@@ -1,0 +1,23 @@
+/* ─── LIMO · Design Tokens ─── */
+:root {
+  /* Colores marca */
+  --teal:    #3DDBD9;
+  --coral:   #F0526A;
+
+  /* Fondos dark */
+  --bg:      #0E0E0E;
+  --bg2:     #161616;
+  --bg3:     #1E1E1E;
+
+  /* Texto */
+  --text:    #F0EEE8;
+  --muted:   #666;
+  --muted2:  #444;
+
+  /* Radios y espaciado */
+  --radius:  12px;
+  --radius-sm: 6px;
+
+  /* Tipografía */
+  --font: 'Courier New', Courier, monospace;
+}

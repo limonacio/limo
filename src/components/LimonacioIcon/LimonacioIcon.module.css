@@ -1,0 +1,47 @@
+.wrapper {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.svg,
+.svgSpin {
+  width: 100%;
+  height: 100%;
+}
+
+.svgSpin {
+  animation: spin 18s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Pulso exterior */
+.pulse {
+  position: absolute;
+  inset: -12px;
+  border-radius: 50%;
+  animation: pulse 3s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes pulse {
+  0%   { box-shadow: 0 0 0 0px rgba(61,219,217,0.35), 0 0 0 0px rgba(240,82,106,0.2); }
+  50%  { box-shadow: 0 0 0 16px rgba(61,219,217,0),   0 0 0 10px rgba(240,82,106,0); }
+  100% { box-shadow: 0 0 0 0px rgba(61,219,217,0),    0 0 0 0px rgba(240,82,106,0); }
+}
+
+/* Parpadeo de los puntos conectores */
+.dotBlink {
+  animation: blink 2.4s ease-in-out infinite;
+}
+.dotBlink2 {
+  animation: blink 2.4s ease-in-out infinite 1.2s;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.15; }
+}
