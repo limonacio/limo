@@ -1,10 +1,12 @@
-// ─── ProjectCard ─────────────────────────────────────────────
-// Recibe un objeto del array proyectos (tipo: "trabajo")
-// ─────────────────────────────────────────────────────────────
+// lang prop viene de la sección padre (i18n.language)
 import styles from './ProjectCard.module.css'
 
-export default function ProjectCard({ proyecto }) {
+export default function ProjectCard({ proyecto, lang = 'en' }) {
   const { titulo, subtitulo, descripcion, imagen, link, featured } = proyecto
+
+  // subtitulo y descripcion pueden ser string o { en, es }
+  const sub  = typeof subtitulo   === 'object' ? subtitulo[lang]   || subtitulo.en : subtitulo
+  const desc = typeof descripcion === 'object' ? descripcion[lang] || descripcion.en : descripcion
 
   const imgSrc = imagen ? `/assets/img/${imagen}` : null
 
@@ -27,9 +29,9 @@ export default function ProjectCard({ proyecto }) {
       </div>
 
       <div className={styles.body}>
-        <span className={styles.subtitulo}>{subtitulo}</span>
+        <span className={styles.subtitulo}>{sub}</span>
         <h3 className={styles.titulo}>{titulo}</h3>
-        <p className={styles.desc}>{descripcion}</p>
+        <p className={styles.desc}>{desc}</p>
       </div>
     </Wrapper>
   )

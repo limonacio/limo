@@ -1,12 +1,10 @@
-// ─── MiscCard ────────────────────────────────────────────────
-// Card para misceláneas: videos musicales, baile, hobbies
-// Si tiene `video` → muestra botón play (embed en modal futuro)
-// Si tiene `imagen` → muestra thumbnail
-// ─────────────────────────────────────────────────────────────
 import styles from './MiscCard.module.css'
 
-export default function MiscCard({ proyecto }) {
+export default function MiscCard({ proyecto, lang = 'en' }) {
   const { titulo, subtitulo, descripcion, imagen, video, link } = proyecto
+
+  const sub  = typeof subtitulo   === 'object' ? subtitulo[lang]   || subtitulo.en : subtitulo
+  const desc = typeof descripcion === 'object' ? descripcion[lang] || descripcion.en : descripcion
 
   const imgSrc = imagen ? `/assets/img/${imagen}` : null
 
@@ -33,9 +31,9 @@ export default function MiscCard({ proyecto }) {
       </div>
 
       <div className={styles.body}>
-        <span className={styles.subtitulo}>{subtitulo}</span>
+        <span className={styles.subtitulo}>{sub}</span>
         <h3 className={styles.titulo}>{titulo}</h3>
-        <p className={styles.desc}>{descripcion}</p>
+        <p className={styles.desc}>{desc}</p>
       </div>
     </div>
   )

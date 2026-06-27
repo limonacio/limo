@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import Nav          from './components/Nav/Nav'
 import Footer       from './components/Footer/Footer'
 import Hero         from './sections/Hero/Hero'
@@ -7,6 +8,8 @@ import LimonacioIcon from './components/LimonacioIcon/LimonacioIcon'
 import styles       from './App.module.css'
 
 export default function App() {
+  const { t } = useTranslation()
+
   return (
     <>
       <Nav />
@@ -14,24 +17,20 @@ export default function App() {
         <Hero />
         <Trabajos />
 
-        {/* Separador */}
         <div className={styles.divider}>
           <span /><span className={styles.dividerMid} /><span />
         </div>
 
         <Miscelaneas />
 
-        {/* Strip "Sobre mí" */}
         <section id="about" className={styles.about}>
           <div className={styles.aboutInner}>
             <LimonacioIcon size={90} spin={false} pulse={false} dots={false} />
             <div>
-              <h2 className={styles.aboutTitle}>sobre <span>limonacio</span></h2>
-              <p className={styles.aboutText}>
-                Portfolio personal de trabajos, proyectos y pasiones.
-                Desde diseño y desarrollo hasta música y baile —
-                todo lo que me mueve va acá.
-              </p>
+              <h2 className={styles.aboutTitle}>
+                {t('about.heading')} <span>{t('about.brand')}</span>
+              </h2>
+              <p className={styles.aboutText}>{t('about.text')}</p>
             </div>
           </div>
         </section>

@@ -1,112 +1,117 @@
 // ─────────────────────────────────────────────────────────────
 //  LIMO · src/data/projects.js
 //
-//  ESTE ES EL ÚNICO ARCHIVO QUE NECESITÁS TOCAR para:
-//    ✔ agregar un proyecto nuevo
-//    ✔ editar título, descripción, imagen o links
-//    ✔ cambiar el orden en que aparecen
-//    ✔ marcar algo como destacado (featured: true)
+//  ÚNICO ARCHIVO que necesitás tocar para agregar/editar proyectos.
+//  Los campos de texto tienen versión EN y ES.
+//  Las secciones leen de acá automáticamente.
 //
-//  Las secciones Trabajos y Misceláneas leen de acá
-//  y se renderizan solas automáticamente.
-//
-//  TIPOS disponibles:
-//    "trabajo"    → aparece en la sección Trabajos
-//    "misc"       → aparece en la sección Misceláneas
-//
-//  CAMPOS:
-//    id          string   identificador único (sin espacios)
-//    tipo        string   "trabajo" | "misc"
-//    titulo      string   nombre del proyecto
-//    subtitulo   string   categoría / tags cortos
-//    descripcion string   texto breve que aparece en la card
-//    imagen      string   ruta relativa desde /public/assets/img/
-//                         (dejar "" para mostrar placeholder)
-//    link        string   URL externa o ruta interna (dejar "" si no hay)
-//    video       string   (solo misc) URL de YouTube / Vimeo embed
-//    featured    bool     si es true → aparece primero y más grande
+//  TIPOS:  "trabajo" → sección Work   |   "misc" → sección Miscellaneous
 // ─────────────────────────────────────────────────────────────
 
 export const proyectos = [
 
-  // ── TRABAJOS ──────────────────────────────────────────────
+  // ── WORK / TRABAJOS ───────────────────────────────────────
 
   {
-    id:          "zeta-sports",
-    tipo:        "trabajo",
-    titulo:      "Zeta Sports",
-    subtitulo:   "branding · identidad visual",
-    descripcion: "Identidad visual completa para Zeta Sports. Agrega acá más detalles del proyecto.",
-    imagen:      "zeta-sports-cover.jpg",   // /public/assets/img/zeta-sports-cover.jpg
-    link:        "",
-    featured:    true,
+    id:       "zeta-sports",
+    tipo:     "trabajo",
+    titulo:   "Zeta Sports",
+    subtitulo: {
+      en: "branding · visual identity",
+      es: "branding · identidad visual",
+    },
+    descripcion: {
+      en: "Full visual identity for Zeta Sports. Add context, tools used and outcome here.",
+      es: "Identidad visual completa para Zeta Sports. Agrega contexto, herramientas y resultado.",
+    },
+    imagen:   "zeta-sports-cover.jpg",
+    link:     "",
+    featured: true,
   },
 
   {
-    id:          "limodoro",
-    tipo:        "trabajo",
-    titulo:      "Limodoro",
-    subtitulo:   "app · diseño · productividad",
-    descripcion: "Descripción del proyecto Limodoro. Agrega contexto, herramientas y resultado.",
-    imagen:      "limodoro-cover.jpg",      // /public/assets/img/limodoro-cover.jpg
-    link:        "",
-    featured:    false,
+    id:       "limodoro",
+    tipo:     "trabajo",
+    titulo:   "Limodoro",
+    subtitulo: {
+      en: "app · design · productivity",
+      es: "app · diseño · productividad",
+    },
+    descripcion: {
+      en: "Description of the Limodoro project. Add context, tools and outcome here.",
+      es: "Descripción del proyecto Limodoro. Agrega contexto, herramientas y resultado.",
+    },
+    imagen:   "limodoro-cover.jpg",
+    link:     "",
+    featured: false,
   },
 
-  // ── Para agregar un trabajo nuevo, copiá este bloque: ──
+  // ── Para agregar un trabajo: copiá este bloque ────────────
   // {
-  //   id:          "nombre-del-proyecto",
-  //   tipo:        "trabajo",
-  //   titulo:      "Nombre del Proyecto",
-  //   subtitulo:   "categoría · etiqueta",
-  //   descripcion: "Descripción breve.",
-  //   imagen:      "nombre-cover.jpg",
-  //   link:        "https://...",
-  //   featured:    false,
+  //   id:       "nuevo-proyecto",
+  //   tipo:     "trabajo",
+  //   titulo:   "Nombre del Proyecto",
+  //   subtitulo: { en: "category · tag", es: "categoría · etiqueta" },
+  //   descripcion: { en: "Short description.", es: "Descripción breve." },
+  //   imagen:   "nombre-cover.jpg",
+  //   link:     "https://...",
+  //   featured: false,
   // },
 
-  // ── MISCELÁNEAS ───────────────────────────────────────────
+  // ── MISC / MISCELÁNEAS ────────────────────────────────────
 
   {
-    id:          "misc-01",
-    tipo:        "misc",
-    titulo:      "Video Musical 01",
-    subtitulo:   "video musical",
-    descripcion: "Descripción del video. Podés pegar el link de YouTube o Vimeo.",
-    imagen:      "",
-    video:       "",   // ej: "https://www.youtube.com/embed/VIDEO_ID"
-    link:        "",
-    featured:    false,
+    id:       "misc-01",
+    tipo:     "misc",
+    titulo:   "Music Video 01",
+    subtitulo: {
+      en: "music video",
+      es: "video musical",
+    },
+    descripcion: {
+      en: "Video description. Paste the YouTube or Vimeo link below.",
+      es: "Descripción del video. Pegá el link de YouTube o Vimeo abajo.",
+    },
+    imagen:   "",
+    video:    "",
+    link:     "",
+    featured: false,
   },
 
   {
-    id:          "misc-02",
-    tipo:        "misc",
-    titulo:      "Video de Baile 01",
-    subtitulo:   "baile",
-    descripcion: "Descripción del video.",
-    imagen:      "",
-    video:       "",
-    link:        "",
-    featured:    false,
+    id:       "misc-02",
+    tipo:     "misc",
+    titulo:   "Dance Video 01",
+    subtitulo: {
+      en: "dance",
+      es: "baile",
+    },
+    descripcion: {
+      en: "Video description.",
+      es: "Descripción del video.",
+    },
+    imagen:   "",
+    video:    "",
+    link:     "",
+    featured: false,
   },
 
-  // ── Para agregar una miscelánea nueva, copiá este bloque: ──
+  // ── Para agregar una miscelánea: copiá este bloque ────────
   // {
-  //   id:          "misc-03",
-  //   tipo:        "misc",
-  //   titulo:      "Nombre",
-  //   subtitulo:   "video musical | baile | otro",
-  //   descripcion: "Descripción.",
-  //   imagen:      "",
-  //   video:       "https://www.youtube.com/embed/VIDEO_ID",
-  //   link:        "",
-  //   featured:    false,
+  //   id:       "misc-03",
+  //   tipo:     "misc",
+  //   titulo:   "Title",
+  //   subtitulo: { en: "music video | dance | other", es: "video musical | baile | otro" },
+  //   descripcion: { en: "Description.", es: "Descripción." },
+  //   imagen:   "",
+  //   video:    "https://www.youtube.com/embed/VIDEO_ID",
+  //   link:     "",
+  //   featured: false,
   // },
 
 ]
 
-// ── Helpers para filtrar por tipo ─────────────────────────
+// ── Helpers ───────────────────────────────────────────────
 export const trabajos    = proyectos.filter(p => p.tipo === "trabajo")
 export const miscelaneas = proyectos.filter(p => p.tipo === "misc")
 export const destacados  = proyectos.filter(p => p.featured)

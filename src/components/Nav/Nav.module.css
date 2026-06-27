@@ -26,6 +26,13 @@
   font-family: var(--font);
 }
 
+/* Nav right side: links + toggle */
+.right {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
 .links {
   list-style: none;
   display: flex;
@@ -40,6 +47,40 @@
   transition: color 0.2s;
 }
 .links a:hover { color: var(--teal); }
+
+/* Language toggle */
+.langToggle {
+  background: none;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 20px;
+  padding: 0.3rem 0.75rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: border-color 0.2s;
+}
+.langToggle:hover { border-color: rgba(61,219,217,0.4); }
+
+.langActive {
+  font-family: var(--font);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--teal);
+}
+
+.langInactive {
+  font-family: var(--font);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  color: var(--muted2);
+}
+
+.langSep {
+  color: var(--muted2);
+  font-size: 0.7rem;
+}
 
 @media (max-width: 600px) {
   .links { display: none; }

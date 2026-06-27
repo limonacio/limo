@@ -1,7 +1,10 @@
+import { useTranslation } from 'react-i18next'
 import LimonacioIcon from '../../components/LimonacioIcon/LimonacioIcon'
 import styles from './Hero.module.css'
 
 export default function Hero() {
+  const { t } = useTranslation()
+
   return (
     <section id="hero" className={styles.hero}>
       <div className={styles.glow} />
@@ -11,8 +14,8 @@ export default function Hero() {
       <h1 className={styles.title}>limonacio</h1>
 
       <p className={styles.subtitle}>
-        portfolio · trabajos · misceláneas<br/>
-        diseño / desarrollo / movimiento
+        {t('hero.tagline')}<br/>
+        {t('hero.subtitle')}
       </p>
 
       <div className={styles.dots}>
@@ -22,8 +25,8 @@ export default function Hero() {
       </div>
 
       <div className={styles.cta}>
-        <a href="#trabajos" className={`${styles.btn} ${styles.btnPrimary}`}>ver trabajos</a>
-        <a href="#miscelaneas" className={`${styles.btn} ${styles.btnSecondary}`}>misceláneas</a>
+        <a href="#trabajos"   className={`${styles.btn} ${styles.btnPrimary}`}>{t('hero.cta_work')}</a>
+        <a href="#miscelaneas" className={`${styles.btn} ${styles.btnSecondary}`}>{t('hero.cta_misc')}</a>
       </div>
 
       <div className={styles.scrollHint}>
@@ -34,7 +37,7 @@ export default function Hero() {
             <animate attributeName="opacity" values="1;0.2;1" dur="1.8s" repeatCount="indefinite"/>
           </circle>
         </svg>
-        scroll
+        {t('hero.scroll')}
       </div>
     </section>
   )
