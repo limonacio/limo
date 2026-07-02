@@ -21,6 +21,12 @@ export default function ProjectCard({ proyecto, lang = 'en' }) {
       {...wrapperProps}
     >
       <div className={styles.thumb}>
+        {imgSrc && (
+          <div
+            className={styles.blur}
+            style={{ backgroundImage: `url(${imgSrc})` }}
+          />
+        )}
         {imgSrc
           ? <img src={imgSrc} alt={titulo} className={styles.img} />
           : <PlaceholderThumb />
