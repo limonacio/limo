@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Limodoro — Pomodoro Timer for Windows</title>
+  <link rel="icon" href="/favicon.ico" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --teal:   #3DDBD9;
+      --coral:  #F0526A;
+      --bg:     #0E0E0E;
+      --bg2:    #161616;
+      --bg3:    #1E1E1E;
+      --text:   #F0F0F0;
+      --muted:  #888;
+      --font:   'Courier New', Courier, monospace;
+      --radius: 10px;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* NAV */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 2.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      text-decoration: none;
+      color: var(--text);
+      font-size: 0.9rem;
+      letter-spacing: 0.1em;
+    }
+    .nav-brand svg { flex-shrink: 0; }
+    .nav-back {
+      font-size: 0.75rem;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--teal); }
+
+    /* HERO */
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 4rem 1.5rem;
+      text-align: center;
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--coral);
+      border: 1px solid rgba(240,82,106,0.3);
+      border-radius: 100px;
+      padding: 0.3rem 0.9rem;
+      margin-bottom: 1.8rem;
+    }
+
+    h1 {
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      line-height: 1.1;
+      margin-bottom: 1.2rem;
+    }
+    h1 span { color: var(--coral); }
+
+    .subtitle {
+      font-size: 1rem;
+      color: var(--muted);
+      max-width: 480px;
+      line-height: 1.7;
+      margin-bottom: 2.8rem;
+    }
+
+    /* DOWNLOAD BUTTON */
+    .btn-download {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      background: var(--teal);
+      color: #0E0E0E;
+      font-family: var(--font);
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-decoration: none;
+      padding: 1rem 2.2rem;
+      border-radius: var(--radius);
+      transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+      margin-bottom: 0.9rem;
+    }
+    .btn-download:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(61,219,217,0.3);
+      background: #5ee8e6;
+    }
+
+    .meta {
+      font-size: 0.7rem;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      margin-bottom: 3.5rem;
+    }
+
+    /* FEATURES */
+    .features {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      max-width: 640px;
+      margin-bottom: 4rem;
+    }
+    .feat {
+      background: var(--bg2);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: var(--radius);
+      padding: 1.1rem 1.4rem;
+      text-align: left;
+      flex: 1 1 180px;
+    }
+    .feat-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 0.4rem;
+    }
+    .feat-text {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    /* SMARTSCREEN WARNING */
+    .warning {
+      background: var(--bg2);
+      border: 1px solid rgba(240,82,106,0.2);
+      border-radius: var(--radius);
+      padding: 1.2rem 1.6rem;
+      max-width: 520px;
+      text-align: left;
+    }
+    .warning-title {
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--coral);
+      margin-bottom: 0.6rem;
+    }
+    .warning-text {
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+    .warning-text strong { color: var(--text); }
+
+    /* FOOTER */
+    footer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      padding: 2rem;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      font-size: 0.72rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+    }
+    footer span { color: var(--coral); }
+    footer sup { font-size: 0.5rem; vertical-align: super; color: var(--coral); }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="/" class="nav-brand">
+      <svg width="22" height="22" viewBox="0 0 40 40" fill="none">
+        <path d="M20 4 A16 16 0 0 1 36 20" stroke="#3DDBD9" stroke-width="3.5" stroke-linecap="round"/>
+        <path d="M36 20 A16 16 0 0 1 4 20" stroke="#F0526A" stroke-width="3.5" stroke-linecap="round"/>
+        <path d="M4 20 A16 16 0 0 1 20 4" stroke="#3DDBD9" stroke-width="3.5" stroke-linecap="round"/>
+      </svg>
+      limonacio
+    </a>
+    <a href="/#work" class="nav-back">← back to work</a>
+  </nav>
+
+  <main>
+    <span class="tag">app · productivity · windows</span>
+
+    <h1>Limo<span>doro</span></h1>
+
+    <p class="subtitle">
+      A Pomodoro timer for Windows that stays out of your way.
+      FREE mode for open sessions, POMO mode for focused sprints,
+      daily goal tracking and full session history.
+    </p>
+
+    <a href="/downloads/limodoro.exe" download class="btn-download">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+        <polyline points="7 10 12 15 17 10"/>
+        <line x1="12" y1="15" x2="12" y2="3"/>
+      </svg>
+      Download for Windows
+    </a>
+
+    <p class="meta">v1.0.0 · Windows 10/11 · 18.5 MB · free</p>
+
+    <div class="features">
+      <div class="feat">
+        <div class="feat-label">POMO mode</div>
+        <div class="feat-text">Classic 25-min focus blocks with short and long breaks.</div>
+      </div>
+      <div class="feat">
+        <div class="feat-label">FREE mode</div>
+        <div class="feat-text">No interruptions. Just a timer running while you work.</div>
+      </div>
+      <div class="feat">
+        <div class="feat-label">Daily goal</div>
+        <div class="feat-text">Set a daily focus target and track your progress in real time.</div>
+      </div>
+      <div class="feat">
+        <div class="feat-label">History</div>
+        <div class="feat-text">Full log of every session with timestamps and accumulated time.</div>
+      </div>
+    </div>
+
+    <div class="warning">
+      <div class="warning-title">⚠ Windows SmartScreen notice</div>
+      <div class="warning-text">
+        Windows may show a "Windows protected your PC" message when you open the file.
+        This happens with apps that don't have a paid digital signature — it's normal and safe.
+        Click <strong>"More info"</strong> → <strong>"Run anyway"</strong> to proceed.
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <svg width="18" height="18" viewBox="0 0 40 40" fill="none">
+      <path d="M20 4 A16 16 0 0 1 36 20" stroke="#3DDBD9" stroke-width="3.5" stroke-linecap="round"/>
+      <path d="M36 20 A16 16 0 0 1 4 20" stroke="#F0526A" stroke-width="3.5" stroke-linecap="round"/>
+      <path d="M4 20 A16 16 0 0 1 20 4" stroke="#3DDBD9" stroke-width="3.5" stroke-linecap="round"/>
+    </svg>
+    <span>limonacio</span><sup>™</sup> · © 2026
+  </footer>
+
+</body>
+</html>

@@ -10,9 +10,13 @@ export default function ProjectCard({ proyecto, lang = 'en' }) {
 
   const imgSrc = imagen ? `/assets/img/${imagen}` : null
 
+  // Links externos (http/https) abren en pestaña nueva; internos navegan en la misma
+  const isExternal = link && (link.startsWith('http://') || link.startsWith('https://'))
   const Wrapper = link ? 'a' : 'div'
   const wrapperProps = link
-    ? { href: link, target: '_blank', rel: 'noopener noreferrer' }
+    ? isExternal
+      ? { href: link, target: '_blank', rel: 'noopener noreferrer' }
+      : { href: link }
     : {}
 
   return (
@@ -22,10 +26,7 @@ export default function ProjectCard({ proyecto, lang = 'en' }) {
     >
       <div className={styles.thumb}>
         {imgSrc && (
-          <div
-            className={styles.blur}
-            style={{ backgroundImage: `url(${imgSrc})` }}
-          />
+          <div className={styles.blur} style={{ backgroundImage: `url(${imgSrc})` }} />
         )}
         {imgSrc
           ? <img src={imgSrc} alt={titulo} className={styles.img} />
