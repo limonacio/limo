@@ -42,7 +42,7 @@ export const proyectos = [
       es: "App de escritorio para Windows basada en la técnica Pomodoro. Modo libre y modo Pomodoro, seguimiento de meta diaria e historial completo de sesiones.",
     },
     imagen:   "limodoro-cover.png",
-    link:     "",
+    link:     "/limodoro/",
     featured: false,
   },
 
