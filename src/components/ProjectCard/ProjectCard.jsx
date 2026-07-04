@@ -8,9 +8,12 @@ export default function ProjectCard({ proyecto, lang = 'en' }) {
   const sub  = typeof subtitulo   === 'object' ? subtitulo[lang]   || subtitulo.en : subtitulo
   const desc = typeof descripcion === 'object' ? descripcion[lang] || descripcion.en : descripcion
 
-  const imgSrc = imagen ? `/assets/img/${imagen}` : null
+  // imagen puede ser nombre local (/assets/img/) o URL externa (http...)
+  const imgSrc = imagen
+    ? (imagen.startsWith('http') ? imagen : `/assets/img/${imagen}`)
+    : null
 
-  // Links externos (http/https) abren en pestaña nueva; internos navegan en la misma
+  // Links externos abren en nueva pestaña; internos navegan en la misma
   const isExternal = link && (link.startsWith('http://') || link.startsWith('https://'))
   const Wrapper = link ? 'a' : 'div'
   const wrapperProps = link

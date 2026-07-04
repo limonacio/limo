@@ -6,6 +6,8 @@
 //  Las secciones leen de acá automáticamente.
 //
 //  TIPOS:  "trabajo" → sección Work   |   "misc" → sección Miscellaneous
+//
+//  imagen: puede ser nombre local (ej: "cover.png") o URL externa (ej: "https://...")
 // ─────────────────────────────────────────────────────────────
 
 export const proyectos = [
@@ -53,7 +55,7 @@ export const proyectos = [
   //   titulo:   "Nombre del Proyecto",
   //   subtitulo: { en: "category · tag", es: "categoría · etiqueta" },
   //   descripcion: { en: "Short description.", es: "Descripción breve." },
-  //   imagen:   "nombre-cover.jpg",
+  //   imagen:   "nombre-cover.jpg",   // o URL externa: "https://..."
   //   link:     "https://...",
   //   featured: false,
   // },
@@ -63,36 +65,34 @@ export const proyectos = [
   {
     id:       "misc-01",
     tipo:     "misc",
-    titulo:   "Music Video 01",
+    titulo:   "Música",
     subtitulo: {
-      en: "music video",
-      es: "video musical",
+      en: "music",
+      es: "música",
     },
     descripcion: {
-      en: "Video description. Paste the YouTube or Vimeo link below.",
-      es: "Descripción del video. Pegá el link de YouTube o Vimeo abajo.",
+      en: "Watch the video on YouTube.",
+      es: "Ver el video en YouTube.",
     },
-    imagen:   "",
-    video:    "",
-    link:     "",
+    imagen:   "musica-cover.jpg",
+    link:     "https://www.youtube.com/watch?v=TiyPCmciZMc",
     featured: false,
   },
 
   {
     id:       "misc-02",
     tipo:     "misc",
-    titulo:   "Dance Video 01",
+    titulo:   "Baile",
     subtitulo: {
       en: "dance",
       es: "baile",
     },
     descripcion: {
-      en: "Video description.",
-      es: "Descripción del video.",
+      en: "Watch the video on YouTube.",
+      es: "Ver el video en YouTube.",
     },
-    imagen:   "",
-    video:    "",
-    link:     "",
+    imagen:   "baile-cover.jpg",
+    link:     "https://www.youtube.com/watch?v=s35t1V0FWjw",
     featured: false,
   },
 
@@ -103,9 +103,8 @@ export const proyectos = [
   //   titulo:   "Title",
   //   subtitulo: { en: "music video | dance | other", es: "video musical | baile | otro" },
   //   descripcion: { en: "Description.", es: "Descripción." },
-  //   imagen:   "",
-  //   video:    "https://www.youtube.com/embed/VIDEO_ID",
-  //   link:     "",
+  //   imagen:   "https://img.youtube.com/vi/VIDEO_ID/hqdefault.jpg",
+  //   link:     "https://www.youtube.com/watch?v=VIDEO_ID",
   //   featured: false,
   // },
 
