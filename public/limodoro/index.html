@@ -47,6 +47,11 @@
       letter-spacing: 0.1em;
     }
     .nav-brand svg { flex-shrink: 0; }
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 1.4rem;
+    }
     .nav-back {
       font-size: 0.75rem;
       color: var(--muted);
@@ -55,6 +60,24 @@
       transition: color 0.2s;
     }
     .nav-back:hover { color: var(--teal); }
+
+    /* LANG TOGGLE */
+    .lang-toggle {
+      background: none;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 6px;
+      color: var(--muted);
+      font-family: var(--font);
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      padding: 0.3rem 0.65rem;
+      cursor: pointer;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .lang-toggle:hover {
+      color: var(--teal);
+      border-color: var(--teal);
+    }
 
     /* HERO */
     main {
@@ -206,7 +229,10 @@
       </svg>
       limonacio
     </a>
-    <a href="/" class="nav-back">← back to work</a>
+    <div class="nav-right">
+      <button class="lang-toggle" id="langToggle">ES</button>
+      <a href="/" class="nav-back" data-en="← back to work" data-es="← volver">← back to work</a>
+    </div>
   </nav>
 
   <main>
@@ -214,45 +240,68 @@
 
     <h1>Limo<span>doro</span></h1>
 
-    <p class="subtitle">
-      A Pomodoro timer for Windows that stays out of your way.
-      FREE mode for open sessions, POMO mode for focused sprints,
-      daily goal tracking and full session history.
+    <p class="subtitle"
+       data-en="A Pomodoro timer for Windows that stays out of your way. FREE mode for open sessions, POMO mode for focused sprints, daily goal tracking and full session history."
+       data-es="Un timer Pomodoro para Windows que no te interrumpe. Modo LIBRE para sesiones abiertas, modo POMO para sprints enfocados, meta diaria e historial completo de sesiones.">
+      A Pomodoro timer for Windows that stays out of your way. FREE mode for open sessions, POMO mode for focused sprints, daily goal tracking and full session history.
     </p>
 
-    <a href="https://github.com/limonacio/limo/releases/download/v1.0.1/limodoro.exe" download class="btn-download">
+    <a href="https://github.com/limonacio/limo/releases/download/v1.0.2/limodoro.exe" download class="btn-download"
+       data-en="Download for Windows" data-es="Descargar para Windows">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
         <polyline points="7 10 12 15 17 10"/>
         <line x1="12" y1="15" x2="12" y2="3"/>
       </svg>
-      Download for Windows
+      <span data-en="Download for Windows" data-es="Descargar para Windows">Download for Windows</span>
     </a>
 
-    <p class="meta">v1.0.0 · Windows 10/11 · 18.5 MB · free</p>
+    <p class="meta" id="versionMeta">v1.0.2 · Windows 10/11 · free</p>
 
     <div class="features">
       <div class="feat">
         <div class="feat-label">POMO mode</div>
-        <div class="feat-text">Classic 25-min focus blocks with short and long breaks.</div>
+        <div class="feat-text"
+             data-en="Classic 25-min focus blocks with short and long breaks."
+             data-es="Bloques de 25 min con descansos cortos y largos.">
+          Classic 25-min focus blocks with short and long breaks.
+        </div>
       </div>
       <div class="feat">
         <div class="feat-label">FREE mode</div>
-        <div class="feat-text">No interruptions. Just a timer running while you work.</div>
+        <div class="feat-text"
+             data-en="No interruptions. Just a timer running while you work."
+             data-es="Sin interrupciones. Solo un timer corriendo mientras trabajás.">
+          No interruptions. Just a timer running while you work.
+        </div>
       </div>
       <div class="feat">
-        <div class="feat-label">Daily goal</div>
-        <div class="feat-text">Set a daily focus target and track your progress in real time.</div>
+        <div class="feat-label" data-en="Daily goal" data-es="Meta diaria">Daily goal</div>
+        <div class="feat-text"
+             data-en="Set a daily focus target and track your progress in real time."
+             data-es="Definí una meta diaria y seguí tu progreso en tiempo real.">
+          Set a daily focus target and track your progress in real time.
+        </div>
       </div>
       <div class="feat">
         <div class="feat-label">History</div>
-        <div class="feat-text">Full log of every session with timestamps and accumulated time.</div>
+        <div class="feat-text"
+             data-en="Full log of every session with timestamps and accumulated time."
+             data-es="Registro completo de cada sesión con timestamps y tiempo acumulado.">
+          Full log of every session with timestamps and accumulated time.
+        </div>
       </div>
     </div>
 
     <div class="warning">
-      <div class="warning-title">⚠ Windows SmartScreen notice</div>
-      <div class="warning-text">
+      <div class="warning-title"
+           data-en="⚠ Windows SmartScreen notice"
+           data-es="⚠ Aviso de Windows SmartScreen">
+        ⚠ Windows SmartScreen notice
+      </div>
+      <div class="warning-text"
+           data-en='Windows may show a "Windows protected your PC" message when you open the file. This happens with apps that don\'t have a paid digital signature — it\'s normal and safe. Click <strong>"More info"</strong> → <strong>"Run anyway"</strong> to proceed.'
+           data-es='Windows puede mostrar el mensaje "Windows protegió tu PC" al abrir el archivo. Esto ocurre con apps sin firma digital paga — es normal y seguro. Hacé clic en <strong>"Más información"</strong> → <strong>"Ejecutar de todas formas"</strong> para continuar.'>
         Windows may show a "Windows protected your PC" message when you open the file.
         This happens with apps that don't have a paid digital signature — it's normal and safe.
         Click <strong>"More info"</strong> → <strong>"Run anyway"</strong> to proceed.
@@ -268,6 +317,44 @@
     </svg>
     <span>limonacio</span><sup>™</sup> · © 2026
   </footer>
+
+  <script>
+    const STORAGE_KEY = 'limonacio-lang';
+    let currentLang = localStorage.getItem(STORAGE_KEY) ||
+      (navigator.language.startsWith('es') ? 'es' : 'en');
+
+    const btn = document.getElementById('langToggle');
+
+    function applyLang(lang) {
+      currentLang = lang;
+      localStorage.setItem(STORAGE_KEY, lang);
+      document.documentElement.lang = lang;
+      btn.textContent = lang === 'en' ? 'ES' : 'EN';
+
+      document.querySelectorAll('[data-en][data-es]').forEach(el => {
+        const text = el.getAttribute('data-' + lang);
+        if (text !== null) el.innerHTML = text;
+      });
+    }
+
+    btn.addEventListener('click', () => {
+      applyLang(currentLang === 'en' ? 'es' : 'en');
+    });
+
+    // Apply on load
+    applyLang(currentLang);
+
+    // Fetch latest version from version.json and update the meta line
+    fetch('/downloads/version.json')
+      .then(r => r.json())
+      .then(data => {
+        if (data.version) {
+          document.getElementById('versionMeta').textContent =
+            'v' + data.version + ' · Windows 10/11 · free';
+        }
+      })
+      .catch(function() {}); // silencioso si falla
+  </script>
 
 </body>
 </html>
