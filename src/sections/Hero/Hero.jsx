@@ -7,28 +7,48 @@ export default function Hero() {
 
   return (
     <section id="hero" className={styles.hero}>
-      <div className={styles.glow} />
 
-      <LimonacioIcon size={160} spin pulse dots />
+      {/* Video de fondo */}
+      <video
+        className={styles.videoBg}
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+      >
+        <source src="/rompimiento-glaciar.mp4" type="video/mp4" />
+      </video>
 
-      <h1 className={styles.title}>limonacio</h1>
+      {/* Overlay oscuro para que el contenido se lea bien */}
+      <div className={styles.videoOverlay} />
 
-      <p className={styles.subtitle}>
-        {t('hero.tagline')}<br/>
-        {t('hero.subtitle')}
-      </p>
+      {/* Contenido del hero por encima del video */}
+      <div className={styles.heroContent}>
+        <div className={styles.glow} />
 
-      <div className={styles.dots}>
-        <span className={`${styles.dot} ${styles.dot1}`} />
-        <span className={`${styles.dot} ${styles.dot2}`} />
-        <span className={`${styles.dot} ${styles.dot3}`} />
+        <LimonacioIcon size={160} spin pulse dots />
+
+        <h1 className={styles.title}>limonacio</h1>
+
+        <p className={styles.subtitle}>
+          {t('hero.tagline')}<br/>
+          {t('hero.subtitle')}
+        </p>
+
+        <div className={styles.dots}>
+          <span className={`${styles.dot} ${styles.dot1}`} />
+          <span className={`${styles.dot} ${styles.dot2}`} />
+          <span className={`${styles.dot} ${styles.dot3}`} />
+        </div>
+
+        <div className={styles.cta}>
+          <a href="#trabajos"    className={`${styles.btn} ${styles.btnPrimary}`}>{t('hero.cta_work')}</a>
+          <a href="#miscelaneas" className={`${styles.btn} ${styles.btnSecondary}`}>{t('hero.cta_misc')}</a>
+        </div>
       </div>
 
-      <div className={styles.cta}>
-        <a href="#trabajos"   className={`${styles.btn} ${styles.btnPrimary}`}>{t('hero.cta_work')}</a>
-        <a href="#miscelaneas" className={`${styles.btn} ${styles.btnSecondary}`}>{t('hero.cta_misc')}</a>
-      </div>
-
+      {/* Scroll hint — posición absoluta, también encima del video */}
       <div className={styles.scrollHint}>
         <svg width="16" height="24" viewBox="0 0 16 24" fill="none">
           <rect x="1" y="1" width="14" height="22" rx="7" stroke="#555" strokeWidth="1.5"/>
@@ -39,6 +59,7 @@ export default function Hero() {
         </svg>
         {t('hero.scroll')}
       </div>
+
     </section>
   )
 }
