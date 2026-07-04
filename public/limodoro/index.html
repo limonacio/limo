@@ -246,7 +246,7 @@
       A Pomodoro timer for Windows that stays out of your way. FREE mode for open sessions, POMO mode for focused sprints, daily goal tracking and full session history.
     </p>
 
-    <a href="https://github.com/limonacio/limo/releases/download/v1.0.2/limodoro.exe" download class="btn-download"
+    <a href="https://github.com/limonacio/limo/releases/download/v1.0.2/limodoro.exe" download class="btn-download" id="downloadBtn"
        data-en="Download for Windows" data-es="Descargar para Windows">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
@@ -344,16 +344,24 @@
     // Apply on load
     applyLang(currentLang);
 
-    // Fetch latest version from version.json and update the meta line
-    fetch('/downloads/version.json')
+    // Fetch latest release from GitHub API — updates version + download link automatically
+    fetch('https://api.github.com/repos/limonacio/limo/releases/latest')
       .then(r => r.json())
-      .then(data => {
-        if (data.version) {
+      .then(function(data) {
+        // Update version number
+        if (data.tag_name) {
           document.getElementById('versionMeta').textContent =
-            'v' + data.version + ' · Windows 10/11 · free';
+            data.tag_name + ' · Windows 10/11 · free';
+        }
+        // Update download button to point to latest .exe asset
+        if (data.assets && data.assets.length > 0) {
+          var exe = data.assets.find(function(a) { return a.name.endsWith('.exe'); });
+          if (exe) {
+            document.getElementById('downloadBtn').href = exe.browser_download_url;
+          }
         }
       })
-      .catch(function() {}); // silencioso si falla
+      .catch(function() {}); // silencioso si falla (queda el fallback hardcodeado)
   </script>
 
 </body>
