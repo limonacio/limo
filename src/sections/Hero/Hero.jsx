@@ -17,6 +17,7 @@ export default function Hero() {
         playsInline
         preload="auto"
       >
+        <source src="/rompimiento-glaciar.webm" type="video/webm" />
         <source src="/rompimiento-glaciar.mp4" type="video/mp4" />
       </video>
 
