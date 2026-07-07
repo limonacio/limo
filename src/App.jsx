@@ -17,10 +17,7 @@ export default function App() {
         <Hero />
         <Trabajos />
 
-        <div className={styles.divider}>
-          <span /><span className={styles.dividerMid} /><span />
-        </div>
-
+        
         <Miscelaneas />
 
         <section id="about" className={styles.about}>

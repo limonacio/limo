@@ -39,9 +39,86 @@
   min-width: 40px;
 }
 
-/* Grid dinámico: el featured ocupa 2 columnas */
+/* ── Carousel ───────────────────────────────────────────── */
+
+.carouselWrap {
+  position: relative;
+  padding: 0 3.5rem;
+}
+
+/* Todos los slides apilados — el contenedor tiene siempre
+   la altura del slide más alto, evita que los dots salten */
+.slideArea {
+  display: grid;
+}
+
+.slide {
+  grid-row: 1;
+  grid-column: 1;
+  transition: opacity 0.3s ease;
+}
+
+/* Grid dentro de cada slide */
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: 3fr 2fr;
   gap: 1.5rem;
+  align-items: start;
+}
+.grid > * {
+  grid-column: span 1 !important;
+}
+
+/* ── Arrows ─────────────────────────────────────────────── */
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: var(--muted);
+  font-size: 1.8rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+.arrow:hover {
+  background: rgba(61,219,217,0.1);
+  border-color: rgba(61,219,217,0.35);
+  color: var(--teal);
+}
+.arrowLeft  { left: 0; }
+.arrowRight { right: 0; }
+
+/* ── Dots ───────────────────────────────────────────────── */
+
+.dotsRow {
+  display: flex;
+  justify-content: center;
+  gap: 0.55rem;
+  margin-top: 1.6rem;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  padding: 0;
+  background: rgba(255,255,255,0.18);
+  cursor: pointer;
+  transition: background 0.22s, transform 0.22s;
+}
+
+.dotActive {
+  background: var(--coral);
+  transform: scale(1.45);
 }

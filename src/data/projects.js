@@ -44,9 +44,27 @@ export const proyectos = [
       es: "App de escritorio para Windows basada en la técnica Pomodoro. Modo libre y modo Pomodoro, seguimiento de meta diaria e historial completo de sesiones.",
     },
     imagen:   "limodoro-cover.png",
-    link:     "/limodoro/",
+    link:     "/limodoro/index.html",
     featured: false,
   },
+
+  {
+  id:       "ecomassages",
+  tipo:     "trabajo",
+  titulo:   "Eco Massages",
+  subtitulo: {
+    en: "web · wellness · booking",
+    es: "web · bienestar · reservas",
+  },
+  descripcion: {
+    en: "Website for a massage therapy center. Services, WhatsApp booking, embedded map, and Google reviews.",
+    es: "Sitio web para un centro de masajes. Servicios, reservas por WhatsApp, mapa integrado y reseñas de Google.",
+  },
+  imagen:   "ecomassages-cover.jpg",
+  link:     "https://limonacio.github.io/ecomassages/",
+  featured: false,
+},
+
 
   // ── Para agregar un trabajo: copiá este bloque ────────────
   // {
