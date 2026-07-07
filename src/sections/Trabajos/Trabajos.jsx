@@ -1,20 +1,36 @@
-import { useState } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { trabajos } from '../../data/projects.js'
 import ProjectCard from '../../components/ProjectCard/ProjectCard'
 import styles from './Trabajos.module.css'
 
-const ITEMS_PER_PAGE = 2
-const pages = []
-for (let i = 0; i < trabajos.length; i += ITEMS_PER_PAGE) {
-  pages.push(trabajos.slice(i, i + ITEMS_PER_PAGE))
-}
-
 export default function Trabajos() {
   const { t, i18n } = useTranslation()
   const lang = i18n.language
+
+  const [mobile, setMobile] = useState(window.innerWidth < 640)
+  useEffect(() => {
+    const fn = () => setMobile(window.innerWidth < 640)
+    window.addEventListener('resize', fn)
+    return () => window.removeEventListener('resize', fn)
+  }, [])
+
+  const itemsPerPage = mobile ? 1 : 2
+
+  const pages = useMemo(() => {
+    const result = []
+    for (let i = 0; i < trabajos.length; i += itemsPerPage) {
+      result.push(trabajos.slice(i, i + itemsPerPage))
+    }
+    return result
+  }, [itemsPerPage])
+
   const [idx, setIdx] = useState(0)
   const n = pages.length
+
+  useEffect(() => {
+    setIdx(i => Math.min(i, n - 1))
+  }, [n])
 
   const prev = () => setIdx(i => Math.max(0, i - 1))
   const next = () => setIdx(i => Math.min(n - 1, i + 1))
