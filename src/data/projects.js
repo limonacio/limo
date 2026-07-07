@@ -61,7 +61,7 @@ export const proyectos = [
     es: "Sitio web para un centro de masajes. Servicios, reservas por WhatsApp, mapa integrado y reseñas de Google.",
   },
   imagen:   "ecomassages-cover.jpg",
-  link:     "https://ecomassages.vercel.app//",
+  link:     "https://ecomassagesweb.com//",
   featured: false,
 },
 
