@@ -1,6 +1,7 @@
 .card {
   background: #202020;
-  border: 1px solid rgba(61,219,217,0.22);
+  border: 1px solid rgba(255,255,255,0.14);
+  box-shadow: 0 2px 16px rgba(0,0,0,0.3);
   border-radius: var(--radius);
   overflow: hidden;
   display: block;
@@ -41,7 +42,7 @@
   inset: 0;
   background-size: cover;
   background-position: center;
-  filter: blur(16px) brightness(0.75) saturate(1.8);
+  filter: blur(16px) brightness(1.2) saturate(2.3);
   transform: scale(1.08);
   z-index: 0;
 }
