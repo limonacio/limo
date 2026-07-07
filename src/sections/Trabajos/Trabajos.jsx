@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react'
+import { useState, useEffect, useMemo, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { trabajos } from '../../data/projects.js'
 import ProjectCard from '../../components/ProjectCard/ProjectCard'
@@ -16,7 +16,6 @@ export default function Trabajos() {
   }, [])
 
   const itemsPerPage = mobile ? 1 : 2
-
   const pages = useMemo(() => {
     const result = []
     for (let i = 0; i < trabajos.length; i += itemsPerPage) {
@@ -27,13 +26,20 @@ export default function Trabajos() {
 
   const [idx, setIdx] = useState(0)
   const n = pages.length
-
-  useEffect(() => {
-    setIdx(i => Math.min(i, n - 1))
-  }, [n])
+  useEffect(() => { setIdx(i => Math.min(i, n - 1)) }, [n])
 
   const prev = () => setIdx(i => Math.max(0, i - 1))
   const next = () => setIdx(i => Math.min(n - 1, i + 1))
+
+  // Swipe tactil
+  const touchStartX = useRef(null)
+  const onTouchStart = (e) => { touchStartX.current = e.touches[0].clientX }
+  const onTouchEnd   = (e) => {
+    if (touchStartX.current === null) return
+    const delta = touchStartX.current - e.changedTouches[0].clientX
+    if (Math.abs(delta) > 50) delta > 0 ? next() : prev()
+    touchStartX.current = null
+  }
 
   return (
     <section id="trabajos" className={styles.section}>
@@ -48,11 +54,15 @@ export default function Trabajos() {
 
         {idx > 0 && (
           <button className={`${styles.arrow} ${styles.arrowLeft}`} onClick={prev} aria-label="Previous">
-            ‹
+            &#8249;
           </button>
         )}
 
-        <div className={styles.slideArea}>
+        <div
+          className={styles.slideArea}
+          onTouchStart={onTouchStart}
+          onTouchEnd={onTouchEnd}
+        >
           {pages.map((group, i) => (
             <div
               key={i}
@@ -73,7 +83,7 @@ export default function Trabajos() {
 
         {idx < n - 1 && (
           <button className={`${styles.arrow} ${styles.arrowRight}`} onClick={next} aria-label="Next">
-            ›
+            &#8250;
           </button>
         )}
 
@@ -85,7 +95,7 @@ export default function Trabajos() {
             key={i}
             className={`${styles.dot} ${i === idx ? styles.dotActive : ''}`}
             onClick={() => setIdx(i)}
-            aria-label={`Página ${i + 1}`}
+            aria-label={`Pagina ${i + 1}`}
           />
         ))}
       </div>
