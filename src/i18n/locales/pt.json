@@ -1,0 +1,30 @@
+{
+  "nav": {
+    "work":    "trabalhos",
+    "misc":    "miscelâneas",
+    "about":   "sobre mim"
+  },
+  "hero": {
+    "tagline":  "portfolio · trabalhos · miscelâneas",
+    "subtitle": "design / desenvolvimento / movimento",
+    "cta_work": "ver trabalhos",
+    "cta_misc": "miscelâneas",
+    "scroll":   "scroll"
+  },
+  "work": {
+    "tag":   "trabalhos",
+    "title": "meus projetos"
+  },
+  "misc": {
+    "tag":   "miscelâneas",
+    "title": "vídeos · música · dança"
+  },
+  "about": {
+    "heading": "sobre",
+    "brand":   "limonacio",
+    "text":    "Portfolio pessoal de trabalhos, projetos e paixões. Do design e desenvolvimento à música e dança — tudo o que me move está aqui."
+  },
+  "card": {
+    "no_link": ""
+  }
+}

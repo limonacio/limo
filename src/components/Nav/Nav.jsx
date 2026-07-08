@@ -1,14 +1,36 @@
+import { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import LimonacioIcon from '../LimonacioIcon/LimonacioIcon'
 import styles from './Nav.module.css'
 
 export default function Nav() {
   const { t, i18n } = useTranslation()
-  const isEN = i18n.language === 'en'
+  const raw = i18n.language || 'en'
+  const lang = raw.startsWith('pt') ? 'pt' : raw.startsWith('es') ? 'es' : 'en'
+  const [active, setActive] = useState('')
 
-  const toggleLang = () => {
-    i18n.changeLanguage(isEN ? 'es' : 'en')
+  const cycleLang = () => {
+    const next = lang === 'en' ? 'es' : lang === 'es' ? 'pt' : 'en'
+    i18n.changeLanguage(next)
   }
+
+  useEffect(() => {
+    const ids = ['trabajos', 'miscelaneas', 'about']
+    const observers = []
+    ids.forEach(id => {
+      const el = document.getElementById(id)
+      if (!el) return
+      const observer = new IntersectionObserver(
+        ([entry]) => { if (entry.isIntersecting) setActive(id) },
+        { rootMargin: '-40% 0px -40% 0px', threshold: 0 }
+      )
+      observer.observe(el)
+      observers.push(observer)
+    })
+    return () => observers.forEach(o => o.disconnect())
+  }, [])
+
+  const linkClass = (id) => `${styles.link} ${active === id ? styles.linkActive : ''}`
 
   return (
     <nav className={styles.nav}>
@@ -16,19 +38,18 @@ export default function Nav() {
         <LimonacioIcon size={34} spin={false} pulse={false} dots={false} />
         <span className={styles.logoText}>limonacio</span>
       </a>
-
       <div className={styles.right}>
         <ul className={styles.links}>
-          <li><a href="#trabajos">{t('nav.work')}</a></li>
-          <li><a href="#miscelaneas">{t('nav.misc')}</a></li>
-          <li><a href="#about">{t('nav.about')}</a></li>
+          <li><a href="#trabajos"    className={linkClass('trabajos')}>{t('nav.work')}</a></li>
+          <li><a href="#miscelaneas" className={linkClass('miscelaneas')}>{t('nav.misc')}</a></li>
+          <li><a href="#about"       className={linkClass('about')}>{t('nav.about')}</a></li>
         </ul>
-
-        {/* Language toggle */}
-        <button className={styles.langToggle} onClick={toggleLang} aria-label="Switch language">
-          <span className={isEN ? styles.langActive : styles.langInactive}>EN</span>
+        <button className={styles.langToggle} onClick={cycleLang} aria-label="Switch language">
+          <span className={lang === 'en' ? styles.langActive : styles.langInactive}>EN</span>
           <span className={styles.langSep}>·</span>
-          <span className={!isEN ? styles.langActive : styles.langInactive}>ES</span>
+          <span className={lang === 'es' ? styles.langActive : styles.langInactive}>ES</span>
+          <span className={styles.langSep}>·</span>
+          <span className={lang === 'pt' ? styles.langActive : styles.langInactive}>PT</span>
         </button>
       </div>
     </nav>
