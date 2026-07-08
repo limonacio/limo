@@ -6,7 +6,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 1rem 2.5rem;
-  background: rgba(14,14,14,0.88);
+  background: rgba(26,26,26,0.88);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(255,255,255,0.05);
 }
@@ -26,7 +26,6 @@
   font-family: var(--font);
 }
 
-/* Nav right side: links + toggle */
 .right {
   display: flex;
   align-items: center;
@@ -36,17 +35,31 @@
 .links {
   list-style: none;
   display: flex;
-  gap: 2rem;
+  gap: 1.2rem;
+  align-items: center;
 }
 
-.links a {
+/* Link base */
+.link {
   font-family: var(--font);
   font-size: 0.85rem;
-  color: var(--muted);
   letter-spacing: 0.08em;
-  transition: color 0.2s;
+  color: var(--muted);
+  text-decoration: none;
+  display: inline-block;
+  padding: 0.28rem 0.7rem;
+  border-radius: 20px;
+  border: 1px solid transparent;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
 }
-.links a:hover { color: var(--teal); }
+.link:hover { color: var(--teal); }
+
+/* Link activo — igual al toggle de idioma */
+.linkActive {
+  color: var(--teal) !important;
+  border-color: rgba(61,219,217,0.35);
+  background: rgba(61,219,217,0.08);
+}
 
 /* Language toggle */
 .langToggle {
