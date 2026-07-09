@@ -25,8 +25,12 @@ export default function Nav() {
     return () => observers.forEach(o => o.disconnect())
   }, [])
 
-  const linkClass = (id) => `${styles.link} ${active === id ? styles.linkActive : ''}`
-
+  const linkClass = (id) => {
+  if (active !== id) return styles.link
+  return id === 'trabajos'
+    ? `${styles.link} ${styles.linkActiveWork}`
+    : `${styles.link} ${styles.linkActive}`
+}
   return (
     <nav className={styles.nav}>
       <a href="#hero" className={styles.logo}>
