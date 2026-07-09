@@ -14,15 +14,16 @@
 
 .tag {
   font-family: var(--font);
-  font-size: 0.72rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--coral);
-  background: rgba(240,82,106,0.08);
-  border: 1px solid rgba(240,82,106,0.2);
-  padding: 0.28rem 0.8rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  color: var(--teal);
+  background: transparent;
+  border: 1.5px solid var(--teal);
+  padding: 0.5rem 1.6rem;
   border-radius: 20px;
   white-space: nowrap;
+  font-weight: 900;
+  -webkit-font-smoothing: antialiased;
 }
 
 .title {
