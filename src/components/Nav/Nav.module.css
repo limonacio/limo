@@ -88,7 +88,10 @@
   font-size: 0.75rem;
   letter-spacing: 0.1em;
   color: var(--muted2);
+  cursor: pointer;
+  transition: color 0.2s;
 }
+.langInactive:hover { color: var(--teal); }
 
 .langSep {
   color: var(--muted2);

@@ -9,11 +9,6 @@ export default function Nav() {
   const lang = raw.startsWith('pt') ? 'pt' : raw.startsWith('es') ? 'es' : 'en'
   const [active, setActive] = useState('')
 
-  const cycleLang = () => {
-    const next = lang === 'en' ? 'es' : lang === 'es' ? 'pt' : 'en'
-    i18n.changeLanguage(next)
-  }
-
   useEffect(() => {
     const ids = ['trabajos', 'miscelaneas', 'about']
     const observers = []
@@ -44,13 +39,13 @@ export default function Nav() {
           <li><a href="#miscelaneas" className={linkClass('miscelaneas')}>{t('nav.misc')}</a></li>
           <li><a href="#about"       className={linkClass('about')}>{t('nav.about')}</a></li>
         </ul>
-        <button className={styles.langToggle} onClick={cycleLang} aria-label="Switch language">
-          <span className={lang === 'en' ? styles.langActive : styles.langInactive}>EN</span>
+        <div className={styles.langToggle} role="group" aria-label="Switch language">
+          <span className={lang === 'en' ? styles.langActive : styles.langInactive} onClick={() => i18n.changeLanguage('en')}>EN</span>
           <span className={styles.langSep}>·</span>
-          <span className={lang === 'es' ? styles.langActive : styles.langInactive}>ES</span>
+          <span className={lang === 'es' ? styles.langActive : styles.langInactive} onClick={() => i18n.changeLanguage('es')}>ES</span>
           <span className={styles.langSep}>·</span>
-          <span className={lang === 'pt' ? styles.langActive : styles.langInactive}>PT</span>
-        </button>
+          <span className={lang === 'pt' ? styles.langActive : styles.langInactive} onClick={() => i18n.changeLanguage('pt')}>PT</span>
+        </div>
       </div>
     </nav>
   )
