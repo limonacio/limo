@@ -18,13 +18,13 @@
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: #0E0E0E;
-  background: var(--teal);
+  background: var(--coral);
   border: none;
   padding: 0.5rem 1.6rem;
   border-radius: 20px;
   white-space: nowrap;
   font-weight: 900;
-  box-shadow: 0 0 14px rgba(61,219,217,0.4);
+  box-shadow: 0 0 14px rgba(240,82,106,0.4);
   -webkit-font-smoothing: antialiased;
 }
 
