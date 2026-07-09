@@ -63,6 +63,7 @@ export const proyectos = [
   imagen:   "ecomassages-cover.jpg",
   link:     "https://ecomassagesweb.com//",
   featured: false,
+  glow: '#ffffff',
 },
 
 

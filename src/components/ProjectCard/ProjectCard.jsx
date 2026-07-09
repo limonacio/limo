@@ -1,19 +1,18 @@
 // lang prop viene de la sección padre (i18n.language)
+import { useState } from 'react'
 import styles from './ProjectCard.module.css'
 
 export default function ProjectCard({ proyecto, lang = 'en' }) {
-  const { titulo, subtitulo, descripcion, imagen, link, featured } = proyecto
+  const { titulo, subtitulo, descripcion, imagen, link, featured, glow } = proyecto
+  const [hovered, setHovered] = useState(false)
 
-  // subtitulo y descripcion pueden ser string o { en, es }
   const sub  = typeof subtitulo   === 'object' ? subtitulo[lang]   || subtitulo.en : subtitulo
   const desc = typeof descripcion === 'object' ? descripcion[lang] || descripcion.en : descripcion
 
-  // imagen puede ser nombre local (/assets/img/) o URL externa (http...)
   const imgSrc = imagen
     ? (imagen.startsWith('http') ? imagen : `/assets/img/${imagen}`)
     : null
 
-  // Links externos abren en nueva pestaña; internos navegan en la misma
   const isExternal = link && (link.startsWith('http://') || link.startsWith('https://'))
   const Wrapper = link ? 'a' : 'div'
   const wrapperProps = link
@@ -25,6 +24,12 @@ export default function ProjectCard({ proyecto, lang = 'en' }) {
   return (
     <Wrapper
       className={`${styles.card} ${featured ? styles.featured : ''}`}
+      style={glow ? {
+        boxShadow: hovered ? `0 0 40px 8px ${glow}22` : `0 0 20px 3px ${glow}08`,
+        transition: 'box-shadow 0.35s ease',
+      } : {}}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
       {...wrapperProps}
     >
       <div className={styles.thumb}>
