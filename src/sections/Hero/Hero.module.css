@@ -116,14 +116,24 @@
   text-transform: uppercase;
   box-shadow: 0 4px 20px rgba(240,82,106,0.3);
 }
-.btnPrimary:hover { box-shadow: 0 6px 28px rgba(240,82,106,0.5); }
+.btnPrimary:hover {
+  background: #f2637a;
+  box-shadow: 0 8px 32px rgba(240,82,106,0.55);
+}
 
 .btnSecondary {
   background: transparent;
   color: var(--teal);
   border: 2px solid var(--teal);
+  transition: background 0.2s, box-shadow 0.2s, border-color 0.2s, color 0.2s;
 }
-.btnSecondary:hover { box-shadow: 0 0 22px rgba(61,219,217,0.22); }
+
+.btnSecondary:hover {
+  background: rgba(61,219,217,0.12);
+  border-color: #3DDBD9;
+  box-shadow: 0 0 28px rgba(61,219,217,0.45);
+  color: #fff;
+}
 
 /* Scroll hint */
 .scrollHint {
