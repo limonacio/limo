@@ -6,10 +6,12 @@ import Trabajos     from './sections/Trabajos/Trabajos'
 import Miscelaneas  from './sections/Miscelaneas/Miscelaneas'
 import LimonacioIcon from './components/LimonacioIcon/LimonacioIcon'
 import styles       from './App.module.css'
+import { useTimePalette } from './hooks/useTimePalette'
 
 export default function App() {
   const { t } = useTranslation()
-
+  useTimePalette()
+  
   return (
     <>
       <Nav />

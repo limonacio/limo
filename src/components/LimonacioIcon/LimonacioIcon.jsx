@@ -26,22 +26,22 @@ export default function LimonacioIcon({
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        {/* Mitad turquesa (izquierda) */}
+        
         <path
-          d="M50 6 A44 44 0 0 0 50 94"
-          stroke="#3DDBD9"
-          strokeWidth="11"
-          strokeLinecap="round"
-          fill="none"
-        />
-        {/* Mitad coral (derecha) */}
-        <path
-          d="M50 6 A44 44 0 0 1 50 94"
-          stroke="#F0526A"
-          strokeWidth="11"
-          strokeLinecap="round"
-          fill="none"
-        />
+  d="M50 6 A44 44 0 0 0 50 94"
+  style={{ stroke: 'var(--teal)' }}
+  strokeWidth="11"
+  strokeLinecap="round"
+  fill="none"
+/>
+<path
+  d="M50 6 A44 44 0 0 1 50 94"
+  style={{ stroke: 'var(--coral)' }}
+  strokeWidth="11"
+  strokeLinecap="round"
+  fill="none"
+/>
+
         {/* Punto conector arriba */}
         <circle className={styles.dotBlink}  cx="50" cy="6"  r="4.5" fill="white" />
         {/* Punto conector abajo */}
