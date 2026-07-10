@@ -27,9 +27,12 @@
       min-height: 100vh;
       display: flex;
       flex-direction: column;
+      transition: background 0.8s ease, color 0.8s ease;
     }
 
-    /* NAV */
+    .icon-arc1 { stroke: var(--teal); }
+    .icon-arc2 { stroke: var(--coral); }
+
     nav {
       display: flex;
       align-items: center;
@@ -46,8 +49,8 @@
       font-size: 1.15rem;
       font-weight: 700;
       letter-spacing: 0.1em;
+      transition: color 0.8s ease;
     }
-    .nav-brand svg { flex-shrink: 0; }
     .nav-actions {
       display: flex;
       align-items: center;
@@ -83,7 +86,6 @@
     .lbl.active { color: var(--teal); }
     .sep { color: rgba(255,255,255,0.2); margin: 0 0.2rem; }
 
-    /* HERO */
     main {
       flex: 1;
       display: flex;
@@ -100,10 +102,11 @@
       letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--coral);
-      border: 1px solid rgba(240,82,106,0.3);
+      border: 1px solid rgba(255,255,255,0.12);
       border-radius: 100px;
       padding: 0.3rem 0.9rem;
       margin-bottom: 1.8rem;
+      transition: color 0.8s ease;
     }
 
     h1 {
@@ -113,7 +116,7 @@
       line-height: 1.1;
       margin-bottom: 1.2rem;
     }
-    h1 span { color: var(--coral); }
+    h1 span { color: var(--coral); transition: color 0.8s ease; }
 
     .subtitle {
       font-size: 1rem;
@@ -136,13 +139,13 @@
       text-decoration: none;
       padding: 1rem 2.2rem;
       border-radius: var(--radius);
-      transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+      transition: transform 0.2s, box-shadow 0.2s, background 0.8s ease;
       margin-bottom: 0.9rem;
     }
     .btn-download:hover {
       transform: translateY(-3px);
       box-shadow: 0 12px 32px rgba(61,219,217,0.3);
-      background: #5ee8e6;
+      filter: brightness(1.1);
     }
 
     .meta {
@@ -167,6 +170,7 @@
       padding: 1.1rem 1.4rem;
       text-align: left;
       flex: 1 1 180px;
+      transition: background 0.8s ease;
     }
     .feat-label {
       font-size: 0.65rem;
@@ -174,6 +178,7 @@
       text-transform: uppercase;
       color: var(--teal);
       margin-bottom: 0.4rem;
+      transition: color 0.8s ease;
     }
     .feat-text {
       font-size: 0.82rem;
@@ -183,11 +188,12 @@
 
     .warning {
       background: var(--bg2);
-      border: 1px solid rgba(240,82,106,0.2);
+      border: 1px solid rgba(255,255,255,0.08);
       border-radius: var(--radius);
       padding: 1.2rem 1.6rem;
       max-width: 520px;
       text-align: left;
+      transition: background 0.8s ease;
     }
     .warning-title {
       font-size: 0.7rem;
@@ -195,6 +201,7 @@
       text-transform: uppercase;
       color: var(--coral);
       margin-bottom: 0.6rem;
+      transition: color 0.8s ease;
     }
     .warning-text {
       font-size: 0.78rem;
@@ -214,7 +221,7 @@
       color: var(--muted);
       letter-spacing: 0.1em;
     }
-    footer span { color: var(--coral); }
+    footer span { color: var(--coral); transition: color 0.8s ease; }
     footer sup { font-size: 0.5rem; vertical-align: super; color: var(--coral); }
   </style>
 </head>
@@ -223,8 +230,8 @@
   <nav>
     <a href="/" class="nav-brand">
       <svg width="34" height="34" viewBox="0 0 100 100" fill="none">
-        <path d="M50 6 A44 44 0 0 0 50 94" stroke="#3DDBD9" stroke-width="11" stroke-linecap="round" fill="none"/>
-        <path d="M50 6 A44 44 0 0 1 50 94" stroke="#F0526A" stroke-width="11" stroke-linecap="round" fill="none"/>
+        <path class="icon-arc1" d="M50 6 A44 44 0 0 0 50 94" stroke-width="11" stroke-linecap="round" fill="none"/>
+        <path class="icon-arc2" d="M50 6 A44 44 0 0 1 50 94" stroke-width="11" stroke-linecap="round" fill="none"/>
         <circle cx="50" cy="6"  r="4.5" fill="white"/>
         <circle cx="50" cy="94" r="4.5" fill="white"/>
       </svg>
@@ -244,15 +251,12 @@
 
   <main>
     <span class="tag" id="tag">app · productivity · windows</span>
-
     <h1>Limo<span>doro</span></h1>
-
     <p class="subtitle" id="subtitle">
       A Pomodoro timer for Windows that stays out of your way.
       FREE mode for open sessions, POMO mode for focused sprints,
       daily goal tracking and full session history.
     </p>
-
     <a href="https://github.com/limonacio/limo/releases/latest/download/limodoro.exe" download class="btn-download">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
@@ -261,9 +265,7 @@
       </svg>
       <span id="btnText">Download for Windows</span>
     </a>
-
     <p class="meta">v1.0.2 · Windows 10/11 · 18.5 MB · free</p>
-
     <div class="features">
       <div class="feat">
         <div class="feat-label">POMO mode</div>
@@ -282,7 +284,6 @@
         <div class="feat-text" id="feat4">Full log of every session with timestamps and accumulated time.</div>
       </div>
     </div>
-
     <div class="warning">
       <div class="warning-title" id="warnTitle">⚠ Windows SmartScreen notice</div>
       <div class="warning-text" id="warnText">
@@ -295,8 +296,8 @@
 
   <footer>
     <svg width="18" height="18" viewBox="0 0 100 100" fill="none">
-      <path d="M50 6 A44 44 0 0 0 50 94" stroke="#3DDBD9" stroke-width="11" stroke-linecap="round" fill="none"/>
-      <path d="M50 6 A44 44 0 0 1 50 94" stroke="#F0526A" stroke-width="11" stroke-linecap="round" fill="none"/>
+      <path class="icon-arc1" d="M50 6 A44 44 0 0 0 50 94" stroke-width="11" stroke-linecap="round" fill="none"/>
+      <path class="icon-arc2" d="M50 6 A44 44 0 0 1 50 94" stroke-width="11" stroke-linecap="round" fill="none"/>
       <circle cx="50" cy="6"  r="4.5" fill="white"/>
       <circle cx="50" cy="94" r="4.5" fill="white"/>
     </svg>
@@ -304,6 +305,7 @@
   </footer>
 
   <script>
+    // ── TRADUCCIONES ─────────────────────────────────────────
     const translations = {
       en: {
         tag:        'app · productivity · windows',
@@ -381,7 +383,62 @@
       applyLang(lang);
     }
 
+    // ── PALETA POR HORA ──────────────────────────────────────
+    const TIME_PALETTES = {
+      weekday: {
+        '--teal':  '#C9853A',
+        '--coral': '#942038',
+        '--bg':    '#1b1714',
+        '--bg2':   '#221e1a',
+        '--bg3':   '#2a2620',
+        '--text':  '#F0EDE8',
+      },
+      weekend: {
+        '--teal':  '#5E9E70',
+        '--coral': '#C46B3A',
+        '--bg':    '#161a17',
+        '--bg2':   '#1d221e',
+        '--bg3':   '#242b25',
+        '--text':  '#EFF2EE',
+      },
+      night: {
+        '--teal':  '#7B74E0',
+        '--coral': '#F0526A',
+        '--bg':    '#17171e',
+        '--bg2':   '#1e1e28',
+        '--bg3':   '#252532',
+        '--text':  '#F0F0F0',
+      },
+    };
+
+    function getTimePalette() {
+      const now  = new Date();
+      const hour = now.getHours();
+      const day  = now.getDay();
+      const isNight   = hour < 8 || hour >= 20;
+      const isWeekend = day === 0 || day === 6;
+      if (isNight)   return TIME_PALETTES.night;
+      if (isWeekend) return TIME_PALETTES.weekend;
+      return TIME_PALETTES.weekday;
+    }
+
+    function applyTimePalette() {
+      const palette = getTimePalette();
+      const root = document.documentElement;
+      Object.entries(palette).forEach(([k, v]) => root.style.setProperty(k, v));
+    }
+
+    // ── INIT ─────────────────────────────────────────────────
+    applyTimePalette();
     applyLang(getLang());
+
+    // Recalcular al inicio de cada hora
+    const _now = new Date();
+    const _ms  = (60 - _now.getMinutes()) * 60000 - _now.getSeconds() * 1000;
+    setTimeout(() => {
+      applyTimePalette();
+      setInterval(applyTimePalette, 3600000);
+    }, _ms);
   </script>
 
 </body>
