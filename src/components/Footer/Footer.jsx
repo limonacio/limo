@@ -8,7 +8,7 @@ export default function Footer() {
       <span className={styles.text}>
         <span className={styles.brand}>limonacio</span>
         <sup className={styles.tm}>™</sup>
-        <span className={styles.sep}> · © {new Date().getFullYear()}</span>
+        <span className={styles.sep}> · © {new Date().getFullYear()}. All rights reserved.</span>
       </span>
     </footer>
   )
