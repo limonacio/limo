@@ -265,7 +265,7 @@
       </svg>
       <span id="btnText">Download for Windows</span>
     </a>
-    <p class="meta">v1.0.2 · Windows 10/11 · 18.5 MB · free</p>
+    <p class="meta" id="meta-info">v1.0.3 · Windows 10/11 · 18.5 MB · free</p>
     <div class="features">
       <div class="feat">
         <div class="feat-label">POMO mode</div>
@@ -382,6 +382,20 @@
       localStorage.setItem('i18nextLng', lang);
       applyLang(lang);
     }
+
+    // ── VERSIÓN DINÁMICA DESDE GITHUB ────────────────────────
+      fetch('https://api.github.com/repos/limonacio/limo/releases/latest')
+        .then(r => r.json())
+        .then(data => {
+          const tag   = data.tag_name || 'v1.0.3';
+          const asset = (data.assets || []).find(a => a.name === 'limodoro.exe');
+          const mb    = asset ? (asset.size / 1024 / 1024).toFixed(1) + ' MB' : '18.5 MB';
+          const el    = document.getElementById('meta-info');
+          if (el) el.textContent = tag + ' · Windows 10/11 · ' + mb + ' · free';
+        })
+        .catch(() => {});
+
+
 
     // ── PALETA POR HORA ──────────────────────────────────────
     const TIME_PALETTES = {
