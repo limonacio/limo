@@ -3,8 +3,8 @@ import { useEffect } from 'react'
 const PALETTES = {
   // Lunes–Viernes 08:00–20:00
   weekday: {
-    '--teal':  '#2ECC80',
-    '--coral': '#900030',
+    '--teal':  '#900030',
+    '--coral': '#2ECC80',
     '--bg':    '#161a17',
     '--bg2':   '#1c211d',
     '--bg3':   '#232a24',
