@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import LimonacioIcon from '../LimonacioIcon/LimonacioIcon'
 import styles from './Nav.module.css'
@@ -8,6 +8,8 @@ export default function Nav() {
   const raw = i18n.language || 'en'
   const lang = raw.startsWith('pt') ? 'pt' : raw.startsWith('es') ? 'es' : 'en'
   const [active, setActive] = useState('')
+  const [langOpen, setLangOpen] = useState(false)
+  const langRef = useRef(null)
 
   useEffect(() => {
     const ids = ['trabajos', 'miscelaneas', 'about']
@@ -25,6 +27,16 @@ export default function Nav() {
     handleScroll()
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (langRef.current && !langRef.current.contains(e.target)) {
+        setLangOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [])
 
   const linkClass = (id) => {
@@ -50,12 +62,32 @@ export default function Nav() {
           <li><a href="#miscelaneas" className={linkClass('miscelaneas')}>{t('nav.misc')}</a></li>
           <li><a href="#about"       className={linkClass('about')}>{t('nav.about')}</a></li>
         </ul>
-        <div className={styles.langToggle} role="group" aria-label="Switch language">
-          <span className={lang === 'en' ? styles.langActive : styles.langInactive} onClick={() => i18n.changeLanguage('en')}>EN</span>
-          <span className={styles.langSep}>·</span>
-          <span className={lang === 'es' ? styles.langActive : styles.langInactive} onClick={() => i18n.changeLanguage('es')}>ES</span>
-          <span className={styles.langSep}>·</span>
-          <span className={lang === 'pt' ? styles.langActive : styles.langInactive} onClick={() => i18n.changeLanguage('pt')}>PT</span>
+
+        <div className={styles.langDropdown} ref={langRef}>
+          <button
+            className={styles.langTrigger}
+            onClick={() => setLangOpen(o => !o)}
+            aria-expanded={langOpen}
+            aria-haspopup="listbox"
+          >
+            {lang.toUpperCase()}
+            <span className={`${styles.langCaret} ${langOpen ? styles.langCaretOpen : ''}`}>▾</span>
+          </button>
+          {langOpen && (
+            <div className={styles.langMenu} role="listbox">
+              {['en', 'es', 'pt'].map(l => (
+                <button
+                  key={l}
+                  className={l === lang ? styles.langMenuItemActive : styles.langMenuItem}
+                  onClick={() => { i18n.changeLanguage(l); setLangOpen(false) }}
+                  role="option"
+                  aria-selected={l === lang}
+                >
+                  {l.toUpperCase()}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </nav>
