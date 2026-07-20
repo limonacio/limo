@@ -1,7 +1,7 @@
 import styles from './MiscCard.module.css'
 
 export default function MiscCard({ proyecto, lang = 'en' }) {
-  const { titulo, subtitulo, descripcion, imagen, video, link } = proyecto
+  const { subtitulo, descripcion, imagen, video, link } = proyecto
 
   const sub  = typeof subtitulo   === 'object' ? subtitulo[lang]   || subtitulo.en : subtitulo
   const desc = typeof descripcion === 'object' ? descripcion[lang] || descripcion.en : descripcion
@@ -17,7 +17,7 @@ export default function MiscCard({ proyecto, lang = 'en' }) {
     <div className={styles.card} onClick={handleClick}>
       <div className={styles.thumb}>
         {imgSrc
-          ? <img src={imgSrc} alt={titulo} className={styles.img} />
+          ? <img src={imgSrc} alt={sub} className={styles.img} />
           : <div className={styles.thumbBg} />
         }
         <div className={styles.overlay} />
@@ -32,7 +32,6 @@ export default function MiscCard({ proyecto, lang = 'en' }) {
 
       <div className={styles.body}>
         <span className={styles.subtitulo}>{sub}</span>
-        <h3 className={styles.titulo}>{titulo}</h3>
         <p className={styles.desc}>{desc}</p>
       </div>
     </div>
