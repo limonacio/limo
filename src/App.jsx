@@ -1,14 +1,12 @@
-import { useTranslation } from 'react-i18next'
 import Nav          from './components/Nav/Nav'
 import Footer       from './components/Footer/Footer'
 import Hero         from './sections/Hero/Hero'
 import Trabajos     from './sections/Trabajos/Trabajos'
 import Miscelaneas  from './sections/Miscelaneas/Miscelaneas'
-import styles       from './App.module.css'
+import About        from './sections/About/About'
 import { useTimePalette } from './hooks/useTimePalette'
 
 export default function App() {
-  const { t } = useTranslation()
   useTimePalette()
 
   return (
@@ -17,19 +15,8 @@ export default function App() {
       <main>
         <Hero />
         <Trabajos />
-
         <Miscelaneas />
-
-        <section id="about" className={styles.about}>
-          <div className={styles.aboutInner}>
-            <div>
-              <h2 className={styles.aboutTitle}>
-                {t('about.heading')}
-              </h2>
-              <p className={styles.aboutText}>{t('about.text')}</p>
-            </div>
-          </div>
-        </section>
+        <About />
       </main>
       <Footer />
     </>
