@@ -10,29 +10,34 @@ export default function Nav() {
   const [active, setActive] = useState('')
 
   useEffect(() => {
-  const ids = ['trabajos', 'miscelaneas', 'about']
+    const ids = ['trabajos', 'miscelaneas', 'about']
 
-  const handleScroll = () => {
-    const mid = window.scrollY + window.innerHeight * 0.5
-    let current = ''
-    for (const id of ids) {
-      const el = document.getElementById(id)
-      if (el && el.offsetTop <= mid) current = id
+    const handleScroll = () => {
+      const mid = window.scrollY + window.innerHeight * 0.5
+      let current = ''
+      for (const id of ids) {
+        const el = document.getElementById(id)
+        if (el && el.offsetTop <= mid) current = id
+      }
+      setActive(current)
     }
-    setActive(current)
-  }
 
-  handleScroll()
-  window.addEventListener('scroll', handleScroll, { passive: true })
-  return () => window.removeEventListener('scroll', handleScroll)
-}, [])
+    handleScroll()
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   const linkClass = (id) => {
-  if (active !== id) return styles.link
-  return id === 'trabajos'
-    ? `${styles.link} ${styles.linkActiveWork}`
-    : `${styles.link} ${styles.linkActive}`
-}
+    if (id === 'trabajos') {
+      return active === id
+        ? `${styles.link} ${styles.linkWork} ${styles.linkActiveWork}`
+        : `${styles.link} ${styles.linkWork}`
+    }
+    return active === id
+      ? `${styles.link} ${styles.linkActive}`
+      : styles.link
+  }
+
   return (
     <nav className={styles.nav}>
       <a href="#hero" className={styles.logo}>

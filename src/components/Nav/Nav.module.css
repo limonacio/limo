@@ -52,19 +52,31 @@
   border: 1px solid transparent;
   transition: color 0.2s, border-color 0.2s, background 0.2s;
 }
-.link:hover { color: var(--teal); }
-
-/* Link activo — igual al toggle de idioma */
-.linkActive {
-  color: var(--teal) !important;
-  border-color: rgba(61,219,217,0.35);
-  background: rgba(61,219,217,0.08);
+.link:hover {
+  color: var(--teal);
+  border-color: color-mix(in srgb, var(--teal) 30%, transparent);
+  background: color-mix(in srgb, var(--teal) 6%, transparent);
 }
 
+/* Work link — hover siempre en coral */
+.linkWork:hover {
+  color: var(--coral);
+  border-color: color-mix(in srgb, var(--coral) 30%, transparent);
+  background: color-mix(in srgb, var(--coral) 6%, transparent);
+}
+
+/* Link activo general (misc, about) */
+.linkActive {
+  color: var(--teal) !important;
+  border-color: color-mix(in srgb, var(--teal) 35%, transparent);
+  background: color-mix(in srgb, var(--teal) 8%, transparent);
+}
+
+/* Link activo work — usa coral */
 .linkActiveWork {
   color: var(--coral) !important;
-  border-color: rgba(240,82,106,0.35);
-  background: rgba(240,82,106,0.08);
+  border-color: color-mix(in srgb, var(--coral) 35%, transparent);
+  background: color-mix(in srgb, var(--coral) 8%, transparent);
 }
 
 /* Language toggle */
@@ -77,9 +89,12 @@
   display: flex;
   align-items: center;
   gap: 0.35rem;
-  transition: border-color 0.2s;
+  transition: border-color 0.2s, background 0.2s;
 }
-.langToggle:hover { border-color: rgba(61,219,217,0.4); }
+.langToggle:hover {
+  border-color: color-mix(in srgb, var(--teal) 40%, transparent);
+  background: color-mix(in srgb, var(--teal) 5%, transparent);
+}
 
 .langActive {
   font-family: var(--font);
@@ -87,6 +102,7 @@
   font-weight: 700;
   letter-spacing: 0.1em;
   color: var(--teal);
+  cursor: default;
 }
 
 .langInactive {
