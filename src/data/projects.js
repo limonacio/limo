@@ -2,7 +2,7 @@
 //  LIMO · src/data/projects.js
 //
 //  ÚNICO ARCHIVO que necesitás tocar para agregar/editar proyectos.
-//  Los campos de texto tienen versión EN y ES.
+//  Los campos de texto tienen versión EN, ES y PT.
 //  Las secciones leen de acá automáticamente.
 //
 //  TIPOS:  "trabajo" → sección Work   |   "misc" → sección Miscellaneous
@@ -21,10 +21,12 @@ export const proyectos = [
     subtitulo: {
       en: "web · design · sports",
       es: "web · diseño · deportes",
+      pt: "web · design · esportes",
     },
     descripcion: {
       en: "Sports web platform built for FIFA World Cup 2026. Real-time fixtures, standings, and knockout bracket — designed to be fast, clean, and mobile-first.",
       es: "Plataforma web deportiva para el Mundial FIFA 2026. Fixtures, posiciones y bracket de eliminación en tiempo real, con diseño limpio y mobile-first.",
+      pt: "Plataforma web esportiva para a Copa do Mundo FIFA 2026. Fixtures, classificações e chave eliminatória em tempo real — design limpo e mobile-first.",
     },
     imagen:   "zeta-sports-cover.png",
     link:     "https://www.zeta-sports.com",
@@ -38,10 +40,12 @@ export const proyectos = [
     subtitulo: {
       en: "app · productivity · windows",
       es: "app · productividad · windows",
+      pt: "app · produtividade · windows",
     },
     descripcion: {
       en: "Windows desktop app based on the Pomodoro technique. Supports FREE and POMO modes, daily goal tracking, and a full session history — built to stay out of your way.",
       es: "App de escritorio para Windows basada en la técnica Pomodoro. Modo libre y modo Pomodoro, seguimiento de meta diaria e historial completo de sesiones.",
+      pt: "App de desktop para Windows baseado na técnica Pomodoro. Modos livre e Pomodoro, acompanhamento de meta diária e histórico completo de sessões.",
     },
     imagen:   "limodoro-cover.png",
     link:     "/limodoro/index.html",
@@ -49,22 +53,24 @@ export const proyectos = [
   },
 
   {
-  id:       "ecomassages",
-  tipo:     "trabajo",
-  titulo:   "Eco Massages",
-  subtitulo: {
-    en: "web · wellness · booking",
-    es: "web · bienestar · reservas",
+    id:       "ecomassages",
+    tipo:     "trabajo",
+    titulo:   "Eco Massages",
+    subtitulo: {
+      en: "web · wellness · booking",
+      es: "web · bienestar · reservas",
+      pt: "web · bem-estar · reservas",
+    },
+    descripcion: {
+      en: "Website for a massage therapy center. Services, WhatsApp booking, embedded map, and Google reviews.",
+      es: "Sitio web para un centro de masajes. Servicios, reservas por WhatsApp, mapa integrado y reseñas de Google.",
+      pt: "Site para um centro de massagens. Serviços, reservas pelo WhatsApp, mapa integrado e avaliações do Google.",
+    },
+    imagen:   "ecomassages-cover.jpg",
+    link:     "https://ecomassagesweb.com//",
+    featured: false,
+    glow: '#ffffff',
   },
-  descripcion: {
-    en: "Website for a massage therapy center. Services, WhatsApp booking, embedded map, and Google reviews.",
-    es: "Sitio web para un centro de masajes. Servicios, reservas por WhatsApp, mapa integrado y reseñas de Google.",
-  },
-  imagen:   "ecomassages-cover.jpg",
-  link:     "https://ecomassagesweb.com//",
-  featured: false,
-  glow: '#ffffff',
-},
 
 
   // ── Para agregar un trabajo: copiá este bloque ────────────
@@ -72,8 +78,8 @@ export const proyectos = [
   //   id:       "nuevo-proyecto",
   //   tipo:     "trabajo",
   //   titulo:   "Nombre del Proyecto",
-  //   subtitulo: { en: "category · tag", es: "categoría · etiqueta" },
-  //   descripcion: { en: "Short description.", es: "Descripción breve." },
+  //   subtitulo: { en: "category · tag", es: "categoría · etiqueta", pt: "categoria · etiqueta" },
+  //   descripcion: { en: "Short description.", es: "Descripción breve.", pt: "Descrição breve." },
   //   imagen:   "nombre-cover.jpg",   // o URL externa: "https://..."
   //   link:     "https://...",
   //   featured: false,
@@ -88,10 +94,12 @@ export const proyectos = [
     subtitulo: {
       en: "music",
       es: "música",
+      pt: "música",
     },
     descripcion: {
       en: "Watch the video on YouTube.",
       es: "Ver el video en YouTube.",
+      pt: "Assista ao vídeo no YouTube.",
     },
     imagen:   "musica-cover.jpg",
     link:     "https://www.youtube.com/watch?v=TiyPCmciZMc",
@@ -105,10 +113,12 @@ export const proyectos = [
     subtitulo: {
       en: "dance",
       es: "baile",
+      pt: "dança",
     },
     descripcion: {
       en: "Watch the video on YouTube.",
       es: "Ver el video en YouTube.",
+      pt: "Assista ao vídeo no YouTube.",
     },
     imagen:   "baile-cover.jpg",
     link:     "https://www.youtube.com/watch?v=s35t1V0FWjw",
@@ -120,8 +130,8 @@ export const proyectos = [
   //   id:       "misc-03",
   //   tipo:     "misc",
   //   titulo:   "Title",
-  //   subtitulo: { en: "music video | dance | other", es: "video musical | baile | otro" },
-  //   descripcion: { en: "Description.", es: "Descripción." },
+  //   subtitulo: { en: "music video | dance | other", es: "video musical | baile | otro", pt: "videoclipe | dança | outro" },
+  //   descripcion: { en: "Description.", es: "Descripción.", pt: "Descrição." },
   //   imagen:   "https://img.youtube.com/vi/VIDEO_ID/hqdefault.jpg",
   //   link:     "https://www.youtube.com/watch?v=VIDEO_ID",
   //   featured: false,
