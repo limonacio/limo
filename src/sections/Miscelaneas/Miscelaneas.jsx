@@ -45,7 +45,6 @@ export default function Miscelaneas() {
 
       <div className={styles.header}>
         <span className={styles.tag}>{t('misc.tag')}</span>
-        <h2 className={styles.title}>{t('misc.title')}</h2>
         <div className={styles.line} />
       </div>
 
