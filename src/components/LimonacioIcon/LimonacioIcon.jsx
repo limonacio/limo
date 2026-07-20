@@ -29,14 +29,14 @@ export default function LimonacioIcon({
         
         <path
   d="M50 6 A44 44 0 0 0 50 94"
-  style={{ stroke: 'var(--teal)' }}
+  style={{ stroke: 'var(--coral)' }}   {/* ← era --teal, ahora verde menta */}
   strokeWidth="11"
   strokeLinecap="round"
   fill="none"
 />
 <path
   d="M50 6 A44 44 0 0 1 50 94"
-  style={{ stroke: 'var(--coral)' }}
+  style={{ stroke: 'var(--teal)' }}    {/* ← era --coral, ahora vino */}
   strokeWidth="11"
   strokeLinecap="round"
   fill="none"
