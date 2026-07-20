@@ -92,8 +92,8 @@
   transition: border-color 0.2s, background 0.2s;
 }
 .langToggle:hover {
-  border-color: color-mix(in srgb, var(--teal) 40%, transparent);
-  background: color-mix(in srgb, var(--teal) 5%, transparent);
+  border-color: color-mix(in srgb, var(--coral) 40%, transparent);
+  background: color-mix(in srgb, var(--coral) 5%, transparent);
 }
 
 .langActive {
@@ -101,7 +101,7 @@
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.1em;
-  color: var(--teal);
+  color: var(--coral);
   cursor: default;
 }
 
@@ -113,7 +113,7 @@
   cursor: pointer;
   transition: color 0.2s;
 }
-.langInactive:hover { color: var(--teal); }
+.langInactive:hover { color: var(--coral); }
 
 .langSep {
   color: var(--muted2);
