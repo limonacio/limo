@@ -10,20 +10,22 @@ export default function Nav() {
   const [active, setActive] = useState('')
 
   useEffect(() => {
-    const ids = ['trabajos', 'miscelaneas', 'about']
-    const observers = []
-    ids.forEach(id => {
+  const ids = ['trabajos', 'miscelaneas', 'about']
+
+  const handleScroll = () => {
+    const mid = window.scrollY + window.innerHeight * 0.5
+    let current = ''
+    for (const id of ids) {
       const el = document.getElementById(id)
-      if (!el) return
-      const observer = new IntersectionObserver(
-        ([entry]) => { if (entry.isIntersecting) setActive(id) },
-        { rootMargin: '-40% 0px -40% 0px', threshold: 0 }
-      )
-      observer.observe(el)
-      observers.push(observer)
-    })
-    return () => observers.forEach(o => o.disconnect())
-  }, [])
+      if (el && el.offsetTop <= mid) current = id
+    }
+    setActive(current)
+  }
+
+  handleScroll()
+  window.addEventListener('scroll', handleScroll, { passive: true })
+  return () => window.removeEventListener('scroll', handleScroll)
+}, [])
 
   const linkClass = (id) => {
   if (active !== id) return styles.link
