@@ -16,6 +16,14 @@
   align-items: center;
   gap: 0.7rem;
   text-decoration: none;
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.logoHidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-8px);
 }
 
 .logoText {

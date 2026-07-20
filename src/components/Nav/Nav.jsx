@@ -50,9 +50,11 @@ export default function Nav() {
       : styles.link
   }
 
+  const atHero = active === ''
+
   return (
     <nav className={styles.nav}>
-      <a href="#hero" className={styles.logo}>
+      <a href="#hero" className={`${styles.logo} ${atHero ? styles.logoHidden : ''}`}>
         <LimonacioIcon size={34} spin={false} pulse={false} dots={false} />
         <span className={styles.logoText}>limonacio</span>
       </a>
