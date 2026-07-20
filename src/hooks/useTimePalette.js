@@ -3,11 +3,11 @@ import { useEffect } from 'react'
 const PALETTES = {
   // Lunes–Viernes 08:00–20:00
   weekday: {
-    '--teal':  '#C9853A',
-    '--coral': '#942038',
-    '--bg':    '#1b1714',
-    '--bg2':   '#221e1a',
-    '--bg3':   '#2a2620',
+    '--teal':  '#2ECC80',
+    '--coral': '#900030',
+    '--bg':    '#161a17',
+    '--bg2':   '#1c211d',
+    '--bg3':   '#232a24',
     '--text':  '#F0EDE8',
   },
   // Sábado–Domingo 08:00–20:00
