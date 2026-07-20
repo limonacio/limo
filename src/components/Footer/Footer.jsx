@@ -4,7 +4,7 @@ import styles from './Footer.module.css'
 export default function Footer() {
   return (
     <footer className={styles.footer}>
-      <LimonacioIcon size={22} spin={false} pulse={false} dots={false} />
+      <LimonacioIcon size={22} spin={false} pulse={false} dots={true} />
       <span className={styles.text}>
         <span className={styles.brand}>limonacio</span>
         <sup className={styles.tm}>™</sup>
