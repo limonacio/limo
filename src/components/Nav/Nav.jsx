@@ -55,7 +55,7 @@ export default function Nav() {
   return (
     <nav className={styles.nav}>
       <a href="#hero" className={`${styles.logo} ${atHero ? styles.logoHidden : ''}`}>
-        <LimonacioIcon size={34} spin={false} pulse={false} dots={false} />
+        <LimonacioIcon size={34} spin={false} pulse={false} dots={true} />
         <span className={styles.logoText}>limonacio</span>
       </a>
       <div className={styles.right}>
