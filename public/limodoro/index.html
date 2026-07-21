@@ -30,32 +30,47 @@
       transition: background 0.8s ease, color 0.8s ease;
     }
 
-    .icon-arc1 { stroke: var(--teal); }
-    .icon-arc2 { stroke: var(--coral); }
+    /* Icon arcs — left = coral, right = teal (matches React component) */
+    .icon-arc1 { stroke: var(--coral); }
+    .icon-arc2 { stroke: var(--teal);  }
 
+    /* ── NAV — identical to main site ── */
     nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 1.2rem 2.5rem;
+      padding: 1rem 2.5rem;
+      background: rgba(26,26,26,0.88);
+      backdrop-filter: blur(12px);
       border-bottom: 1px solid rgba(255,255,255,0.05);
     }
+
     .nav-brand {
       display: flex;
       align-items: center;
-      gap: 0.6rem;
+      gap: 0.7rem;
       text-decoration: none;
-      color: var(--coral);
+    }
+    .nav-logo-text {
       font-size: 1.15rem;
       font-weight: 700;
-      letter-spacing: 0.1em;
+      color: var(--coral);
+      letter-spacing: 0.04em;
+      font-family: var(--font);
       transition: color 0.8s ease;
     }
-    .nav-actions {
+
+    /* Right side */
+    .nav-right {
       display: flex;
       align-items: center;
-      gap: 1.2rem;
+      gap: 2rem;
     }
+
+    /* Back to work link */
     .nav-back {
       font-size: 0.75rem;
       color: var(--muted);
@@ -65,34 +80,86 @@
     }
     .nav-back:hover { color: var(--teal); }
 
-    .lang-toggle {
+    /* Language dropdown — matches main site exactly */
+    .lang-dropdown { position: relative; }
+    .lang-trigger {
       display: flex;
       align-items: center;
-      font-size: 0.7rem;
-      letter-spacing: 0.1em;
+      gap: 0.4rem;
+      background: none;
       border: 1px solid rgba(255,255,255,0.1);
       border-radius: 20px;
-      padding: 0.25rem 0.75rem;
-      transition: border-color 0.2s;
+      padding: 0.3rem 0.85rem;
+      font-family: var(--font);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--coral);
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s, color 0.8s ease;
     }
-    .lang-toggle:hover { border-color: rgba(61,219,217,0.35); }
-    .lbl {
+    .lang-trigger:hover {
+      border-color: color-mix(in srgb, var(--coral) 40%, transparent);
+      background: color-mix(in srgb, var(--coral) 5%, transparent);
+    }
+    .lang-caret {
+      font-size: 0.6rem;
+      display: inline-block;
+      transition: transform 0.2s;
+      line-height: 1;
+    }
+    .lang-caret.open { transform: rotate(180deg); }
+    .lang-menu {
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 0;
+      background: var(--bg2);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 10px;
+      padding: 0.35rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 62px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.45);
+      z-index: 200;
+    }
+    .lang-item {
+      background: none;
+      border: none;
+      font-family: var(--font);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
       color: var(--muted);
       cursor: pointer;
-      transition: color 0.2s;
-      font-family: var(--font);
+      padding: 0.4rem 0.7rem;
+      border-radius: 6px;
+      text-align: center;
+      transition: color 0.15s, background 0.15s;
     }
-    .lbl:hover { color: var(--teal); }
-    .lbl.active { color: var(--teal); }
-    .sep { color: rgba(255,255,255,0.2); margin: 0 0.2rem; }
+    .lang-item:hover {
+      color: var(--coral);
+      background: color-mix(in srgb, var(--coral) 8%, transparent);
+    }
+    .lang-item.active {
+      background: color-mix(in srgb, var(--coral) 10%, transparent);
+      font-weight: 700;
+      color: var(--coral);
+      cursor: default;
+    }
 
+    @media (max-width: 600px) {
+      nav { padding: 0.9rem 1.2rem; }
+    }
+
+    /* ── HERO — offset for fixed nav ── */
     main {
       flex: 1;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 4rem 1.5rem;
+      padding: 7rem 1.5rem 4rem;
       text-align: center;
     }
 
@@ -102,11 +169,11 @@
       letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--coral);
-      border: 1px solid rgba(255,255,255,0.12);
+      border: 1px solid color-mix(in srgb, var(--coral) 30%, transparent);
       border-radius: 100px;
       padding: 0.3rem 0.9rem;
       margin-bottom: 1.8rem;
-      transition: color 0.8s ease;
+      transition: color 0.8s ease, border-color 0.8s ease;
     }
 
     h1 {
@@ -126,27 +193,28 @@
       margin-bottom: 2.8rem;
     }
 
+    /* DOWNLOAD BUTTON — always green, never follows palette */
     .btn-download {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.7rem;
-  background: #22C55E;
-  color: #0a0a0a;
-  font-family: var(--font);
-  font-size: 0.9rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-decoration: none;
-  padding: 1rem 2.2rem;
-  border-radius: var(--radius);
-  transition: transform 0.2s, box-shadow 0.2s;
-  margin-bottom: 0.9rem;
-}
-.btn-download:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 32px rgba(34,197,94,0.35);
-  filter: brightness(1.1);
-}
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      background: #22C55E;
+      color: #0a0a0a;
+      font-family: var(--font);
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-decoration: none;
+      padding: 1rem 2.2rem;
+      border-radius: var(--radius);
+      transition: transform 0.2s, box-shadow 0.2s;
+      margin-bottom: 0.9rem;
+    }
+    .btn-download:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(34,197,94,0.35);
+      filter: brightness(1.1);
+    }
 
     .meta {
       font-size: 0.7rem;
@@ -155,6 +223,7 @@
       margin-bottom: 3.5rem;
     }
 
+    /* FEATURES */
     .features {
       display: flex;
       gap: 1.5rem;
@@ -186,14 +255,15 @@
       line-height: 1.55;
     }
 
+    /* SMARTSCREEN WARNING */
     .warning {
       background: var(--bg2);
-      border: 1px solid rgba(255,255,255,0.08);
+      border: 1px solid color-mix(in srgb, var(--coral) 20%, transparent);
       border-radius: var(--radius);
       padding: 1.2rem 1.6rem;
       max-width: 520px;
       text-align: left;
-      transition: background 0.8s ease;
+      transition: background 0.8s ease, border-color 0.8s ease;
     }
     .warning-title {
       font-size: 0.7rem;
@@ -210,6 +280,7 @@
     }
     .warning-text strong { color: var(--text); }
 
+    /* FOOTER */
     footer {
       display: flex;
       align-items: center;
@@ -222,34 +293,39 @@
       letter-spacing: 0.1em;
     }
     footer span { color: var(--coral); transition: color 0.8s ease; }
-    footer sup { font-size: 0.5rem; vertical-align: super; color: var(--coral); }
+    footer sup  { font-size: 0.5rem; vertical-align: super; color: var(--coral); }
   </style>
 </head>
 <body>
 
   <nav>
-    <a href="/" class="nav-brand">
+    <a href="/" class="nav-brand" id="navBrand">
       <svg width="34" height="34" viewBox="0 0 100 100" fill="none">
         <path class="icon-arc1" d="M50 6 A44 44 0 0 0 50 94" stroke-width="11" stroke-linecap="round" fill="none"/>
         <path class="icon-arc2" d="M50 6 A44 44 0 0 1 50 94" stroke-width="11" stroke-linecap="round" fill="none"/>
         <circle cx="50" cy="6"  r="4.5" fill="white"/>
         <circle cx="50" cy="94" r="4.5" fill="white"/>
       </svg>
-      limonacio
+      <span class="nav-logo-text">limonacio</span>
     </a>
-    <div class="nav-actions">
-      <div class="lang-toggle">
-        <span class="lbl" id="lbl-en" onclick="setLang('en')">EN</span>
-        <span class="sep">·</span>
-        <span class="lbl" id="lbl-es" onclick="setLang('es')">ES</span>
-        <span class="sep">·</span>
-        <span class="lbl" id="lbl-pt" onclick="setLang('pt')">PT</span>
+
+    <div class="nav-right">
+      <div class="lang-dropdown" id="langDropdown">
+        <button class="lang-trigger" id="langTrigger" aria-haspopup="listbox" aria-expanded="false">
+          <span id="langLabel">EN</span>
+          <span class="lang-caret" id="langCaret">▾</span>
+        </button>
+        <div class="lang-menu" id="langMenu" style="display:none;" role="listbox">
+          <button class="lang-item" id="li-en" onclick="setLang('en')" role="option">EN</button>
+          <button class="lang-item" id="li-es" onclick="setLang('es')" role="option">ES</button>
+          <button class="lang-item" id="li-pt" onclick="setLang('pt')" role="option">PT</button>
+        </div>
       </div>
       <a href="/#trabajos" class="nav-back" id="navBack">← back to work</a>
     </div>
   </nav>
 
-  <main>
+  <main id="heroSection">
     <span class="tag" id="tag">app · productivity · windows</span>
     <h1>Limo<span>doro</span></h1>
     <p class="subtitle" id="subtitle">
@@ -265,7 +341,7 @@
       </svg>
       <span id="btnText">Download for Windows</span>
     </a>
-    <p class="meta" id="meta-info">v1.0.3 · Windows 10/11 · 18.5 MB · free</p>
+    <p class="meta" id="meta-info">v1.0.4 · Windows 10/11 · 18.5 MB · free</p>
     <div class="features">
       <div class="feat">
         <div class="feat-label">POMO mode</div>
@@ -351,6 +427,7 @@
       }
     };
 
+    // ── IDIOMA ───────────────────────────────────────────────
     function getLang() {
       const stored = localStorage.getItem('i18nextLng') || 'en';
       if (stored.startsWith('pt')) return 'pt';
@@ -373,38 +450,63 @@
       document.getElementById('warnTitle').textContent  = t.warnTitle;
       document.getElementById('warnText').innerHTML     = t.warnText;
       document.getElementById('navBack').textContent    = t.navBack;
+      document.getElementById('langLabel').textContent  = lang.toUpperCase();
       ['en','es','pt'].forEach(l => {
-        document.getElementById('lbl-' + l).classList.toggle('active', l === lang);
+        document.getElementById('li-' + l).classList.toggle('active', l === lang);
       });
     }
 
     function setLang(lang) {
       localStorage.setItem('i18nextLng', lang);
       applyLang(lang);
+      closeLangMenu();
     }
 
+    // ── DROPDOWN IDIOMA ──────────────────────────────────────
+    const langTrigger = document.getElementById('langTrigger');
+    const langMenu    = document.getElementById('langMenu');
+    const langCaret   = document.getElementById('langCaret');
+
+    function openLangMenu()  {
+      langMenu.style.display = 'flex';
+      langCaret.classList.add('open');
+      langTrigger.setAttribute('aria-expanded', 'true');
+    }
+    function closeLangMenu() {
+      langMenu.style.display = 'none';
+      langCaret.classList.remove('open');
+      langTrigger.setAttribute('aria-expanded', 'false');
+    }
+    langTrigger.addEventListener('click', e => {
+      e.stopPropagation();
+      langMenu.style.display === 'none' ? openLangMenu() : closeLangMenu();
+    });
+    document.addEventListener('click', e => {
+      if (!document.getElementById('langDropdown').contains(e.target)) closeLangMenu();
+    });
+
+    // Logo siempre visible en Limodoro (el hero muestra "Limodoro", no "limonacio")
+
     // ── VERSIÓN DINÁMICA DESDE GITHUB ────────────────────────
-      fetch('https://api.github.com/repos/limonacio/limo/releases/latest')
-        .then(r => r.json())
-        .then(data => {
-          const tag   = data.tag_name || 'v1.0.3';
-          const asset = (data.assets || []).find(a => a.name === 'limodoro.exe');
-          const mb    = asset ? (asset.size / 1024 / 1024).toFixed(1) + ' MB' : '18.5 MB';
-          const el    = document.getElementById('meta-info');
-          if (el) el.textContent = tag + ' · Windows 10/11 · ' + mb + ' · free';
-        })
-        .catch(() => {});
+    fetch('https://api.github.com/repos/limonacio/limo/releases/latest')
+      .then(r => r.json())
+      .then(data => {
+        const tag   = data.tag_name || 'v1.0.4';
+        const asset = (data.assets || []).find(a => a.name === 'limodoro.exe');
+        const mb    = asset ? (asset.size / 1024 / 1024).toFixed(1) + ' MB' : '18.5 MB';
+        const el    = document.getElementById('meta-info');
+        if (el) el.textContent = tag + ' · Windows 10/11 · ' + mb + ' · free';
+      })
+      .catch(() => {});
 
-
-
-    // ── PALETA POR HORA ──────────────────────────────────────
+    // ── PALETA POR HORA (sincronizada con main site) ──────────
     const TIME_PALETTES = {
       weekday: {
-        '--teal':  '#C9853A',
-        '--coral': '#942038',
-        '--bg':    '#1b1714',
-        '--bg2':   '#221e1a',
-        '--bg3':   '#2a2620',
+        '--teal':  '#900030',
+        '--coral': '#2ECC80',
+        '--bg':    '#161a17',
+        '--bg2':   '#1c211d',
+        '--bg3':   '#232a24',
         '--text':  '#F0EDE8',
       },
       weekend: {
@@ -446,7 +548,6 @@
     applyTimePalette();
     applyLang(getLang());
 
-    // Recalcular al inicio de cada hora
     const _now = new Date();
     const _ms  = (60 - _now.getMinutes()) * 60000 - _now.getSeconds() * 1000;
     setTimeout(() => {
