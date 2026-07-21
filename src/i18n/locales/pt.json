@@ -22,7 +22,10 @@
   "about": {
     "heading": "sobre mim",
     "brand":   "limonacio",
-    "text":    "Portfolio pessoal de trabalhos, projetos e paixões. Do design e desenvolvimento à música e dança — tudo o que me move está aqui."
+    "text":    "Portfolio pessoal de trabalhos, projetos e paixões. Do design e desenvolvimento à música e dança — tudo o que me move está aqui.",
+    "extended": "Me formei no Colégio León XIII, onde cursei o bacharelado com ênfase em Humanidades. O estudo do latim e do grego que realizei ali — junto com vários anos de francês e inglês — me proporcionou sólidas capacidades analíticas e associativas, além de uma memória bem exercitada.\n\nAo longo da minha carreira, decidi me envolver com questões relacionadas à saúde e à psicoterapia — dimensões sensíveis do ser humano. Mais recentemente, tenho me sentido muito motivado a mergulhar no estudo de tecnologia e software. Todo dia encontro algo novo para aprender sobre testes de erros, repositórios, automação e relatórios.\n\nConsulto regularmente a IA como assistente no meu processo de aprendizado e, em alguns casos, até como mero supervisor do meu trabalho e de certas produções.\n\nAtualmente estudo inglês com afinco para enriquecer minhas habilidades linguísticas e poder usá-lo eventualmente com a mesma amplitude com que uso o espanhol.\n\nTalvez um dia no futuro — um grande objetivo meu — eu consiga conectar os dois mundos: o da saúde psicossocial e o do desenvolvimento de software.",
+    "see_more": "ver mais",
+    "see_less": "ver menos"
   },
   "card": {
     "no_link": ""

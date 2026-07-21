@@ -22,7 +22,10 @@
   "about": {
     "heading": "about me",
     "brand":   "limonacio",
-    "text":    "Personal portfolio of work, projects and passions. From design and development to music and dance — everything that moves me goes here."
+    "text":    "Personal portfolio of work, projects and passions. From design and development to music and dance — everything that moves me goes here.",
+    "extended": "I graduated from Colegio León XIII, where I completed a baccalaureate with a focus on the Humanities. The study of Latin and Greek I undertook there—along with several years of French and English—gave me strong analytical and associative abilities, as well as a well-exercised memory.\n\nThroughout my career, I decided to get involved in matters related to health and psychotherapy—sensitive dimensions of the human being. More recently, I have felt strongly motivated to dive into the study of technology and software. Every day, I find myself learning something new about error testing, repositories, automation, and reporting.\n\nI regularly consult AI as an assistant in my learning process and, in some cases, even as a mere supervisor of my work and certain productions.\n\nI am currently studying English assiduously in order to enrich my language skills and eventually use it with the same breadth with which I use Spanish.\n\nPerhaps one day in the future—a big goal of mine—I will be able to connect both worlds: that of psychosocial health and that of software development.",
+    "see_more": "see more",
+    "see_less": "see less"
   },
   "card": {
     "no_link": ""
