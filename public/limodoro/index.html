@@ -11,6 +11,7 @@
     :root {
       --teal:   #3DDBD9;
       --coral:  #F0526A;
+      --feat:   #2ECC80;   /* verde iluminado — sobreescrito por JS */
       --bg:     #1a1a1a;
       --bg2:    #212121;
       --bg3:    #2a2a2a;
@@ -245,7 +246,7 @@
       font-size: 0.65rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: var(--teal);
+      color: var(--feat);
       margin-bottom: 0.4rem;
       transition: color 0.8s ease;
     }
@@ -258,7 +259,7 @@
     /* SMARTSCREEN WARNING */
     .warning {
       background: var(--bg2);
-      border: 1px solid color-mix(in srgb, var(--coral) 20%, transparent);
+      border: 1px solid rgba(201, 162, 39, 0.28);
       border-radius: var(--radius);
       padding: 1.2rem 1.6rem;
       max-width: 520px;
@@ -269,7 +270,7 @@
       font-size: 0.7rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--coral);
+      color: #C9A227;
       margin-bottom: 0.6rem;
       transition: color 0.8s ease;
     }
@@ -504,6 +505,7 @@
       weekday: {
         '--teal':  '#900030',
         '--coral': '#2ECC80',
+        '--feat':  '#2ECC80',   /* menta — misma para semana y finde */
         '--bg':    '#161a17',
         '--bg2':   '#1c211d',
         '--bg3':   '#232a24',
@@ -512,6 +514,7 @@
       weekend: {
         '--teal':  '#5E9E70',
         '--coral': '#C46B3A',
+        '--feat':  '#5E9E70',   /* verde weekend */
         '--bg':    '#161a17',
         '--bg2':   '#1d221e',
         '--bg3':   '#242b25',
@@ -520,6 +523,7 @@
       night: {
         '--teal':  '#7B74E0',
         '--coral': '#F0526A',
+        '--feat':  '#7B74E0',   /* lila */
         '--bg':    '#17171e',
         '--bg2':   '#1e1e28',
         '--bg3':   '#252532',
