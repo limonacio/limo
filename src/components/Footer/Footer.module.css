@@ -1,10 +1,16 @@
 .footer {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   gap: 0.6rem;
   padding: 2.5rem;
   border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+.left {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
 }
 
 .text {
@@ -29,5 +35,29 @@
 .sep {
   color: var(--muted);
   opacity: 0.5;
-  
+}
+
+.socials {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.socialLink {
+  display: flex;
+  align-items: center;
+  color: var(--muted);
+  opacity: 0.5;
+  transition: color 0.2s, opacity 0.2s;
+  line-height: 1;
+}
+
+.socialLink:hover {
+  color: var(--teal);
+  opacity: 1;
+}
+
+.socialLink svg {
+  width: 16px;
+  height: 16px;
 }
