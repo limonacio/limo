@@ -57,7 +57,6 @@ const SLOTS = [
 // Solo las verticales solitarias necesitan blur de fondo
 const VERTICAL = new Set([
   '/assets/img/hero/bsas-llegando-noche.png',
-  '/assets/img/hero/natal-noche-llegada.png',
   '/assets/img/hero/yendo-sao-paulo-siesta.png',
   '/assets/img/hero/yendo-sao-paulo-siesta2.png',
   '/assets/img/hero/rio-santa-cruz-tarde.png',
