@@ -145,6 +145,17 @@
   letter-spacing: 0.02em;
   line-height: 1;
   font-family: var(--font);
+  text-shadow:
+    /* reborde blanco finísimo pegado a la letra */
+    -1px -1px 0 rgba(255,255,255,0.25),
+     1px -1px 0 rgba(255,255,255,0.25),
+    -1px  1px 0 rgba(255,255,255,0.25),
+     1px  1px 0 rgba(255,255,255,0.25),
+    /* reborde negro justo afuera del blanco */
+    -2px -2px 0 rgba(0,0,0,0.45),
+     2px -2px 0 rgba(0,0,0,0.45),
+    -2px  2px 0 rgba(0,0,0,0.45),
+     2px  2px 0 rgba(0,0,0,0.45);
 }
 
 .subtitle {
@@ -153,6 +164,15 @@
   line-height: 1.8;
   letter-spacing: 0.05em;
   font-family: var(--font);
+  text-shadow:
+    -1px -1px 0 rgba(255,255,255,0.15),
+     1px -1px 0 rgba(255,255,255,0.15),
+    -1px  1px 0 rgba(255,255,255,0.15),
+     1px  1px 0 rgba(255,255,255,0.15),
+    -2px -2px 0 rgba(0,0,0,0.5),
+     2px -2px 0 rgba(0,0,0,0.5),
+    -2px  2px 0 rgba(0,0,0,0.5),
+     2px  2px 0 rgba(0,0,0,0.5);
 }
 
 /* Tres puntitos decorativos */
