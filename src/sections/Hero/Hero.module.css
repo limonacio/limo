@@ -260,3 +260,34 @@
   0%, 100% { transform: translateX(-50%) translateY(0);  opacity: 0.5; }
   50%       { transform: translateX(-50%) translateY(7px); opacity: 1; }
 }
+
+/* ── Mobile: foto alineada con el contenido (Opción C) ──── */
+@media (max-width: 640px) {
+
+  /* Rieles oscuros de 2rem a cada lado.
+     El padding del .hero es 2rem, así que los bordes de la foto
+     quedan alineados exactamente con los del texto y los botones. */
+  .hero::before,
+  .hero::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 2rem;
+    background: #080808;
+    z-index: 5;
+    pointer-events: none;
+  }
+  .hero::before { left: 0; }
+  .hero::after  { right: 0; }
+
+  /* Pares de imágenes: en mobile mostrar solo la primera, full-cover */
+  .imgPairItem:last-child {
+    display: none;
+  }
+  .imgPairItem:first-child {
+    width: 100%;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+}
