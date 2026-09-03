@@ -15,42 +15,25 @@ export const proyectos = [
   // ── WORK / TRABAJOS ───────────────────────────────────────
 
   {
-    id:       "zeta-sports",
+    id:       "martin-brooks",
     tipo:     "trabajo",
-    titulo:   "Zeta Sports",
+    titulo:   "Martín Brooks",
     subtitulo: {
-      en: "web · design · sports",
-      es: "web · diseño · deportes",
-      pt: "web · design · esportes",
+      en: "web · psychology · wellness",
+      es: "web · psicología · bienestar",
+      pt: "web · psicologia · bem-estar",
     },
     descripcion: {
-      en: "Sports web platform built for FIFA World Cup 2026. Real-time fixtures, standings, and knockout bracket — designed to be fast, clean, and mobile-first.",
-      es: "Plataforma web deportiva para el Mundial FIFA 2026. Fixtures, posiciones y bracket de eliminación en tiempo real, con diseño limpio y mobile-first.",
-      pt: "Plataforma web esportiva para a Copa do Mundo FIFA 2026. Fixtures, classificações e chave eliminatória em tempo real — design limpo e mobile-first.",
+      en: "Personal site for a psychologist. Individual therapy sessions, appointment booking, and a clean bilingual design that reflects the professional's approach.",
+      es: "Sitio personal para un psicólogo. Sesiones individuales, reserva de turnos y diseño bilingüe que refleja el estilo profesional del terapeuta.",
+      pt: "Site pessoal para um psicólogo. Sessões individuais, agendamento de consultas e design bilíngue que reflete a abordagem do profissional.",
     },
-    imagen:   "zeta-sports-cover.png",
-    link:     "https://www.zeta-sports.com",
-    featured: true,
-  },
-
-  {
-    id:       "limodoro",
-    tipo:     "trabajo",
-    titulo:   "Limodoro",
-    subtitulo: {
-      en: "app · productivity · windows",
-      es: "app · productividad · windows",
-      pt: "app · produtividade · windows",
-    },
-    descripcion: {
-      en: "Windows desktop app based on the Pomodoro technique. Supports FREE and POMO modes, daily goal tracking, and a full session history — built to stay out of your way.",
-      es: "App de escritorio para Windows basada en la técnica Pomodoro. Modo libre y modo Pomodoro, seguimiento de meta diaria e historial completo de sesiones.",
-      pt: "App de desktop para Windows baseado na técnica Pomodoro. Modos livre e Pomodoro, acompanhamento de meta diária e histórico completo de sessões.",
-    },
-    imagen:   "limodoro-cover.png",
-    link:     "/limodoro/index.html",
+    imagen:   "martin-brooks-cover.png",
+    link:     "https://martin-ebon.vercel.app/martinbrookspsi",
     featured: false,
   },
+
+
 
   {
     id:       "ecomassages",
@@ -72,23 +55,46 @@ export const proyectos = [
     glow: '#ffffff',
   },
 
+
+
   {
-    id:       "martin-brooks",
+    id:       "limodoro",
     tipo:     "trabajo",
-    titulo:   "Martín Brooks",
+    titulo:   "Limodoro",
     subtitulo: {
-      en: "web · psychology · wellness",
-      es: "web · psicología · bienestar",
-      pt: "web · psicologia · bem-estar",
+      en: "app · productivity · windows",
+      es: "app · productividad · windows",
+      pt: "app · produtividade · windows",
     },
     descripcion: {
-      en: "Personal site for a psychologist. Individual therapy sessions, appointment booking, and a clean bilingual design that reflects the professional's approach.",
-      es: "Sitio personal para un psicólogo. Sesiones individuales, reserva de turnos y diseño bilingüe que refleja el estilo profesional del terapeuta.",
-      pt: "Site pessoal para um psicólogo. Sessões individuais, agendamento de consultas e design bilíngue que reflete a abordagem do profissional.",
+      en: "Windows desktop app based on the Pomodoro technique. Supports FREE and POMO modes, daily goal tracking, and a full session history — built to stay out of your way.",
+      es: "App de escritorio para Windows basada en la técnica Pomodoro. Modo libre y modo Pomodoro, seguimiento de meta diaria e historial completo de sesiones.",
+      pt: "App de desktop para Windows baseado na técnica Pomodoro. Modos livre e Pomodoro, acompanhamento de meta diária e histórico completo de sessões.",
     },
-    imagen:   "martin-brooks-cover.png",
-    link:     "https://martin-ebon.vercel.app/martinbrookspsi",
+    imagen:   "limodoro-cover.png",
+    link:     "/limodoro/index.html",
     featured: false,
+  },
+
+
+
+  {
+    id:       "zeta-sports",
+    tipo:     "trabajo",
+    titulo:   "Zeta Sports",
+    subtitulo: {
+      en: "web · design · sports",
+      es: "web · diseño · deportes",
+      pt: "web · design · esportes",
+    },
+    descripcion: {
+      en: "Sports web platform built for FIFA World Cup 2026. Real-time fixtures, standings, and knockout bracket — designed to be fast, clean, and mobile-first.",
+      es: "Plataforma web deportiva para el Mundial FIFA 2026. Fixtures, posiciones y bracket de eliminación en tiempo real, con diseño limpio y mobile-first.",
+      pt: "Plataforma web esportiva para a Copa do Mundo FIFA 2026. Fixtures, classificações e chave eliminatória em tempo real — design limpo e mobile-first.",
+    },
+    imagen:   "zeta-sports-cover.png",
+    link:     "https://www.zeta-sports.com",
+    featured: true,
   },
 
 
