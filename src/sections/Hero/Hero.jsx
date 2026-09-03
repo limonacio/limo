@@ -37,6 +37,7 @@ const SLOTS = [
       ['/assets/img/hero/maceio-estatua-graciliano-ramos.png'],
       ['/assets/img/hero/porto-de-galinhas-siesta.png'],
       ['/assets/img/hero/porto-de-galinhas-siesta2.png'],
+      ['/assets/img/hero/rio-santa-cruz-tarde.png'],
       // Las 2 de São Paulo juntas lado a lado
       ['/assets/img/hero/yendo-sao-paulo-siesta.png', '/assets/img/hero/yendo-sao-paulo-siesta2.png'],
     ],
@@ -59,6 +60,7 @@ const VERTICAL = new Set([
   '/assets/img/hero/natal-noche-llegada.png',
   '/assets/img/hero/yendo-sao-paulo-siesta.png',
   '/assets/img/hero/yendo-sao-paulo-siesta2.png',
+  '/assets/img/hero/rio-santa-cruz-tarde.png',
 ])
 
 function getTimeSlotIndex() {
