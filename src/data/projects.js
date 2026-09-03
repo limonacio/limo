@@ -86,7 +86,7 @@ export const proyectos = [
       es: "Sitio personal para un psicólogo. Sesiones individuales, reserva de turnos y diseño bilingüe que refleja el estilo profesional del terapeuta.",
       pt: "Site pessoal para um psicólogo. Sessões individuais, agendamento de consultas e design bilíngue que reflete a abordagem do profissional.",
     },
-    imagen:   "martin-brooks-cover.jpg",
+    imagen:   "martin-brooks-cover.png",
     link:     "https://martin-ebon.vercel.app/martinbrookspsi",
     featured: false,
   },
