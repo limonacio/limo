@@ -41,7 +41,7 @@
   transition: opacity 0.5s ease;
 }
 
-/* ── Par de imágenes lado a lado ────────────────────── */
+/* ── Par de imágenes lado a lado con fade en el centro ─ */
 .imgPair {
   position: absolute;
   inset: 0;
@@ -56,6 +56,17 @@
   height: 100%;
   object-fit: cover;
   object-position: center;
+}
+
+/* Fade hacia el centro: cada imagen se disuelve en su borde interior */
+.imgPairItem:first-child {
+  -webkit-mask-image: linear-gradient(to right, black 45%, transparent 100%);
+  mask-image: linear-gradient(to right, black 45%, transparent 100%);
+}
+
+.imgPairItem:last-child {
+  -webkit-mask-image: linear-gradient(to left, black 45%, transparent 100%);
+  mask-image: linear-gradient(to left, black 45%, transparent 100%);
 }
 
 /* ── Imagen vertical: blur de relleno ───────────────── */
