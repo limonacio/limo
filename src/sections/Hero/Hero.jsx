@@ -4,16 +4,17 @@ import LimonacioIcon from '../../components/LimonacioIcon/LimonacioIcon'
 import styles from './Hero.module.css'
 
 // ── Franjas horarias ──────────────────────────────────────────
+// Cada "frame" es un array: 1 imagen sola, o 2 para mostrar lado a lado
 const SLOTS = [
   {
     name: 'amanecer',
     range: [6, 9],
     type: 'images',
-    images: [
-      '/assets/img/hero/amanecer-joao-pessoa.png',
-      '/assets/img/hero/amanecer-joao-pessoa2.png',
-      '/assets/img/hero/amanecer-joao-pessoa3.png',
-      '/assets/img/hero/amanecer-joao-pessoa4.png',
+    frames: [
+      ['/assets/img/hero/amanecer-joao-pessoa.png'],
+      ['/assets/img/hero/amanecer-joao-pessoa2.png'],
+      ['/assets/img/hero/amanecer-joao-pessoa3.png'],
+      ['/assets/img/hero/amanecer-joao-pessoa4.png'],
     ],
   },
   {
@@ -25,34 +26,34 @@ const SLOTS = [
     name: 'tarde',
     range: [16, 20],
     type: 'images',
-    images: [
-      '/assets/img/hero/atardecer-pipa.png',
-      '/assets/img/hero/atardecer-pipa2.png',
-      '/assets/img/hero/atardecer-pipa3.png',
-      '/assets/img/hero/atardecer-pipa4.png',
-      '/assets/img/hero/floripa-siesta.png',
-      '/assets/img/hero/joao-pessoa-siesta.png',
-      '/assets/img/hero/maceio.png',
-      '/assets/img/hero/maceio-estatua-graciliano-ramos.png',
-      '/assets/img/hero/porto-de-galinhas-siesta.png',
-      '/assets/img/hero/porto-de-galinhas-siesta2.png',
-      '/assets/img/hero/yendo-sao-paulo-siesta.png',
-      '/assets/img/hero/yendo-sao-paulo-siesta2.png',
+    frames: [
+      ['/assets/img/hero/atardecer-pipa.png'],
+      ['/assets/img/hero/atardecer-pipa2.png'],
+      ['/assets/img/hero/atardecer-pipa3.png'],
+      ['/assets/img/hero/atardecer-pipa4.png'],
+      ['/assets/img/hero/floripa-siesta.png'],
+      ['/assets/img/hero/joao-pessoa-siesta.png'],
+      ['/assets/img/hero/maceio.png'],
+      ['/assets/img/hero/maceio-estatua-graciliano-ramos.png'],
+      ['/assets/img/hero/porto-de-galinhas-siesta.png'],
+      ['/assets/img/hero/porto-de-galinhas-siesta2.png'],
+      // Las 2 de São Paulo juntas lado a lado
+      ['/assets/img/hero/yendo-sao-paulo-siesta.png', '/assets/img/hero/yendo-sao-paulo-siesta2.png'],
     ],
   },
   {
     name: 'noche',
     range: [20, 6],
     type: 'images',
-    images: [
-      '/assets/img/hero/bsas-llegando-noche.png',
-      '/assets/img/hero/bsas-llegando-noche2.png',
-      '/assets/img/hero/natal-noche-llegada.png',
+    frames: [
+      // Las 2 de Bs As juntas lado a lado
+      ['/assets/img/hero/bsas-llegando-noche.png', '/assets/img/hero/bsas-llegando-noche2.png'],
+      ['/assets/img/hero/natal-noche-llegada.png'],
     ],
   },
 ]
 
-// Fotos verticales — reciben tratamiento blur + centrado
+// Solo las verticales solitarias necesitan blur de fondo
 const VERTICAL = new Set([
   '/assets/img/hero/bsas-llegando-noche.png',
   '/assets/img/hero/natal-noche-llegada.png',
@@ -68,34 +69,32 @@ function getTimeSlotIndex() {
   return 3                         // noche
 }
 
-const DEFAULT_INTERVAL = 18000 // ms — fallback antes de detectar duración del video
+const DEFAULT_INTERVAL = 18000
 
 export default function Hero() {
   const { t } = useTranslation()
-  const videoRef    = useRef(null)
-  const timerRef    = useRef(null)
-  const slotIdxRef  = useRef(getTimeSlotIndex())
+  const videoRef   = useRef(null)
+  const timerRef   = useRef(null)
+  const slotIdxRef = useRef(getTimeSlotIndex())
 
-  const [slotIdx,     setSlotIdx]     = useState(getTimeSlotIndex)
-  const [imgIdx,      setImgIdx]      = useState(0)
-  const [visible,     setVisible]     = useState(true)
-  const [intervalMs,  setIntervalMs]  = useState(DEFAULT_INTERVAL)
+  const [slotIdx,    setSlotIdx]    = useState(getTimeSlotIndex)
+  const [imgIdx,     setImgIdx]     = useState(0)
+  const [visible,    setVisible]    = useState(true)
+  const [intervalMs, setIntervalMs] = useState(DEFAULT_INTERVAL)
 
-  // mantener ref sincronizada para closures del timer
   useEffect(() => { slotIdxRef.current = slotIdx }, [slotIdx])
 
-  const slot       = SLOTS[slotIdx]
-  const currentImg = slot.type === 'images' ? slot.images[imgIdx] : null
-  const isVertical = currentImg ? VERTICAL.has(currentImg) : false
+  const slot  = SLOTS[slotIdx]
+  const frame = slot.type === 'images' ? (slot.frames[imgIdx] ?? []) : []
 
-  // Detectar duración del video y calibrar el intervalo (½ duración)
+  // Calibrar intervalo con la duración del video
   const handleVideoMeta = () => {
     if (videoRef.current?.duration) {
       setIntervalMs(Math.round(videoRef.current.duration * 500))
     }
   }
 
-  // Play/pause del video según slot activo
+  // Play / pause del video
   useEffect(() => {
     if (!videoRef.current) return
     if (slot.type === 'video') {
@@ -105,19 +104,19 @@ export default function Hero() {
     }
   }, [slot])
 
-  // Avanzar imagen con crossfade
+  // Avanzar frame con crossfade
   const advance = useCallback(() => {
     setVisible(false)
     setTimeout(() => {
       setImgIdx(i => {
-        const imgs = SLOTS[slotIdxRef.current]?.images
-        return imgs ? (i + 1) % imgs.length : 0
+        const frames = SLOTS[slotIdxRef.current]?.frames
+        return frames ? (i + 1) % frames.length : 0
       })
       setVisible(true)
     }, 500)
   }, [])
 
-  // Timer del carousel (solo franjas de imagen)
+  // Timer del carousel
   useEffect(() => {
     clearInterval(timerRef.current)
     if (slot.type === 'video') return
@@ -125,14 +124,59 @@ export default function Hero() {
     return () => clearInterval(timerRef.current)
   }, [slot, advance, intervalMs])
 
-  // Reset al cambiar de slot
+  // Reset al cambiar slot
   useEffect(() => {
     setImgIdx(0)
     setVisible(true)
   }, [slotIdx])
 
-  // Toggle misterioso: cicla entre los 4 slots
   const handleToggle = () => setSlotIdx(i => (i + 1) % SLOTS.length)
+
+  // ── Render del fondo ──────────────────────────────────────
+  const renderBackground = () => {
+    if (slot.type === 'video') return null
+
+    // Par: dos imágenes lado a lado
+    if (frame.length === 2) {
+      return (
+        <div className={`${styles.imgPair} ${visible ? styles.imgVisible : ''}`}>
+          <img src={frame[0]} alt="" className={styles.imgPairItem} />
+          <img src={frame[1]} alt="" className={styles.imgPairItem} />
+        </div>
+      )
+    }
+
+    // Imagen sola
+    const img = frame[0]
+    if (!img) return null
+    const isV = VERTICAL.has(img)
+
+    if (isV) {
+      // Vertical: blur de relleno + foto centrada
+      return (
+        <>
+          <div
+            className={styles.imgBlur}
+            style={{ backgroundImage: `url(${img})`, opacity: visible ? 1 : 0 }}
+          />
+          <img
+            src={img}
+            alt=""
+            className={`${styles.imgCentered} ${visible ? styles.imgVisible : ''}`}
+          />
+        </>
+      )
+    }
+
+    // Horizontal: foto a full, sin blur
+    return (
+      <img
+        src={img}
+        alt=""
+        className={`${styles.imgCover} ${visible ? styles.imgVisible : ''}`}
+      />
+    )
+  }
 
   return (
     <section id="hero" className={styles.hero}>
@@ -148,25 +192,7 @@ export default function Hero() {
         <source src="/rompimiento-glaciar.mp4"  type="video/mp4" />
       </video>
 
-      {/* Fondo imagen: blur expandido (siempre) + foto centrada (solo verticales) */}
-      {slot.type === 'images' && currentImg && (
-        <>
-          <div
-            className={styles.imgBlur}
-            style={{
-              backgroundImage: `url(${currentImg})`,
-              opacity: visible ? 1 : 0,
-            }}
-          />
-          {isVertical && (
-            <img
-              src={currentImg}
-              alt=""
-              className={`${styles.imgCentered} ${visible ? styles.imgVisible : ''}`}
-            />
-          )}
-        </>
-      )}
+      {renderBackground()}
 
       {/* Overlay oscuro */}
       <div className={styles.videoOverlay} />
