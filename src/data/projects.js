@@ -38,7 +38,7 @@ export const proyectos = [
   {
     id:       "ecomassages",
     tipo:     "trabajo",
-    titulo:   "EcoMassages",
+    titulo:   "Ecomassages",
     subtitulo: {
       en: "web · wellness · booking",
       es: "web · bienestar · reservas",
