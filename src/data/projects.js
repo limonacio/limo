@@ -72,6 +72,25 @@ export const proyectos = [
     glow: '#ffffff',
   },
 
+  {
+    id:       "martin-brooks",
+    tipo:     "trabajo",
+    titulo:   "Martín Brooks",
+    subtitulo: {
+      en: "web · psychology · wellness",
+      es: "web · psicología · bienestar",
+      pt: "web · psicologia · bem-estar",
+    },
+    descripcion: {
+      en: "Personal site for a psychologist. Individual therapy sessions, appointment booking, and a clean bilingual design that reflects the professional's approach.",
+      es: "Sitio personal para un psicólogo. Sesiones individuales, reserva de turnos y diseño bilingüe que refleja el estilo profesional del terapeuta.",
+      pt: "Site pessoal para um psicólogo. Sessões individuais, agendamento de consultas e design bilíngue que reflete a abordagem do profissional.",
+    },
+    imagen:   "martin-brooks-cover.jpg",
+    link:     "https://martin-ebon.vercel.app/martinbrookspsi",
+    featured: false,
+  },
+
 
   // ── Para agregar un trabajo: copiá este bloque ────────────
   // {
