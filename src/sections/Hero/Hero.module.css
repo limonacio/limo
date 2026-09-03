@@ -290,4 +290,19 @@
     -webkit-mask-image: none;
     mask-image: none;
   }
+
+  /* Verticales en mobile: esconder blur, mostrar como cover */
+  .imgBlur {
+    display: none;
+  }
+  .imgCentered {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    max-width: none;
+    max-height: none;
+  }
 }
