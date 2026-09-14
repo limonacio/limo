@@ -322,5 +322,6 @@
     object-position: center;
     max-width: none;
     max-height: none;
+    transform: none; /* resetea el translate(-50%,-50%) del desktop */
   }
 }

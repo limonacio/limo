@@ -7,14 +7,27 @@ import styles from './Hero.module.css'
 // Cada "frame" es un array: 1 imagen sola, o 2 para mostrar lado a lado
 const SLOTS = [
   {
-    name: 'amanecer',
-    range: [6, 9],
+    name: 'madrugada',
+    range: [4, 5],
     type: 'images',
     frames: [
-      ['/assets/img/hero/amanecer-joao-pessoa.png'],
-      ['/assets/img/hero/amanecer-joao-pessoa2.png'],
-      ['/assets/img/hero/amanecer-joao-pessoa3.png'],
-      ['/assets/img/hero/amanecer-joao-pessoa4.png'],
+      ['/assets/img/hero/trasnochada1.webp'],
+      ['/assets/img/hero/trasnochada2.webp'],
+      ['/assets/img/hero/trasnochada3.webp'],
+    ],
+  },
+  {
+    name: 'amanecer',
+    range: [5, 9],
+    type: 'images',
+    frames: [
+      ['/assets/img/hero/natal-amanecer-fuego.webp'],
+      ['/assets/img/hero/natal-amanecer-rosa.webp'],
+      ['/assets/img/hero/natal-amanecer-lila.webp'],
+      ['/assets/img/hero/natal-amanecer-sol.webp'],
+      ['/assets/img/hero/natal-amanecer-sol2.webp'],
+      ['/assets/img/hero/natal-amanecer-sol3.webp'],
+      ['/assets/img/hero/natal-amanecer-sol4.webp'],
     ],
   },
   {
@@ -27,48 +40,72 @@ const SLOTS = [
     range: [16, 20],
     type: 'images',
     frames: [
-      ['/assets/img/hero/atardecer-pipa.png'],
-      ['/assets/img/hero/atardecer-pipa2.png'],
-      ['/assets/img/hero/atardecer-pipa3.png'],
-      ['/assets/img/hero/atardecer-pipa4.png'],
-      ['/assets/img/hero/floripa-siesta.png'],
-      ['/assets/img/hero/joao-pessoa-siesta.png'],
-      ['/assets/img/hero/maceio.png'],
-      ['/assets/img/hero/maceio-estatua-graciliano-ramos.png'],
-      ['/assets/img/hero/porto-de-galinhas-siesta.png'],
-      ['/assets/img/hero/porto-de-galinhas-siesta2.png'],
-      ['/assets/img/hero/rio-santa-cruz-tarde.png'],
-      // Las 2 de São Paulo juntas lado a lado
-      ['/assets/img/hero/yendo-sao-paulo-siesta.png', '/assets/img/hero/yendo-sao-paulo-siesta2.png'],
+      // Mezcladas por lugar para no mostrar seguidas del mismo sitio
+      ['/assets/img/hero/pipa-tarde-arcoiris.webp'],
+      ['/assets/img/hero/floripa-avion-bahia.webp'],
+      ['/assets/img/hero/natal-tarde-ciudad.webp'],
+      ['/assets/img/hero/maceio-tarde-olas.webp'],
+      ['/assets/img/hero/pipa-tarde-playa.webp'],
+      ['/assets/img/hero/floripa-manha-ondas3.webp'],
+      ['/assets/img/hero/pernambuco-tarde-laguna.webp'],
+      ['/assets/img/hero/natal-atardecer-barcos.webp'],
+      ['/assets/img/hero/maceio-tarde-praia.webp'],
+      ['/assets/img/hero/pipa-tarde-barcos.webp'],
+      ['/assets/img/hero/ruta-tarde-kombi.webp'],
+      ['/assets/img/hero/floripa-tarde-morro.webp'],
+      ['/assets/img/hero/avion-atardecer.webp'],
+      ['/assets/img/hero/pernambuco-tarde-campos.webp'],
+      ['/assets/img/hero/natal-atardecer-ciudad.webp'],
+      ['/assets/img/hero/porto-tarde-jangada.webp'],
+      ['/assets/img/hero/floripa-manha-ondas.webp'],
+      ['/assets/img/hero/maceio-tarde-mar.webp'],
+      ['/assets/img/hero/pipa-tarde-acantilado.webp'],
+      ['/assets/img/hero/ruta-tarde-puente.webp'],
+      ['/assets/img/hero/floripa-avion-bahia2.webp'],
+      ['/assets/img/hero/porto-tarde-acai.webp'],
+      ['/assets/img/hero/rio-santa-cruz-tarde.webp'],
+      ['/assets/img/hero/floripa-tarde-morro2.webp'],
+      ['/assets/img/hero/pernambuco-tarde-campos2.webp'],
+      ['/assets/img/hero/maceio-tarde-orla.webp'],
+      ['/assets/img/hero/pipa-tarde-restaurantes.webp'],
+      ['/assets/img/hero/ruta-tarde-campos.webp'],
+      ['/assets/img/hero/floripa-manha-ondas2.webp'],
+      ['/assets/img/hero/maceio-tarde-avenida.webp'],
+      ['/assets/img/hero/ruta-tarde-campos2.webp'],
+      ['/assets/img/hero/floripa-tarde-avenida.webp'],
+      ['/assets/img/hero/floripa-manha-pescador.webp'],
+      ['/assets/img/hero/ruta-tarde-colinas.webp'],
     ],
   },
   {
     name: 'noche',
-    range: [20, 6],
+    range: [20, 4],
     type: 'images',
     frames: [
-      // Las 2 de Bs As juntas lado a lado
-      ['/assets/img/hero/bsas-llegando-noche.png', '/assets/img/hero/bsas-llegando-noche2.png'],
-      ['/assets/img/hero/natal-noche-llegada.png'],
+      ['/assets/img/hero/avion-gol-noche.webp'],
+      ['/assets/img/hero/avion-bsas-noche2.webp'],
+      ['/assets/img/hero/avion-smiles-noche1.webp'],
+      ['/assets/img/hero/avion-bsas-noche1.webp'],
+      ['/assets/img/hero/avion-smiles-noche2.webp'],
     ],
   },
 ]
 
 // Solo las verticales solitarias necesitan blur de fondo
 const VERTICAL = new Set([
-  '/assets/img/hero/bsas-llegando-noche.png',
-  '/assets/img/hero/natal-noche-llegada.png',
-  '/assets/img/hero/yendo-sao-paulo-siesta.png',
-  '/assets/img/hero/yendo-sao-paulo-siesta2.png',
-  '/assets/img/hero/rio-santa-cruz-tarde.png',
+  '/assets/img/hero/avion-gol-noche.webp',
+  '/assets/img/hero/avion-bsas-noche1.webp',
+  '/assets/img/hero/avion-smiles-noche2.webp',
+  '/assets/img/hero/rio-santa-cruz-tarde.webp',
 ])
 
 function getTimeSlotIndex() {
   const h = new Date().getHours()
-  if (h >= 6  && h < 9)  return 0 // amanecer
-  if (h >= 9  && h < 16) return 1 // glaciar
-  if (h >= 16 && h < 20) return 2 // tarde
-  return 3                         // noche
+  if (h >= 4  && h < 5)  return 0 // madrugada
+  if (h >= 5  && h < 9)  return 1 // amanecer
+  if (h >= 9  && h < 16) return 2 // glaciar
+  if (h >= 16 && h < 20) return 3 // tarde
+  return 4                         // noche
 }
 
 const DEFAULT_INTERVAL = 18000
@@ -132,7 +169,11 @@ export default function Hero() {
     setVisible(true)
   }, [slotIdx])
 
-  const handleToggle = () => setSlotIdx(i => (i + 1) % SLOTS.length)
+  // El toggle nunca entra a madrugada (índice 0): solo aparece a las 4 AM reales
+  const handleToggle = () => setSlotIdx(i => {
+    const next = (i + 1) % SLOTS.length
+    return next === 0 ? 1 : next
+  })
 
   // ── Render del fondo ──────────────────────────────────────
   const renderBackground = () => {
