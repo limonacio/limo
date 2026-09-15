@@ -29,7 +29,7 @@ export const proyectos = [
       pt: "Site pessoal para um psicólogo. Sessões individuais, agendamento de consultas e design bilíngue que reflete a abordagem do profissional.",
     },
     imagen:   "martin-brooks-cover.png",
-    link:     "https://martin-ebon.vercel.app/martinbrookspsi",
+    link:     "https://martin-dun.vercel.app",
     featured: false,
   },
 
