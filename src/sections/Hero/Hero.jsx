@@ -48,7 +48,6 @@ const SLOTS = [
       ['/assets/img/hero/pipa-tarde-barcos.webp'],
       ['/assets/img/hero/ruta-tarde-kombi.webp'],
       ['/assets/img/hero/floripa-tarde-morro.webp'],
-      ['/assets/img/hero/avion-atardecer.webp'],
       ['/assets/img/hero/pernambuco-tarde-campos.webp'],
       ['/assets/img/hero/natal-atardecer-ciudad.webp'],
       ['/assets/img/hero/porto-tarde-jangada.webp'],
@@ -77,6 +76,7 @@ const SLOTS = [
     range: [20, 4],
     type: 'images',
     frames: [
+      ['/assets/img/hero/avion-atarmanecer.webp'],
       ['/assets/img/hero/avion-gol-noche.webp'],
       ['/assets/img/hero/avion-bsas-noche1.webp'],
       ['/assets/img/hero/avion-smiles-noche2.webp'],
