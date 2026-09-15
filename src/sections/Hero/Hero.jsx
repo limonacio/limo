@@ -171,7 +171,6 @@ export default function Hero() {
   // Parallax en mobile: fondo baja mientras scrolleás (solo imágenes, no video)
   useEffect(() => {
     const onScroll = () => {
-      if (window.innerWidth > 640) return
       if (SLOTS[slotIdxRef.current]?.type === 'video') {
         heroRef.current?.style.setProperty('--parallax-y', '0px')
         return
