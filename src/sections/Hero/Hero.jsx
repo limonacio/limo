@@ -109,6 +109,7 @@ export default function Hero() {
   const { t } = useTranslation()
   const videoRef   = useRef(null)
   const timerRef   = useRef(null)
+  const heroRef    = useRef(null)
   const slotIdxRef = useRef(getTimeSlotIndex())
 
   const [slotIdx,    setSlotIdx]    = useState(getTimeSlotIndex)
@@ -162,7 +163,22 @@ export default function Hero() {
   useEffect(() => {
     setImgIdx(0)
     setVisible(true)
+    heroRef.current?.style.setProperty('--parallax-y', '0px')
   }, [slotIdx])
+
+  // Parallax en mobile: fondo baja mientras scrolleás (solo imágenes, no video)
+  useEffect(() => {
+    const onScroll = () => {
+      if (window.innerWidth > 640) return
+      if (SLOTS[slotIdxRef.current]?.type === 'video') {
+        heroRef.current?.style.setProperty('--parallax-y', '0px')
+        return
+      }
+      heroRef.current?.style.setProperty('--parallax-y', `${window.scrollY * 0.45}px`)
+    }
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
 
   // Precargar las próximas 2 imágenes para evitar el freeze al cambiar
   useEffect(() => {
@@ -227,7 +243,7 @@ export default function Hero() {
   }
 
   return (
-    <section id="hero" className={styles.hero}>
+    <section id="hero" className={styles.hero} ref={heroRef}>
 
       {/* Video — siempre en el DOM para detectar duración */}
       <video

@@ -322,6 +322,17 @@
     object-position: center;
     max-width: none;
     max-height: none;
-    transform: none; /* resetea el translate(-50%,-50%) del desktop */
+    transform: translateY(var(--parallax-y, 0px));
+    will-change: transform;
+  }
+
+  /* Parallax: imágenes horizontales y pares también bajan con el scroll */
+  .imgCover {
+    transform: translateY(var(--parallax-y, 0px));
+    will-change: transform;
+  }
+  .imgPair {
+    transform: translateY(var(--parallax-y, 0px));
+    will-change: transform;
   }
 }
