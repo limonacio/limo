@@ -24,7 +24,6 @@ const SLOTS = [
       ['/assets/img/hero/natal-amanecer-fuego.webp'],
       ['/assets/img/hero/natal-amanecer-sol.webp'],
       ['/assets/img/hero/natal-amanecer-sol3.webp'],
-      ['/assets/img/hero/natal-amanecer-sol4.webp'],
     ],
   },
   {
