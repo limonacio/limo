@@ -169,6 +169,16 @@ export default function Hero() {
     setVisible(true)
   }, [slotIdx])
 
+  // Precargar las próximas 2 imágenes para evitar el freeze al cambiar
+  useEffect(() => {
+    if (slot.type !== 'images') return
+    const frames = slot.frames
+    for (let i = 1; i <= 2; i++) {
+      const nextFrame = frames[(imgIdx + i) % frames.length]
+      nextFrame?.forEach(src => { new Image().src = src })
+    }
+  }, [imgIdx, slot])
+
   // El toggle nunca entra a madrugada (índice 0): solo aparece a las 4 AM reales
   const handleToggle = () => setSlotIdx(i => {
     const next = (i + 1) % SLOTS.length
