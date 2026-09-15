@@ -93,12 +93,16 @@ const VERTICAL = new Set([
 ])
 
 function getTimeSlotIndex() {
-  const h = new Date().getHours()
-  if (h >= 4  && h < 5)  return 0 // madrugada
-  if (h >= 5  && h < 9)  return 1 // amanecer
-  if (h >= 9  && h < 16) return 2 // glaciar
-  if (h >= 16 && h < 20) return 3 // tarde
-  return 4                         // noche
+  const now  = new Date()
+  const h    = now.getHours()
+  const day  = now.getDay()            // 0 = domingo, 6 = sábado
+  const esFinDeSemana = day === 0 || day === 6
+
+  if (h >= 4  && h < 5)  return 0                        // madrugada
+  if (h >= 5  && h < 9)  return 1                        // amanecer
+  if (h >= 9  && h < 16) return esFinDeSemana ? 3 : 2   // finde → tarde, semana → glaciar
+  if (h >= 16 && h < 21) return 3                        // tarde
+  return 4                                                // noche
 }
 
 const DEFAULT_INTERVAL = 18000
