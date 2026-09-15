@@ -39,7 +39,6 @@ const SLOTS = [
       // Mezcladas por lugar para no mostrar seguidas del mismo sitio
       ['/assets/img/hero/pipa-tarde-arcoiris.webp'],
       ['/assets/img/hero/floripa-avion-bahia.webp'],
-      ['/assets/img/hero/natal-tarde-ciudad.webp'],
       ['/assets/img/hero/maceio-tarde-olas.webp'],
       ['/assets/img/hero/pipa-tarde-playa.webp'],
       ['/assets/img/hero/floripa-manha-ondas3.webp'],
