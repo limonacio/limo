@@ -22,10 +22,7 @@ const SLOTS = [
     type: 'images',
     frames: [
       ['/assets/img/hero/natal-amanecer-fuego.webp'],
-      ['/assets/img/hero/natal-amanecer-rosa.webp'],
-      ['/assets/img/hero/natal-amanecer-lila.webp'],
       ['/assets/img/hero/natal-amanecer-sol.webp'],
-      ['/assets/img/hero/natal-amanecer-sol2.webp'],
       ['/assets/img/hero/natal-amanecer-sol3.webp'],
       ['/assets/img/hero/natal-amanecer-sol4.webp'],
     ],
@@ -83,8 +80,6 @@ const SLOTS = [
     type: 'images',
     frames: [
       ['/assets/img/hero/avion-gol-noche.webp'],
-      ['/assets/img/hero/avion-bsas-noche2.webp'],
-      ['/assets/img/hero/avion-smiles-noche1.webp'],
       ['/assets/img/hero/avion-bsas-noche1.webp'],
       ['/assets/img/hero/avion-smiles-noche2.webp'],
     ],
