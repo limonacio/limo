@@ -118,19 +118,11 @@ export default function Hero() {
   const [slotIdx,    setSlotIdx]    = useState(getTimeSlotIndex)
   const [imgIdx,     setImgIdx]     = useState(0)
   const [visible,    setVisible]    = useState(true)
-  const [intervalMs, setIntervalMs] = useState(DEFAULT_INTERVAL)
 
   useEffect(() => { slotIdxRef.current = slotIdx }, [slotIdx])
 
   const slot  = SLOTS[slotIdx]
   const frame = slot.type === 'images' ? (slot.frames[imgIdx] ?? []) : []
-
-  // Calibrar intervalo con la duración del video
-  const handleVideoMeta = () => {
-    if (videoRef.current?.duration) {
-      setIntervalMs(Math.round(videoRef.current.duration * 500))
-    }
-  }
 
   // Play / pause del video
   useEffect(() => {
@@ -158,9 +150,9 @@ export default function Hero() {
   useEffect(() => {
     clearInterval(timerRef.current)
     if (slot.type === 'video') return
-    timerRef.current = setInterval(advance, intervalMs)
+    timerRef.current = setInterval(advance, DEFAULT_INTERVAL)
     return () => clearInterval(timerRef.current)
-  }, [slot, advance, intervalMs])
+  }, [slot, advance])
 
   // Reset al cambiar slot
   useEffect(() => {
@@ -247,12 +239,12 @@ export default function Hero() {
   return (
     <section id="hero" className={styles.hero} ref={heroRef}>
 
-      {/* Video — siempre en el DOM para detectar duración */}
+      {/* Video — solo se descarga en la franja glaciar (pesa ~17 MB) */}
       <video
         ref={videoRef}
         className={`${styles.videoBg} ${slot.type !== 'video' ? styles.videoHidden : ''}`}
-        autoPlay muted loop playsInline preload="auto"
-        onLoadedMetadata={handleVideoMeta}
+        muted loop playsInline
+        preload={slot.type === 'video' ? 'auto' : 'none'}
       >
         <source src="/rompimiento-glaciar.webm" type="video/webm" />
         <source src="/rompimiento-glaciar.mp4"  type="video/mp4" />
