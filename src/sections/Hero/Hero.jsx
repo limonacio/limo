@@ -59,6 +59,7 @@ const SLOTS = [
       ['/assets/img/hero/porto-tarde-acai.webp'],
       ['/assets/img/hero/rio-santa-cruz-tarde.webp'],
       ['/assets/img/hero/floripa-tarde-morro2.webp'],
+      ['/assets/img/hero/ruta-tarde-rio.webp'],
       ['/assets/img/hero/pernambuco-tarde-campos2.webp'],
       ['/assets/img/hero/maceio-tarde-orla.webp'],
       ['/assets/img/hero/pipa-tarde-restaurantes.webp'],

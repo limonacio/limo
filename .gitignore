@@ -3,3 +3,10 @@ dist/
 .env
 .DS_Store
 public/downloads/*.exe
+
+# Fotos originales / descartadas (no van al repo)
+/*.png
+/*.zip
+/*.ps1
+public/assets/img/hero/pajuera/
+public/assets/img/hero/*.png
