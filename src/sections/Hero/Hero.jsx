@@ -254,6 +254,7 @@ export default function Hero() {
         className={`${styles.videoBg} ${slot.type !== 'video' ? styles.videoHidden : ''}`}
         muted loop playsInline
         preload={slot.type === 'video' ? 'auto' : 'none'}
+        poster={slot.type === 'video' ? '/assets/img/hero/glaciar-poster.webp' : undefined}
       >
         <source src="/rompimiento-glaciar.webm" type="video/webm" />
         <source src="/rompimiento-glaciar.mp4"  type="video/mp4" />
