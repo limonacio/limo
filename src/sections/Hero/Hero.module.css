@@ -227,7 +227,7 @@
 
 .btnSecondary {
   background: transparent;
-  color: var(--teal);
+  color: var(--text);          /* texto claro: legible en todas las paletas */
   border: 2px solid var(--teal);
   transition: background 0.2s, box-shadow 0.2s, border-color 0.2s, color 0.2s;
 }
