@@ -9,7 +9,8 @@
     "subtitle": "design / development / movement",
     "cta_work": "see work",
     "cta_misc": "miscellaneous",
-    "scroll":   "scroll"
+    "scroll":   "scroll",
+    "toggle":   "change view"
   },
   "work": {
     "tag":   "work",

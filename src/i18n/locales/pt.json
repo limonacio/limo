@@ -9,7 +9,8 @@
     "subtitle": "design / desenvolvimento / movimento",
     "cta_work": "ver trabalhos",
     "cta_misc": "miscelâneas",
-    "scroll":   "scroll"
+    "scroll":   "scroll",
+    "toggle":   "mudar visualização"
   },
   "work": {
     "tag":   "trabalhos",

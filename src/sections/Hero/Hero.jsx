@@ -285,7 +285,7 @@ export default function Hero() {
       </div>
 
       {/* Toggle misterioso */}
-      <button className={styles.toggleBtn} onClick={handleToggle} aria-label="cambiar vista" title="">
+      <button className={styles.toggleBtn} onClick={handleToggle} aria-label={t('hero.toggle')}>
         ◎
       </button>
 
