@@ -33,7 +33,7 @@ const SLOTS = [
   },
   {
     name: 'tarde',
-    range: [16, 20],
+    range: [16, 21],
     type: 'images',
     frames: [
       // Mezcladas por lugar para no mostrar seguidas del mismo sitio
@@ -74,7 +74,7 @@ const SLOTS = [
   },
   {
     name: 'noche',
-    range: [20, 4],
+    range: [21, 4],   // cruza la medianoche
     type: 'images',
     frames: [
       ['/assets/img/hero/avion-atarmanecer.webp'],
@@ -93,17 +93,26 @@ const VERTICAL = new Set([
   '/assets/img/hero/rio-santa-cruz-tarde.webp',
 ])
 
-function getTimeSlotIndex() {
-  const now  = new Date()
-  const h    = now.getHours()
-  const day  = now.getDay()            // 0 = domingo, 6 = sábado
+// ¿La hora h cae dentro de [desde, hasta)? Soporta rangos que cruzan medianoche (ej. 21 → 4)
+function inRange(h, [desde, hasta]) {
+  return desde < hasta
+    ? h >= desde && h < hasta
+    : h >= desde || h < hasta
+}
+
+// Los horarios salen de SLOTS[].range: única fuente de verdad
+function getTimeSlotIndex(now = new Date()) {
+  const h   = now.getHours()
+  const day = now.getDay()             // 0 = domingo, 6 = sábado
   const esFinDeSemana = day === 0 || day === 6
 
-  if (h >= 4  && h < 5)  return 0                        // madrugada
-  if (h >= 5  && h < 9)  return 1                        // amanecer
-  if (h >= 9  && h < 16) return esFinDeSemana ? 3 : 2   // finde → tarde, semana → glaciar
-  if (h >= 16 && h < 21) return 3                        // tarde
-  return 4                                                // noche
+  const idx = SLOTS.findIndex(slot => inRange(h, slot.range))
+
+  // Fines de semana no hay glaciar: se pasa a la tarde
+  if (esFinDeSemana && SLOTS[idx].name === 'glaciar') {
+    return SLOTS.findIndex(slot => slot.name === 'tarde')
+  }
+  return idx
 }
 
 const DEFAULT_INTERVAL = 18000
