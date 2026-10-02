@@ -99,6 +99,10 @@ const VERTICAL = new Set([
 
 const MOBILE_QUERY = '(max-width: 640px)'   // mismo corte que el CSS
 
+// El usuario pidió "reducir movimiento" en su sistema operativo (accesibilidad):
+// sin video en movimiento, sin parallax y sin animaciones en bucle.
+const REDUCE_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
 const isVerticalFrame = (frame) => frame.length === 1 && VERTICAL.has(frame[0])
 const lugarDe = (frame) => frame[0].split('/').pop().split('-')[0]   // 'pipa-tarde-playa.webp' → 'pipa'
 
@@ -190,6 +194,7 @@ export default function Hero() {
     video.pause()
     if (video.readyState > 0) video.currentTime = 0   // volver al primer cuadro (= póster)
     setPosterOn(true)
+    if (REDUCE_MOTION) return          // queda la imagen quieta del glaciar
 
     // Fundido: el video arranca a velocidad normal por debajo y la imagen quieta se disuelve encima.
     // Si el video no puede arrancar, la imagen queda (nunca se ve fondo vacío).
@@ -229,6 +234,7 @@ export default function Hero() {
 
   // Parallax en mobile: fondo baja mientras scrolleás (solo imágenes, no video)
   useEffect(() => {
+    if (REDUCE_MOTION) return
     const onScroll = () => {
       if (SLOTS[slotIdxRef.current]?.type === 'video') {
         heroRef.current?.style.setProperty('--parallax-y', '0px')
@@ -376,8 +382,12 @@ export default function Hero() {
         <svg width="16" height="24" viewBox="0 0 16 24" fill="none">
           <rect x="1" y="1" width="14" height="22" rx="7" stroke="#555" strokeWidth="1.5"/>
           <circle cx="8" cy="8" r="2.5" fill="#555">
-            <animate attributeName="cy" values="8;14;8" dur="1.8s" repeatCount="indefinite"/>
-            <animate attributeName="opacity" values="1;0.2;1" dur="1.8s" repeatCount="indefinite"/>
+            {!REDUCE_MOTION && (
+              <>
+                <animate attributeName="cy" values="8;14;8" dur="1.8s" repeatCount="indefinite"/>
+                <animate attributeName="opacity" values="1;0.2;1" dur="1.8s" repeatCount="indefinite"/>
+              </>
+            )}
           </circle>
         </svg>
         {t('hero.scroll')}

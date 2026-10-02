@@ -34,3 +34,15 @@ img {
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: var(--bg3); border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--muted2); }
+
+/* ── Accesibilidad: el usuario pidió reducir el movimiento en su sistema ── */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  /* Corta las animaciones en bucle (giro del ícono, pulso, puntitos, rebote del scroll).
+     Los fundidos suaves (transition de opacidad) se mantienen. */
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
