@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next'
-import { useState, useEffect, useRef, useCallback } from 'react'
+import { useState, useEffect, useRef, useCallback, useMemo } from 'react'
 import LimonacioIcon from '../../components/LimonacioIcon/LimonacioIcon'
 import styles from './Hero.module.css'
 import { PLACEHOLDERS } from './placeholders'
@@ -21,6 +21,7 @@ const SLOTS = [
     name: 'amanecer',
     range: [5, 9],
     type: 'images',
+    shuffle: true,
     frames: [
       ['/assets/img/hero/natal-amanecer-fuego.webp'],
       ['/assets/img/hero/natal-amanecer-sol.webp'],
@@ -36,8 +37,9 @@ const SLOTS = [
     name: 'tarde',
     range: [16, 21],
     type: 'images',
+    shuffle: true,
     frames: [
-      // Mezcladas por lugar para no mostrar seguidas del mismo sitio
+      // El orden se sortea en cada visita (ver buildOrder), evitando dos seguidas del mismo lugar
       ['/assets/img/hero/pipa-tarde-arcoiris.webp'],
       ['/assets/img/hero/floripa-avion-bahia.webp'],
       ['/assets/img/hero/maceio-tarde-olas.webp'],
@@ -77,6 +79,7 @@ const SLOTS = [
     name: 'noche',
     range: [21, 4],   // cruza la medianoche
     type: 'images',
+    shuffle: true,
     frames: [
       ['/assets/img/hero/avion-atarmanecer.webp'],
       ['/assets/img/hero/avion-gol-noche.webp'],
@@ -93,6 +96,38 @@ const VERTICAL = new Set([
   '/assets/img/hero/avion-smiles-noche2.webp',
   '/assets/img/hero/rio-santa-cruz-tarde.webp',
 ])
+
+const MOBILE_QUERY = '(max-width: 640px)'   // mismo corte que el CSS
+
+const isVerticalFrame = (frame) => frame.length === 1 && VERTICAL.has(frame[0])
+const lugarDe = (frame) => frame[0].split('/').pop().split('-')[0]   // 'pipa-tarde-playa.webp' → 'pipa'
+
+// Orden al azar, intentando no poner dos fotos seguidas del mismo lugar
+function shuffleSinRepetirLugar(frames) {
+  const resto = [...frames]
+  const orden = []
+  while (resto.length) {
+    const ultimo = orden.length ? lugarDe(orden[orden.length - 1]) : null
+    const candidatos = resto.filter(f => lugarDe(f) !== ultimo)
+    const pool = candidatos.length ? candidatos : resto
+    const elegido = pool[Math.floor(Math.random() * pool.length)]
+    orden.push(elegido)
+    resto.splice(resto.indexOf(elegido), 1)
+  }
+  return orden
+}
+
+// Orden final de una franja:
+//  - desktop: primero las horizontales, las verticales al final
+//  - mobile:  primero las verticales (se ven mejor), las horizontales al final
+function buildOrder(slot) {
+  if (slot.type !== 'images') return []
+  if (!slot.shuffle) return slot.frames
+  const verticales   = shuffleSinRepetirLugar(slot.frames.filter(isVerticalFrame))
+  const horizontales = shuffleSinRepetirLugar(slot.frames.filter(f => !isVerticalFrame(f)))
+  const esMobile = window.matchMedia(MOBILE_QUERY).matches
+  return esMobile ? [...verticales, ...horizontales] : [...horizontales, ...verticales]
+}
 
 // ¿La hora h cae dentro de [desde, hasta)? Soporta rangos que cruzan medianoche (ej. 21 → 4)
 function inRange(h, [desde, hasta]) {
@@ -134,10 +169,12 @@ export default function Hero() {
   useEffect(() => { slotIdxRef.current = slotIdx }, [slotIdx])
 
   const slot  = SLOTS[slotIdx]
-  const frame = slot.type === 'images' ? (slot.frames[imgIdx] ?? []) : []
+  // El orden de las fotos se sortea una vez cada vez que se entra a la franja
+  const frames = useMemo(() => buildOrder(slot), [slot])
+  const frame  = frames[imgIdx] ?? []
 
   // Mientras baja la primera foto de la franja se ve su miniatura borrosa
-  const firstSrc     = slot.type === 'images' ? slot.frames[0][0] : null
+  const firstSrc     = frames.length ? frames[0][0] : null
   const firstPending = firstSrc !== null && loadedSrc !== firstSrc
 
   // Play / pause del video
@@ -206,12 +243,11 @@ export default function Hero() {
   // Precargar las próximas 2 imágenes para evitar el freeze al cambiar
   useEffect(() => {
     if (slot.type !== 'images') return
-    const frames = slot.frames
     for (let i = 1; i <= 2; i++) {
       const nextFrame = frames[(imgIdx + i) % frames.length]
       nextFrame?.forEach(src => { new Image().src = src })
     }
-  }, [imgIdx, slot])
+  }, [imgIdx, slot, frames])
 
   // El toggle nunca entra a madrugada (índice 0): solo aparece a las 4 AM reales
   const handleToggle = () => setSlotIdx(i => {
@@ -238,33 +274,37 @@ export default function Hero() {
     if (!img) return null
     const isV = VERTICAL.has(img)
 
+    // La primera foto de la franja aparece con fundido recién cuando terminó de bajar
+    const isFirst = img === firstSrc
+    const waiting = isFirst && firstPending
+    const onFirstDone = isFirst ? () => setLoadedSrc(img) : undefined
+
     if (isV) {
       // Vertical: blur de relleno + foto centrada
       return (
         <>
           <div
             className={styles.imgBlur}
-            style={{ backgroundImage: `url(${img})`, opacity: visible ? 1 : 0 }}
+            style={{ backgroundImage: `url(${img})`, opacity: visible && !waiting ? 1 : 0 }}
           />
           <img
             src={img}
             alt=""
-            className={`${styles.imgCentered} ${visible ? styles.imgVisible : ''}`}
+            onLoad={onFirstDone}
+            onError={onFirstDone}
+            className={`${styles.imgCentered} ${visible && !waiting ? styles.imgVisible : ''}`}
           />
         </>
       )
     }
 
     // Horizontal: foto a full, sin blur
-    // La primera foto de la franja aparece con fundido recién cuando terminó de bajar
-    const isFirst = img === firstSrc
-    const waiting = isFirst && firstPending
     return (
       <img
         src={img}
         alt=""
-        onLoad={isFirst ? () => setLoadedSrc(img) : undefined}
-        onError={isFirst ? () => setLoadedSrc(img) : undefined}
+        onLoad={onFirstDone}
+        onError={onFirstDone}
         className={`${styles.imgCover} ${visible && !waiting ? styles.imgVisible : ''}`}
       />
     )
@@ -294,10 +334,10 @@ export default function Hero() {
       )}
 
       {/* Miniatura borrosa de la primera foto: se ve al instante y se funde cuando llega la real */}
-      {slot.type === 'images' && PLACEHOLDERS[slot.name] && (
+      {firstSrc && PLACEHOLDERS[firstSrc] && (
         <div
           className={`${styles.imgPlaceholder} ${firstPending ? '' : styles.imgPlaceholderHidden}`}
-          style={{ backgroundImage: `url(${PLACEHOLDERS[slot.name]})` }}
+          style={{ backgroundImage: `url(${PLACEHOLDERS[firstSrc]})` }}
         />
       )}
 
