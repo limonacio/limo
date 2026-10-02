@@ -117,8 +117,6 @@ function getTimeSlotIndex(now = new Date()) {
 
 const DEFAULT_INTERVAL = 18000
 const POSTER_MIN_MS    = 3000    // tiempo mínimo de imagen quieta antes de que el glaciar se mueva
-const RAMP_MS          = 4000    // cuánto tarda el video en llegar a su velocidad real
-const RAMP_START_RATE  = 0.1     // velocidad inicial (0.1 = 10 %)
 
 export default function Hero() {
   const { t } = useTranslation()
@@ -149,29 +147,10 @@ export default function Hero() {
     video.pause()
     if (video.readyState > 0) video.currentTime = 0   // volver al primer cuadro (= póster)
 
-    let rafId = null
-    // Arranque suave: el video empieza casi quieto y acelera hasta su velocidad real
-    const rampUp = () => {
-      const t0 = performance.now()
-      const step = (now) => {
-        const k = Math.min((now - t0) / RAMP_MS, 1)   // 0 → 1 a lo largo de RAMP_MS
-        const eased = k * k                           // ease-in: acelera de a poco
-        video.playbackRate = RAMP_START_RATE + (1 - RAMP_START_RATE) * eased
-        if (k < 1) rafId = requestAnimationFrame(step)
-      }
-      rafId = requestAnimationFrame(step)
-    }
-
     const id = setTimeout(() => {
-      video.playbackRate = RAMP_START_RATE
-      video.play().then(rampUp).catch(() => {})       // la rampa empieza cuando el video realmente arranca
+      video.play().catch(() => {})
     }, POSTER_MIN_MS)
-
-    return () => {
-      clearTimeout(id)
-      if (rafId) cancelAnimationFrame(rafId)
-      video.playbackRate = 1
-    }
+    return () => clearTimeout(id)
   }, [slot])
 
   // Avanzar frame con crossfade
