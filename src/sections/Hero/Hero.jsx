@@ -128,6 +128,7 @@ export default function Hero() {
   const [slotIdx,    setSlotIdx]    = useState(getTimeSlotIndex)
   const [imgIdx,     setImgIdx]     = useState(0)
   const [visible,    setVisible]    = useState(true)
+  const [posterOn,   setPosterOn]   = useState(true)   // imagen quieta encima del video del glaciar
 
   useEffect(() => { slotIdxRef.current = slotIdx }, [slotIdx])
 
@@ -146,11 +147,20 @@ export default function Hero() {
     }
     video.pause()
     if (video.readyState > 0) video.currentTime = 0   // volver al primer cuadro (= póster)
+    setPosterOn(true)
 
+    // Fundido: el video arranca a velocidad normal por debajo y la imagen quieta se disuelve encima.
+    // Si el video no puede arrancar, la imagen queda (nunca se ve fondo vacío).
+    let cancelado = false
     const id = setTimeout(() => {
-      video.play().catch(() => {})
+      video.play()
+        .then(() => { if (!cancelado) setPosterOn(false) })
+        .catch(() => {})
     }, POSTER_MIN_MS)
-    return () => clearTimeout(id)
+    return () => {
+      cancelado = true
+      clearTimeout(id)
+    }
   }, [slot])
 
   // Avanzar frame con crossfade
@@ -264,11 +274,19 @@ export default function Hero() {
         className={`${styles.videoBg} ${slot.type !== 'video' ? styles.videoHidden : ''}`}
         muted loop playsInline
         preload={slot.type === 'video' ? 'auto' : 'none'}
-        poster={slot.type === 'video' ? '/assets/img/hero/glaciar-poster.webp' : undefined}
       >
         <source src="/rompimiento-glaciar.webm" type="video/webm" />
         <source src="/rompimiento-glaciar.mp4"  type="video/mp4" />
       </video>
+
+      {/* Imagen quieta del glaciar: tapa el video mientras carga y se funde cuando arranca */}
+      {slot.type === 'video' && (
+        <img
+          src="/assets/img/hero/glaciar-poster.webp"
+          alt=""
+          className={`${styles.videoPoster} ${posterOn ? '' : styles.videoPosterHidden}`}
+        />
+      )}
 
       {renderBackground()}
 

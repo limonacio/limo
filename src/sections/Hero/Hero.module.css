@@ -27,6 +27,23 @@
   pointer-events: none;
 }
 
+/* ── Imagen quieta del glaciar (encima del video, se funde al arrancar) ── */
+.videoPoster {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 1.8s ease;
+}
+
+.videoPosterHidden {
+  opacity: 0;
+}
+
 /* ── Imagen horizontal — full cover sin blur ────────── */
 .imgCover {
   position: absolute;
