@@ -2,6 +2,7 @@ import { useTranslation } from 'react-i18next'
 import { useState, useEffect, useRef, useCallback } from 'react'
 import LimonacioIcon from '../../components/LimonacioIcon/LimonacioIcon'
 import styles from './Hero.module.css'
+import { PLACEHOLDERS } from './placeholders'
 
 // ── Franjas horarias ──────────────────────────────────────────
 // Cada "frame" es un array: 1 imagen sola, o 2 para mostrar lado a lado
@@ -128,11 +129,16 @@ export default function Hero() {
   const [imgIdx,     setImgIdx]     = useState(0)
   const [visible,    setVisible]    = useState(true)
   const [posterOn,   setPosterOn]   = useState(true)   // imagen quieta encima del video del glaciar
+  const [loadedSrc,  setLoadedSrc]  = useState(null)   // primera foto de la franja que ya terminó de bajar
 
   useEffect(() => { slotIdxRef.current = slotIdx }, [slotIdx])
 
   const slot  = SLOTS[slotIdx]
   const frame = slot.type === 'images' ? (slot.frames[imgIdx] ?? []) : []
+
+  // Mientras baja la primera foto de la franja se ve su miniatura borrosa
+  const firstSrc     = slot.type === 'images' ? slot.frames[0][0] : null
+  const firstPending = firstSrc !== null && loadedSrc !== firstSrc
 
   // Play / pause del video
   // Al entrar al glaciar: la imagen quieta se ve solo mientras el video carga.
@@ -250,11 +256,16 @@ export default function Hero() {
     }
 
     // Horizontal: foto a full, sin blur
+    // La primera foto de la franja aparece con fundido recién cuando terminó de bajar
+    const isFirst = img === firstSrc
+    const waiting = isFirst && firstPending
     return (
       <img
         src={img}
         alt=""
-        className={`${styles.imgCover} ${visible ? styles.imgVisible : ''}`}
+        onLoad={isFirst ? () => setLoadedSrc(img) : undefined}
+        onError={isFirst ? () => setLoadedSrc(img) : undefined}
+        className={`${styles.imgCover} ${visible && !waiting ? styles.imgVisible : ''}`}
       />
     )
   }
@@ -279,6 +290,14 @@ export default function Hero() {
           src="/assets/img/hero/glaciar-poster.webp"
           alt=""
           className={`${styles.videoPoster} ${posterOn ? '' : styles.videoPosterHidden}`}
+        />
+      )}
+
+      {/* Miniatura borrosa de la primera foto: se ve al instante y se funde cuando llega la real */}
+      {slot.type === 'images' && PLACEHOLDERS[slot.name] && (
+        <div
+          className={`${styles.imgPlaceholder} ${firstPending ? '' : styles.imgPlaceholderHidden}`}
+          style={{ backgroundImage: `url(${PLACEHOLDERS[slot.name]})` }}
         />
       )}
 
