@@ -116,7 +116,6 @@ function getTimeSlotIndex(now = new Date()) {
 }
 
 const DEFAULT_INTERVAL = 18000
-const POSTER_MIN_MS    = 3000    // tiempo mínimo de imagen quieta antes de que el glaciar se mueva
 
 export default function Hero() {
   const { t } = useTranslation()
@@ -136,8 +135,8 @@ export default function Hero() {
   const frame = slot.type === 'images' ? (slot.frames[imgIdx] ?? []) : []
 
   // Play / pause del video
-  // Al entrar al glaciar: imagen quieta como mínimo POSTER_MIN_MS y recién después arranca.
-  // Si para entonces el video no terminó de cargar, el póster sigue hasta que esté listo.
+  // Al entrar al glaciar: la imagen quieta se ve solo mientras el video carga.
+  // Apenas el video puede arrancar, arranca y la imagen se funde.
   useEffect(() => {
     const video = videoRef.current
     if (!video) return
@@ -152,15 +151,10 @@ export default function Hero() {
     // Fundido: el video arranca a velocidad normal por debajo y la imagen quieta se disuelve encima.
     // Si el video no puede arrancar, la imagen queda (nunca se ve fondo vacío).
     let cancelado = false
-    const id = setTimeout(() => {
-      video.play()
-        .then(() => { if (!cancelado) setPosterOn(false) })
-        .catch(() => {})
-    }, POSTER_MIN_MS)
-    return () => {
-      cancelado = true
-      clearTimeout(id)
-    }
+    video.play()                                        // se resuelve cuando el video realmente arranca
+      .then(() => { if (!cancelado) setPosterOn(false) })
+      .catch(() => {})
+    return () => { cancelado = true }
   }, [slot])
 
   // Avanzar frame con crossfade
