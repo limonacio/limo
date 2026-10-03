@@ -355,10 +355,10 @@ export default function Hero() {
       {/* Contenido */}
       <div className={styles.heroContent}>
         <div className={styles.glow} />
-        <LimonacioIcon size={160} spin pulse dots />
+        <span className={styles.iconWrap}><LimonacioIcon size={160} spin pulse dots /></span>
         <h1 className={styles.title}>limonacio</h1>
         <p className={styles.subtitle}>
-          {t('hero.tagline')}<br/>
+          <span className={styles.tagline}>{t('hero.tagline')}<br/></span>
           {t('hero.subtitle')}
         </p>
         <div className={styles.dots}>
