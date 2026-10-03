@@ -352,12 +352,14 @@
   /* Se van del desktop: ícono grande, glow, tagline, puntitos, scroll hint */
   .iconWrap, .glow, .tagline, .dots, .scrollHint { display: none; }
 
-  /* Nombre: letra del tatuaje, contorno menta sin relleno, brillante (R3 + "prendido") */
+  /* Nombre: en mobile se ve el texto; en desktop, la firma del tatuaje (SVG) */
   .title {
     margin: 0 0 -6px -2px;
     line-height: 0;
     font-size: 0;
+    color: transparent;
     text-shadow: none;
+    -webkit-text-stroke: 0;
     filter: none;
   }
   .titleTexto { display: none; }
@@ -366,34 +368,13 @@
     width: clamp(280px, 42vw, 700px);
     height: auto;
     overflow: visible;
-    filter:
-      drop-shadow(0 0 2px rgba(92,255,168,1))
-      drop-shadow(0 0 5px rgba(92,255,168,1))
-      drop-shadow(0 0 12px rgba(92,255,168,.9))
-      drop-shadow(0 0 26px rgba(46,204,128,.7))
-      drop-shadow(0 0 48px rgba(46,204,128,.45));
+    /* R3: borde oscuro, linea menta, nucleo casi blanco y resplandor fuerte */
+    filter: drop-shadow(0 0 3px rgba(46,204,128,.9)) drop-shadow(0 0 9px rgba(46,204,128,.5));
   }
-  .firmaTrazos {
-    fill: none;
-    stroke: #5CFFA8;
-    stroke-width: 4;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    filter:
-      drop-shadow(0 0 2px rgba(92,255,168,1))
-      drop-shadow(0 0 5px rgba(92,255,168,1))
-      drop-shadow(0 0 12px rgba(92,255,168,.9))
-      drop-shadow(0 0 26px rgba(46,204,128,.7))
-      drop-shadow(0 0 48px rgba(46,204,128,.45));
-  }
-  .firmaNucleo {
-    fill: none;
-    stroke: #f2fff8;
-    stroke-opacity: .7;
-    stroke-width: 1.4;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-  }
+  .firmaBorde  { fill: none; stroke: #04100a; stroke-opacity: .55; stroke-width: 6.5; stroke-linecap: round; stroke-linejoin: round; }
+  .firmaLinea  { stroke: #900030; stroke-width: 6; stroke-linecap: round; }
+  .firmaTrazos { fill: none; stroke: #2ECC80; stroke-width: 3.5; stroke-linecap: round; stroke-linejoin: round; }
+  .firmaNucleo { fill: none; stroke: #dfffee; stroke-opacity: .2; stroke-width: 1.2; stroke-linecap: round; stroke-linejoin: round; }
 
   .subtitle {
     font-size: 17px;
@@ -410,35 +391,159 @@
     border-radius: 8px;
   }
 
-  .btnPrimary {
+  .btnSecondary {
+    border: 3px solid var(--coral);
+    color: #F0EDE8;
     background: rgba(10,10,14,0.5);
+  }
+
+  /* SEE WORK provisorio a la derecha (lo reemplaza el limón en la pieza 3) */
+  .btnPrimary {
+    position: absolute;
+    right: 56px;
+    bottom: 158px;
+    background: transparent;
     box-shadow: none;
     color: var(--coral);
-    border: 2px solid var(--coral);
-    font-size: 16px;
+    font-size: 17px;
     letter-spacing: 0.12em;
-    padding: 14px 28px;
+    padding: 0;
     filter: drop-shadow(0 1px 3px rgba(4,16,10,0.8));
   }
   .btnPrimary::after { content: ' \2193'; }
   .btnPrimary:hover {
-    background: rgba(240,82,106,0.15);
-    box-shadow: 0 0 28px rgba(240,82,106,0.45);
+    background: transparent;
+    box-shadow: none;
     color: #fff;
+  }
+}
+
+.limonBtn { display: none; }
+
+@keyframes limonSpin   { to { transform: rotate(360deg); } }
+@keyframes limonRipple { from { transform: translate(-50%, -50%) scale(0.6); opacity: 0.9; } to { transform: translate(-50%, -50%) scale(2.6); opacity: 0; } }
+
+/* ── Desktop: layout nuevo (#9) ─────────────────────────
+   Foto a pantalla completa; nombre abajo a la izquierda,
+   botón a work abajo a la derecha. Mobile no se toca. */
+@media (min-width: 641px) {
+  .hero { padding: 0; }
+
+  .videoOverlay {
+    background: linear-gradient(
+      to top,
+      rgba(8,8,8,0.88) 0%,
+      rgba(8,8,8,0.30) 38%,
+      rgba(8,8,8,0.05) 70%,
+      rgba(8,8,8,0.40) 100%
+    );
+  }
+
+  .heroContent {
+    position: absolute;
+    inset: 0;
+    padding: 0 56px 158px;
+    align-items: flex-start;
+    justify-content: flex-end;
+    text-align: left;
+    gap: 0;
+  }
+
+  /* Se van del desktop: ícono grande, glow, tagline, puntitos, scroll hint */
+  .iconWrap, .glow, .tagline, .dots, .scrollHint, .btnPrimary { display: none; }
+
+  /* Nombre: en mobile se ve el texto; en desktop, la firma del tatuaje (SVG) */
+  .title {
+    margin: 0 0 -6px -2px;
+    line-height: 0;
+    font-size: 0;
+    color: transparent;
+    text-shadow: none;
+    -webkit-text-stroke: 0;
+    filter: none;
+  }
+  .titleTexto { display: none; }
+  .firma {
+    display: block;
+    width: clamp(280px, 42vw, 700px);
+    height: auto;
+    overflow: visible;
+    /* R3: borde oscuro, linea menta, nucleo casi blanco y resplandor fuerte */
+    filter: drop-shadow(0 0 3px rgba(46,204,128,.9)) drop-shadow(0 0 9px rgba(46,204,128,.5));
+  }
+  .firmaBorde  { fill: none; stroke: #04100a; stroke-opacity: .55; stroke-width: 6.5; stroke-linecap: round; stroke-linejoin: round; }
+  .firmaLinea  { stroke: #900030; stroke-width: 6; stroke-linecap: round; }
+  .firmaTrazos { fill: none; stroke: #2ECC80; stroke-width: 3.5; stroke-linecap: round; stroke-linejoin: round; }
+  .firmaNucleo { fill: none; stroke: #dfffee; stroke-opacity: .2; stroke-width: 1.2; stroke-linecap: round; stroke-linejoin: round; }
+
+  .subtitle {
+    font-size: 17px;
+    color: #e3e0d9;
+    letter-spacing: 0.1em;
+    line-height: 1.4;
+    margin: 22px 0 28px;
+  }
+
+  .btn {
+    padding: 16px 30px;
+    font-size: 16px;
+    letter-spacing: 0.08em;
+    border-radius: 8px;
   }
 
   .btnSecondary {
-    position: absolute;
-    right: 56px;
-    bottom: 158px;
+    border: 3px solid var(--coral);
+    color: #F0EDE8;
     background: rgba(10,10,14,0.5);
   }
 
-  /* Limón: botón a work (no gira). Nervaduras apenas más visibles */
-  .limonBtn { --ix: 0px; --iy: 0px; position: absolute; right: 56px; bottom: 236px; }
-  .limonIcon { transform: translate(var(--ix), var(--iy)); }
-  .limonBtn:hover .limonIcon, .limonBtn:focus-visible .limonIcon { --iy: -3px; }
+  /* SEE WORK provisorio a la derecha (lo reemplaza el limón en la pieza 3) */
+  .limonBtn {
+    position: absolute;
+    right: 56px;
+    bottom: 158px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+    color: var(--coral);
+    font-family: var(--font);
+    font-weight: 700;
+    font-size: 17px;
+    letter-spacing: 0.12em;
+    text-decoration: none;
+    filter: drop-shadow(0 1px 3px rgba(4,16,10,0.8));
+    transition: color 0.2s;
+  }
+  .limonBtn:hover { color: #fff; }
   .limonBtn:focus-visible { outline: 2px solid var(--coral); outline-offset: 8px; border-radius: 4px; }
+
+  .limonIcon {
+    position: relative;
+    display: flex;
+    width: clamp(150px, 15vw, 240px);
+  }
+  .limonSvg {
+    width: 100%;
+    height: auto;
+    overflow: visible;
+    display: block;
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+  .limonBtn:hover .limonSvg { animation: limonSpin 6s linear infinite; }
+
+  .limonRipple {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 70%;
+    aspect-ratio: 1;
+    border: 2px solid #2ECC80;
+    border-radius: 50%;
+    pointer-events: none;
+    animation: limonRipple 0.7s ease-out forwards;
+  }
 }
 
 /* ── Mobile: foto alineada con el contenido (Opción C) ──── */
