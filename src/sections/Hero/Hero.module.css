@@ -546,6 +546,9 @@
     pointer-events: none;
     animation: limonRipple 0.7s ease-out forwards;
   }
+  .limonBorde  { fill: none; stroke: #04100a; stroke-opacity: .62; stroke-width: 10.5; stroke-linecap: round; stroke-linejoin: round; }
+  .limonTrazos { fill: none; stroke: #2ECC80; stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; }
+  .limonNucleo { fill: none; stroke: #dfffee; stroke-opacity: .36; stroke-width: 2.16; stroke-linecap: round; stroke-linejoin: round; }
 }
 
 /* ── Mobile: foto alineada con el contenido (Opción C) ──── */
