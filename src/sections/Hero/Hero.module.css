@@ -368,6 +368,15 @@
   /* En desktop el botón de abajo-izquierda es WORK (el limón lleva a misceláneas) */
   .iconWrap, .glow, .tagline, .dots, .scrollHint, .btnSecondary { display: none; }
 
+  /* El toggle secreto va centrado abajo, no perdido en la esquina */
+  .toggleBtn {
+    left: 50%;
+    right: auto;
+    bottom: 2rem;
+    transform: translateX(-50%);
+  }
+  .toggleBtn:hover { transform: translateX(-50%) rotate(45deg); }
+
   /* Nombre: en mobile se ve el texto; en desktop, la firma del tatuaje (SVG) */
   .title {
     margin: 0 0 -6px -2px;
@@ -505,6 +514,17 @@
     filter: drop-shadow(0 0 4px rgba(46,204,128,.85)) drop-shadow(0 0 14px rgba(46,204,128,.4));
     transition: filter 0.3s ease;
   }
+  /* En reposo solo el contorno de cada trazo: se ve la foto a traves.
+     Al pasar el mouse aparece la version solida. */
+  .limonHueco,
+  .limonSolido { transition: opacity 0.3s ease; }
+  .limonHueco  { opacity: 1; }
+  .limonSolido { opacity: 0; }
+  .limonBtn:hover .limonHueco,
+  .limonBtn:focus-visible .limonHueco { opacity: 0; }
+  .limonBtn:hover .limonSolido,
+  .limonBtn:focus-visible .limonSolido { opacity: 1; }
+
   /* Al acercar el mouse se aviva, sin pasarse */
   .limonBtn:hover .limonSvg,
   .limonBtn:focus-visible .limonSvg {
@@ -541,6 +561,7 @@
     line-height: 1;
     color: #F0EDE8;
     letter-spacing: 0.02em;
+    margin-bottom: 26px;
     filter: drop-shadow(0 1px 4px rgba(4,16,10,0.85));
   }
 
