@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import LimonacioIcon from '../LimonacioIcon/LimonacioIcon'
 import styles from './Footer.module.css'
 
@@ -41,6 +42,7 @@ const SOCIALS = [
 ]
 
 export default function Footer() {
+  const { t } = useTranslation()
   return (
     <footer className={styles.footer}>
       <div className={styles.left}>
@@ -48,11 +50,11 @@ export default function Footer() {
         <span className={styles.text}>
           <span className={styles.brand}>limonacio</span>
           <sup className={styles.tm}>™</sup>
-          <span className={styles.sep}> · © {new Date().getFullYear()}. All rights reserved.</span>
+          <span className={styles.sep}> · © {new Date().getFullYear()}. {t('footer.rights')}</span>
         </span>
       </div>
 
-      <nav className={styles.socials} aria-label="Redes sociales">
+      <nav className={styles.socials} aria-label={t('a11y.socials')}>
         {SOCIALS.map(({ name, href, icon }) => (
           <a
             key={name}

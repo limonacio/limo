@@ -53,7 +53,7 @@ export default function Trabajos() {
       <div className={styles.carouselWrap}>
 
         {idx > 0 && (
-          <button className={`${styles.arrow} ${styles.arrowLeft}`} onClick={prev} aria-label="Previous">
+          <button className={`${styles.arrow} ${styles.arrowLeft}`} onClick={prev} aria-label={t('a11y.prev')}>
             &#8249;
           </button>
         )}
@@ -82,7 +82,7 @@ export default function Trabajos() {
         </div>
 
         {idx < n - 1 && (
-          <button className={`${styles.arrow} ${styles.arrowRight}`} onClick={next} aria-label="Next">
+          <button className={`${styles.arrow} ${styles.arrowRight}`} onClick={next} aria-label={t('a11y.next')}>
             &#8250;
           </button>
         )}
@@ -95,7 +95,7 @@ export default function Trabajos() {
             key={i}
             className={`${styles.dot} ${i === idx ? styles.dotActive : ''}`}
             onClick={() => setIdx(i)}
-            aria-label={`Pagina ${i + 1}`}
+            aria-label={t('a11y.page', { n: i + 1 })}
           />
         ))}
       </div>
