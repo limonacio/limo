@@ -398,7 +398,8 @@
     color: #e3e0d9;
     letter-spacing: 0.1em;
     line-height: 1.4;
-    margin: 22px 0 28px;
+    margin: 22px 0 0;
+    white-space: nowrap;
   }
 
   .btn {
@@ -408,14 +409,17 @@
     border-radius: 8px;
   }
 
-  /* El bloque toma el ancho del subtitulo (el hijo mas ancho) y el boton
-     se alinea a la derecha, o sea al final de "/ movement". */
+  /* El boton va a la derecha del subtitulo, en la misma linea.
+     Centrados entre si y luego subido media altura: asi su borde de abajo
+     queda a la mitad del texto "/ movement". */
   .bloqueIzq {
     display: flex;
-    flex-direction: column;
-    align-items: flex-end;
+    flex-direction: row;
+    align-items: center;
+    gap: 30px;
     width: max-content;
   }
+  .cta { transform: translateY(-50%); }
 
   .btnPrimary {
     border: 3px solid var(--coral);
