@@ -369,12 +369,12 @@
     height: auto;
     overflow: visible;
     /* R3: borde oscuro, linea menta, nucleo casi blanco y resplandor fuerte */
-    filter: drop-shadow(0 0 3px rgba(46,204,128,1)) drop-shadow(0 0 9px rgba(46,204,128,.9)) drop-shadow(0 0 22px rgba(46,204,128,.55));
+    filter: drop-shadow(0 0 3px rgba(46,204,128,.9)) drop-shadow(0 0 9px rgba(46,204,128,.5));
   }
-  .firmaBorde  { fill: none; stroke: #04100a; stroke-opacity: .62; stroke-width: 10.5; stroke-linecap: round; stroke-linejoin: round; }
+  .firmaBorde  { fill: none; stroke: #04100a; stroke-opacity: .55; stroke-width: 6.5; stroke-linecap: round; stroke-linejoin: round; }
   .firmaLinea  { stroke: #900030; stroke-width: 6; stroke-linecap: round; }
-  .firmaTrazos { fill: none; stroke: #2ECC80; stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; }
-  .firmaNucleo { fill: none; stroke: #dfffee; stroke-opacity: .36; stroke-width: 2.16; stroke-linecap: round; stroke-linejoin: round; }
+  .firmaTrazos { fill: none; stroke: #2ECC80; stroke-width: 3.5; stroke-linecap: round; stroke-linejoin: round; }
+  .firmaNucleo { fill: none; stroke: #dfffee; stroke-opacity: .2; stroke-width: 1.2; stroke-linecap: round; stroke-linejoin: round; }
 
   .subtitle {
     font-size: 17px;
@@ -469,12 +469,12 @@
     height: auto;
     overflow: visible;
     /* R3: borde oscuro, linea menta, nucleo casi blanco y resplandor fuerte */
-    filter: drop-shadow(0 0 3px rgba(46,204,128,1)) drop-shadow(0 0 9px rgba(46,204,128,.9)) drop-shadow(0 0 22px rgba(46,204,128,.55));
+    filter: drop-shadow(0 0 3px rgba(46,204,128,.9)) drop-shadow(0 0 9px rgba(46,204,128,.5));
   }
-  .firmaBorde  { fill: none; stroke: #04100a; stroke-opacity: .62; stroke-width: 10.5; stroke-linecap: round; stroke-linejoin: round; }
+  .firmaBorde  { fill: none; stroke: #04100a; stroke-opacity: .55; stroke-width: 6.5; stroke-linecap: round; stroke-linejoin: round; }
   .firmaLinea  { stroke: #900030; stroke-width: 6; stroke-linecap: round; }
-  .firmaTrazos { fill: none; stroke: #2ECC80; stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; }
-  .firmaNucleo { fill: none; stroke: #dfffee; stroke-opacity: .36; stroke-width: 2.16; stroke-linecap: round; stroke-linejoin: round; }
+  .firmaTrazos { fill: none; stroke: #2ECC80; stroke-width: 3.5; stroke-linecap: round; stroke-linejoin: round; }
+  .firmaNucleo { fill: none; stroke: #dfffee; stroke-opacity: .2; stroke-width: 1.2; stroke-linecap: round; stroke-linejoin: round; }
 
   .subtitle {
     font-size: 17px;
