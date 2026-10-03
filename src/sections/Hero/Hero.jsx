@@ -99,21 +99,6 @@ const VERTICAL = new Set([
 
 const MOBILE_QUERY = '(max-width: 640px)'   // mismo corte que el CSS
 
-// El lugar sale del nombre del archivo: 'pipa-tarde-playa.webp' -> 'pipa'
-const LUGARES = {
-  pipa:        'Pipa · Brasil',
-  floripa:     'Florianópolis · Brasil',
-  maceio:      'Maceió · Brasil',
-  natal:       'Natal · Brasil',
-  pernambuco:  'Pernambuco · Brasil',
-  porto:       'Porto de Galinhas · Brasil',
-  ruta:        'En ruta · Brasil',
-  rio:         'Río Santa Cruz · Argentina',
-  avion:       'En vuelo',
-  trasnochada: 'Buenos Aires · Argentina',
-}
-const LUGAR_VIDEO = 'Perito Moreno · Patagonia'
-
 // El usuario pidió "reducir movimiento" en su sistema operativo (accesibilidad):
 // sin video en movimiento, sin parallax y sin animaciones en bucle.
 const REDUCE_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -293,11 +278,9 @@ export default function Hero() {
     return next === 0 ? 1 : next
   })
 
-  // Hora y lugar que se muestran a la derecha (desktop)
+  // Hora que se muestra a la derecha (desktop). El lugar de la foto no se muestra:
+  // Limo no quiere que se sepa dónde ni en qué momento del día está cada imagen.
   const horaTexto = ahora.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false })
-  const lugarTexto = slot.type === 'video'
-    ? LUGAR_VIDEO
-    : (LUGARES[lugarDe(frame.length ? frame : [''])] ?? '')
 
   // ── Render del fondo ──────────────────────────────────────
   const renderBackground = () => {
@@ -429,9 +412,9 @@ export default function Hero() {
 
       </div>
 
-      {/* Columna derecha (solo desktop): limón, SEE WORK, hora y lugar de la foto */}
+      {/* Columna derecha (solo desktop): limón, SEE WORK y la hora */}
       <div className={styles.colDerecha}>
-          {/* Limón: botón a work (solo desktop). Gira en hover, onda expansiva al clic */}
+          {/* Limón: botón a work (solo desktop). Quieto; onda expansiva al clic */}
           <a href="#trabajos" className={styles.limonBtn} onClick={handleLimonClick}>
             <span className={styles.limonIcon}>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="-10 -10 156 120" className={styles.limonSvg} aria-hidden="true">
@@ -442,24 +425,6 @@ export default function Hero() {
             <span>{t('hero.cta_work')} ↓</span>
           </a>
         <span className={styles.hora}>{horaTexto}</span>
-        <span className={styles.lugar}>{lugarTexto}</span>
-      </div>
-
-      {/* Línea de tiempo (solo desktop): solo indica la franja actual, no se clickea */}
-      <div className={styles.lineaTiempo} aria-hidden="true">
-        {SLOTS.map((s, i) => (
-          // 'madrugada' es secreta: solo se ve si estas dentro de esa franja (4 a 5 AM)
-          i === 0 && slotIdx !== 0 ? null : (
-            <div
-              key={s.name}
-              className={`${styles.franja} ${i === slotIdx ? styles.franjaActiva : ''}`}
-              aria-current={i === slotIdx ? 'true' : undefined}
-            >
-              <span className={styles.franjaHora}>{String(s.range[0]).padStart(2, '0')}:00</span>
-              <span className={styles.franjaNombre}>{s.name}</span>
-            </div>
-          )
-        ))}
       </div>
 
       {/* Toggle misterioso */}

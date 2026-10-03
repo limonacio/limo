@@ -329,7 +329,6 @@
 
 .limonBtn { display: none; }
 .colDerecha { display: none; }
-.lineaTiempo { display: none; }
 
 @keyframes limonRipple { from { transform: translate(-50%, -50%) scale(0.6); opacity: 0.9; } to { transform: translate(-50%, -50%) scale(2.6); opacity: 0; } }
 
@@ -477,42 +476,7 @@
     letter-spacing: 0.02em;
     filter: drop-shadow(0 1px 4px rgba(4,16,10,0.85));
   }
-  .lugar {
-    font-family: var(--font);
-    font-size: 15px;
-    letter-spacing: 0.1em;
-    color: #e3e0d9;
-    margin-top: 12px;
-    filter: drop-shadow(0 1px 4px rgba(4,16,10,0.85));
-  }
 
-  /* ── Linea de tiempo de las 5 franjas (reemplaza al toggle) ── */
-  .lineaTiempo {
-    position: absolute;
-    left: 56px;
-    right: 56px;
-    bottom: 40px;
-    z-index: 3;
-    display: flex;
-    gap: 12px;
-  }
-  /* Solo indica en que franja estas; quien cambia el fondo es el ojo (.toggleBtn) */
-  .franja {
-    flex: 1;
-    padding-top: 11px;
-    border-top: 3px solid rgba(255,255,255,0.22);
-    text-align: left;
-    color: rgba(255,255,255,0.5);
-    font-family: var(--font);
-    transition: color 0.25s, border-color 0.25s;
-  }
-  .franjaHora   { font-size: 11px; letter-spacing: 0.14em; display: block; }
-  .franjaNombre { font-size: 14px; letter-spacing: 0.06em; margin-top: 5px; display: block; }
-  .franjaActiva {
-    color: #fff;
-    border-top-color: var(--teal);
-  }
-  .franjaActiva .franjaNombre { font-weight: 700; }
 }
 
 /* ── Mobile: foto alineada con el contenido (Opción C) ──── */
