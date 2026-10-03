@@ -411,30 +411,31 @@
   }
 
   .btnPrimary {
-    position: absolute;
-    right: 56px;
-    bottom: 158px;
-    background: transparent;
+    background: rgba(10,10,14,0.5);
     box-shadow: none;
     color: var(--coral);
-    font-size: 17px;
+    border: 2px solid var(--coral);
+    font-size: 16px;
     letter-spacing: 0.12em;
-    padding: 0;
+    padding: 14px 28px;
     filter: drop-shadow(0 1px 3px rgba(4,16,10,0.8));
   }
   .btnPrimary::after { content: ' \2193'; }
   .btnPrimary:hover {
-    background: transparent;
-    box-shadow: none;
+    background: rgba(240,82,106,0.15);
+    box-shadow: 0 0 28px rgba(240,82,106,0.45);
     color: #fff;
   }
 
   .btnSecondary {
+    position: absolute;
+    right: 56px;
+    bottom: 158px;
     background: rgba(10,10,14,0.5);
   }
 
   /* Limón: botón a work (no gira). Nervaduras apenas más visibles */
-  .limonBtn { --ix: 0px; --iy: 0px; }
+  .limonBtn { --ix: 0px; --iy: 0px; position: absolute; right: 56px; bottom: 236px; }
   .limonIcon { transform: translate(var(--ix), var(--iy)); }
   .limonBtn:hover .limonIcon, .limonBtn:focus-visible .limonIcon { --iy: -3px; }
   .limonBtn:focus-visible { outline: 2px solid var(--coral); outline-offset: 8px; border-radius: 4px; }
