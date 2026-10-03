@@ -410,16 +410,15 @@
   }
 
   /* El boton va a la derecha del subtitulo, en la misma linea.
-     Centrados entre si y luego subido media altura: asi su borde de abajo
-     queda a la mitad del texto "/ movement". */
+     Dos perillas para ajustarlo: separacion horizontal y cuanto sube. */
   .bloqueIzq {
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 30px;
+    gap: 80px;
     width: max-content;
   }
-  .cta { transform: translateY(-50%); }
+  .cta { transform: translateY(-14%); }
 
   .btnPrimary {
     border: 3px solid var(--coral);
