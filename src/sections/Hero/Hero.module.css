@@ -407,6 +407,9 @@
   }
 
   .btnPrimary {
+    /* Alineado con la "a" de "acio": en el SVG de la firma esa letra arranca
+       en x=257 de un lienzo de 494.2 que empieza en -20, o sea al 56% del ancho. */
+    margin-left: calc(0.56 * clamp(280px, 42vw, 700px));
     border: 3px solid var(--coral);
     color: #F0EDE8;
     background: rgba(10,10,14,0.5);
