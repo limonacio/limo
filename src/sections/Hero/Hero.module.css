@@ -373,7 +373,6 @@
       drop-shadow(0 0 26px rgba(46,204,128,.7))
       drop-shadow(0 0 48px rgba(46,204,128,.45));
   }
-  .firmaBorde  { display: none; }
   .firmaTrazos {
     fill: none;
     stroke: #5CFFA8;
@@ -435,7 +434,7 @@
   }
 
   /* Limón: botón a work (no gira). Nervaduras apenas más visibles */
-  .limonBtn { --ix: 0px; --iy: 0px; bottom: calc(122.4px + 0.2935 * clamp(280px, 42vw, 700px) - 0.3846 * clamp(150px, 15vw, 240px)); }
+  .limonBtn { --ix: 0px; --iy: 0px; }
   .limonIcon { transform: translate(var(--ix), var(--iy)); }
   .limonBtn:hover .limonIcon, .limonBtn:focus-visible .limonIcon { --iy: -3px; }
   .limonBtn:focus-visible { outline: 2px solid var(--coral); outline-offset: 8px; border-radius: 4px; }
