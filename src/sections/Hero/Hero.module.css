@@ -525,13 +525,15 @@
   }
   .limonSvg {
     width: 100%;
+    transition: filter 0.25s ease;
     height: auto;
     overflow: visible;
     display: block;
     transform-box: fill-box;
     transform-origin: center;
   }
-  .limonBtn:hover .limonSvg { animation: limonSpin 6s linear infinite; }
+  .limonBtn:hover .limonSvg { filter: drop-shadow(0 0 2px rgba(46,204,128,1)) drop-shadow(0 0 4px rgba(46,204,128,1)) drop-shadow(0 0 10px rgba(46,204,128,.9)) drop-shadow(0 0 24px rgba(46,204,128,.6)); }
+  .limonBtn:hover .limonSpin { animation: limonSpin 6s linear infinite; }
 
   .limonRipple {
     position: absolute;
