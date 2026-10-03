@@ -177,6 +177,9 @@
   pointer-events: none;
 }
 
+.firma { display: none; }
+.titleTexto { display: inline; }
+
 .title {
   font-size: clamp(3rem, 9vw, 6.5rem);
   font-weight: 700;
@@ -349,15 +352,29 @@
   /* Se van del desktop: ícono grande, glow, tagline, puntitos, scroll hint */
   .iconWrap, .glow, .tagline, .dots, .scrollHint { display: none; }
 
-  /* Nombre provisorio en contorno menta (la firma del tatuaje llega en la pieza 2) */
+  /* Nombre: en mobile se ve el texto; en desktop, la firma del tatuaje (SVG) */
   .title {
-    font-size: clamp(4rem, 9.4vw, 150px);
-    color: transparent;
-    -webkit-text-stroke: 2.5px var(--coral);
-    text-shadow: none;
-    filter: drop-shadow(0 1px 3px rgba(4,16,10,0.8));
     margin: 0 0 -6px -2px;
+    line-height: 0;
+    font-size: 0;
+    color: transparent;
+    text-shadow: none;
+    -webkit-text-stroke: 0;
+    filter: none;
   }
+  .titleTexto { display: none; }
+  .firma {
+    display: block;
+    width: clamp(280px, 42vw, 700px);
+    height: auto;
+    overflow: visible;
+    /* R3: borde oscuro, linea menta, nucleo casi blanco y resplandor fuerte */
+    filter: drop-shadow(0 0 3px rgba(46,204,128,1)) drop-shadow(0 0 9px rgba(46,204,128,.9)) drop-shadow(0 0 22px rgba(46,204,128,.55));
+  }
+  .firmaBorde  { fill: none; stroke: #04100a; stroke-opacity: .62; stroke-width: 10.5; stroke-linecap: round; stroke-linejoin: round; }
+  .firmaLinea  { stroke: #900030; stroke-width: 6; stroke-linecap: round; }
+  .firmaTrazos { fill: none; stroke: #2ECC80; stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; }
+  .firmaNucleo { fill: none; stroke: #dfffee; stroke-opacity: .36; stroke-width: 2.16; stroke-linecap: round; stroke-linejoin: round; }
 
   .subtitle {
     font-size: 17px;
@@ -435,15 +452,29 @@
   /* Se van del desktop: ícono grande, glow, tagline, puntitos, scroll hint */
   .iconWrap, .glow, .tagline, .dots, .scrollHint, .btnPrimary { display: none; }
 
-  /* Nombre provisorio en contorno menta (la firma del tatuaje llega en la pieza 2) */
+  /* Nombre: en mobile se ve el texto; en desktop, la firma del tatuaje (SVG) */
   .title {
-    font-size: clamp(4rem, 9.4vw, 150px);
-    color: transparent;
-    -webkit-text-stroke: 2.5px var(--coral);
-    text-shadow: none;
-    filter: drop-shadow(0 1px 3px rgba(4,16,10,0.8));
     margin: 0 0 -6px -2px;
+    line-height: 0;
+    font-size: 0;
+    color: transparent;
+    text-shadow: none;
+    -webkit-text-stroke: 0;
+    filter: none;
   }
+  .titleTexto { display: none; }
+  .firma {
+    display: block;
+    width: clamp(280px, 42vw, 700px);
+    height: auto;
+    overflow: visible;
+    /* R3: borde oscuro, linea menta, nucleo casi blanco y resplandor fuerte */
+    filter: drop-shadow(0 0 3px rgba(46,204,128,1)) drop-shadow(0 0 9px rgba(46,204,128,.9)) drop-shadow(0 0 22px rgba(46,204,128,.55));
+  }
+  .firmaBorde  { fill: none; stroke: #04100a; stroke-opacity: .62; stroke-width: 10.5; stroke-linecap: round; stroke-linejoin: round; }
+  .firmaLinea  { stroke: #900030; stroke-width: 6; stroke-linecap: round; }
+  .firmaTrazos { fill: none; stroke: #2ECC80; stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; }
+  .firmaNucleo { fill: none; stroke: #dfffee; stroke-opacity: .36; stroke-width: 2.16; stroke-linecap: round; stroke-linejoin: round; }
 
   .subtitle {
     font-size: 17px;

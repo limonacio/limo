@@ -366,7 +366,51 @@ export default function Hero() {
       <div className={styles.heroContent}>
         <div className={styles.glow} />
         <span className={styles.iconWrap}><LimonacioIcon size={160} spin pulse dots /></span>
-        <h1 className={styles.title}>limonacio</h1>
+        <h1 className={styles.title} aria-label="limonacio">
+          <span className={styles.titleTexto} aria-hidden="true">limonacio</span>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="-20 -36 494.2 231" className={styles.firma} aria-hidden="true">
+            <g className={styles.firmaBorde}>
+              <polyline points="0.0,-26 0.0,100" />
+              <polyline points="30.0,0 30.0,100" />
+              <polyline points="60.0,0 60.0,100" />
+              <polyline points="60.0,27 83.0,0 95.1,22 116.7,0 116.7,100" />
+              <polyline points="159.0,0 183.3,44 159.0,100 134.7,44 159.0,0 183.3,44" />
+              <polyline points="201.3,0 201.3,100" />
+              <polyline points="201.3,24 220.2,0 239.1,26 239.1,185" />
+              <polyline points="307.1,4 280.1,100 257.1,50 277.3,0 316.5,96" />
+              <polyline points="369.6,4 334.5,50 369.6,96" />
+              <polyline points="387.6,0 387.6,100" />
+              <polyline points="429.9,0 454.2,44 429.9,100 405.6,44 429.9,0 454.2,44" />
+            </g>
+            <line x1="-16" y1="50" x2="470.20000000000005" y2="50" className={styles.firmaLinea} />
+            <g className={styles.firmaTrazos}>
+              <polyline points="0.0,-26 0.0,100" />
+              <polyline points="30.0,0 30.0,100" />
+              <polyline points="60.0,0 60.0,100" />
+              <polyline points="60.0,27 83.0,0 95.1,22 116.7,0 116.7,100" />
+              <polyline points="159.0,0 183.3,44 159.0,100 134.7,44 159.0,0 183.3,44" />
+              <polyline points="201.3,0 201.3,100" />
+              <polyline points="201.3,24 220.2,0 239.1,26 239.1,185" />
+              <polyline points="307.1,4 280.1,100 257.1,50 277.3,0 316.5,96" />
+              <polyline points="369.6,4 334.5,50 369.6,96" />
+              <polyline points="387.6,0 387.6,100" />
+              <polyline points="429.9,0 454.2,44 429.9,100 405.6,44 429.9,0 454.2,44" />
+            </g>
+            <g className={styles.firmaNucleo}>
+              <polyline points="0.0,-26 0.0,100" />
+              <polyline points="30.0,0 30.0,100" />
+              <polyline points="60.0,0 60.0,100" />
+              <polyline points="60.0,27 83.0,0 95.1,22 116.7,0 116.7,100" />
+              <polyline points="159.0,0 183.3,44 159.0,100 134.7,44 159.0,0 183.3,44" />
+              <polyline points="201.3,0 201.3,100" />
+              <polyline points="201.3,24 220.2,0 239.1,26 239.1,185" />
+              <polyline points="307.1,4 280.1,100 257.1,50 277.3,0 316.5,96" />
+              <polyline points="369.6,4 334.5,50 369.6,96" />
+              <polyline points="387.6,0 387.6,100" />
+              <polyline points="429.9,0 454.2,44 429.9,100 405.6,44 429.9,0 454.2,44" />
+            </g>
+          </svg>
+        </h1>
         <p className={styles.subtitle}>
           <span className={styles.tagline}>{t('hero.tagline')}<br/></span>
           {t('hero.subtitle')}
