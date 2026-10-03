@@ -396,18 +396,21 @@ export default function Hero() {
             </g>
           </svg>
         </h1>
-        <p className={styles.subtitle}>
-          <span className={styles.tagline}>{t('hero.tagline')}<br/></span>
-          {t('hero.subtitle')}
-        </p>
-        <div className={styles.dots}>
-          <span className={`${styles.dot} ${styles.dot1}`} />
-          <span className={`${styles.dot} ${styles.dot2}`} />
-          <span className={`${styles.dot} ${styles.dot3}`} />
-        </div>
-        <div className={styles.cta}>
-          <a href="#trabajos"    className={`${styles.btn} ${styles.btnPrimary}`}>{t('hero.cta_work')}</a>
-          <a href="#miscelaneas" className={`${styles.btn} ${styles.btnSecondary}`}>{t('hero.cta_misc')}</a>
+        {/* Subtitulo y boton: en desktop comparten ancho para poder alinearlos */}
+        <div className={styles.bloqueIzq}>
+          <p className={styles.subtitle}>
+            <span className={styles.tagline}>{t('hero.tagline')}<br/></span>
+            {t('hero.subtitle')}
+          </p>
+          <div className={styles.dots}>
+            <span className={`${styles.dot} ${styles.dot1}`} />
+            <span className={`${styles.dot} ${styles.dot2}`} />
+            <span className={`${styles.dot} ${styles.dot3}`} />
+          </div>
+          <div className={styles.cta}>
+            <a href="#trabajos"    className={`${styles.btn} ${styles.btnPrimary}`}>{t('hero.cta_work')}</a>
+            <a href="#miscelaneas" className={`${styles.btn} ${styles.btnSecondary}`}>{t('hero.cta_misc')}</a>
+          </div>
         </div>
 
       </div>
