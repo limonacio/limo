@@ -395,7 +395,13 @@
     overflow: visible;
   }
   /* Una sola linea verde solida con halo. Sin borde oscuro ni nucleo claro. */
-  .firmaLinea  { stroke: #900030; stroke-width: 6; stroke-linecap: round; }
+  /* La linea vino tambien es fina en reposo y engorda al pasar por "see work" */
+  .firmaLinea {
+    stroke: #900030;
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    transition: stroke-width 0.3s ease;
+  }
   /* En reposo el nombre es solo contorno: se ve el paisaje a traves de la letra.
      Al pasar por "see work" se rellena y se ilumina un poco. */
   .firmaHueca,
@@ -421,6 +427,8 @@
   .heroContent:has(.btnPrimary:focus-visible) .firmaHueca { opacity: 0; }
   .heroContent:has(.btnPrimary:hover) .firmaSolida,
   .heroContent:has(.btnPrimary:focus-visible) .firmaSolida { opacity: 1; }
+  .heroContent:has(.btnPrimary:hover) .firmaLinea,
+  .heroContent:has(.btnPrimary:focus-visible) .firmaLinea { stroke-width: 6; }
 
   .subtitle {
     font-size: 17px;
