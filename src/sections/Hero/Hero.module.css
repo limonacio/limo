@@ -332,7 +332,10 @@
 .limonBtn { display: none; }
 .colDerecha { display: none; }
 
-@keyframes limonRipple { from { transform: translate(-50%, -50%) scale(0.6); opacity: 0.9; } to { transform: translate(-50%, -50%) scale(2.6); opacity: 0; } }
+@keyframes limonRipple {
+  from { transform: translate(-50%, -50%) scale(0.45); opacity: 1; }
+  to   { transform: translate(-50%, -50%) scale(2.1);  opacity: 0; }
+}
 
 /* ── Desktop: layout nuevo (#9) ─────────────────────────
    Foto a pantalla completa; nombre abajo a la izquierda,
@@ -473,18 +476,35 @@
     overflow: visible;
     display: block;
     filter: drop-shadow(0 0 4px rgba(46,204,128,.85)) drop-shadow(0 0 14px rgba(46,204,128,.4));
+    transition: filter 0.3s ease;
+  }
+  /* Al acercar el mouse se aviva, sin pasarse */
+  .limonBtn:hover .limonSvg,
+  .limonBtn:focus-visible .limonSvg {
+    filter:
+      drop-shadow(0 0 5px rgba(92,255,168,1))
+      drop-shadow(0 0 18px rgba(46,204,128,.6))
+      drop-shadow(0 0 34px rgba(46,204,128,.3));
   }
 
+  /* Onda de halo al clic: un anillo difuso que se expande y se apaga */
   .limonRipple {
     position: absolute;
     left: 50%;
     top: 50%;
-    width: 70%;
+    width: 130%;
     aspect-ratio: 1;
-    border: 2px solid #2ECC80;
     border-radius: 50%;
     pointer-events: none;
-    animation: limonRipple 0.7s ease-out forwards;
+    background: radial-gradient(
+      circle,
+      rgba(46,204,128,0)    36%,
+      rgba(92,255,168,0.5)  52%,
+      rgba(46,204,128,0.2)  66%,
+      rgba(46,204,128,0)    78%
+    );
+    filter: blur(7px);
+    animation: limonRipple 0.9s ease-out forwards;
   }
 
   .hora {
