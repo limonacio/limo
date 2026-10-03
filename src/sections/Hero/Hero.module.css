@@ -379,12 +379,17 @@
     width: clamp(280px, 42vw, 700px);
     height: auto;
     overflow: visible;
-    filter: drop-shadow(0 0 3px rgba(46,204,128,.9)) drop-shadow(0 0 9px rgba(46,204,128,.5));
   }
-  .firmaBorde  { fill: none; stroke: #04100a; stroke-opacity: .55; stroke-width: 6.5; stroke-linecap: round; stroke-linejoin: round; }
+  /* Una sola linea verde solida con halo. Sin borde oscuro ni nucleo claro. */
   .firmaLinea  { stroke: #900030; stroke-width: 6; stroke-linecap: round; }
-  .firmaTrazos { fill: none; stroke: #2ECC80; stroke-width: 3.5; stroke-linecap: round; stroke-linejoin: round; }
-  .firmaNucleo { fill: none; stroke: #dfffee; stroke-opacity: .2; stroke-width: 1.2; stroke-linecap: round; stroke-linejoin: round; }
+  .firmaTrazos {
+    fill: none;
+    stroke: #2ECC80;
+    stroke-width: 6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    filter: drop-shadow(0 0 4px rgba(46,204,128,.85)) drop-shadow(0 0 14px rgba(46,204,128,.4));
+  }
 
   .subtitle {
     font-size: 17px;
@@ -447,7 +452,7 @@
     height: auto;
     overflow: visible;
     display: block;
-    filter: drop-shadow(0 0 2px rgba(46,204,128,.95)) drop-shadow(0 0 6px rgba(46,204,128,.45));
+    filter: drop-shadow(0 0 4px rgba(46,204,128,.85)) drop-shadow(0 0 14px rgba(46,204,128,.4));
   }
 
   .limonRipple {
