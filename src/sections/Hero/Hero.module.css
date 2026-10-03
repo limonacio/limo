@@ -361,7 +361,7 @@
   }
 
   /* Se van del desktop: icono grande, glow, tagline, puntitos, scroll hint */
-  .iconWrap, .glow, .tagline, .dots, .scrollHint, .btnPrimary, .toggleBtn { display: none; }
+  .iconWrap, .glow, .tagline, .dots, .scrollHint, .btnPrimary { display: none; }
 
   /* Nombre: en mobile se ve el texto; en desktop, la firma del tatuaje (SVG) */
   .title {
@@ -496,21 +496,18 @@
     display: flex;
     gap: 12px;
   }
+  /* Solo indica en que franja estas; quien cambia el fondo es el ojo (.toggleBtn) */
   .franja {
     flex: 1;
     padding-top: 11px;
-    border: none;
     border-top: 3px solid rgba(255,255,255,0.22);
-    background: transparent;
     text-align: left;
-    cursor: pointer;
     color: rgba(255,255,255,0.5);
     font-family: var(--font);
     transition: color 0.25s, border-color 0.25s;
   }
   .franjaHora   { font-size: 11px; letter-spacing: 0.14em; display: block; }
   .franjaNombre { font-size: 14px; letter-spacing: 0.06em; margin-top: 5px; display: block; }
-  .franja:hover { color: rgba(255,255,255,0.8); border-top-color: rgba(255,255,255,0.45); }
   .franjaActiva {
     color: #fff;
     border-top-color: var(--teal);

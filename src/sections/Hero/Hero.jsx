@@ -445,21 +445,22 @@ export default function Hero() {
         <span className={styles.lugar}>{lugarTexto}</span>
       </div>
 
-      {/* Línea de tiempo de las franjas (solo desktop): reemplaza al toggle */}
-      <nav className={styles.lineaTiempo} aria-label={t('hero.toggle')}>
+      {/* Línea de tiempo (solo desktop): solo indica la franja actual, no se clickea */}
+      <div className={styles.lineaTiempo} aria-hidden="true">
         {SLOTS.map((s, i) => (
-          <button
-            key={s.name}
-            type="button"
-            onClick={() => setSlotIdx(i)}
-            className={`${styles.franja} ${i === slotIdx ? styles.franjaActiva : ''}`}
-            aria-current={i === slotIdx ? 'true' : undefined}
-          >
-            <span className={styles.franjaHora}>{String(s.range[0]).padStart(2, '0')}:00</span>
-            <span className={styles.franjaNombre}>{s.name}</span>
-          </button>
+          // 'madrugada' es secreta: solo se ve si estas dentro de esa franja (4 a 5 AM)
+          i === 0 && slotIdx !== 0 ? null : (
+            <div
+              key={s.name}
+              className={`${styles.franja} ${i === slotIdx ? styles.franjaActiva : ''}`}
+              aria-current={i === slotIdx ? 'true' : undefined}
+            >
+              <span className={styles.franjaHora}>{String(s.range[0]).padStart(2, '0')}:00</span>
+              <span className={styles.franjaNombre}>{s.name}</span>
+            </div>
+          )
         ))}
-      </nav>
+      </div>
 
       {/* Toggle misterioso */}
       <button className={styles.toggleBtn} onClick={handleToggle} aria-label={t('hero.toggle')}>
