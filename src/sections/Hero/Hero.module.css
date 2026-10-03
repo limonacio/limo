@@ -360,7 +360,8 @@
   }
 
   /* Se van del desktop: icono grande, glow, tagline, puntitos, scroll hint */
-  .iconWrap, .glow, .tagline, .dots, .scrollHint, .btnPrimary { display: none; }
+  /* En desktop el botón de abajo-izquierda es WORK (el limón lleva a misceláneas) */
+  .iconWrap, .glow, .tagline, .dots, .scrollHint, .btnSecondary { display: none; }
 
   /* Nombre: en mobile se ve el texto; en desktop, la firma del tatuaje (SVG) */
   .title {
@@ -405,10 +406,16 @@
     border-radius: 8px;
   }
 
-  .btnSecondary {
+  .btnPrimary {
     border: 3px solid var(--coral);
     color: #F0EDE8;
     background: rgba(10,10,14,0.5);
+    box-shadow: none;
+    text-transform: none;
+  }
+  .btnPrimary:hover {
+    background: rgba(10,10,14,0.72);
+    box-shadow: 0 0 28px rgba(240,82,106,0.35);
   }
 
   /* ── Columna derecha: limon + SEE WORK + hora + lugar ─────── */
