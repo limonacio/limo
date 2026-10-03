@@ -387,24 +387,31 @@
   }
   /* Una sola linea verde solida con halo. Sin borde oscuro ni nucleo claro. */
   .firmaLinea  { stroke: #900030; stroke-width: 6; stroke-linecap: round; }
-  .firmaTrazos {
+  /* En reposo el nombre es solo contorno: se ve el paisaje a traves de la letra.
+     Al pasar por "see work" se rellena y se ilumina un poco. */
+  .firmaHueca,
+  .firmaSolida {
     fill: none;
     stroke: #2ECC80;
     stroke-width: 6;
     stroke-linecap: round;
     stroke-linejoin: round;
-    filter: drop-shadow(0 0 4px rgba(46,204,128,.85)) drop-shadow(0 0 14px rgba(46,204,128,.4));
-    transition: filter 0.3s ease;
+    transition: opacity 0.3s ease;
   }
-  /* Al pasar por "see work" tambien se aviva el nombre.
-     :has() permite mirar hacia arriba desde el boton hasta la firma. */
-  .heroContent:has(.btnPrimary:hover) .firmaTrazos,
-  .heroContent:has(.btnPrimary:focus-visible) .firmaTrazos {
-    filter:
-      drop-shadow(0 0 5px rgba(92,255,168,1))
-      drop-shadow(0 0 18px rgba(46,204,128,.6))
-      drop-shadow(0 0 34px rgba(46,204,128,.3));
+  .firmaHueca {
+    opacity: 1;
+    filter: drop-shadow(0 0 3px rgba(46,204,128,.75)) drop-shadow(0 0 10px rgba(46,204,128,.3));
   }
+  .firmaSolida {
+    opacity: 0;
+    filter: drop-shadow(0 0 5px rgba(46,204,128,.9)) drop-shadow(0 0 16px rgba(46,204,128,.45));
+  }
+
+  /* :has() permite mirar hacia arriba desde el boton hasta la firma */
+  .heroContent:has(.btnPrimary:hover) .firmaHueca,
+  .heroContent:has(.btnPrimary:focus-visible) .firmaHueca { opacity: 0; }
+  .heroContent:has(.btnPrimary:hover) .firmaSolida,
+  .heroContent:has(.btnPrimary:focus-visible) .firmaSolida { opacity: 1; }
 
   .subtitle {
     font-size: 17px;
