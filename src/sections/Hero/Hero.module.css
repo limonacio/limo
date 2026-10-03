@@ -440,16 +440,24 @@
   }
   .cta { transform: translateY(-14%); }
 
+  /* Siempre verde menta, no sigue la paleta horaria: es la invitacion al clic.
+     En reposo contorneado; al pasar el mouse se rellena.
+     PENDIENTE: ver una variante para noche y madrugada. */
   .btnPrimary {
-    border: 3px solid var(--coral);
-    color: #F0EDE8;
+    border: 3px solid #2ECC80;
+    color: #2ECC80;
     background: rgba(10,10,14,0.5);
-    box-shadow: none;
+    box-shadow: 0 0 22px rgba(46,204,128,0.3);
+    text-shadow: 0 0 8px rgba(46,204,128,0.45);
     text-transform: none;
+    transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, text-shadow 0.3s ease, transform 0.15s;
   }
-  .btnPrimary:hover {
-    background: rgba(10,10,14,0.72);
-    box-shadow: 0 0 28px rgba(240,82,106,0.35);
+  .btnPrimary:hover,
+  .btnPrimary:focus-visible {
+    background: #2ECC80;
+    color: #0d1510;
+    box-shadow: 0 0 30px rgba(46,204,128,0.5);
+    text-shadow: none;
   }
 
   /* ── Columna derecha: limon + SEE WORK + hora + lugar ─────── */
