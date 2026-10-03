@@ -394,6 +394,16 @@
     stroke-linecap: round;
     stroke-linejoin: round;
     filter: drop-shadow(0 0 4px rgba(46,204,128,.85)) drop-shadow(0 0 14px rgba(46,204,128,.4));
+    transition: filter 0.3s ease;
+  }
+  /* Al pasar por "see work" tambien se aviva el nombre.
+     :has() permite mirar hacia arriba desde el boton hasta la firma. */
+  .heroContent:has(.btnPrimary:hover) .firmaTrazos,
+  .heroContent:has(.btnPrimary:focus-visible) .firmaTrazos {
+    filter:
+      drop-shadow(0 0 5px rgba(92,255,168,1))
+      drop-shadow(0 0 18px rgba(46,204,128,.6))
+      drop-shadow(0 0 34px rgba(46,204,128,.3));
   }
 
   .subtitle {
