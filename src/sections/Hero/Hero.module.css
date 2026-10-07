@@ -670,20 +670,21 @@
   }
 
   /* Encendido: se rellena y engorda */
-  .logoBtnOn .logoTatuaje,
-  .logoBtn:focus-visible .logoTatuaje {
+  .logoBtnOn .logoTatuaje {
     opacity: 1;
     filter: drop-shadow(0 0 4px rgba(46,204,128,0.95)) drop-shadow(0 0 9px rgba(46,204,128,0.4));
   }
-  .logoBtnOn .logoTatuaje [data-p='limon'],
-  .logoBtn:focus-visible .logoTatuaje [data-p='limon'] { fill-opacity: 1; stroke-width: 0; }
-  .logoBtnOn .logoTatuaje [data-p='letras'],
-  .logoBtn:focus-visible .logoTatuaje [data-p='letras'] { stroke-width: 3.3; }
-  .logoBtnOn .logoTatuaje [data-p='vino'],
-  .logoBtn:focus-visible .logoTatuaje [data-p='vino'] { stroke-width: 2.8; }
+  .logoBtnOn .logoTatuaje [data-p='limon'] { fill-opacity: 1; stroke-width: 0; }
+  .logoBtnOn .logoTatuaje [data-p='letras'] { stroke-width: 3.3; }
+  .logoBtnOn .logoTatuaje [data-p='vino'] { stroke-width: 2.8; }
 
   /* De noche la linea vino se pierde sobre la foto oscura: pasa a coral,
      que es el otro color de la marca y si respira contra el negro. */
+  /* Teclado: solo un contorno de foco. El encendido completo lo maneja
+     la clase .logoBtnOn, nunca :focus-visible (en mobile el <a> queda
+     enfocado despues del toque y el logo se quedaba prendido). */
+  .logoBtn:focus-visible { outline: 2px solid var(--coral); outline-offset: 6px; border-radius: 6px; }
+
   .logoBtnNoche .logoTatuaje [data-p='vino'] { stroke: var(--coral); }
 
   /* Etapa 2: apenas arranca el scroll se enciende el contorno.

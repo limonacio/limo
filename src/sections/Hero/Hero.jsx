@@ -104,6 +104,18 @@ const MOBILE_QUERY = '(max-width: 640px)'   // mismo corte que el CSS
 // sin video en movimiento, sin parallax y sin animaciones en bucle.
 const REDUCE_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
+// Un unico AudioContext para toda la pagina. Crear uno nuevo en cada clic
+// falla en mobile: los navegadores limitan cuantos se pueden abrir (Safari
+// corta a los pocos) y por eso el sonido dejaba de salir despues de un rato.
+let audioCtx = null
+function getAudioCtx() {
+  const Ctx = window.AudioContext || window.webkitAudioContext
+  if (!Ctx) return null
+  if (!audioCtx || audioCtx.state === 'closed') audioCtx = new Ctx()
+  if (audioCtx.state === 'suspended') audioCtx.resume()   // mobile lo deja dormido hasta el primer gesto
+  return audioCtx
+}
+
 const isVerticalFrame = (frame) => frame.length === 1 && VERTICAL.has(frame[0])
 const lugarDe = (frame) => frame[0].split('/').pop().split('-')[0]   // 'pipa-tarde-playa.webp' → 'pipa'
 
@@ -305,9 +317,8 @@ export default function Hero() {
   // Si el navegador no deja sonar, no pasa nada y el resto sigue igual.
   const click = () => {
     try {
-      const Ctx = window.AudioContext || window.webkitAudioContext
-      if (!Ctx) return
-      const ctx = new Ctx()
+      const ctx = getAudioCtx()
+      if (!ctx) return
       const t = ctx.currentTime
       const out = ctx.createGain()
       out.gain.value = 0.55
@@ -361,13 +372,13 @@ export default function Hero() {
       parciales.forEach(o => { o.start(t); o.stop(t + 0.12) })
       grave.start(t)
       grave.stop(t + 0.09)
-      parciales[0].onended = () => ctx.close()
     } catch { /* sin sonido */ }
   }
 
   // Logo mobile: se prende, tira el halo, y recien despues baja a work
   const handleLogoClick = (e) => {
     e.preventDefault()
+    e.currentTarget.blur()
     const irAWork = () => document.getElementById('trabajos')?.scrollIntoView({ behavior: REDUCE_MOTION ? 'auto' : 'smooth' })
     if (REDUCE_MOTION) { irAWork(); return }
     click()
