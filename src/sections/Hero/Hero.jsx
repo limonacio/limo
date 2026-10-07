@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next'
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react'
 import LimonacioIcon from '../../components/LimonacioIcon/LimonacioIcon'
+import LogoTatuaje from '../../components/LogoTatuaje/LogoTatuaje'
 import styles from './Hero.module.css'
 import { PLACEHOLDERS } from './placeholders'
 
@@ -377,6 +378,10 @@ export default function Hero() {
       <div className={styles.heroContent}>
         <div className={styles.glow} />
         <span className={styles.iconWrap}><LimonacioIcon size={160} spin pulse dots /></span>
+        {/* Mobile: el logo entero (limon + nombre) es un solo boton a work */}
+        <a href="#trabajos" className={styles.logoBtn} aria-label={t('hero.cta_work')}>
+          <LogoTatuaje className={styles.logoTatuaje} />
+        </a>
         <h1 className={styles.title} aria-label="limonacio">
           <span className={styles.titleTexto} aria-hidden="true">limonacio</span>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="-20 -36 494.2 231" className={styles.firma} aria-hidden="true">
