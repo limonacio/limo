@@ -268,8 +268,15 @@ export default function Hero() {
       clearTimeout(apagar)
       apagar = setTimeout(() => setLogoDesp(false), 2200)
     }
+    // Tambien despierta al apoyar el dedo: en mobile el gesto de scrollear
+    // empieza con el touch, antes de que la pagina se mueva un solo pixel.
     window.addEventListener('scroll', onScroll, { passive: true })
-    return () => { window.removeEventListener('scroll', onScroll); clearTimeout(apagar) }
+    window.addEventListener('touchstart', onScroll, { passive: true })
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('touchstart', onScroll)
+      clearTimeout(apagar)
+    }
   }, [])
 
   // Precargar las próximas 2 imágenes para evitar el freeze al cambiar
@@ -290,10 +297,11 @@ export default function Hero() {
     setTimeout(irAMisc, 450)
   }
 
-  // Click de tecla al apretar el logo. No hay archivo de audio: se sintetiza
-  // con Web Audio y son dos capas, como suena una tecla de verdad:
-  //   1. el "tac" seco   -> ruido blanco muy corto pasado por un filtro agudo
-  //   2. el cuerpo grave -> un seno bajo que cae enseguida
+  // Golpe de tecla de maquina de escribir al apretar el logo. No hay archivo
+  // de audio: se sintetiza con Web Audio, en tres capas, como suena de verdad:
+  //   1. el "clack" -> ruido blanco muy corto y brillante (filtro pasa-altos)
+  //   2. el timbre metalico de la varilla -> dos senos agudos que mueren rapido
+  //   3. el golpe del rodillo -> un seno grave y seco
   // Si el navegador no deja sonar, no pasa nada y el resto sigue igual.
   const click = () => {
     try {
@@ -302,40 +310,58 @@ export default function Hero() {
       const ctx = new Ctx()
       const t = ctx.currentTime
       const out = ctx.createGain()
-      out.gain.value = 0.5
+      out.gain.value = 0.55
       out.connect(ctx.destination)
 
-      // 1. tac seco
-      const n = Math.floor(ctx.sampleRate * 0.04)
+      // 1. clack
+      const n = Math.floor(ctx.sampleRate * 0.03)
       const buf = ctx.createBuffer(1, n, ctx.sampleRate)
       const data = buf.getChannelData(0)
-      for (let k = 0; k < n; k++) data[k] = (Math.random() * 2 - 1) * (1 - k / n)
+      for (let k = 0; k < n; k++) {
+        const caida = Math.pow(1 - k / n, 3)       // ataque instantaneo, cola muy corta
+        data[k] = (Math.random() * 2 - 1) * caida
+      }
       const ruido = ctx.createBufferSource()
       ruido.buffer = buf
-      const paso = ctx.createBiquadFilter()
-      paso.type = 'bandpass'
-      paso.frequency.value = 2600
-      paso.Q.value = 0.9
+      const altos = ctx.createBiquadFilter()
+      altos.type = 'highpass'
+      altos.frequency.value = 3200
       const gRuido = ctx.createGain()
-      gRuido.gain.setValueAtTime(0.22, t)
-      gRuido.gain.exponentialRampToValueAtTime(0.0001, t + 0.045)
-      ruido.connect(paso).connect(gRuido).connect(out)
+      gRuido.gain.setValueAtTime(0.5, t)
+      gRuido.gain.exponentialRampToValueAtTime(0.0001, t + 0.035)
+      ruido.connect(altos).connect(gRuido).connect(out)
 
-      // 2. cuerpo grave
-      const osc = ctx.createOscillator()
-      osc.type = 'sine'
-      osc.frequency.setValueAtTime(190, t)
-      osc.frequency.exponentialRampToValueAtTime(120, t + 0.07)
-      const gOsc = ctx.createGain()
-      gOsc.gain.setValueAtTime(0.0001, t)
-      gOsc.gain.exponentialRampToValueAtTime(0.16, t + 0.006)
-      gOsc.gain.exponentialRampToValueAtTime(0.0001, t + 0.09)
-      osc.connect(gOsc).connect(out)
+      // 2. timbre metalico (dos parciales desafinados entre si)
+      const metal = ctx.createGain()
+      metal.gain.setValueAtTime(0.0001, t)
+      metal.gain.exponentialRampToValueAtTime(0.09, t + 0.003)
+      metal.gain.exponentialRampToValueAtTime(0.0001, t + 0.1)
+      metal.connect(out)
+      const parciales = []
+      for (const hz of [1870, 2630]) {
+        const o = ctx.createOscillator()
+        o.type = 'triangle'
+        o.frequency.value = hz
+        o.connect(metal)
+        parciales.push(o)
+      }
+
+      // 3. golpe grave del rodillo
+      const grave = ctx.createOscillator()
+      grave.type = 'sine'
+      grave.frequency.setValueAtTime(240, t)
+      grave.frequency.exponentialRampToValueAtTime(90, t + 0.06)
+      const gGrave = ctx.createGain()
+      gGrave.gain.setValueAtTime(0.0001, t)
+      gGrave.gain.exponentialRampToValueAtTime(0.2, t + 0.004)
+      gGrave.gain.exponentialRampToValueAtTime(0.0001, t + 0.075)
+      grave.connect(gGrave).connect(out)
 
       ruido.start(t)
-      osc.start(t)
-      osc.stop(t + 0.1)
-      osc.onended = () => ctx.close()
+      parciales.forEach(o => { o.start(t); o.stop(t + 0.12) })
+      grave.start(t)
+      grave.stop(t + 0.09)
+      parciales[0].onended = () => ctx.close()
     } catch { /* sin sonido */ }
   }
 
