@@ -682,6 +682,10 @@
   .logoBtnOn .logoTatuaje [data-p='vino'],
   .logoBtn:focus-visible .logoTatuaje [data-p='vino'] { stroke-width: 2.8; }
 
+  /* De noche la linea vino se pierde sobre la foto oscura: pasa a coral,
+     que es el otro color de la marca y si respira contra el negro. */
+  .logoBtnNoche .logoTatuaje [data-p='vino'] { stroke: var(--coral); }
+
   /* Etapa 2: apenas arranca el scroll se enciende el contorno.
      Se apaga solo cuando el scroll se queda quieto. */
   .logoBtnDesp .logoTatuaje {

@@ -485,7 +485,7 @@ export default function Hero() {
         {/* Mobile: el logo entero (limon + nombre) es un solo boton a work */}
         <a
           href="#trabajos"
-          className={`${styles.logoBtn} ${logoDesp ? styles.logoBtnDesp : ''} ${logoOn ? styles.logoBtnOn : ''}`}
+          className={`${styles.logoBtn} ${logoDesp ? styles.logoBtnDesp : ''} ${logoOn ? styles.logoBtnOn : ''} ${slot.name === 'noche' ? styles.logoBtnNoche : ''}`}
           aria-label={t('hero.cta_work')}
           onClick={handleLogoClick}
         >
