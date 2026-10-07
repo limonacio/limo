@@ -174,6 +174,7 @@ export default function Hero() {
   const [ahora,      setAhora]      = useState(() => new Date())
   const [logoOn,     setLogoOn]     = useState(false)  // logo mobile encendido mientras dura el clic
   const [logoOnda,   setLogoOnda]   = useState(0)      // contador de halos del logo mobile
+  const [logoDesp,   setLogoDesp]   = useState(false)  // logo mobile a medio encender mientras se scrollea
 
   // Reloj del hero: se refresca cada 30 s (suficiente para mostrar hora y minutos)
   useEffect(() => {
@@ -257,6 +258,20 @@ export default function Hero() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  // Logo mobile, etapa intermedia: apenas el usuario empieza a scrollear el
+  // contorno se enciende, y vuelve a apagarse cuando el scroll se queda quieto.
+  useEffect(() => {
+    if (REDUCE_MOTION) return
+    let apagar
+    const onScroll = () => {
+      setLogoDesp(true)
+      clearTimeout(apagar)
+      apagar = setTimeout(() => setLogoDesp(false), 2200)
+    }
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => { window.removeEventListener('scroll', onScroll); clearTimeout(apagar) }
+  }, [])
+
   // Precargar las próximas 2 imágenes para evitar el freeze al cambiar
   useEffect(() => {
     if (slot.type !== 'images') return
@@ -275,24 +290,51 @@ export default function Hero() {
     setTimeout(irAMisc, 450)
   }
 
-  // Blip corto de videojuego al apretar el logo (sin archivo de audio:
-  // se sintetiza con Web Audio). Si el navegador no deja, no pasa nada.
-  const blip = () => {
+  // Click de tecla al apretar el logo. No hay archivo de audio: se sintetiza
+  // con Web Audio y son dos capas, como suena una tecla de verdad:
+  //   1. el "tac" seco   -> ruido blanco muy corto pasado por un filtro agudo
+  //   2. el cuerpo grave -> un seno bajo que cae enseguida
+  // Si el navegador no deja sonar, no pasa nada y el resto sigue igual.
+  const click = () => {
     try {
       const Ctx = window.AudioContext || window.webkitAudioContext
       if (!Ctx) return
       const ctx = new Ctx()
+      const t = ctx.currentTime
+      const out = ctx.createGain()
+      out.gain.value = 0.5
+      out.connect(ctx.destination)
+
+      // 1. tac seco
+      const n = Math.floor(ctx.sampleRate * 0.04)
+      const buf = ctx.createBuffer(1, n, ctx.sampleRate)
+      const data = buf.getChannelData(0)
+      for (let k = 0; k < n; k++) data[k] = (Math.random() * 2 - 1) * (1 - k / n)
+      const ruido = ctx.createBufferSource()
+      ruido.buffer = buf
+      const paso = ctx.createBiquadFilter()
+      paso.type = 'bandpass'
+      paso.frequency.value = 2600
+      paso.Q.value = 0.9
+      const gRuido = ctx.createGain()
+      gRuido.gain.setValueAtTime(0.22, t)
+      gRuido.gain.exponentialRampToValueAtTime(0.0001, t + 0.045)
+      ruido.connect(paso).connect(gRuido).connect(out)
+
+      // 2. cuerpo grave
       const osc = ctx.createOscillator()
-      const vol = ctx.createGain()
-      osc.type = 'square'
-      osc.frequency.setValueAtTime(520, ctx.currentTime)
-      osc.frequency.exponentialRampToValueAtTime(1040, ctx.currentTime + 0.09)
-      vol.gain.setValueAtTime(0.0001, ctx.currentTime)
-      vol.gain.exponentialRampToValueAtTime(0.09, ctx.currentTime + 0.01)
-      vol.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.22)
-      osc.connect(vol).connect(ctx.destination)
-      osc.start()
-      osc.stop(ctx.currentTime + 0.24)
+      osc.type = 'sine'
+      osc.frequency.setValueAtTime(190, t)
+      osc.frequency.exponentialRampToValueAtTime(120, t + 0.07)
+      const gOsc = ctx.createGain()
+      gOsc.gain.setValueAtTime(0.0001, t)
+      gOsc.gain.exponentialRampToValueAtTime(0.16, t + 0.006)
+      gOsc.gain.exponentialRampToValueAtTime(0.0001, t + 0.09)
+      osc.connect(gOsc).connect(out)
+
+      ruido.start(t)
+      osc.start(t)
+      osc.stop(t + 0.1)
       osc.onended = () => ctx.close()
     } catch { /* sin sonido */ }
   }
@@ -302,7 +344,7 @@ export default function Hero() {
     e.preventDefault()
     const irAWork = () => document.getElementById('trabajos')?.scrollIntoView({ behavior: REDUCE_MOTION ? 'auto' : 'smooth' })
     if (REDUCE_MOTION) { irAWork(); return }
-    blip()
+    click()
     setLogoOn(true)
     setLogoOnda(n => n + 1)
     setTimeout(irAWork, 620)                    // tiempo para ver el encendido y el halo
@@ -417,7 +459,7 @@ export default function Hero() {
         {/* Mobile: el logo entero (limon + nombre) es un solo boton a work */}
         <a
           href="#trabajos"
-          className={`${styles.logoBtn} ${logoOn ? styles.logoBtnOn : ''}`}
+          className={`${styles.logoBtn} ${logoDesp ? styles.logoBtnDesp : ''} ${logoOn ? styles.logoBtnOn : ''}`}
           aria-label={t('hero.cta_work')}
           onClick={handleLogoClick}
         >
