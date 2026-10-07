@@ -172,6 +172,8 @@ export default function Hero() {
   const [loadedSrc,  setLoadedSrc]  = useState(null)   // primera foto de la franja que ya terminó de bajar
   const [onda,       setOnda]       = useState(0)      // contador: cada clic en el limón dispara una onda nueva
   const [ahora,      setAhora]      = useState(() => new Date())
+  const [logoOn,     setLogoOn]     = useState(false)  // logo mobile encendido mientras dura el clic
+  const [logoOnda,   setLogoOnda]   = useState(0)      // contador de halos del logo mobile
 
   // Reloj del hero: se refresca cada 30 s (suficiente para mostrar hora y minutos)
   useEffect(() => {
@@ -271,6 +273,40 @@ export default function Hero() {
     if (REDUCE_MOTION) { irAMisc(); return }
     setOnda(n => n + 1)
     setTimeout(irAMisc, 450)
+  }
+
+  // Blip corto de videojuego al apretar el logo (sin archivo de audio:
+  // se sintetiza con Web Audio). Si el navegador no deja, no pasa nada.
+  const blip = () => {
+    try {
+      const Ctx = window.AudioContext || window.webkitAudioContext
+      if (!Ctx) return
+      const ctx = new Ctx()
+      const osc = ctx.createOscillator()
+      const vol = ctx.createGain()
+      osc.type = 'square'
+      osc.frequency.setValueAtTime(520, ctx.currentTime)
+      osc.frequency.exponentialRampToValueAtTime(1040, ctx.currentTime + 0.09)
+      vol.gain.setValueAtTime(0.0001, ctx.currentTime)
+      vol.gain.exponentialRampToValueAtTime(0.09, ctx.currentTime + 0.01)
+      vol.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.22)
+      osc.connect(vol).connect(ctx.destination)
+      osc.start()
+      osc.stop(ctx.currentTime + 0.24)
+      osc.onended = () => ctx.close()
+    } catch { /* sin sonido */ }
+  }
+
+  // Logo mobile: se prende, tira el halo, y recien despues baja a work
+  const handleLogoClick = (e) => {
+    e.preventDefault()
+    const irAWork = () => document.getElementById('trabajos')?.scrollIntoView({ behavior: REDUCE_MOTION ? 'auto' : 'smooth' })
+    if (REDUCE_MOTION) { irAWork(); return }
+    blip()
+    setLogoOn(true)
+    setLogoOnda(n => n + 1)
+    setTimeout(irAWork, 620)                    // tiempo para ver el encendido y el halo
+    setTimeout(() => setLogoOn(false), 1100)    // se apaga una vez que ya esta bajando
   }
 
   // El toggle nunca entra a madrugada (índice 0): solo aparece a las 4 AM reales
@@ -379,8 +415,14 @@ export default function Hero() {
         <div className={styles.glow} />
         <span className={styles.iconWrap}><LimonacioIcon size={160} spin pulse dots /></span>
         {/* Mobile: el logo entero (limon + nombre) es un solo boton a work */}
-        <a href="#trabajos" className={styles.logoBtn} aria-label={t('hero.cta_work')}>
+        <a
+          href="#trabajos"
+          className={`${styles.logoBtn} ${logoOn ? styles.logoBtnOn : ''}`}
+          aria-label={t('hero.cta_work')}
+          onClick={handleLogoClick}
+        >
           <LogoTatuaje className={styles.logoTatuaje} />
+          {logoOnda > 0 && <span key={logoOnda} className={styles.logoRipple} />}
         </a>
         <h1 className={styles.title} aria-label="limonacio">
           <span className={styles.titleTexto} aria-hidden="true">limonacio</span>
