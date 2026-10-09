@@ -752,7 +752,12 @@
      enfocado despues del toque y el logo se quedaba prendido). */
   .logoBtn:focus-visible { outline: 2px solid var(--coral); outline-offset: 6px; border-radius: 6px; }
 
-  .logoBtnCoral { --acento: var(--coral); --acento-rgb: 240, 82, 106; }
+  /* OJO: aca va el coral LITERAL, no var(--coral). useTimePalette redefine
+     --coral segun la hora y en las franjas oscuras vale #2ECC80, el mismo
+     verde del logo: usar la variable hacia que el aro y la linea salieran
+     verdes justo cuando mas falta hacia el contraste. Igual que el verde del
+     boton "see work", este color no sigue la paleta horaria. */
+  .logoBtnCoral { --acento: #F0526A; --acento-rgb: 240, 82, 106; }
 
   /* Halo que sale al apretar, antes de que la pagina baje a work */
   .logoRipple {
@@ -862,6 +867,7 @@
    El limon lleva el vino escrito como atributo en el SVG (stroke="#900030"),
    y por eso hace falta el selector de atributo: una regla de CSS le gana a
    un atributo de presentacion, asi que lo pisa sin tocar el JSX. */
-.heroCoral .firmaLinea { stroke: var(--coral); }
-.heroCoral .limonSvg [stroke="#900030"] { stroke: var(--coral); }
+/* Coral literal, no var(--coral): ver la nota en .logoBtnCoral. */
+.heroCoral .firmaLinea { stroke: #F0526A; }
+.heroCoral .limonSvg [stroke="#900030"] { stroke: #F0526A; }
 
