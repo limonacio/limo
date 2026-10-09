@@ -643,40 +643,57 @@
     filter: drop-shadow(0 0 1.5px rgba(46,204,128,0.35));
     transition: opacity 0.45s ease, filter 0.45s ease;
   }
-  /* Reposo: todo hueco y finito, como el nombre en desktop.
-     El limon muestra solo el contorno de su trazo (relleno en 0). */
+  /* ETAPA 1 — reposo: todo hueco. El limon muestra solo el contorno de su
+     trazo (relleno en 0) y el nombre va en contorno via mascara, igual que
+     la firma de desktop. */
   .logoTatuaje [data-p='limon'] {
     fill: #2ECC80;
     fill-opacity: 0;
     stroke: #2ECC80;
     stroke-width: 0.8;
     stroke-linejoin: round;
-    transition: fill-opacity 0.3s ease, stroke-width 0.3s ease;
+    transition: fill-opacity 0.35s ease, stroke-width 0.35s ease;
   }
+  .logoTatuaje [data-p='letrasHueca'],
   .logoTatuaje [data-p='letras'] {
     fill: none;
     stroke: #2ECC80;
-    stroke-width: 1.8;
+    stroke-width: 4.8;        /* igual que el trazo blanco de la mascara */
     stroke-linecap: round;
     stroke-linejoin: round;
-    transition: stroke-width 0.3s ease;
+    transition: opacity 0.35s ease, stroke-width 0.35s ease;
   }
+  .logoTatuaje [data-p='letrasHueca'] { opacity: 1; }
+  .logoTatuaje [data-p='letras']      { opacity: 0; }
   .logoTatuaje [data-p='vino'] {
     fill: none;
     stroke: #900030;
     stroke-width: 0.9;
     stroke-linecap: round;
-    transition: stroke-width 0.3s ease;
+    transition: stroke-width 0.35s ease;
   }
 
-  /* Encendido: se rellena y engorda */
+  /* ETAPA 2 — al scrollear: el nombre se RELLENA y todo se enciende.
+     El orden importa: estas reglas van ANTES que las de .logoBtnOn,
+     porque al apretar estan las dos clases puestas y gana la ultima. */
+  .logoBtnDesp .logoTatuaje {
+    opacity: 1;
+    filter: drop-shadow(0 0 3px rgba(46,204,128,0.8)) drop-shadow(0 0 8px rgba(46,204,128,0.28));
+  }
+  /* (sigue)      El limon sigue hueco: guarda algo para la etapa 3. */
+  .logoBtnDesp .logoTatuaje [data-p='letrasHueca'] { opacity: 0; }
+  .logoBtnDesp .logoTatuaje [data-p='letras']      { opacity: 1; }
+  .logoBtnDesp .logoTatuaje [data-p='vino']        { stroke-width: 1.8; }
+
+  /* ETAPA 3 — al apretar: se rellena tambien el limon y engorda todo */
   .logoBtnOn .logoTatuaje {
     opacity: 1;
     filter: drop-shadow(0 0 4px rgba(46,204,128,0.95)) drop-shadow(0 0 9px rgba(46,204,128,0.4));
   }
-  .logoBtnOn .logoTatuaje [data-p='limon'] { fill-opacity: 1; stroke-width: 0; }
-  .logoBtnOn .logoTatuaje [data-p='letras'] { stroke-width: 3.3; }
-  .logoBtnOn .logoTatuaje [data-p='vino'] { stroke-width: 2.8; }
+  .logoBtnOn .logoTatuaje [data-p='limon']       { fill-opacity: 1; stroke-width: 0; }
+  .logoBtnOn .logoTatuaje [data-p='letrasHueca'] { opacity: 0; }
+  .logoBtnOn .logoTatuaje [data-p='letras']      { opacity: 1; stroke-width: 5.6; }
+  .logoBtnOn .logoTatuaje [data-p='vino']        { stroke-width: 2.8; }
 
   /* De noche la linea vino se pierde sobre la foto oscura: pasa a coral,
      que es el otro color de la marca y si respira contra el negro. */
@@ -686,13 +703,6 @@
   .logoBtn:focus-visible { outline: 2px solid var(--coral); outline-offset: 6px; border-radius: 6px; }
 
   .logoBtnNoche .logoTatuaje [data-p='vino'] { stroke: var(--coral); }
-
-  /* Etapa 2: apenas arranca el scroll se enciende el contorno.
-     Se apaga solo cuando el scroll se queda quieto. */
-  .logoBtnDesp .logoTatuaje {
-    opacity: 1;
-    filter: drop-shadow(0 0 3px rgba(46,204,128,0.8)) drop-shadow(0 0 8px rgba(46,204,128,0.28));
-  }
 
   /* Halo que sale al apretar, antes de que la pagina baje a work */
   .logoRipple {
