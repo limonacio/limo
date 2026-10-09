@@ -717,9 +717,10 @@
     transition: stroke-width 0.35s ease;
   }
 
-  /* ETAPA 2 — al scrollear SOLO se enciende: el nombre sigue hueco y el
-     limon tambien. El relleno queda reservado para la etapa 3, asi tocar
-     tiene algo que mostrar que el scroll no mostro.
+  /* ETAPA 2 — al scrollear el nombre se RELLENA, pero con un trazo mas fino
+     que el contorno (2.2 contra 3): asi se nota que se lleno sin engordar.
+     Relleno y no hueco porque el contorno deja ver el temblor del calco.
+     El limon sigue hueco: el relleno del limon es de la etapa 3.
      El orden importa: estas reglas van ANTES que las de .logoBtnOn,
      porque al apretar estan las dos clases puestas y gana la ultima. */
   .logoBtnDesp .logoTatuaje {
@@ -727,7 +728,9 @@
     filter: drop-shadow(0 0 3px rgba(46,204,128,0.8)) drop-shadow(0 0 8px rgba(46,204,128,0.28));
   }
   /* (sigue) */
-  .logoBtnDesp .logoTatuaje [data-p='vino'] { stroke-width: 1.4; }
+  .logoBtnDesp .logoTatuaje [data-p='letrasHueca'] { opacity: 0; }
+  .logoBtnDesp .logoTatuaje [data-p='letras']      { opacity: 1; stroke-width: 2.2; }
+  .logoBtnDesp .logoTatuaje [data-p='vino']        { stroke-width: 1.4; }
 
   /* ETAPA 3 — al apretar: se rellena tambien el limon y engorda todo */
   .logoBtnOn .logoTatuaje {
