@@ -658,7 +658,7 @@
   .logoTatuaje [data-p='letras'] {
     fill: none;
     stroke: #2ECC80;
-    stroke-width: 4.8;        /* igual que el trazo blanco de la mascara */
+    stroke-width: 3;          /* igual que el trazo blanco de la mascara */
     stroke-linecap: round;
     stroke-linejoin: round;
     transition: opacity 0.35s ease, stroke-width 0.35s ease;
@@ -692,7 +692,7 @@
   }
   .logoBtnOn .logoTatuaje [data-p='limon']       { fill-opacity: 1; stroke-width: 0; }
   .logoBtnOn .logoTatuaje [data-p='letrasHueca'] { opacity: 0; }
-  .logoBtnOn .logoTatuaje [data-p='letras']      { opacity: 1; stroke-width: 5.6; }
+  .logoBtnOn .logoTatuaje [data-p='letras']      { opacity: 1; stroke-width: 3.6; }
   .logoBtnOn .logoTatuaje [data-p='vino']        { stroke-width: 2.8; }
 
   /* De noche la linea vino se pierde sobre la foto oscura: pasa a coral,

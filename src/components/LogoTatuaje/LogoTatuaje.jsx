@@ -27,8 +27,8 @@ export default function LogoTatuaje({ className }) {
     >
       <defs>
         <mask id="letrasHuecas" maskUnits="userSpaceOnUse" x="-40" y="20" width="200" height="140">
-          <path d={letras} fill="none" stroke="#fff" strokeWidth="4.8" strokeLinecap="round" strokeLinejoin="round" />
-          <path d={letras} fill="none" stroke="#000" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round" />
+          <path d={letras} fill="none" stroke="#fff" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+          <path d={letras} fill="none" stroke="#000" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
         </mask>
       </defs>
       <g transform="rotate(-35 53 55)">
