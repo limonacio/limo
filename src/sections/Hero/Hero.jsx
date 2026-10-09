@@ -188,12 +188,23 @@ export default function Hero() {
   const [logoOn,     setLogoOn]     = useState(false)  // logo mobile encendido mientras dura el clic
   const [logoOnda,   setLogoOnda]   = useState(0)      // contador de halos del logo mobile
   const [logoDesp,   setLogoDesp]   = useState(false)  // logo mobile a medio encender mientras se scrollea
+  const [manual,     setManual]     = useState(false)  // true si el visitante eligio la franja con el ◎
 
-  // Reloj del hero: se refresca cada 30 s (suficiente para mostrar hora y minutos)
+  // Reloj del hero: se refresca cada 30 s (suficiente para mostrar hora y minutos).
+  // Aprovechamos el mismo intervalo para re-evaluar la FRANJA: la inicial se
+  // calcula una sola vez al montar, asi que sin esto una pestania abierta se
+  // quedaba clavada en la franja de cuando se cargo (p. ej. seguia en el
+  // glaciar a las 16:05). No se toca nada si el visitante eligio con el ◎.
   useEffect(() => {
-    const id = setInterval(() => setAhora(new Date()), 30000)
+    const id = setInterval(() => {
+      setAhora(new Date())
+      if (!manual) {
+        const i = getTimeSlotIndex()
+        setSlotIdx(prev => (prev === i ? prev : i))
+      }
+    }, 30000)
     return () => clearInterval(id)
-  }, [])
+  }, [manual])
 
   useEffect(() => { slotIdxRef.current = slotIdx }, [slotIdx])
   const imgIdxRef = useRef(0)
@@ -392,10 +403,13 @@ export default function Hero() {
   }
 
   // El toggle nunca entra a madrugada (índice 0): solo aparece a las 4 AM reales
-  const handleToggle = () => setSlotIdx(i => {
-    const next = (i + 1) % SLOTS.length
-    return next === 0 ? 1 : next
-  })
+  const handleToggle = () => {
+    setManual(true)          // desde ahora manda el visitante, no el reloj
+    setSlotIdx(i => {
+      const next = (i + 1) % SLOTS.length
+      return next === 0 ? 1 : next
+    })
+  }
 
   // Hora que se muestra a la derecha (desktop). El lugar de la foto no se muestra:
   // Limo no quiere que se sepa dónde ni en qué momento del día está cada imagen.
