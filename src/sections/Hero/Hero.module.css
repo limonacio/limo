@@ -733,6 +733,9 @@
   .logoBtnOn .logoTatuaje [data-p='vino']        { stroke-width: 2.8; }
   .logoBtnOn .logoTatuaje [data-p='moneda'] {
     opacity: 1;
+    /* Resplandor propio, en el color del acento: el verde del resto no lo
+       acompania y sobre fotos oscuras el vino solo no se lee. */
+    filter: drop-shadow(0 0 4px rgba(var(--acento-rgb), 0.9));
     animation: acunar 0.55s ease-out forwards;
   }
 
