@@ -100,6 +100,11 @@ const VERTICAL = new Set([
 
 const MOBILE_QUERY = '(max-width: 640px)'   // mismo corte que el CSS
 
+// Franjas donde la linea vino (#900030) no se lee bien sobre la foto y
+// pasa a coral. Una sola lista para desktop y mobile: agregar una franja
+// aca la cambia en las dos interfaces.
+const SLOTS_CORAL = new Set(['noche', 'amanecer'])
+
 // El usuario pidió "reducir movimiento" en su sistema operativo (accesibilidad):
 // sin video en movimiento, sin parallax y sin animaciones en bucle.
 const REDUCE_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -484,7 +489,7 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className={`${styles.hero} ${slot.name === 'noche' ? styles.heroNoche : ''}`}
+      className={`${styles.hero} ${SLOTS_CORAL.has(slot.name) ? styles.heroCoral : ''}`}
       ref={heroRef}
     >
 
@@ -530,7 +535,7 @@ export default function Hero() {
         <span className={styles.horaMobile}>{horaTexto}</span>
         <a
           href="#trabajos"
-          className={`${styles.logoBtn} ${logoDesp ? styles.logoBtnDesp : ''} ${logoOn ? styles.logoBtnOn : ''} ${slot.name === 'noche' ? styles.logoBtnNoche : ''}`}
+          className={`${styles.logoBtn} ${logoDesp ? styles.logoBtnDesp : ''} ${logoOn ? styles.logoBtnOn : ''} ${SLOTS_CORAL.has(slot.name) ? styles.logoBtnCoral : ''}`}
           aria-label={t('hero.cta_work')}
           onClick={handleLogoClick}
         >

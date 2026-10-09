@@ -703,14 +703,14 @@
   .logoBtnOn .logoTatuaje [data-p='letras']      { opacity: 1; stroke-width: 3.6; }
   .logoBtnOn .logoTatuaje [data-p='vino']        { stroke-width: 2.8; }
 
-  /* De noche la linea vino se pierde sobre la foto oscura: pasa a coral,
-     que es el otro color de la marca y si respira contra el negro. */
+  /* En las franjas de SLOTS_CORAL (noche, amanecer) el vino no se lee
+     sobre la foto: pasa a coral, el otro color de la marca. */
   /* Teclado: solo un contorno de foco. El encendido completo lo maneja
      la clase .logoBtnOn, nunca :focus-visible (en mobile el <a> queda
      enfocado despues del toque y el logo se quedaba prendido). */
   .logoBtn:focus-visible { outline: 2px solid var(--coral); outline-offset: 6px; border-radius: 6px; }
 
-  .logoBtnNoche .logoTatuaje [data-p='vino'] { stroke: var(--coral); }
+  .logoBtnCoral .logoTatuaje [data-p='vino'] { stroke: var(--coral); }
 
   /* Halo que sale al apretar, antes de que la pagina baje a work */
   .logoRipple {
@@ -806,11 +806,11 @@
   to   { transform: translate(-50%, -50%) scale(1.9); opacity: 0; }
 }
 
-/* ── De noche el vino pasa a coral ──────────────────────
+/* ── Franjas donde el vino pasa a coral (noche y amanecer; ver SLOTS_CORAL) ──────────────────────
    Sobre las fotos oscuras de la franja noche el vino #900030 casi no se ve.
-   En mobile lo resuelve .logoBtnNoche; esto es lo mismo para desktop.
+   En mobile lo resuelve .logoBtnCoral; esto es lo mismo para desktop.
    El limon lleva el vino escrito como atributo en el SVG (stroke="#900030"),
    y por eso hace falta el selector de atributo: una regla de CSS le gana a
    un atributo de presentacion, asi que lo pisa sin tocar el JSX. */
-.heroNoche .firmaLinea { stroke: var(--coral); }
-.heroNoche .limonSvg [stroke="#900030"] { stroke: var(--coral); }
+.heroCoral .firmaLinea { stroke: var(--coral); }
+.heroCoral .limonSvg [stroke="#900030"] { stroke: var(--coral); }
