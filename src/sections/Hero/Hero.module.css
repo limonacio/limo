@@ -690,17 +690,14 @@
   }
   .logoTatuaje [data-p='letrasHueca'] { opacity: 1; }
   .logoTatuaje [data-p='letras']      { opacity: 0; }
-  /* La moneda: invisible en reposo, se acuña al apretar. pathLength=100 en
-     el SVG deja el dash en unidades de porcentaje, asi que el aro se dibuja
-     solo de 0 a 100 sin tener que saber su perimetro real. */
+  /* La moneda: el aro esta SIEMPRE, igual que el resto del logo. Fino y
+     apagado en reposo, apenas mas grueso al apretar. No se dibuja dando la
+     vuelta: no es un efecto aparte, es una parte mas del dibujo. */
   .logoTatuaje [data-p='moneda'] {
     fill: none;
     stroke: var(--acento);
-    stroke-width: 2.2;
-    opacity: 0;
-    stroke-dasharray: 100;
-    stroke-dashoffset: 100;
-    transition: opacity 0.2s ease;
+    stroke-width: 0.9;
+    transition: stroke-width 0.35s ease;
   }
   .logoTatuaje [data-p='vino'] {
     fill: none;
@@ -732,11 +729,10 @@
   .logoBtnOn .logoTatuaje [data-p='letras']      { opacity: 1; stroke-width: 3.6; }
   .logoBtnOn .logoTatuaje [data-p='vino']        { stroke-width: 2.8; }
   .logoBtnOn .logoTatuaje [data-p='moneda'] {
-    opacity: 1;
+    stroke-width: 1.8;
     /* Resplandor propio, en el color del acento: el verde del resto no lo
        acompania y sobre fotos oscuras el vino solo no se lee. */
     filter: drop-shadow(0 0 4px rgba(var(--acento-rgb), 0.9));
-    animation: acunar 0.55s ease-out forwards;
   }
 
   /* En las franjas de SLOTS_CORAL (noche, amanecer) el vino no se lee
@@ -855,8 +851,3 @@
 .heroCoral .firmaLinea { stroke: var(--coral); }
 .heroCoral .limonSvg [stroke="#900030"] { stroke: var(--coral); }
 
-/* El aro de la moneda se dibuja de un trazo al apretar el logo */
-@keyframes acunar {
-  from { stroke-dashoffset: 100; }
-  to   { stroke-dashoffset: 0; }
-}
