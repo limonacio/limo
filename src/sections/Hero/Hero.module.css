@@ -647,25 +647,23 @@
      En reposo esta apagado (semitransparente, trazo fino); al tocarlo
      se prende y engorda. Misma logica que los botones de desktop. */
   .logoBtn {
+    /* Color de acento del logo: lo usan la linea del nombre, el aro de la
+       moneda y el halo. Una sola variable para que los tres cambien juntos.
+       --acento-rgb es el mismo color en componentes, porque el degradado del
+       halo necesita transparencias y rgba() no acepta un hex. */
+    --acento: #900030;
+    --acento-rgb: 144, 0, 48;
     position: relative;
     display: block;
-    width: min(84vw, 400px);
+    width: min(92vw, 440px);
     margin: 0 auto;
     -webkit-tap-highlight-color: transparent;
-    /* El corrimiento optico va en el DIBUJO, no aca: asi el rotulo
-       "see work" queda centrado en pantalla y su flecha puede apuntar a la
-       palabra del medio del subtitulo. */
   }
   .logoTatuaje {
     display: block;
     width: 100%;
     height: auto;
     overflow: visible;
-    /* Centrado OPTICO: el logo es una diagonal con el limon (la masa pesada)
-       arriba a la izquierda, asi que centrado al milimetro se ve corrido a la
-       derecha. 4.6% del ancho son ~15px en un telefono de 390 y ~12px en uno
-       de 320: en % y no en px para no comerse el aire del costado. */
-    transform: translateX(-4.6%);
     opacity: 0.42;
     filter: drop-shadow(0 0 1.5px rgba(46,204,128,0.35));
     transition: opacity 0.45s ease, filter 0.45s ease;
@@ -692,9 +690,21 @@
   }
   .logoTatuaje [data-p='letrasHueca'] { opacity: 1; }
   .logoTatuaje [data-p='letras']      { opacity: 0; }
+  /* La moneda: invisible en reposo, se acuña al apretar. pathLength=100 en
+     el SVG deja el dash en unidades de porcentaje, asi que el aro se dibuja
+     solo de 0 a 100 sin tener que saber su perimetro real. */
+  .logoTatuaje [data-p='moneda'] {
+    fill: none;
+    stroke: var(--acento);
+    stroke-width: 2.2;
+    opacity: 0;
+    stroke-dasharray: 100;
+    stroke-dashoffset: 100;
+    transition: opacity 0.2s ease;
+  }
   .logoTatuaje [data-p='vino'] {
     fill: none;
-    stroke: #900030;
+    stroke: var(--acento);
     stroke-width: 0.9;
     stroke-linecap: round;
     transition: stroke-width 0.35s ease;
@@ -721,6 +731,10 @@
   .logoBtnOn .logoTatuaje [data-p='letrasHueca'] { opacity: 0; }
   .logoBtnOn .logoTatuaje [data-p='letras']      { opacity: 1; stroke-width: 3.6; }
   .logoBtnOn .logoTatuaje [data-p='vino']        { stroke-width: 2.8; }
+  .logoBtnOn .logoTatuaje [data-p='moneda'] {
+    opacity: 1;
+    animation: acunar 0.55s ease-out forwards;
+  }
 
   /* En las franjas de SLOTS_CORAL (noche, amanecer) el vino no se lee
      sobre la foto: pasa a coral, el otro color de la marca. */
@@ -729,7 +743,7 @@
      enfocado despues del toque y el logo se quedaba prendido). */
   .logoBtn:focus-visible { outline: 2px solid var(--coral); outline-offset: 6px; border-radius: 6px; }
 
-  .logoBtnCoral .logoTatuaje [data-p='vino'] { stroke: var(--coral); }
+  .logoBtnCoral { --acento: var(--coral); --acento-rgb: 240, 82, 106; }
 
   /* Halo que sale al apretar, antes de que la pagina baje a work */
   .logoRipple {
@@ -742,10 +756,10 @@
     pointer-events: none;
     background: radial-gradient(
       circle,
-      rgba(46,204,128,0)    38%,
-      rgba(92,255,168,0.45) 54%,
-      rgba(46,204,128,0.18) 68%,
-      rgba(46,204,128,0)    80%
+      rgba(var(--acento-rgb), 0)    38%,
+      rgba(var(--acento-rgb), 0.55) 54%,
+      rgba(var(--acento-rgb), 0.22) 68%,
+      rgba(var(--acento-rgb), 0)    80%
     );
     filter: blur(7px);
     animation: logoRipple 0.85s ease-out forwards;
@@ -837,3 +851,9 @@
    un atributo de presentacion, asi que lo pisa sin tocar el JSX. */
 .heroCoral .firmaLinea { stroke: var(--coral); }
 .heroCoral .limonSvg [stroke="#900030"] { stroke: var(--coral); }
+
+/* El aro de la moneda se dibuja de un trazo al apretar el logo */
+@keyframes acunar {
+  from { stroke-dashoffset: 100; }
+  to   { stroke-dashoffset: 0; }
+}
