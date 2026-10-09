@@ -635,6 +635,12 @@
     width: min(84vw, 400px);
     margin: 0 auto;
     -webkit-tap-highlight-color: transparent;
+    /* Centrado OPTICO: el logo es una diagonal con el limon (la masa pesada)
+       arriba a la izquierda, asi que centrado al milimetro se ve corrido a la
+       derecha. Lo corremos un poco. En % y no en px para que no se coma el
+       aire del costado en pantallas chicas: 4.6% del ancho del boton son
+       ~15px en un telefono de 390 y ~12px en uno de 320. */
+    transform: translateX(-4.6%);
   }
   .logoTatuaje {
     display: block;
