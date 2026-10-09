@@ -655,7 +655,13 @@
     --acento-rgb: 144, 0, 48;
     position: relative;
     display: block;
-    width: min(92vw, 440px);
+    /* El logo es CUADRADO (la moneda), asi que su alto = su ancho. El tamanio
+       lo decide la dimension que escasee: el ancho de la pantalla, el alto
+       disponible (58vh deja lugar a la hora, el rotulo y el subtitulo), o un
+       tope de 440 para que no se agigante en tablets. min() elige el menor,
+       asi la moneda nunca se corta ni empuja al resto. */
+    width: min(92vw, 58vh, 440px);
+    aspect-ratio: 1;
     margin: 0 auto;
     -webkit-tap-highlight-color: transparent;
   }
