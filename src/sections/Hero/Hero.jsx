@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next'
-import { useState, useEffect, useRef, useCallback, useMemo } from 'react'
+import { useState, useEffect, useRef, useCallback, useMemo, Fragment } from 'react'
 import LimonacioIcon from '../../components/LimonacioIcon/LimonacioIcon'
 import LogoTatuaje from '../../components/LogoTatuaje/LogoTatuaje'
 import styles from './Hero.module.css'
@@ -169,6 +169,7 @@ function getTimeSlotIndex(now = new Date()) {
 }
 
 const DEFAULT_INTERVAL = 18000
+const FUNDIDO = 1200   // ms que dura el fundido entre fotos (ver .imgCover/.imgCentered)
 
 export default function Hero() {
   const { t } = useTranslation()
@@ -179,7 +180,7 @@ export default function Hero() {
 
   const [slotIdx,    setSlotIdx]    = useState(getTimeSlotIndex)
   const [imgIdx,     setImgIdx]     = useState(0)
-  const [visible,    setVisible]    = useState(true)
+  const [salIdx,     setSalIdx]     = useState(null)   // foto que se esta yendo durante el fundido
   const [posterOn,   setPosterOn]   = useState(true)   // imagen quieta encima del video del glaciar
   const [loadedSrc,  setLoadedSrc]  = useState(null)   // primera foto de la franja que ya terminó de bajar
   const [onda,       setOnda]       = useState(0)      // contador: cada clic en el limón dispara una onda nueva
@@ -195,6 +196,8 @@ export default function Hero() {
   }, [])
 
   useEffect(() => { slotIdxRef.current = slotIdx }, [slotIdx])
+  const imgIdxRef = useRef(0)
+  useEffect(() => { imgIdxRef.current = imgIdx }, [imgIdx])
 
   const slot  = SLOTS[slotIdx]
   // El orden de las fotos se sortea una vez cada vez que se entra a la franja
@@ -229,16 +232,16 @@ export default function Hero() {
     return () => { cancelado = true }
   }, [slot])
 
-  // Avanzar frame con crossfade
+  // Avanzar frame con fundido encadenado (crossfade), igual que el glaciar:
+  // la foto nueva aparece DEBAJO ya opaca y la vieja se disuelve ENCIMA.
+  // Nunca hay un momento en negro, que era lo que pasaba antes.
   const advance = useCallback(() => {
-    setVisible(false)
-    setTimeout(() => {
-      setImgIdx(i => {
-        const frames = SLOTS[slotIdxRef.current]?.frames
-        return frames ? (i + 1) % frames.length : 0
-      })
-      setVisible(true)
-    }, 500)
+    const frames = SLOTS[slotIdxRef.current]?.frames
+    if (!frames) return
+    const actual = imgIdxRef.current
+    setSalIdx(actual)
+    setImgIdx((actual + 1) % frames.length)
+    setTimeout(() => setSalIdx(null), FUNDIDO + 100)   // se desmonta ya invisible
   }, [])
 
   // Timer del carousel
@@ -252,7 +255,7 @@ export default function Hero() {
   // Reset al cambiar slot
   useEffect(() => {
     setImgIdx(0)
-    setVisible(true)
+    setSalIdx(null)
     heroRef.current?.style.setProperty('--parallax-y', '0px')
   }, [slotIdx])
 
@@ -399,58 +402,69 @@ export default function Hero() {
   const horaTexto = ahora.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false })
 
   // ── Render del fondo ──────────────────────────────────────
-  const renderBackground = () => {
-    if (slot.type === 'video') return null
+  // Dibuja UNA capa: una foto sola, un par lado a lado, o una vertical con
+  // su blur de relleno. `saliendo` marca la que se esta disolviendo encima.
+  const renderFrame = (fr, saliendo) => {
+    if (!fr || !fr.length) return null
 
-    // Par: dos imágenes lado a lado
-    if (frame.length === 2) {
+    // Par: dos imagenes lado a lado
+    if (fr.length === 2) {
       return (
-        <div className={`${styles.imgPair} ${visible ? styles.imgVisible : ''}`}>
-          <img src={frame[0]} alt="" className={styles.imgPairItem} />
-          <img src={frame[1]} alt="" className={styles.imgPairItem} />
+        <div key={fr[0]} className={`${styles.imgPair} ${saliendo ? '' : styles.imgVisible}`}>
+          <img src={fr[0]} alt="" className={styles.imgPairItem} />
+          <img src={fr[1]} alt="" className={styles.imgPairItem} />
         </div>
       )
     }
 
-    // Imagen sola
-    const img = frame[0]
-    if (!img) return null
-    const isV = VERTICAL.has(img)
-
-    // La primera foto de la franja aparece con fundido recién cuando terminó de bajar
-    const isFirst = img === firstSrc
-    const waiting = isFirst && firstPending
+    const img = fr[0]
+    // La primera foto de la franja aparece recien cuando termino de bajar
+    const isFirst     = img === firstSrc
     const onFirstDone = isFirst ? () => setLoadedSrc(img) : undefined
+    const visible     = !saliendo && !(isFirst && firstPending)
 
-    if (isV) {
-      // Vertical: blur de relleno + foto centrada
+    // Vertical: blur de relleno + foto centrada
+    if (VERTICAL.has(img)) {
       return (
-        <>
+        <Fragment key={img}>
           <div
             className={styles.imgBlur}
-            style={{ backgroundImage: `url(${img})`, opacity: visible && !waiting ? 1 : 0 }}
+            style={{ backgroundImage: `url(${img})`, opacity: visible ? 1 : 0 }}
           />
           <img
             src={img}
             alt=""
             onLoad={onFirstDone}
             onError={onFirstDone}
-            className={`${styles.imgCentered} ${visible && !waiting ? styles.imgVisible : ''}`}
+            className={`${styles.imgCentered} ${visible ? styles.imgVisible : ''}`}
           />
-        </>
+        </Fragment>
       )
     }
 
     // Horizontal: foto a full, sin blur
     return (
       <img
+        key={img}
         src={img}
         alt=""
         onLoad={onFirstDone}
         onError={onFirstDone}
-        className={`${styles.imgCover} ${visible && !waiting ? styles.imgVisible : ''}`}
+        className={`${styles.imgCover} ${visible ? styles.imgVisible : ''}`}
       />
     )
+  }
+
+  // Las capas van en un array para que React las reconozca por su `key`:
+  // asi la foto que sale conserva su nodo del DOM y puede hacer la
+  // transicion de opacidad 1 -> 0. Si fueran posiciones fijas, React
+  // reusaria el nodo para la foto nueva y no habria fundido.
+  const renderBackground = () => {
+    if (slot.type === 'video') return null
+    const saliente = (salIdx !== null && salIdx !== imgIdx) ? frames[salIdx] : null
+    const capas = [{ fr: frame, saliendo: false }]
+    if (saliente) capas.push({ fr: saliente, saliendo: true })   // encima, disolviendose
+    return capas.map(c => renderFrame(c.fr, c.saliendo))
   }
 
   return (

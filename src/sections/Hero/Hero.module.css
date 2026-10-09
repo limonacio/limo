@@ -72,7 +72,7 @@
   z-index: 0;
   pointer-events: none;
   opacity: 0;
-  transition: opacity 0.5s ease;
+  transition: opacity 1.2s ease;   /* = FUNDIDO en Hero.jsx */
   will-change: transform;
   transform: translateY(var(--parallax-y, 0px));
 }
@@ -83,7 +83,7 @@
   inset: 0;
   display: flex;
   opacity: 0;
-  transition: opacity 0.5s ease;
+  transition: opacity 1.2s ease;   /* = FUNDIDO en Hero.jsx */
   will-change: transform;
   transform: translateY(var(--parallax-y, 0px));
 }
@@ -117,7 +117,7 @@
   transform: scale(1.1);
   z-index: 0;
   pointer-events: none;
-  transition: opacity 0.5s ease;
+  transition: opacity 1.2s ease;   /* = FUNDIDO en Hero.jsx */
 }
 
 /* Foto vertical centrada encima del blur */
@@ -133,7 +133,7 @@
   z-index: 0;
   pointer-events: none;
   opacity: 0;
-  transition: opacity 0.5s ease;
+  transition: opacity 1.2s ease;   /* = FUNDIDO en Hero.jsx */
   will-change: transform;
 }
 
