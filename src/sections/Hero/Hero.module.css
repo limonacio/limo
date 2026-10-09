@@ -656,11 +656,15 @@
     position: relative;
     display: block;
     /* El logo es CUADRADO (la moneda), asi que su alto = su ancho. El tamanio
-       lo decide la dimension que escasee: el ancho de la pantalla, el alto
-       disponible (58vh deja lugar a la hora, el rotulo y el subtitulo), o un
-       tope de 440 para que no se agigante en tablets. min() elige el menor,
-       asi la moneda nunca se corta ni empuja al resto. */
-    width: min(92vw, 58vh, 440px);
+       lo decide la dimension que escasee:
+         100%  -> el ancho REAL disponible. Ojo: NO usar vw, que mide la
+                  ventana entera e ignora el padding de 2rem del hero y los
+                  rieles oscuros de los costados; con 92vw la moneda se salia
+                  por los lados en pantallas angostas (Galaxy Z Fold).
+         58vh  -> deja lugar a la hora arriba y al rotulo y subtitulo abajo.
+         440px -> tope para que no se agigante en tablets.
+       min() elige el menor, asi la moneda nunca se corta ni empuja al resto. */
+    width: min(100%, 58vh, 440px);
     aspect-ratio: 1;
     margin: 0 auto;
     -webkit-tap-highlight-color: transparent;
@@ -784,7 +788,11 @@
   .cta,
   .scrollHint { display: none; }
 
-  .heroContent { gap: 18px; }
+  .heroContent {
+    gap: 18px;
+    width: 100%;        /* para que el 100% del logo sea un ancho real */
+    box-sizing: border-box;
+  }
 
   /* El <h1> sigue existiendo para Google y los lectores de pantalla,
      pero no se ve: el nombre ya lo dibuja el logo. */
