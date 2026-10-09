@@ -482,7 +482,11 @@ export default function Hero() {
   }
 
   return (
-    <section id="hero" className={styles.hero} ref={heroRef}>
+    <section
+      id="hero"
+      className={`${styles.hero} ${slot.name === 'noche' ? styles.heroNoche : ''}`}
+      ref={heroRef}
+    >
 
       {/* Video — solo se descarga en la franja glaciar (pesa ~17 MB) */}
       <video

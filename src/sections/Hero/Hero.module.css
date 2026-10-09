@@ -805,3 +805,12 @@
   from { transform: translate(-50%, -50%) scale(0.5); opacity: 1; }
   to   { transform: translate(-50%, -50%) scale(1.9); opacity: 0; }
 }
+
+/* ── De noche el vino pasa a coral ──────────────────────
+   Sobre las fotos oscuras de la franja noche el vino #900030 casi no se ve.
+   En mobile lo resuelve .logoBtnNoche; esto es lo mismo para desktop.
+   El limon lleva el vino escrito como atributo en el SVG (stroke="#900030"),
+   y por eso hace falta el selector de atributo: una regla de CSS le gana a
+   un atributo de presentacion, asi que lo pisa sin tocar el JSX. */
+.heroNoche .firmaLinea { stroke: var(--coral); }
+.heroNoche .limonSvg [stroke="#900030"] { stroke: var(--coral); }
