@@ -98,7 +98,9 @@ const VERTICAL = new Set([
   '/assets/img/hero/rio-santa-cruz-tarde.webp',
 ])
 
-const MOBILE_QUERY = '(max-width: 640px)'   // mismo corte que el CSS
+// Mismo criterio que el bloque VERTICAL de Hero.module.css: si cambia uno,
+// cambia el otro. Decide el orden de las fotos (verticales primero).
+const MOBILE_QUERY = '(max-width: 640px), (max-width: 1024px) and (orientation: portrait)'
 
 // Franjas donde la linea vino (#900030) no se lee bien sobre la foto y
 // pasa a coral. Una sola lista para desktop y mobile: agregar una franja

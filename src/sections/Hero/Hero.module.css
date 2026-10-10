@@ -343,7 +343,10 @@
 /* ── Desktop: layout nuevo (#9) ─────────────────────────
    Foto a pantalla completa; nombre abajo a la izquierda,
    botón a work abajo a la derecha. Mobile no se toca. */
-@media (min-width: 641px) {
+/* HORIZONTAL: pantallas apaisadas (y cualquier monitor de mas de 1024).
+   Ver el bloque VERTICAL mas abajo: los dos criterios son complementarios,
+   si se toca uno hay que tocar el otro y tambien MOBILE_QUERY en Hero.jsx. */
+@media (min-width: 1025px), (min-width: 641px) and (orientation: landscape) {
   .hero { padding: 0; }
 
   .videoOverlay {
@@ -590,7 +593,10 @@
 }
 
 /* ── Mobile: foto alineada con el contenido (Opción C) ──── */
-@media (max-width: 640px) {
+/* VERTICAL: celulares, y tablets en vertical (el iPad Mini entra aca).
+   Se decide por ORIENTACION, no solo por ancho: una pantalla alta pide el
+   logo, aunque mida 768 de ancho. */
+@media (max-width: 640px), (max-width: 1024px) and (orientation: portrait) {
 
   /* Rieles oscuros de 2rem a cada lado.
      El padding del .hero es 2rem, así que los bordes de la foto
