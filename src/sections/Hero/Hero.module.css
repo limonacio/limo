@@ -440,6 +440,11 @@
     line-height: 1.4;
     margin: 22px 0 0;
     white-space: nowrap;
+    /* --n lo calcula Hero.jsx: cuantos caracteres hay que correr el subtitulo
+       para que su palabra del medio quede bajo el boton. 1ch es el ancho de
+       un caracter (fuente monoespaciada) y hay que sumarle el letter-spacing,
+       que tambien ocupa. */
+    transform: translateX(calc(var(--n, 0) * (1ch + 0.1em)));
   }
 
   .btn {
@@ -641,18 +646,20 @@
     width: min(84vw, 400px);
     margin: 0 auto;
     -webkit-tap-highlight-color: transparent;
-    /* Centrado OPTICO: el logo es una diagonal con el limon (la masa pesada)
-       arriba a la izquierda, asi que centrado al milimetro se ve corrido a la
-       derecha. Lo corremos un poco. En % y no en px para que no se coma el
-       aire del costado en pantallas chicas: 4.6% del ancho del boton son
-       ~15px en un telefono de 390 y ~12px en uno de 320. */
-    transform: translateX(-4.6%);
+    /* El corrimiento optico va en el DIBUJO, no aca: asi el rotulo
+       "see work" queda centrado en pantalla y su flecha puede apuntar a la
+       palabra del medio del subtitulo. */
   }
   .logoTatuaje {
     display: block;
     width: 100%;
     height: auto;
     overflow: visible;
+    /* Centrado OPTICO: el logo es una diagonal con el limon (la masa pesada)
+       arriba a la izquierda, asi que centrado al milimetro se ve corrido a la
+       derecha. 4.6% del ancho son ~15px en un telefono de 390 y ~12px en uno
+       de 320: en % y no en px para no comerse el aire del costado. */
+    transform: translateX(-4.6%);
     opacity: 0.42;
     filter: drop-shadow(0 0 1.5px rgba(46,204,128,0.35));
     transition: opacity 0.45s ease, filter 0.45s ease;
@@ -798,10 +805,14 @@
   .subtitle {
     margin: 0;
     text-align: center;
-    font-size: 11px;
+    /* clamp para que el portugues, que es el mas largo, entre entero en una
+       sola linea: si se corta, la palabra del medio deja de estar donde va. */
+    font-size: clamp(8.5px, 2.5vw, 11px);
     letter-spacing: 0.14em;
+    white-space: nowrap;
     color: #cfc9c2;
     text-shadow: 0 1px 4px rgba(0,0,0,0.9);
+    transform: translateX(calc(var(--n, 0) * (1ch + 0.14em)));
   }
 
 }

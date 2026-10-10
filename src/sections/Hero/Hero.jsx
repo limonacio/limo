@@ -418,6 +418,21 @@ export default function Hero() {
 
   // Hora que se muestra a la derecha (desktop). El lugar de la foto no se muestra:
   // Limo no quiere que se sepa dónde ni en qué momento del día está cada imagen.
+  // El boton "see work" va centrado y su flecha tiene que apuntar a la palabra
+  // del medio del subtitulo (development / desarrollo / desenvolvimento).
+  // Esa palabra NUNCA esta centrada en la linea: queda 1 a 2 caracteres a la
+  // izquierda, y cuanto corre depende del idioma. Medimos la diferencia en
+  // caracteres y la pasamos al CSS como --n; alla se multiplica por el ancho
+  // real de un caracter (la fuente es monoespaciada) mas el letter-spacing.
+  const desfaseSubtitulo = useMemo(() => {
+    const partes = t('hero.subtitle').split(' / ')
+    if (partes.length !== 3) return 0
+    const largo        = t('hero.subtitle').length
+    const inicioMedio  = partes[0].length + 3
+    const centroMedio  = inicioMedio + partes[1].length / 2
+    return largo / 2 - centroMedio          // + mueve el subtitulo a la derecha
+  }, [t])
+
   const horaTexto = ahora.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false })
 
   // ── Render del fondo ──────────────────────────────────────
@@ -608,7 +623,7 @@ export default function Hero() {
         </h1>
         {/* Subtitulo y boton: en desktop comparten ancho para poder alinearlos */}
         <div className={styles.bloqueIzq}>
-          <p className={styles.subtitle}>
+          <p className={styles.subtitle} style={{ '--n': desfaseSubtitulo }}>
             <span className={styles.tagline}>{t('hero.tagline')}<br/></span>
             {t('hero.subtitle')}
           </p>
