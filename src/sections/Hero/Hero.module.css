@@ -451,14 +451,20 @@
 
   /* El boton va a la derecha del subtitulo, en la misma linea.
      Dos perillas para ajustarlo: separacion horizontal y cuanto sube. */
+  /* El boton va ARRIBA del subtitulo, centrado sobre el: como el subtitulo
+     es monoespaciado y "development" es la palabra del medio, centrar el
+     boton sobre la linea lo deja justo encima de esa palabra. Sirve igual
+     en los 3 idiomas, sin medir caracteres a mano.
+     column-reverse: en el HTML el subtitulo va primero (orden de lectura),
+     pero se dibuja abajo. */
   .bloqueIzq {
     display: flex;
-    flex-direction: row;
+    flex-direction: column-reverse;
     align-items: center;
-    gap: 80px;
+    gap: 18px;
     width: max-content;
   }
-  .cta { transform: translateY(-14%); }
+  .cta { transform: none; }
 
   /* Siempre verde menta, no sigue la paleta horaria: es la invitacion al clic.
      En reposo contorneado; al pasar el mouse se rellena.
