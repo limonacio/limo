@@ -332,6 +332,8 @@
 .limonBtn { display: none; }
 .colDerecha { display: none; }
 .logoBtn { display: none; }
+.horaMobile { display: none; }
+.logoRotulo { display: none; }
 
 @keyframes limonRipple {
   from { transform: translate(-50%, -50%) scale(0.45); opacity: 1; }
@@ -729,15 +731,66 @@
     .logoRipple  { display: none; }
   }
 
-  /* El resto de la interfaz vieja del hero no va mas en mobile */
-  .titleTexto,
+  /* La interfaz vieja del hero no va mas en mobile. El subtitulo si queda,
+     pero solo su segunda linea: el tagline (portfolio / work / misc) se va. */
   .iconWrap,
   .glow,
-  .subtitle,
+  .tagline,
   .dots,
-  .cta { display: none; }
+  .cta,
+  .scrollHint { display: none; }
 
-  .heroContent { gap: 0; }
+  .heroContent { gap: 18px; }
+
+  /* El <h1> sigue existiendo para Google y los lectores de pantalla,
+     pero no se ve: el nombre ya lo dibuja el logo. */
+  .title {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  /* Hora arriba del logo: el mismo reloj que desktop, pero chico.
+     Es el unico elemento que comparten las dos interfaces. */
+  .horaMobile {
+    display: block;
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 0.02em;
+    color: #F0EDE8;
+    filter: drop-shadow(0 1px 5px rgba(4,16,10,0.85));
+  }
+
+  /* Rotulo del boton: va DENTRO del <a>, asi se enciende junto con el logo */
+  .logoRotulo {
+    display: block;
+    margin-top: 4px;
+    text-align: center;
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #2ECC80;
+    opacity: 0.55;
+    text-shadow: 0 0 8px rgba(46,204,128,0.45);
+    transition: opacity 0.35s ease;
+  }
+  .logoBtnDesp .logoRotulo,
+  .logoBtnOn .logoRotulo { opacity: 1; }
+
+  .subtitle {
+    margin: 0;
+    text-align: center;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    color: #cfc9c2;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.9);
+  }
 
 }
 

@@ -521,7 +521,9 @@ export default function Hero() {
       <div className={styles.heroContent}>
         <div className={styles.glow} />
         <span className={styles.iconWrap}><LimonacioIcon size={160} spin pulse dots /></span>
-        {/* Mobile: el logo entero (limon + nombre) es un solo boton a work */}
+        {/* Mobile: la hora, el logo-boton y el subtitulo. El logo entero
+            (limon + nombre + linea) es un solo boton que lleva a work. */}
+        <span className={styles.horaMobile}>{horaTexto}</span>
         <a
           href="#trabajos"
           className={`${styles.logoBtn} ${logoDesp ? styles.logoBtnDesp : ''} ${logoOn ? styles.logoBtnOn : ''} ${slot.name === 'noche' ? styles.logoBtnNoche : ''}`}
@@ -530,6 +532,7 @@ export default function Hero() {
         >
           <LogoTatuaje className={styles.logoTatuaje} />
           {logoOnda > 0 && <span key={logoOnda} className={styles.logoRipple} />}
+          <span className={styles.logoRotulo}>{t('hero.cta_work')} ↓</span>
         </a>
         <h1 className={styles.title} aria-label="limonacio">
           <span className={styles.titleTexto} aria-hidden="true">limonacio</span>
