@@ -539,16 +539,19 @@
     filter: drop-shadow(0 0 4px rgba(46,204,128,.85)) drop-shadow(0 0 14px rgba(46,204,128,.4));
     transition: filter 0.3s ease;
   }
-  /* En reposo solo el contorno de cada trazo: se ve la foto a traves.
-     Al pasar el mouse aparece la version solida. */
-  .limonHueco,
-  .limonSolido { transition: opacity 0.3s ease; }
-  .limonHueco  { opacity: 1; }
-  .limonSolido { opacity: 0; }
-  .limonBtn:hover .limonHueco,
-  .limonBtn:focus-visible .limonHueco { opacity: 0; }
-  .limonBtn:hover .limonSolido,
-  .limonBtn:focus-visible .limonSolido { opacity: 1; }
+  /* Mismo limon que el logo de mobile (LimonTrazado): un solo path relleno.
+     En reposo se ve solo el CONTORNO de su trazo (relleno en 0), asi la foto
+     se ve a traves; al pasar el mouse se rellena. Misma formula que mobile. */
+  .limonSvg [data-p='limon'] {
+    fill: #2ECC80;
+    fill-opacity: 0;
+    stroke: #2ECC80;
+    stroke-width: 0.8;
+    stroke-linejoin: round;
+    transition: fill-opacity 0.3s ease, stroke-width 0.3s ease;
+  }
+  .limonBtn:hover .limonSvg [data-p='limon'],
+  .limonBtn:focus-visible .limonSvg [data-p='limon'] { fill-opacity: 1; stroke-width: 0; }
 
   /* Al acercar el mouse se aviva, sin pasarse */
   .limonBtn:hover .limonSvg,
@@ -882,5 +885,6 @@
    un atributo de presentacion, asi que lo pisa sin tocar el JSX. */
 /* Coral literal, no var(--coral): ver la nota en .logoBtnCoral. */
 .heroCoral .firmaLinea { stroke: #F0526A; }
-.heroCoral .limonSvg [stroke="#900030"] { stroke: #F0526A; }
+/* El limon nuevo es todo verde, no tiene detalles en vino: solo cambia la
+   linea del nombre. */
 
