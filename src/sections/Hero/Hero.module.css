@@ -508,11 +508,13 @@
     gap: 30px;
     text-align: right;
   }
-  /* Hora con el rotulo debajo, los dos pegados al borde derecho */
+  /* Hora con el rotulo debajo, CENTRADO respecto de la hora (no alineado al
+     borde derecho: el rotulo es mas angosto y asi quedaba desbordado hacia
+     un lado). El ancho de la columna lo fija la hora, que es lo mas ancho. */
   .infoDer {
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
+    align-items: center;
     gap: 6px;
   }
   .miscLabel {
@@ -525,6 +527,14 @@
     text-transform: uppercase;
     opacity: 0.85;
     transition: opacity 0.3s ease, color 0.2s ease;
+  }
+  /* El letter-spacing agrega un espacio despues de la ultima letra: sin esto
+     el texto se ve corrido medio caracter a la izquierda de su caja. */
+  .miscLabel { text-indent: 0.12em; }
+  .miscLabel:focus-visible {
+    outline: 2px solid var(--coral);
+    outline-offset: 4px;
+    border-radius: 3px;
   }
   /* El rotulo y el limon son dos enlaces distintos, pero se encienden juntos:
      :has() deja que el hover de uno alcance al otro. */
