@@ -530,14 +530,20 @@
     display: flex;
     width: clamp(190px, 19vw, 300px);   /* el limon ahora trae aro e inscripcion */
   }
-  /* Contorno neon, sin relleno: el resplandor queda corto para que se vea la foto a traves */
+  /* Tres etapas, las mismas que el logo de mobile:
+       1. quieto   -> apagado y difuso, el limon hueco
+       2. hover    -> se enciende, sigue hueco
+       3. al clic  -> estalla: se rellena, resplandor fuerte y onda expansiva
+     Antes el limon arrancaba ya encendido a tope y el hover no tenia adonde
+     ir, por eso quedaba "explotado" todo el tiempo. */
   .limonSvg {
     width: 100%;
     height: auto;
     overflow: visible;
     display: block;
-    filter: drop-shadow(0 0 4px rgba(46,204,128,.85)) drop-shadow(0 0 14px rgba(46,204,128,.4));
-    transition: filter 0.3s ease;
+    opacity: 0.42;
+    filter: drop-shadow(0 0 1.5px rgba(46,204,128,0.35));
+    transition: opacity 0.3s ease, filter 0.3s ease;
   }
   /* Mismo limon que el logo de mobile (LimonTrazado): un solo path relleno.
      En reposo se ve solo el CONTORNO de su trazo (relleno en 0), asi la foto
@@ -550,8 +556,8 @@
     stroke-linejoin: round;
     transition: fill-opacity 0.3s ease, stroke-width 0.3s ease;
   }
-  .limonBtn:hover .limonSvg [data-p='limon'],
-  .limonBtn:focus-visible .limonSvg [data-p='limon'] { fill-opacity: 1; stroke-width: 0; }
+  /* Etapa 3: el relleno es del clic, no del hover */
+  .limonBtnOn .limonSvg [data-p='limon'] { fill-opacity: 1; stroke-width: 0; }
 
   /* Aro e inscripcion, igual que la moneda de mobile pero sin el nombre.
      Van en vino y estan siempre: engordan apenas al pasar el mouse. */
@@ -567,7 +573,8 @@
     font-weight: 700;
   }
   .limonBtn:hover .limonSvg [data-p='moneda'],
-  .limonBtn:focus-visible .limonSvg [data-p='moneda'] { stroke-width: 1.6; }
+  .limonBtn:focus-visible .limonSvg [data-p='moneda'] { stroke-width: 1.2; }
+  .limonBtnOn .limonSvg [data-p='moneda'] { stroke-width: 1.8; }
 
   /* De noche y al amanecer el vino no se lee sobre la foto: pasa a coral.
      Literal, nunca var(--coral): useTimePalette la redefine por franja y en
@@ -575,13 +582,20 @@
   .heroCoral .limonSvg [data-p='moneda']      { stroke: #F0526A; }
   .heroCoral .limonSvg [data-p='inscripcion'] { fill: #F0526A; }
 
-  /* Al acercar el mouse se aviva, sin pasarse */
+  /* Etapa 2: al acercar el mouse se enciende, sin rellenarse */
   .limonBtn:hover .limonSvg,
   .limonBtn:focus-visible .limonSvg {
+    opacity: 1;
+    filter: drop-shadow(0 0 3px rgba(46,204,128,0.8)) drop-shadow(0 0 8px rgba(46,204,128,0.28));
+  }
+
+  /* Etapa 3: al clic estalla. Va DESPUES del hover: al apretar estan las dos
+     clases puestas y, con la misma especificidad, gana la ultima. */
+  .limonBtnOn .limonSvg {
+    opacity: 1;
     filter:
       drop-shadow(0 0 5px rgba(92,255,168,1))
-      drop-shadow(0 0 18px rgba(46,204,128,.6))
-      drop-shadow(0 0 34px rgba(46,204,128,.3));
+      drop-shadow(0 0 18px rgba(46,204,128,.6));
   }
 
   /* Onda de halo al clic: un anillo difuso que se expande y se apaga */

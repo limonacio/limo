@@ -192,6 +192,7 @@ export default function Hero() {
   const [posterOn,   setPosterOn]   = useState(true)   // imagen quieta encima del video del glaciar
   const [loadedSrc,  setLoadedSrc]  = useState(null)   // primera foto de la franja que ya terminó de bajar
   const [onda,       setOnda]       = useState(0)      // contador: cada clic en el limón dispara una onda nueva
+  const [limonOn,    setLimonOn]    = useState(false)  // limón de desktop estallado mientras dura el clic
   const [ahora,      setAhora]      = useState(() => new Date())
   const [logoOn,     setLogoOn]     = useState(false)  // logo mobile encendido mientras dura el clic
   const [logoOnda,   setLogoOnda]   = useState(0)      // contador de halos del logo mobile
@@ -328,7 +329,9 @@ export default function Hero() {
     const irAMisc = () => document.getElementById('miscelaneas')?.scrollIntoView({ behavior: REDUCE_MOTION ? 'auto' : 'smooth' })
     if (REDUCE_MOTION) { irAMisc(); return }
     setOnda(n => n + 1)
+    setLimonOn(true)
     setTimeout(irAMisc, 450)
+    setTimeout(() => setLimonOn(false), 900)
   }
 
   // Golpe de tecla de maquina de escribir al apretar el logo. No hay archivo
@@ -646,7 +649,7 @@ export default function Hero() {
       {/* Columna derecha (solo desktop): limón (a misceláneas) y la hora */}
       <div className={styles.colDerecha}>
           {/* Limón: botón a misceláneas (solo desktop). Quieto; onda expansiva al clic */}
-          <a href="#miscelaneas" className={styles.limonBtn} onClick={handleLimonClick}>
+          <a href="#miscelaneas" className={`${styles.limonBtn} ${limonOn ? styles.limonBtnOn : ''}`} onClick={handleLimonClick}>
             <span className={styles.limonIcon}>
                 <LimonTrazado className={styles.limonSvg} />
               {onda > 0 && <span key={onda} className={styles.limonRipple} />}
