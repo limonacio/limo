@@ -443,11 +443,9 @@
     line-height: 1.4;
     margin: 22px 0 0;
     white-space: nowrap;
-    /* --n lo calcula Hero.jsx: cuantos caracteres hay que correr el subtitulo
-       para que su palabra del medio quede bajo el boton. 1ch es el ancho de
-       un caracter (fuente monoespaciada) y hay que sumarle el letter-spacing,
-       que tambien ocupa. */
-    transform: translateX(calc(var(--n, 0) * (1ch + 0.1em)));
+    /* Sin el desfase --n: eso es solo para mobile, donde el rotulo SI esta
+       arriba del subtitulo y su flecha tiene que apuntar a la palabra del
+       medio. Aca el boton esta al costado. */
   }
 
   .btn {
@@ -459,20 +457,20 @@
 
   /* El boton va a la derecha del subtitulo, en la misma linea.
      Dos perillas para ajustarlo: separacion horizontal y cuanto sube. */
-  /* El boton va ARRIBA del subtitulo, centrado sobre el: como el subtitulo
-     es monoespaciado y "development" es la palabra del medio, centrar el
-     boton sobre la linea lo deja justo encima de esa palabra. Sirve igual
-     en los 3 idiomas, sin medir caracteres a mano.
-     column-reverse: en el HTML el subtitulo va primero (orden de lectura),
-     pero se dibuja abajo. */
+  /* Subtitulo y boton en la MISMA FILA: el subtitulo a la izquierda, el
+     boton a su derecha, que es donde cae bajo el final del nombre ("acio").
+     Aprobado el 03/10/2026. Las dos perillas son este gap y el translateY
+     del .cta. ❌ No volver a ponerlo arriba del subtitulo (se probo el
+     08/10/2026 y Limo lo hizo volver): arriba pierde la relacion con el
+     nombre, que es lo que lo hacia coherente. */
   .bloqueIzq {
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: row;
     align-items: center;
-    gap: 18px;
+    gap: 80px;
     width: max-content;
   }
-  .cta { transform: none; }
+  .cta { transform: translateY(-14%); }
 
   /* Siempre verde menta, no sigue la paleta horaria: es la invitacion al clic.
      En reposo contorneado; al pasar el mouse se rellena.
