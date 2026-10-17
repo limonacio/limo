@@ -15,6 +15,27 @@ export const proyectos = [
   // ── WORK / TRABAJOS ───────────────────────────────────────
 
   {
+    id:       "limonario",
+    tipo:     "trabajo",
+    titulo:   "Limonario",
+    subtitulo: {
+      en: "web app · booking · payments",
+      es: "web app · turnos · pagos",
+      pt: "web app · agendamentos · pagamentos",
+    },
+    descripcion: {
+      en: "Booking platform with up-front deposits. The professional sets the session price and the deposit from their own panel; the client never sends a price — it is calculated on the server and frozen into each booking. Payments through Mercado Pago, confirmed by webhook.",
+      es: "Plataforma de turnos con seña. El profesional fija el precio de la sesión y la seña desde su panel; el cliente nunca manda un precio: se calcula en el servidor y queda congelado en cada reserva. Cobro por Mercado Pago, confirmado por webhook.",
+      pt: "Plataforma de agendamentos com sinal. O profissional define o preço da sessão e o sinal no seu painel; o cliente nunca envia um preço: é calculado no servidor e fica congelado em cada reserva. Pagamento por Mercado Pago, confirmado por webhook.",
+    },
+    imagen:   "limonario-cover.png",
+    link:     "https://limonario.limonacio.com",
+    featured: false,
+  },
+
+
+
+  {
     id:       "martin-brooks",
     tipo:     "trabajo",
     titulo:   "Martín Brooks",
