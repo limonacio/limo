@@ -494,6 +494,9 @@
 
   /* ── Columna derecha: limon + SEE WORK + hora + lugar ─────── */
   /* El limon va a la izquierda del reloj, en la misma fila */
+  /* La moneda y el bloque de informacion comparten el eje horizontal del
+     CENTRO de la moneda: un circulo se alinea por su centro, no por su borde
+     de abajo, que es lo que hacia ver el reloj colgado. */
   .colDerecha {
     position: absolute;
     right: 56px;
@@ -501,10 +504,37 @@
     z-index: 2;
     display: flex;
     flex-direction: row;
-    align-items: flex-end;
-    gap: 35px;
+    align-items: center;
+    gap: 30px;
     text-align: right;
   }
+  /* Hora con el rotulo debajo, los dos pegados al borde derecho */
+  .infoDer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+  }
+  .miscLabel {
+    color: #F0EDE8;
+    font-family: var(--font);
+    font-weight: 700;
+    font-size: 17px;
+    letter-spacing: 0.12em;
+    text-decoration: none;
+    text-transform: uppercase;
+    opacity: 0.85;
+    transition: opacity 0.3s ease, color 0.2s ease;
+  }
+  /* El rotulo y el limon son dos enlaces distintos, pero se encienden juntos:
+     :has() deja que el hover de uno alcance al otro. */
+  .colDerecha:has(.limonBtn:hover) .miscLabel,
+  .colDerecha:has(.miscLabel:hover) .miscLabel { opacity: 1; }
+  .colDerecha:has(.miscLabel:hover) .limonSvg {
+    opacity: 1;
+    filter: drop-shadow(0 0 3px rgba(46,204,128,0.8)) drop-shadow(0 0 8px rgba(46,204,128,0.28));
+  }
+  .colDerecha:has(.miscLabel:hover) .limonSvg [data-p='moneda'] { stroke-width: 1.2; }
 
   .limonBtn {
     display: flex;
@@ -623,7 +653,6 @@
     line-height: 1;
     color: #F0EDE8;
     letter-spacing: 0.02em;
-    margin-bottom: 26px;
     filter: drop-shadow(0 1px 4px rgba(4,16,10,0.85));
   }
 

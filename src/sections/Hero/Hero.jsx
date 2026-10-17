@@ -646,17 +646,31 @@ export default function Hero() {
 
       </div>
 
-      {/* Columna derecha (solo desktop): limón (a misceláneas) y la hora */}
+      {/* Columna derecha (solo desktop): la moneda del limon y, a su lado, la
+          hora con el rotulo debajo. Los dos comparten el eje horizontal del
+          centro de la moneda: un circulo se alinea por su centro, no por su
+          borde de abajo. */}
       <div className={styles.colDerecha}>
-          {/* Limón: botón a misceláneas (solo desktop). Quieto; onda expansiva al clic */}
-          <a href="#miscelaneas" className={`${styles.limonBtn} ${limonOn ? styles.limonBtnOn : ''}`} onClick={handleLimonClick}>
-            <span className={styles.limonIcon}>
-                <LimonTrazado className={styles.limonSvg} />
-              {onda > 0 && <span key={onda} className={styles.limonRipple} />}
-            </span>
-            <span>{t('hero.cta_misc')} ↓</span>
+        {/* Limon: boton a miscelaneas. Quieto; estalla y larga la onda al clic */}
+        <a
+          href="#miscelaneas"
+          className={`${styles.limonBtn} ${limonOn ? styles.limonBtnOn : ''}`}
+          onClick={handleLimonClick}
+          aria-label={t('hero.cta_misc')}
+        >
+          <span className={styles.limonIcon}>
+            <LimonTrazado className={styles.limonSvg} />
+            {onda > 0 && <span key={onda} className={styles.limonRipple} />}
+          </span>
+        </a>
+        <div className={styles.infoDer}>
+          <span className={styles.hora}>{horaTexto}</span>
+          {/* El rotulo es su propio enlace porque vive fuera del <a> del limon;
+              el CSS los hace encenderse juntos con :has() */}
+          <a href="#miscelaneas" className={styles.miscLabel} onClick={handleLimonClick}>
+            {t('hero.cta_misc')} ↓
           </a>
-        <span className={styles.hora}>{horaTexto}</span>
+        </div>
       </div>
 
       {/* Toggle misterioso */}
