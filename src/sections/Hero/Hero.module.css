@@ -528,7 +528,7 @@
   .limonIcon {
     position: relative;
     display: flex;
-    width: clamp(150px, 15vw, 240px);
+    width: clamp(190px, 19vw, 300px);   /* el limon ahora trae aro e inscripcion */
   }
   /* Contorno neon, sin relleno: el resplandor queda corto para que se vea la foto a traves */
   .limonSvg {
@@ -552,6 +552,28 @@
   }
   .limonBtn:hover .limonSvg [data-p='limon'],
   .limonBtn:focus-visible .limonSvg [data-p='limon'] { fill-opacity: 1; stroke-width: 0; }
+
+  /* Aro e inscripcion, igual que la moneda de mobile pero sin el nombre.
+     Van en vino y estan siempre: engordan apenas al pasar el mouse. */
+  .limonSvg [data-p='moneda'] {
+    fill: none;
+    stroke: #900030;
+    stroke-width: 0.8;
+    transition: stroke-width 0.3s ease;
+  }
+  .limonSvg [data-p='inscripcion'] {
+    fill: #900030;
+    font-family: var(--font);
+    font-weight: 700;
+  }
+  .limonBtn:hover .limonSvg [data-p='moneda'],
+  .limonBtn:focus-visible .limonSvg [data-p='moneda'] { stroke-width: 1.6; }
+
+  /* De noche y al amanecer el vino no se lee sobre la foto: pasa a coral.
+     Literal, nunca var(--coral): useTimePalette la redefine por franja y en
+     las franjas oscuras vale #2ECC80, el mismo verde del limon. */
+  .heroCoral .limonSvg [data-p='moneda']      { stroke: #F0526A; }
+  .heroCoral .limonSvg [data-p='inscripcion'] { fill: #F0526A; }
 
   /* Al acercar el mouse se aviva, sin pasarse */
   .limonBtn:hover .limonSvg,
