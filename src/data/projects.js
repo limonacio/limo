@@ -28,7 +28,7 @@ export const proyectos = [
       es: "Plataforma de turnos con seña. El profesional fija el precio de la sesión y la seña desde su panel; el cliente nunca manda un precio: se calcula en el servidor y queda congelado en cada reserva. Cobro por Mercado Pago, confirmado por webhook.",
       pt: "Plataforma de agendamentos com sinal. O profissional define o preço da sessão e o sinal no seu painel; o cliente nunca envia um preço: é calculado no servidor e fica congelado em cada reserva. Pagamento por Mercado Pago, confirmado por webhook.",
     },
-    imagen:   "limonario-cover.png",
+    imagen:   "limonario-cover.webp",
     link:     "https://limonario.limonacio.com",
     featured: false,
   },
