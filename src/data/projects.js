@@ -36,6 +36,48 @@ export const proyectos = [
 
 
   {
+    id:       "siria",
+    tipo:     "trabajo",
+    titulo:   "Siria",
+    subtitulo: {
+      en: "web · beauty salon · booking",
+      es: "web · peluqueria · turnos",
+      pt: "web · salao de beleza · agendamentos",
+    },
+    descripcion: {
+      en: "Site for a unisex beauty salon in El Calafate. Services, a gallery of real work, online booking and local SEO so it shows up in searches from the area.",
+      es: "Sitio para un salon unisex de El Calafate. Servicios, galeria de trabajos reales, reserva de turnos online y SEO local para aparecer en las busquedas de la zona.",
+      pt: "Site para um salao unissex em El Calafate. Servicos, galeria de trabalhos reais, agendamento online e SEO local para aparecer nas buscas da regiao.",
+    },
+    imagen:   "siria-cover.webp",
+    link:     "https://siria-sigma.vercel.app",
+    featured: false,
+  },
+
+
+
+  {
+    id:       "intycaren",
+    tipo:     "trabajo",
+    titulo:   "Inty Caren Transfers",
+    subtitulo: {
+      en: "web · transfers · patagonia",
+      es: "web · traslados · patagonia",
+      pt: "web · traslados · patagonia",
+    },
+    descripcion: {
+      en: "Site for a private transfer service out of El Calafate. Static, trilingual, with destinations, vehicles, map and FAQ; bookings go through WhatsApp.",
+      es: "Sitio para un servicio de remis privado desde El Calafate. Estatico, en tres idiomas, con destinos, vehiculos, mapa y preguntas frecuentes; las reservas van por WhatsApp.",
+      pt: "Site para um servico de traslado privado saindo de El Calafate. Estatico, em tres idiomas, com destinos, veiculos, mapa e perguntas frequentes; as reservas vao pelo WhatsApp.",
+    },
+    imagen:   "intycaren-cover.webp",
+    link:     "https://intycaren.vercel.app",
+    featured: false,
+  },
+
+
+
+  {
     id:       "martin-brooks",
     tipo:     "trabajo",
     titulo:   "Martín Brooks",
