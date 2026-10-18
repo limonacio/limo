@@ -15,21 +15,21 @@ export const proyectos = [
   // ── WORK / TRABAJOS ───────────────────────────────────────
 
   {
-    id:       "limonario",
+    id:       "intycaren",
     tipo:     "trabajo",
-    titulo:   "Limonario",
+    titulo:   "Inty Caren Transfers",
     subtitulo: {
-      en: "web app · booking · payments",
-      es: "web app · turnos · pagos",
-      pt: "web app · agendamentos · pagamentos",
+      en: "web · transfers · patagonia",
+      es: "web · traslados · patagonia",
+      pt: "web · traslados · patagonia",
     },
     descripcion: {
-      en: "Booking platform with up-front deposits. The professional sets the session price and the deposit from their own panel; the client never sends a price — it is calculated on the server and frozen into each booking. Payments through Mercado Pago, confirmed by webhook.",
-      es: "Plataforma de turnos con seña. El profesional fija el precio de la sesión y la seña desde su panel; el cliente nunca manda un precio: se calcula en el servidor y queda congelado en cada reserva. Cobro por Mercado Pago, confirmado por webhook.",
-      pt: "Plataforma de agendamentos com sinal. O profissional define o preço da sessão e o sinal no seu painel; o cliente nunca envia um preço: é calculado no servidor e fica congelado em cada reserva. Pagamento por Mercado Pago, confirmado por webhook.",
+      en: "Site for a private transfer service out of El Calafate. Static, trilingual, with destinations, vehicles, map and FAQ; bookings go through WhatsApp.",
+      es: "Sitio para un servicio de remis privado desde El Calafate. Estatico, en tres idiomas, con destinos, vehiculos, mapa y preguntas frecuentes; las reservas van por WhatsApp.",
+      pt: "Site para um servico de traslado privado saindo de El Calafate. Estatico, em tres idiomas, com destinos, veiculos, mapa e perguntas frequentes; as reservas vao pelo WhatsApp.",
     },
-    imagen:   "limonario-cover.webp",
-    link:     "https://limonario.limonacio.com",
+    imagen:   "intycaren-cover.webp",
+    link:     "https://intycaren.vercel.app",
     featured: false,
   },
 
@@ -57,21 +57,21 @@ export const proyectos = [
 
 
   {
-    id:       "intycaren",
+    id:       "limonario",
     tipo:     "trabajo",
-    titulo:   "Inty Caren Transfers",
+    titulo:   "Limonario",
     subtitulo: {
-      en: "web · transfers · patagonia",
-      es: "web · traslados · patagonia",
-      pt: "web · traslados · patagonia",
+      en: "web app · booking · payments",
+      es: "web app · turnos · pagos",
+      pt: "web app · agendamentos · pagamentos",
     },
     descripcion: {
-      en: "Site for a private transfer service out of El Calafate. Static, trilingual, with destinations, vehicles, map and FAQ; bookings go through WhatsApp.",
-      es: "Sitio para un servicio de remis privado desde El Calafate. Estatico, en tres idiomas, con destinos, vehiculos, mapa y preguntas frecuentes; las reservas van por WhatsApp.",
-      pt: "Site para um servico de traslado privado saindo de El Calafate. Estatico, em tres idiomas, com destinos, veiculos, mapa e perguntas frequentes; as reservas vao pelo WhatsApp.",
+      en: "Booking platform with up-front deposits. The professional sets the session price and the deposit from their own panel; the client never sends a price — it is calculated on the server and frozen into each booking. Payments through Mercado Pago, confirmed by webhook.",
+      es: "Plataforma de turnos con seña. El profesional fija el precio de la sesión y la seña desde su panel; el cliente nunca manda un precio: se calcula en el servidor y queda congelado en cada reserva. Cobro por Mercado Pago, confirmado por webhook.",
+      pt: "Plataforma de agendamentos com sinal. O profissional define o preço da sessão e o sinal no seu painel; o cliente nunca envia um preço: é calculado no servidor e fica congelado em cada reserva. Pagamento por Mercado Pago, confirmado por webhook.",
     },
-    imagen:   "intycaren-cover.webp",
-    link:     "https://intycaren.vercel.app",
+    imagen:   "limonario-cover.webp",
+    link:     "https://limonario.limonacio.com",
     featured: false,
   },
 
