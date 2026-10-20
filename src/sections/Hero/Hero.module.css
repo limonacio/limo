@@ -503,8 +503,17 @@
     background: rgba(10,10,14,0.5);
     box-shadow: 0 0 22px rgba(46,204,128,0.3);
     text-shadow: 0 0 8px rgba(46,204,128,0.45);
-    text-transform: none;
-    transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, text-shadow 0.3s ease, transform 0.15s;
+    /* Versales bien espaciadas: mismo Courier del resto del sitio, pero con
+       aire de letrero. Se evaluo una fuente de cartel (Bebas Neue) y se
+       descarto: el sitio no descarga ninguna fuente hoy y una display en
+       un solo boton queda como un invitado de una sola aparicion.
+       text-indent compensa el espacio que letter-spacing agrega DESPUES de
+       la ultima letra, que si no descentra el texto dentro del boton. */
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 0.34em;
+    text-indent: 0.34em;
+    transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, text-shadow 0.3s ease, border-color 0.3s ease, transform 0.15s;
   }
   /* ── Luces de kiosco, solo en la franja NOCHE ─────────────
      Un trazo por color, con guiones de largo cero y punta redonda: cada
@@ -514,6 +523,15 @@
      El lila es #A99BFF y NO var(--teal): en la paleta de noche esa variable
      vale #7B74E0, un violeta pensado para texto que como luz queda apagado. */
   .luces { display: none; }
+  /* De noche el contorno lo marcan las luces: el borde verde seria una
+     segunda linea haciendo el mismo trabajo. Queda transparente, no se
+     quita, asi el boton no cambia de tamanio entre franjas. */
+  .heroLuces .btnPrimary {
+    border-color: transparent;
+    box-shadow: none;
+  }
+  .heroLuces .btnPrimary:hover,
+  .heroLuces .btnPrimary:focus-visible { border-color: #2ECC80; }
   .heroLuces .luces {
     display: block;
     position: absolute;
