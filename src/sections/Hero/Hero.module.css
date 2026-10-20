@@ -293,6 +293,16 @@
   user-select: none;
 }
 
+/* El ◎ es secreto: no debe quedar marcado despues de tocarlo.
+   Al hacer clic, Chrome le deja su anillo de foco puesto y el recuadro lo
+   delata. Se apaga ese outline y se le da uno propio solo para teclado. */
+.toggleBtn:focus { outline: none; }
+.toggleBtn:focus-visible {
+  outline: 1px solid rgba(255,255,255,0.45);
+  outline-offset: 4px;
+  border-radius: 50%;
+}
+
 .toggleBtn:hover {
   color: rgba(255,255,255,0.6);
   transform: rotate(45deg);

@@ -416,7 +416,8 @@ export default function Hero() {
   }
 
   // El toggle nunca entra a madrugada (índice 0): solo aparece a las 4 AM reales
-  const handleToggle = () => {
+  const handleToggle = (e) => {
+    e.currentTarget.blur()   // que no quede marcado: el ◎ es secreto
     setManual(true)          // desde ahora manda el visitante, no el reloj
     setSlotIdx(i => {
       const next = (i + 1) % SLOTS.length
