@@ -445,10 +445,21 @@
   .heroContent:has(.btnPrimary:focus-visible) .firmaSolida { opacity: 1; }
   .heroContent:has(.btnPrimary:hover) .firmaLinea,
   .heroContent:has(.btnPrimary:focus-visible) .firmaLinea { stroke-width: 6; }
+  /* El subtitulo acompania: atenuado en reposo, encendido al pasar por
+     "see work". Forma parte del mismo bloque, asi que se enciende con el. */
+  .heroContent:has(.btnPrimary:hover) .subtitle,
+  .heroContent:has(.btnPrimary:focus-visible) .subtitle,
+  .heroContent:has(.btnPrimary:active) .subtitle {
+    opacity: 1;
+    color: #F0EDE8;
+    text-shadow: 0 0 10px rgba(46,204,128,0.25);
+  }
 
   .subtitle {
     font-size: 17px;
     color: #e3e0d9;
+    opacity: 0.6;
+    transition: opacity 0.3s ease, color 0.3s ease, text-shadow 0.3s ease;
     letter-spacing: 0.1em;
     line-height: 1.4;
     margin: 22px 0 0;
@@ -517,13 +528,14 @@
     stroke-width: 5;
     stroke-linecap: round;
     stroke-dasharray: 0 45;
-    /* Ciclo largo y piso alto: llama sin marear. Ver tarea #10. */
-    animation: lucesPulso 5.4s ease-in-out infinite;
+    /* 2.7s con desfase de 0.9 entre colores. Se probo a 1.8 (mareaba) y
+       a 5.4 (aburria); este es el punto medio. Ver tarea #10. */
+    animation: lucesPulso 2.7s ease-in-out infinite;
   }
   .luzMenta { stroke: #2ECC80; filter: drop-shadow(0 0 4px rgba(46,204,128,0.85)); }
-  .luzCoral { stroke: #F0526A; stroke-dashoffset: -15; animation-delay: 1.8s;
+  .luzCoral { stroke: #F0526A; stroke-dashoffset: -15; animation-delay: 0.9s;
               filter: drop-shadow(0 0 4px rgba(240,82,106,0.85)); }
-  .luzLila  { stroke: #A99BFF; stroke-dashoffset: -30; animation-delay: 3.6s;
+  .luzLila  { stroke: #A99BFF; stroke-dashoffset: -30; animation-delay: 1.8s;
               filter: drop-shadow(0 0 4px rgba(169,155,255,0.85)); }
 
   /* Movimiento reducido: las luces quedan prendidas y quietas */
@@ -1010,6 +1022,6 @@
 
 /* Luces de kiosco del boton "see work" (solo de noche) */
 @keyframes lucesPulso {
-  0%, 100% { opacity: 0.45; }
+  0%, 100% { opacity: 0.32; }
   50%      { opacity: 1; }
 }
