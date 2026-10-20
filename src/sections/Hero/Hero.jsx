@@ -512,7 +512,7 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className={`${styles.hero} ${SLOTS_CORAL.has(slot.name) ? styles.heroCoral : ''}`}
+      className={`${styles.hero} ${SLOTS_CORAL.has(slot.name) ? styles.heroCoral : ''} ${slot.name === 'noche' ? styles.heroLuces : ''}`}
       ref={heroRef}
     >
 
@@ -641,7 +641,19 @@ export default function Hero() {
             <span className={`${styles.dot} ${styles.dot3}`} />
           </div>
           <div className={styles.cta}>
-            <a href="#trabajos"    className={`${styles.btn} ${styles.btnPrimary}`}>{t('hero.cta_work')}</a>
+            <a href="#trabajos" className={`${styles.btn} ${styles.btnPrimary}`}>
+              {t('hero.cta_work')}
+              {/* Luces de kiosco: solo se ven en la franja noche (.heroLuces).
+                  Es UN trazo por color, con guiones de largo cero y punta
+                  redonda: cada "foco" es un punto del dash, no un elemento.
+                  Los tres van desfasados 15 unidades, asi quedan intercalados
+                  menta / coral / lila alrededor del marco. */}
+              <svg className={styles.luces} aria-hidden="true">
+                <rect className={`${styles.luz} ${styles.luzMenta}`} x="3" y="3" rx="9" width="calc(100% - 6px)" height="calc(100% - 6px)" />
+                <rect className={`${styles.luz} ${styles.luzCoral}`} x="3" y="3" rx="9" width="calc(100% - 6px)" height="calc(100% - 6px)" />
+                <rect className={`${styles.luz} ${styles.luzLila}`}  x="3" y="3" rx="9" width="calc(100% - 6px)" height="calc(100% - 6px)" />
+              </svg>
+            </a>
             <a href="#miscelaneas" className={`${styles.btn} ${styles.btnSecondary}`}>{t('hero.cta_misc')}</a>
           </div>
         </div>

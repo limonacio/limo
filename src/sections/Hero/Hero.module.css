@@ -476,6 +476,7 @@
      En reposo contorneado; al pasar el mouse se rellena.
      PENDIENTE: ver una variante para noche y madrugada. */
   .btnPrimary {
+    position: relative;   /* ancla de las luces de kiosco */
     border: 3px solid #2ECC80;
     color: #2ECC80;
     background: rgba(10,10,14,0.5);
@@ -484,6 +485,42 @@
     text-transform: none;
     transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, text-shadow 0.3s ease, transform 0.15s;
   }
+  /* ── Luces de kiosco, solo en la franja NOCHE ─────────────
+     Un trazo por color, con guiones de largo cero y punta redonda: cada
+     "foco" es un punto del dash, no un elemento del DOM. Los tres comparten
+     el mismo recorrido y se desfasan 15 unidades, asi quedan intercalados
+     menta / coral / lila alrededor del marco.
+     El lila es #A99BFF y NO var(--teal): en la paleta de noche esa variable
+     vale #7B74E0, un violeta pensado para texto que como luz queda apagado. */
+  .luces { display: none; }
+  .heroLuces .luces {
+    display: block;
+    position: absolute;
+    inset: -9px;
+    width: calc(100% + 18px);
+    height: calc(100% + 18px);
+    pointer-events: none;
+    overflow: visible;
+  }
+  .luz {
+    fill: none;
+    stroke-width: 5;
+    stroke-linecap: round;
+    stroke-dasharray: 0 45;
+    /* Ciclo largo y piso alto: llama sin marear. Ver tarea #10. */
+    animation: lucesPulso 5.4s ease-in-out infinite;
+  }
+  .luzMenta { stroke: #2ECC80; filter: drop-shadow(0 0 4px rgba(46,204,128,0.85)); }
+  .luzCoral { stroke: #F0526A; stroke-dashoffset: -15; animation-delay: 1.8s;
+              filter: drop-shadow(0 0 4px rgba(240,82,106,0.85)); }
+  .luzLila  { stroke: #A99BFF; stroke-dashoffset: -30; animation-delay: 3.6s;
+              filter: drop-shadow(0 0 4px rgba(169,155,255,0.85)); }
+
+  /* Movimiento reducido: las luces quedan prendidas y quietas */
+  @media (prefers-reduced-motion: reduce) {
+    .luz { animation: none; opacity: 0.85; }
+  }
+
   .btnPrimary:hover,
   .btnPrimary:focus-visible {
     background: #2ECC80;
@@ -961,3 +998,8 @@
 /* El limon nuevo es todo verde, no tiene detalles en vino: solo cambia la
    linea del nombre. */
 
+/* Luces de kiosco del boton "see work" (solo de noche) */
+@keyframes lucesPulso {
+  0%, 100% { opacity: 0.45; }
+  50%      { opacity: 1; }
+}
