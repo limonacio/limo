@@ -1,29 +1,35 @@
 {
   "nav": {
-    "work":    "trabajos",
-    "misc":    "misceláneas",
-    "about":   "sobre mí"
+    "work": "trabajos",
+    "misc": "misceláneas",
+    "about": "sobre mí",
+    "lab": "lab"
   },
   "hero": {
-    "tagline":  "portfolio · trabajos · misceláneas",
+    "tagline": "portfolio · trabajos · misceláneas",
     "subtitle": "diseño / desarrollo / movimiento",
     "cta_work": "ver trabajos",
     "cta_misc": "misceláneas",
-    "scroll":   "scroll",
-    "toggle":   "cambiar vista"
+    "scroll": "scroll",
+    "toggle": "cambiar vista",
+    "cta_lab": "lab"
   },
   "work": {
-    "tag":   "trabajos",
+    "tag": "trabajos",
     "title": "mis proyectos"
   },
+  "lab": {
+    "tag": "lab",
+    "title": "lo que construyo"
+  },
   "misc": {
-    "tag":   "misceláneas",
+    "tag": "misceláneas",
     "title": "videos · música · baile"
   },
   "about": {
     "heading": "sobre mi",
-    "brand":   "limonacio",
-    "text":    "Portfolio personal de trabajos, proyectos y pasiones. Desde diseño y desarrollo hasta música y baile — todo lo que me mueve va acá.",
+    "brand": "limonacio",
+    "text": "Portfolio personal de trabajos, proyectos y pasiones. Desde diseño y desarrollo hasta música y baile — todo lo que me mueve va acá.",
     "extended": "Me gradué en el Colegio León XIII, donde cursé el bachillerato con orientación en Humanidades. El estudio del latín y el griego que realicé allí, junto con varios años de francés e inglés, me brindó sólidas capacidades analíticas y asociativas, además de una memoria bien ejercitada.\n\nA lo largo de mi carrera, decidí involucrarme en temas relacionados con la salud y la psicoterapia — dimensiones sensibles del ser humano. Más recientemente, me he sentido muy motivado a adentrarme en el estudio de la tecnología y el software. Cada día encuentro algo nuevo que aprender sobre pruebas de errores, repositorios, automatización e informes.\n\nConsulto regularmente la IA como asistente en mi proceso de aprendizaje y, en algunos casos, incluso como mero supervisor de mi trabajo y ciertas producciones.\n\nActualmente estudio inglés con dedicación para enriquecer mis habilidades lingüísticas y poder usarlo eventualmente con la misma amplitud con que uso el español.\n\nQuizás algún día en el futuro — una gran meta para mí — podré conectar ambos mundos: el de la salud psicosocial y el del desarrollo de software.",
     "see_more": "ver más",
     "see_less": "ver menos"
@@ -32,12 +38,12 @@
     "no_link": ""
   },
   "a11y": {
-    "prev":    "Anterior",
-    "next":    "Siguiente",
-    "page":    "Página {{n}}",
+    "prev": "Anterior",
+    "next": "Siguiente",
+    "page": "Página {{n}}",
     "socials": "Redes sociales"
   },
   "footer": {
-    "rights":  "Todos los derechos reservados."
+    "rights": "Todos los derechos reservados."
   }
 }

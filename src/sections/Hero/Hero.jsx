@@ -323,10 +323,12 @@ export default function Hero() {
     }
   }, [imgIdx, slot, frames])
 
-  // Limón: al clic, onda expansiva y recién después baja a misceláneas
+  // Limón: al clic, onda expansiva y recién después baja a LAB.
+  // Antes bajaba a misceláneas; se cambió el 20/10/2026 porque la moneda es la
+  // marca de Limo y tiene que apuntar a sus propios productos, no al relleno.
   const handleLimonClick = (e) => {
     e.preventDefault()
-    const irAMisc = () => document.getElementById('miscelaneas')?.scrollIntoView({ behavior: REDUCE_MOTION ? 'auto' : 'smooth' })
+    const irAMisc = () => document.getElementById('lab')?.scrollIntoView({ behavior: REDUCE_MOTION ? 'auto' : 'smooth' })
     if (REDUCE_MOTION) { irAMisc(); return }
     setOnda(n => n + 1)
     setLimonOn(true)
@@ -651,12 +653,12 @@ export default function Hero() {
           centro de la moneda: un circulo se alinea por su centro, no por su
           borde de abajo. */}
       <div className={styles.colDerecha}>
-        {/* Limon: boton a miscelaneas. Quieto; estalla y larga la onda al clic */}
+        {/* Limon: boton a LAB. Quieto; estalla y larga la onda al clic */}
         <a
-          href="#miscelaneas"
+          href="#lab"
           className={`${styles.limonBtn} ${limonOn ? styles.limonBtnOn : ''}`}
           onClick={handleLimonClick}
-          aria-label={t('hero.cta_misc')}
+          aria-label={t('hero.cta_lab')}
         >
           <span className={styles.limonIcon}>
             <LimonTrazado className={styles.limonSvg} />
@@ -667,8 +669,8 @@ export default function Hero() {
           <span className={styles.hora}>{horaTexto}</span>
           {/* El rotulo es su propio enlace porque vive fuera del <a> del limon;
               el CSS los hace encenderse juntos con :has() */}
-          <a href="#miscelaneas" className={styles.miscLabel} onClick={handleLimonClick}>
-            {t('hero.cta_misc')} ↓
+          <a href="#lab" className={styles.miscLabel} onClick={handleLimonClick}>
+            {t('hero.cta_lab')} ↓
           </a>
         </div>
       </div>

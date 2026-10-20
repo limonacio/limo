@@ -5,7 +5,9 @@
 //  Los campos de texto tienen versión EN, ES y PT.
 //  Las secciones leen de acá automáticamente.
 //
-//  TIPOS:  "trabajo" → sección Work   |   "misc" → sección Miscellaneous
+//  TIPOS:  "trabajo" → Work (sitios para clientes)
+//          "lab"     → Lab (software propio de Limo)
+//          "misc"    → Miscellaneous
 //
 //  imagen: puede ser nombre local (ej: "cover.png") o URL externa (ej: "https://...")
 // ─────────────────────────────────────────────────────────────
@@ -58,7 +60,7 @@ export const proyectos = [
 
   {
     id:       "limonario",
-    tipo:     "trabajo",
+    tipo:     "lab",
     titulo:   "Limonario",
     subtitulo: {
       en: "web app · booking · payments",
@@ -122,7 +124,7 @@ export const proyectos = [
 
   {
     id:       "limodoro",
-    tipo:     "trabajo",
+    tipo:     "lab",
     titulo:   "Limodoro",
     subtitulo: {
       en: "app · productivity · windows",
@@ -229,5 +231,6 @@ export const proyectos = [
 
 // ── Helpers ───────────────────────────────────────────────
 export const trabajos    = proyectos.filter(p => p.tipo === "trabajo")
+export const lab         = proyectos.filter(p => p.tipo === "lab")
 export const miscelaneas = proyectos.filter(p => p.tipo === "misc")
 export const destacados  = proyectos.filter(p => p.featured)

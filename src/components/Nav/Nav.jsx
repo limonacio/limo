@@ -12,7 +12,7 @@ export default function Nav() {
   const langRef = useRef(null)
 
   useEffect(() => {
-    const ids = ['trabajos', 'miscelaneas', 'about']
+    const ids = ['trabajos', 'lab', 'about']   // miscelaneas no esta en el header a proposito
 
     const handleScroll = () => {
       const mid = window.scrollY + window.innerHeight * 0.5
@@ -61,7 +61,7 @@ export default function Nav() {
       <div className={styles.right}>
         <ul className={styles.links}>
           <li><a href="#trabajos"    className={linkClass('trabajos')}>{t('nav.work')}</a></li>
-          <li><a href="#miscelaneas" className={linkClass('miscelaneas')}>{t('nav.misc')}</a></li>
+          <li><a href="#lab"         className={linkClass('lab')}>{t('nav.lab')}</a></li>
           <li><a href="#about"       className={linkClass('about')}>{t('nav.about')}</a></li>
         </ul>
 
