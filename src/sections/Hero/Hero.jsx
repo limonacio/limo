@@ -106,7 +106,7 @@ const MOBILE_QUERY = '(max-width: 640px), (max-width: 1024px) and (orientation: 
 // Franjas donde la linea vino (#900030) no se lee bien sobre la foto y
 // pasa a coral. Una sola lista para desktop y mobile: agregar una franja
 // aca la cambia en las dos interfaces.
-const SLOTS_CORAL = new Set(['noche', 'amanecer'])
+const SLOTS_CORAL = new Set(['noche', 'amanecer', 'madrugada'])
 
 // El usuario pidió "reducir movimiento" en su sistema operativo (accesibilidad):
 // sin video en movimiento, sin parallax y sin animaciones en bucle.

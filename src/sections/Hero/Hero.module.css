@@ -822,6 +822,24 @@
     margin: 0 auto;
     -webkit-tap-highlight-color: transparent;
   }
+
+  /* Velo propio detras del logo: sobre fotos claras (playa, nieve, cielo)
+     el verde se lee flojo. En vez de oscurecer la foto entera, se oscurece
+     solo el circulo que ocupa la moneda, con un degradado que se desvanece
+     antes del borde para que no se note el recorte. */
+  .logoBtn::before {
+    content: '';
+    position: absolute;
+    inset: -8%;
+    border-radius: 50%;
+    z-index: -1;
+    pointer-events: none;
+    background: radial-gradient(circle,
+      rgba(4,12,8,0.50) 0%,
+      rgba(4,12,8,0.34) 52%,
+      rgba(4,12,8,0.12) 70%,
+      rgba(4,12,8,0)    80%);
+  }
   .logoTatuaje {
     display: block;
     width: 100%;
