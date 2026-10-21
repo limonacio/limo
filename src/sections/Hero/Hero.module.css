@@ -855,6 +855,12 @@
       rgba(6,14,10,0.5)  82%,
       rgba(6,14,10,0.5)  93%,
       rgba(6,14,10,0)    100%);
+    /* El velo acompania al limon: en reposo esta al 0.42 igual que el SVG,
+       asi el paisaje se aprecia y el velo no parece una mancha suelta; al
+       prenderse el logo el velo sube a 1 y la inscripcion gana contraste.
+       Misma duracion que .logoTatuaje para que viajen juntos. */
+    opacity: 0.42;
+    transition: opacity 0.45s ease;
   }
   .logoTatuaje {
     display: block;
@@ -928,6 +934,7 @@
   .logoBtnDesp .logoTatuaje [data-p='letrasHueca'] { opacity: 0; }
   .logoBtnDesp .logoTatuaje [data-p='letras']      { opacity: 1; stroke-width: 2.2; }
   .logoBtnDesp .logoTatuaje [data-p='vino']        { stroke-width: 1.4; }
+  .logoBtnDesp::before { opacity: 1; }
 
   /* ETAPA 3 — al apretar: se rellena tambien el limon y engorda todo */
   .logoBtnOn .logoTatuaje {
@@ -938,6 +945,7 @@
   .logoBtnOn .logoTatuaje [data-p='letrasHueca'] { opacity: 0; }
   .logoBtnOn .logoTatuaje [data-p='letras']      { opacity: 1; stroke-width: 3.6; }
   .logoBtnOn .logoTatuaje [data-p='vino']        { stroke-width: 2.8; }
+  .logoBtnOn::before { opacity: 1; }
   .logoBtnOn .logoTatuaje [data-p='moneda'] {
     stroke-width: 1.8;
     /* Resplandor propio, en el color del acento: el verde del resto no lo
