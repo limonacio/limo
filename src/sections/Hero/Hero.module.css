@@ -823,10 +823,14 @@
     -webkit-tap-highlight-color: transparent;
   }
 
-  /* Velo propio detras del logo: sobre fotos claras (playa, nieve, cielo)
-     el verde se lee flojo. En vez de oscurecer la foto entera, se oscurece
-     solo el circulo que ocupa la moneda, con un degradado que se desvanece
-     antes del borde para que no se note el recorte. */
+  /* Velo detras del logo: un ANILLO, no un disco.
+     Sobre fotos claras lo que se pierde es la inscripcion latina, que es
+     fina; el limon tiene trazo grueso y se defiende solo. Asi que se
+     oscurece unicamente la franja donde cae el texto y el centro queda
+     libre: la foto se ve a traves del limon y el logo no tapa la imagen.
+     ❌ Se probo un disco completo (y una version con brillo metalico): se
+     lee mejor pero convierte la pantalla en 'una moneda con una foto
+     atras' en vez de 'una foto con la marca encima'. */
   .logoBtn::before {
     content: '';
     position: absolute;
@@ -834,14 +838,11 @@
     border-radius: 50%;
     z-index: -1;
     pointer-events: none;
-    /* Termina en el 88%, que es donde cae la inscripcion: el velo sigue la
-       forma de la moneda y no sobresale. Con inset negativo quedaba mas
-       grande que el dibujo y se veia el disco gris. */
     background: radial-gradient(circle,
-      rgba(4,12,8,0.46) 0%,
-      rgba(4,12,8,0.34) 55%,
-      rgba(4,12,8,0.14) 76%,
-      rgba(4,12,8,0)    88%);
+      rgba(6,14,10,0)    56%,
+      rgba(6,14,10,0.52) 70%,
+      rgba(6,14,10,0.52) 86%,
+      rgba(6,14,10,0)    92%);
   }
   .logoTatuaje {
     display: block;
