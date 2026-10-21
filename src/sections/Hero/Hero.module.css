@@ -830,15 +830,18 @@
   .logoBtn::before {
     content: '';
     position: absolute;
-    inset: -8%;
+    inset: 0;
     border-radius: 50%;
     z-index: -1;
     pointer-events: none;
+    /* Termina en el 88%, que es donde cae la inscripcion: el velo sigue la
+       forma de la moneda y no sobresale. Con inset negativo quedaba mas
+       grande que el dibujo y se veia el disco gris. */
     background: radial-gradient(circle,
-      rgba(4,12,8,0.50) 0%,
-      rgba(4,12,8,0.34) 52%,
-      rgba(4,12,8,0.12) 70%,
-      rgba(4,12,8,0)    80%);
+      rgba(4,12,8,0.46) 0%,
+      rgba(4,12,8,0.34) 55%,
+      rgba(4,12,8,0.14) 76%,
+      rgba(4,12,8,0)    88%);
   }
   .logoTatuaje {
     display: block;
