@@ -834,15 +834,27 @@
   .logoBtn::before {
     content: '';
     position: absolute;
-    inset: 0;
-    border-radius: 50%;
+    /* OJO: no usar inset:0. El boton no es cuadrado — adentro tiene el SVG
+       Y el rotulo "see work", que lo estira hacia abajo. Con inset:0 el
+       pseudo-elemento tomaba esa forma alta y border-radius:50% dibujaba una
+       ELIPSE, no un circulo. Se ancla arriba y se le fuerza el cuadrado. */
+    top: 0;
+    left: 0;
+    width: 100%;
+    aspect-ratio: 1;
     z-index: -1;
     pointer-events: none;
-    background: radial-gradient(circle,
-      rgba(6,14,10,0)    56%,
-      rgba(6,14,10,0.52) 70%,
-      rgba(6,14,10,0.52) 86%,
-      rgba(6,14,10,0)    92%);
+    /* closest-side -> el 100% del degradado cae justo en el borde del
+       cuadrado, o sea el radio de la moneda. Asi los porcentajes se leen
+       como "porcentaje del radio" y el anillo se puede alinear con el SVG:
+       el aro de la moneda esta al 81% y la inscripcion latina entre 85% y
+       92%. El degradado llega a alpha 0 en el 100%, asi que NO hace falta
+       border-radius: no hay nada que recortar y el circulo sale perfecto. */
+    background: radial-gradient(circle closest-side,
+      rgba(6,14,10,0)    72%,
+      rgba(6,14,10,0.5)  82%,
+      rgba(6,14,10,0.5)  93%,
+      rgba(6,14,10,0)    100%);
   }
   .logoTatuaje {
     display: block;
