@@ -342,6 +342,7 @@
 .limonBtn { display: none; }
 .colDerecha { display: none; }
 .logoBtn { display: none; }
+.labLink { display: none; }
 .horaMobile { display: none; }
 .logoRotulo { display: none; }
 
@@ -1054,9 +1055,54 @@
     font-size: clamp(8.5px, 2.5vw, 11px);
     letter-spacing: 0.14em;
     white-space: nowrap;
-    color: #cfc9c2;
+    /* En reposo, gris apagado: la moneda esta apagada y el subtitulo la
+       acompania. Al encenderse el logo pasa a blanco puro (ver abajo). */
+    color: #a8a29b;
     text-shadow: 0 1px 4px rgba(0,0,0,0.9);
     transform: translateX(calc(var(--n, 0) * (1ch + 0.14em)));
+    transition: color 0.45s ease, text-shadow 0.45s ease;
+  }
+
+  /* Acceso a lab, en renglon propio (21/10/2026). En mobile el header
+     esconde los links (.links display:none bajo 600px), asi que sin esto
+     a lab solo se llega scrolleando todo work.
+     ❌ Se descarto ponerlo al lado de "see work": la moneda lleva SOLO a
+     work y tiene que quedar aparte. Por eso renglon propio y separado.
+     En reposo es gris apagado como el subtitulo, no menta ni coral: esos
+     dos colores son de la moneda y lo volverian parte de ella. */
+  .labLink {
+    display: block;
+    margin-top: 14px;
+    text-align: center;
+    font-family: var(--font);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    /* compensa el espacio que letter-spacing agrega DESPUES de la ultima
+       letra y descentra todo texto muy espaciado */
+    text-indent: 0.22em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #a8a29b;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.9);
+    -webkit-tap-highlight-color: transparent;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+  }
+  .labLink:hover,
+  .labLink:active,
+  .labLink:focus-visible {
+    color: #F0526A;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.9), 0 0 10px rgba(240,82,106,0.45);
+  }
+  /* El subtitulo se enciende con la moneda, igual que en desktop se enciende
+     con "see work". Va con :has() porque el subtitulo es HERMANO POSTERIOR
+     del boton, no hijo: la clase de estado (.logoBtnDesp/.logoBtnOn) vive en
+     el <a> y hay que mirar hacia arriba, al .heroContent, para alcanzarlo.
+     Misma duracion de 0.45s que el logo y el velo: los tres viajan juntos. */
+  .heroContent:has(.logoBtnDesp) .subtitle,
+  .heroContent:has(.logoBtnOn) .subtitle {
+    color: #FFFFFF;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.9), 0 0 10px rgba(255,255,255,0.3);
   }
 
 }

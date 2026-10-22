@@ -631,6 +631,10 @@ export default function Hero() {
             <span className={styles.tagline}>{t('hero.tagline')}<br/></span>
             {t('hero.subtitle')}
           </p>
+          {/* Solo mobile: el unico acceso a lab desde el Hero. Va en su propio
+              renglon, separado, a proposito: la moneda lleva SOLO a work y
+              tiene que quedar aparte del resto. */}
+          <a href="#lab" className={styles.labLink}>{t('nav.lab')} &darr;</a>
           <div className={styles.dots}>
             <span className={`${styles.dot} ${styles.dot1}`} />
             <span className={`${styles.dot} ${styles.dot2}`} />
