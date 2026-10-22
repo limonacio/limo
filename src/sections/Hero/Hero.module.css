@@ -411,9 +411,9 @@
     overflow: visible;
   }
   /* Una sola linea verde solida con halo. Sin borde oscuro ni nucleo claro. */
-  /* La linea vino tambien es fina en reposo y engorda al pasar por "see work" */
+  /* La linea coral tambien es fina en reposo y engorda al pasar por "see work" */
   .firmaLinea {
-    stroke: #900030;
+    stroke: #F0526A;
     stroke-width: 2.5;
     stroke-linecap: round;
     transition: stroke-width 0.3s ease;
@@ -675,27 +675,21 @@
   .limonBtnOn .limonSvg [data-p='limon'] { fill-opacity: 1; stroke-width: 0; }
 
   /* Aro e inscripcion, igual que la moneda de mobile pero sin el nombre.
-     Van en vino y estan siempre: engordan apenas al pasar el mouse. */
+     Van en coral y estan siempre: engordan apenas al pasar el mouse. */
   .limonSvg [data-p='moneda'] {
     fill: none;
-    stroke: #900030;
+    stroke: #F0526A;
     stroke-width: 0.8;
     transition: stroke-width 0.3s ease;
   }
   .limonSvg [data-p='inscripcion'] {
-    fill: #900030;
+    fill: #F0526A;
     font-family: var(--font);
     font-weight: 700;
   }
   .limonBtn:hover .limonSvg [data-p='moneda'],
   .limonBtn:focus-visible .limonSvg [data-p='moneda'] { stroke-width: 1.2; }
   .limonBtnOn .limonSvg [data-p='moneda'] { stroke-width: 1.8; }
-
-  /* De noche y al amanecer el vino no se lee sobre la foto: pasa a coral.
-     Literal, nunca var(--coral): useTimePalette la redefine por franja y en
-     las franjas oscuras vale #2ECC80, el mismo verde del limon. */
-  .heroCoral .limonSvg [data-p='moneda']      { stroke: #F0526A; }
-  .heroCoral .limonSvg [data-p='inscripcion'] { fill: #F0526A; }
 
   /* Etapa 2: al acercar el mouse se enciende, sin rellenarse */
   .limonBtn:hover .limonSvg,
@@ -803,9 +797,14 @@
     /* Color de acento del logo: lo usan la linea del nombre, el aro de la
        moneda y el halo. Una sola variable para que los tres cambien juntos.
        --acento-rgb es el mismo color en componentes, porque el degradado del
-       halo necesita transparencias y rgba() no acepta un hex. */
-    --acento: #900030;
-    --acento-rgb: 144, 0, 48;
+       halo necesita transparencias y rgba() no acepta un hex.
+       Coral literal, NUNCA var(--coral): useTimePalette redefine esa variable
+       por franja y en varias vale #2ECC80, el mismo verde del limon.
+       ❌ Se uso el vino #900030 hasta el 21/10. Se ve lindo de noche pero de
+       dia y de tarde la inscripcion latina (6.2px, trazo finito) desaparecia
+       sobre las fotos claras y se leia como un error de render. */
+    --acento: #F0526A;
+    --acento-rgb: 240, 82, 106;
     position: relative;
     display: block;
     /* El logo es CUADRADO (la moneda), asi que su alto = su ancho. El tamanio
@@ -965,7 +964,6 @@
      verde del logo: usar la variable hacia que el aro y la linea salieran
      verdes justo cuando mas falta hacia el contraste. Igual que el verde del
      boton "see work", este color no sigue la paleta horaria. */
-  .logoBtnCoral { --acento: #F0526A; --acento-rgb: 240, 82, 106; }
 
   /* Halo que sale al apretar, antes de que la pagina baje a work */
   .logoRipple {
@@ -1068,17 +1066,6 @@
   from { transform: translate(-50%, -50%) scale(0.5); opacity: 1; }
   to   { transform: translate(-50%, -50%) scale(1.9); opacity: 0; }
 }
-
-/* ── Franjas donde el vino pasa a coral (noche y amanecer; ver SLOTS_CORAL) ──────────────────────
-   Sobre las fotos oscuras de la franja noche el vino #900030 casi no se ve.
-   En mobile lo resuelve .logoBtnCoral; esto es lo mismo para desktop.
-   El limon lleva el vino escrito como atributo en el SVG (stroke="#900030"),
-   y por eso hace falta el selector de atributo: una regla de CSS le gana a
-   un atributo de presentacion, asi que lo pisa sin tocar el JSX. */
-/* Coral literal, no var(--coral): ver la nota en .logoBtnCoral. */
-.heroCoral .firmaLinea { stroke: #F0526A; }
-/* El limon nuevo es todo verde, no tiene detalles en vino: solo cambia la
-   linea del nombre. */
 
 /* Luces de kiosco del boton "see work" (solo de noche) */
 @keyframes lucesPulso {
