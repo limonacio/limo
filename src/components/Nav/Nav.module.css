@@ -74,7 +74,8 @@
   }
 
   /* Work link — hover siempre en coral */
-  .linkWork:hover {
+  /* work y lab: hover en el acento dominante */
+  .linkPropio:hover {
     color: var(--marca-1);
     border-color: color-mix(in srgb, var(--marca-1) 30%, transparent);
     background: color-mix(in srgb, var(--marca-1) 6%, transparent);
@@ -96,7 +97,9 @@
 }
 
 /* Link activo work — usa coral */
-.linkActiveWork {
+/* Activo de work y lab: acento dominante (menta de dia, coral de noche,
+   verde profundo en modo claro). about usa .linkActive, el secundario. */
+.linkActivoPropio {
   color: var(--marca-1) !important;
   border-color: color-mix(in srgb, var(--marca-1) 35%, transparent);
   background: color-mix(in srgb, var(--marca-1) 8%, transparent);

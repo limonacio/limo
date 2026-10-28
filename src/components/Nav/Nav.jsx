@@ -68,11 +68,18 @@ export default function Nav({ theme = 'dark', onToggleTheme }) {
     return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [])
 
+  // work y lab son las secciones PROPIAS de Limo -lo que hace y lo que
+  // construye- y van en el acento dominante. about (y miscelaneas, que no
+  // esta en el header) van en el secundario.
+  // ⚠️ La clase se llamaba .linkWork; al sumarle lab el nombre pasaba a
+  // mentir, que es justo el problema que se desarmo con --teal/--coral.
+  const SECCIONES_PROPIAS = ['trabajos', 'lab']
+
   const linkClass = (id) => {
-    if (id === 'trabajos') {
+    if (SECCIONES_PROPIAS.includes(id)) {
       return active === id
-        ? `${styles.link} ${styles.linkWork} ${styles.linkActiveWork}`
-        : `${styles.link} ${styles.linkWork}`
+        ? `${styles.link} ${styles.linkPropio} ${styles.linkActivoPropio}`
+        : `${styles.link} ${styles.linkPropio}`
     }
     return active === id
       ? `${styles.link} ${styles.linkActive}`
