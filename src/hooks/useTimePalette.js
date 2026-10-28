@@ -27,7 +27,11 @@ const PALETTES = {
     // Lunes–Viernes 08:00–20:00
     weekday: {
       '--marca-1': '#2ECC80',   // menta          8,5:1
-      '--marca-2': '#900030',   // vino           1,87:1  ⚠️ ver nota arriba
+      '--marca-2': '#F0526A',   // coral          5,3:1
+      // ❌ Aca vivia el vino #900030 hasta el 28/10/2026. Daba 1,87:1 y era
+      //    el unico acento del sistema que no llegaba al minimo de 4,5:1:
+      //    de dia 'miscellaneous' y las etiquetas de las tarjetas casi no se
+      //    leian. No se perdio: se mudo al modo claro, donde da 8,3:1.
       '--bg':      '#161a17',
       '--bg2':     '#1c211d',
       '--bg3':     '#232a24',
