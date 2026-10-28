@@ -55,15 +55,15 @@
   font-weight: 900;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: var(--teal);
+  color: var(--marca-2);
   background: transparent;
-  border: 1.5px solid var(--teal);
+  border: 1.5px solid var(--marca-2);
   padding: 0.45rem 1.4rem;
   border-radius: 20px;
   cursor: pointer;
   transition: background 0.2s, box-shadow 0.2s;
 }
 .seeMore:hover {
-  background: color-mix(in srgb, var(--teal) 8%, transparent);
-  box-shadow: 0 0 16px color-mix(in srgb, var(--teal) 40%, transparent);
+  background: color-mix(in srgb, var(--marca-2) 8%, transparent);
+  box-shadow: 0 0 16px color-mix(in srgb, var(--marca-2) 40%, transparent);
 }

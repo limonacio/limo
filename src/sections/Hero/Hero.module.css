@@ -183,7 +183,7 @@
 .title {
   font-size: clamp(3rem, 9vw, 6.5rem);
   font-weight: 700;
-  color: var(--coral);
+  color: var(--marca-1);
   letter-spacing: 0.02em;
   line-height: 1;
   font-family: var(--font);
@@ -221,9 +221,9 @@
   width: 8px; height: 8px;
   border-radius: 50%;
 }
-.dot1 { background: var(--teal);  animation: dotPop 1.8s ease-in-out 3 0s   both; }
-.dot2 { background: var(--coral); animation: dotPop 1.8s ease-in-out 3 0.3s both; }
-.dot3 { background: var(--teal);  animation: dotPop 1.8s ease-in-out 3 0.6s both; }
+.dot1 { background: var(--marca-2);  animation: dotPop 1.8s ease-in-out 3 0s   both; }
+.dot2 { background: var(--marca-1); animation: dotPop 1.8s ease-in-out 3 0.3s both; }
+.dot3 { background: var(--marca-2);  animation: dotPop 1.8s ease-in-out 3 0.6s both; }
 
 @keyframes dotPop {
   0%, 100% { transform: scale(1);   opacity: 0.4; }
@@ -252,7 +252,7 @@
 .btn:hover { transform: translateY(-2px); }
 
 .btnPrimary {
-  background: var(--coral);
+  background: var(--marca-1);
   color: #fff;
   text-transform: uppercase;
   box-shadow: 0 4px 20px rgba(240,82,106,0.3);
@@ -265,7 +265,7 @@
 .btnSecondary {
   background: transparent;
   color: var(--text);          /* texto claro: legible en todas las paletas */
-  border: 2px solid var(--teal);
+  border: 2px solid var(--marca-2);
   transition: background 0.2s, box-shadow 0.2s, border-color 0.2s, color 0.2s;
 }
 
@@ -521,7 +521,7 @@
      "foco" es un punto del dash, no un elemento del DOM. Los tres comparten
      el mismo recorrido y se desfasan 15 unidades, asi quedan intercalados
      menta / coral / lila alrededor del marco.
-     El lila es #A99BFF y NO var(--teal): en la paleta de noche esa variable
+     El lila es #A99BFF y NO var(--marca-2): en la paleta de noche esa variable
      vale #7B74E0, un violeta pensado para texto que como luz queda apagado. */
   .luces { display: none; }
   /* De noche el contorno lo marcan las luces: el borde verde seria una
@@ -610,7 +610,7 @@
      el texto se ve corrido medio caracter a la izquierda de su caja. */
   .miscLabel { text-indent: 0.12em; }
   .miscLabel:focus-visible {
-    outline: 2px solid var(--coral);
+    outline: 2px solid var(--marca-1);
     outline-offset: 4px;
     border-radius: 3px;
   }
@@ -638,8 +638,8 @@
     text-transform: uppercase;
     transition: color 0.2s;
   }
-  .limonBtn:hover { color: var(--coral); }
-  .limonBtn:focus-visible { outline: 2px solid var(--coral); outline-offset: 8px; border-radius: 4px; }
+  .limonBtn:hover { color: var(--marca-1); }
+  .limonBtn:focus-visible { outline: 2px solid var(--marca-1); outline-offset: 8px; border-radius: 4px; }
 
   .limonIcon {
     position: relative;
@@ -799,7 +799,7 @@
        moneda y el halo. Una sola variable para que los tres cambien juntos.
        --acento-rgb es el mismo color en componentes, porque el degradado del
        halo necesita transparencias y rgba() no acepta un hex.
-       Coral literal, NUNCA var(--coral): useTimePalette redefine esa variable
+       Coral literal, NUNCA var(--marca-1): useTimePalette redefine esa variable
        por franja y en varias vale #2ECC80, el mismo verde del limon.
        ❌ Se uso el vino #900030 hasta el 21/10. Se ve lindo de noche pero de
        dia y de tarde la inscripcion latina (6.2px, trazo finito) desaparecia
@@ -958,10 +958,10 @@
   /* Teclado: solo un contorno de foco. El encendido completo lo maneja
      la clase .logoBtnOn, nunca :focus-visible (en mobile el <a> queda
      enfocado despues del toque y el logo se quedaba prendido). */
-  .logoBtn:focus-visible { outline: 2px solid var(--coral); outline-offset: 6px; border-radius: 6px; }
+  .logoBtn:focus-visible { outline: 2px solid var(--marca-1); outline-offset: 6px; border-radius: 6px; }
 
-  /* OJO: aca va el coral LITERAL, no var(--coral). useTimePalette redefine
-     --coral segun la hora y en las franjas oscuras vale #2ECC80, el mismo
+  /* OJO: aca va el coral LITERAL, no var(--marca-1). useTimePalette redefine
+     --marca-1 segun la hora y en las franjas oscuras vale #2ECC80, el mismo
      verde del logo: usar la variable hacia que el aro y la linea salieran
      verdes justo cuando mas falta hacia el contraste. Igual que el verde del
      boton "see work", este color no sigue la paleta horaria. */

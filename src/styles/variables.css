@@ -1,8 +1,13 @@
 /* ─── LIMO · Design Tokens ─── */
 :root {
-  /* Colores marca */
-  --teal:    #3DDBD9;
-  --coral:   #F0526A;
+  /* Colores marca — SOLO el valor por defecto.
+     useTimePalette.js los pisa al montar la app segun el dia y la hora, asi
+     que estos dos valores se ven apenas un instante, o si el hook falla.
+     El celeste #3DDBD9 es el que aparecia en el hover del boton secundario
+     y figuraba como "hardcodeado" en la tarea #7: no estaba suelto, era
+     esto. Se lo cambia por el coral, que pertenece a la paleta. */
+  --marca-1: #F0526A;
+  --marca-2: #2ECC80;
 
   /* Fondos dark */
   --bg:      #1a1a1a;   

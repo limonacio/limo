@@ -29,7 +29,7 @@
 .logoText {
   font-size: 1.15rem;
   font-weight: 700;
-  color: var(--coral);
+  color: var(--marca-1);
   letter-spacing: 0.04em;
   font-family: var(--font);
 }
@@ -68,38 +68,38 @@
    `hover: hover` solo es verdadero en dispositivos con puntero real. */
 @media (hover: hover) {
   .link:hover {
-    color: var(--teal);
-    border-color: color-mix(in srgb, var(--teal) 30%, transparent);
-    background: color-mix(in srgb, var(--teal) 6%, transparent);
+    color: var(--marca-2);
+    border-color: color-mix(in srgb, var(--marca-2) 30%, transparent);
+    background: color-mix(in srgb, var(--marca-2) 6%, transparent);
   }
 
   /* Work link — hover siempre en coral */
   .linkWork:hover {
-    color: var(--coral);
-    border-color: color-mix(in srgb, var(--coral) 30%, transparent);
-    background: color-mix(in srgb, var(--coral) 6%, transparent);
+    color: var(--marca-1);
+    border-color: color-mix(in srgb, var(--marca-1) 30%, transparent);
+    background: color-mix(in srgb, var(--marca-1) 6%, transparent);
   }
 }
 
 /* Teclado: el hover se fue del celular, pero quien navega con Tab necesita
    ver donde esta parado. Esto no se dispara al tocar con el dedo. */
 .link:focus-visible {
-  outline: 2px solid var(--coral);
+  outline: 2px solid var(--marca-1);
   outline-offset: 2px;
 }
 
 /* Link activo general (misc, about) */
 .linkActive {
-  color: var(--teal) !important;
-  border-color: color-mix(in srgb, var(--teal) 35%, transparent);
-  background: color-mix(in srgb, var(--teal) 8%, transparent);
+  color: var(--marca-2) !important;
+  border-color: color-mix(in srgb, var(--marca-2) 35%, transparent);
+  background: color-mix(in srgb, var(--marca-2) 8%, transparent);
 }
 
 /* Link activo work — usa coral */
 .linkActiveWork {
-  color: var(--coral) !important;
-  border-color: color-mix(in srgb, var(--coral) 35%, transparent);
-  background: color-mix(in srgb, var(--coral) 8%, transparent);
+  color: var(--marca-1) !important;
+  border-color: color-mix(in srgb, var(--marca-1) 35%, transparent);
+  background: color-mix(in srgb, var(--marca-1) 8%, transparent);
 }
 
 /* ── Language dropdown ── */
@@ -119,13 +119,13 @@
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.1em;
-  color: var(--coral);
+  color: var(--marca-1);
   cursor: pointer;
   transition: border-color 0.2s, background 0.2s;
 }
 .langTrigger:hover {
-  border-color: color-mix(in srgb, var(--coral) 40%, transparent);
-  background: color-mix(in srgb, var(--coral) 5%, transparent);
+  border-color: color-mix(in srgb, var(--marca-1) 40%, transparent);
+  background: color-mix(in srgb, var(--marca-1) 5%, transparent);
 }
 
 .langCaret {
@@ -168,18 +168,18 @@
   transition: color 0.15s, background 0.15s;
 }
 .langMenuItem:hover {
-  color: var(--coral);
-  background: color-mix(in srgb, var(--coral) 8%, transparent);
+  color: var(--marca-1);
+  background: color-mix(in srgb, var(--marca-1) 8%, transparent);
 }
 
 .langMenuItemActive {
-  background: color-mix(in srgb, var(--coral) 10%, transparent);
+  background: color-mix(in srgb, var(--marca-1) 10%, transparent);
   border: none;
   font-family: var(--font);
   font-size: 0.72rem;
   letter-spacing: 0.1em;
   font-weight: 700;
-  color: var(--coral);
+  color: var(--marca-1);
   cursor: default;
   padding: 0.4rem 0.7rem;
   border-radius: 6px;
