@@ -15,7 +15,11 @@ export default function Nav({ theme = 'dark', onToggleTheme }) {
   // formula vieja el nav mobile se habria escondido en medio del sitio.
   const [atHero, setAtHero] = useState(true)
   const [langOpen, setLangOpen] = useState(false)
+  // Panel de ajustes (tema + idioma). Solo existe en mobile: en desktop los
+  // dos controles van sueltos en la barra y este estado no se usa.
+  const [ajustesOpen, setAjustesOpen] = useState(false)
   const langRef = useRef(null)
+  const ajustesRef = useRef(null)
 
   useEffect(() => {
     const ids = ['trabajos', 'lab', 'about']   // miscelaneas no esta en el header a proposito
@@ -63,9 +67,22 @@ export default function Nav({ theme = 'dark', onToggleTheme }) {
       if (langRef.current && !langRef.current.contains(e.target)) {
         setLangOpen(false)
       }
+      if (ajustesRef.current && !ajustesRef.current.contains(e.target)) {
+        setAjustesOpen(false)
+        setLangOpen(false)
+      }
     }
-    document.addEventListener('mousedown', handleClickOutside)
-    return () => document.removeEventListener('mousedown', handleClickOutside)
+    // pointerdown y no mousedown: en un celular mousedown llega tarde,
+    // despues del tap, y el panel se cerraba recien al segundo toque.
+    const handleEscape = (e) => {
+      if (e.key === 'Escape') { setAjustesOpen(false); setLangOpen(false) }
+    }
+    document.addEventListener('pointerdown', handleClickOutside)
+    document.addEventListener('keydown', handleEscape)
+    return () => {
+      document.removeEventListener('pointerdown', handleClickOutside)
+      document.removeEventListener('keydown', handleEscape)
+    }
   }, [])
 
   // work y lab son las secciones PROPIAS de Limo -lo que hace y lo que
@@ -102,6 +119,21 @@ export default function Nav({ theme = 'dark', onToggleTheme }) {
           <li><a href="#about"       className={linkClass('about')}>{t('nav.about')}</a></li>
         </ul>
 
+        {/* Ajustes. En desktop .controles es una fila suelta en la barra y
+            la hamburguesa no existe; en mobile la hamburguesa la abre como
+            panel. Un solo juego de controles, sin duplicar el markup. */}
+        <div className={styles.ajustes} ref={ajustesRef}>
+        <button
+          type="button"
+          className={`${styles.hamburguesa} ${ajustesOpen ? styles.hamburguesaAbierta : ''}`}
+          onClick={(e) => { e.currentTarget.blur(); setAjustesOpen(o => !o) }}
+          aria-expanded={ajustesOpen}
+          aria-label={t('nav.ajustes')}
+        >
+          <span /><span /><span />
+        </button>
+
+        <div className={`${styles.controles} ${ajustesOpen ? styles.controlesAbierto : ''}`}>
         {/* Claro / oscuro. El icono muestra ADONDE vas, no donde estas:
             en oscuro se ve un sol, porque apretarlo te lleva a claro. */}
         <button
@@ -157,6 +189,8 @@ export default function Nav({ theme = 'dark', onToggleTheme }) {
               ))}
             </div>
           )}
+        </div>
+        </div>
         </div>
       </div>
     </nav>

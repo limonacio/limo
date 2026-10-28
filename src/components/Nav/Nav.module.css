@@ -6,9 +6,12 @@
   align-items: center;
   justify-content: space-between;
   padding: 1rem 2.5rem;
-  background: rgba(26,26,26,0.88);
+  /* ⚠️ Antes era rgba(26,26,26,0.88), escrito a mano en oscuro: en modo
+     claro la barra se quedaba negra. Ahora sale del --bg de la franja, asi
+     que acompania al tema y a la hora sin tocar nada mas. */
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
   backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255,255,255,0.05);
+  border-bottom: 1px solid color-mix(in srgb, var(--text) 8%, transparent);
 }
 
 .logo {
@@ -103,6 +106,63 @@
   color: var(--marca-1) !important;
   border-color: color-mix(in srgb, var(--marca-1) 35%, transparent);
   background: color-mix(in srgb, var(--marca-1) 8%, transparent);
+}
+
+/* ── Ajustes: hamburguesa + controles ──────────────────────────────────
+   En DESKTOP .controles es una fila normal dentro de la barra y la
+   hamburguesa esta oculta. En MOBILE se invierte: la hamburguesa aparece y
+   .controles pasa a ser un panel desplegable. Es el mismo markup en los
+   dos casos, no hay controles duplicados. */
+.ajustes {
+  display: flex;
+  align-items: center;
+}
+.controles {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+/* La hamburguesa se dibuja con tres <span>: no existe ninguna "por defecto"
+   en HTML, asi que el color es decision nuestra.
+   Va en CORAL LITERAL, no en var(--marca-1): ese cambia de color segun la
+   franja y la hamburguesa tiene que ser siempre la misma cosa.
+   ⚠️ El coral #F0526A sobre el fondo claro da 2,93:1, apenas por debajo del
+   minimo de 3:1 que piden los iconos, asi que en modo claro baja al carmin
+   #B0203C -misma familia, 5,9:1-. Lo resuelve la regla de data-theme. */
+.hamburguesa {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  width: 34px;
+  height: 30px;
+  padding: 0 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.hamburguesa span {
+  display: block;
+  height: 2px;
+  width: 100%;
+  border-radius: 2px;
+  background: #F0526A;
+  transition: transform 0.25s ease, opacity 0.2s ease, background 0.2s ease;
+}
+:root[data-theme='light'] .hamburguesa span { background: #B0203C; }
+
+/* Abierta: la de arriba y la de abajo se cruzan en X y la del medio se va.
+   Las dos se mueven 6px, que es el alto de una linea (2) mas el gap (4). */
+.hamburguesaAbierta span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.hamburguesaAbierta span:nth-child(2) { opacity: 0; }
+.hamburguesaAbierta span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+.hamburguesa:focus-visible {
+  outline: 2px solid #F0526A;
+  outline-offset: 3px;
+  border-radius: 4px;
 }
 
 /* ── Boton claro / oscuro ── */
@@ -250,6 +310,26 @@
      en los telefonos mas angostos. */
   .logoText { display: none; }
   .right { gap: 0.6rem; }
+
+  .hamburguesa { display: flex; }
+  /* El panel cuelga de .nav, que es position: fixed y por lo tanto sirve de
+     ancla para un hijo absolute. */
+  .controles {
+    display: none;
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 1.2rem;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+    padding: 0.85rem;
+    border-radius: 12px;
+    background: color-mix(in srgb, var(--bg) 96%, transparent);
+    backdrop-filter: blur(12px);
+    border: 1px solid color-mix(in srgb, var(--text) 10%, transparent);
+    box-shadow: 0 10px 28px rgba(0,0,0,0.35);
+  }
+  .controlesAbierto { display: flex; }
   .link {
     font-size: 0.68rem;
     letter-spacing: 0.05em;
