@@ -8,6 +8,12 @@ export default function Nav() {
   const raw = i18n.language || 'en'
   const lang = raw.startsWith('pt') ? 'pt' : raw.startsWith('es') ? 'es' : 'en'
   const [active, setActive] = useState('')
+  // atHero es estado propio, NO se deriva de active. Antes era
+  // `active === ''`, y eso ataba dos cosas distintas: "que seccion marco en
+  // el header" y "el visitante sigue en el Hero". Como miscelaneas no esta
+  // en el header, al pasar por esa seccion no hay ninguna activa, y con la
+  // formula vieja el nav mobile se habria escondido en medio del sitio.
+  const [atHero, setAtHero] = useState(true)
   const [langOpen, setLangOpen] = useState(false)
   const langRef = useRef(null)
 
@@ -15,12 +21,35 @@ export default function Nav() {
     const ids = ['trabajos', 'lab', 'about']   // miscelaneas no esta en el header a proposito
 
     const handleScroll = () => {
-      const mid = window.scrollY + window.innerHeight * 0.5
+      // Linea imaginaria a media pantalla: la seccion que la cruza es la
+      // activa. Se mide con getBoundingClientRect, que da la posicion real
+      // en pantalla.
+      // ❌ Antes se usaba `el.offsetTop <= mid` y se guardaba la ULTIMA que
+      // cumplia. Eso marcaba una seccion por el solo hecho de haberla
+      // pasado, aunque ya estuvieras lejos: en miscelaneas (que no esta en
+      // el header) seguia encendida lab.
+      const alto = window.innerHeight
+      const linea = alto * 0.5
+
+      const hero = document.getElementById('hero')
+      const enHero = hero ? hero.getBoundingClientRect().bottom > linea : false
+      setAtHero(enHero)
+
       let current = ''
       for (const id of ids) {
         const el = document.getElementById(id)
-        if (el && el.offsetTop <= mid) current = id
+        if (!el) continue
+        const r = el.getBoundingClientRect()
+        if (r.top <= linea && r.bottom > linea) { current = id; break }
       }
+
+      // Al llegar al fondo la pagina ya no scrollea mas, asi que la ULTIMA
+      // seccion puede no alcanzar nunca a cruzar la linea y quedaba
+      // encendida la anterior. Si estamos al fondo, gana la ultima.
+      const fondo =
+        window.scrollY + alto >= document.documentElement.scrollHeight - 2
+      if (fondo && !enHero) current = ids[ids.length - 1]
+
       setActive(current)
     }
 
@@ -49,8 +78,6 @@ export default function Nav() {
       ? `${styles.link} ${styles.linkActive}`
       : styles.link
   }
-
-  const atHero = active === ''
 
   return (
     <nav className={styles.nav}>

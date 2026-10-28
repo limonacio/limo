@@ -60,17 +60,32 @@
   border: 1px solid transparent;
   transition: color 0.2s, border-color 0.2s, background 0.2s;
 }
-.link:hover {
-  color: var(--teal);
-  border-color: color-mix(in srgb, var(--teal) 30%, transparent);
-  background: color-mix(in srgb, var(--teal) 6%, transparent);
+/* El hover va encerrado en @media (hover: hover) a proposito.
+   En un telefono NO existe el hover, pero el navegador se lo deja PEGADO al
+   ultimo elemento que tocaste hasta que toques otra cosa. Resultado: al
+   tocar "about" quedaba pintado como si tuvieras el mouse encima, y como
+   ademas lab figuraba como activa, se veian DOS links encendidos a la vez.
+   `hover: hover` solo es verdadero en dispositivos con puntero real. */
+@media (hover: hover) {
+  .link:hover {
+    color: var(--teal);
+    border-color: color-mix(in srgb, var(--teal) 30%, transparent);
+    background: color-mix(in srgb, var(--teal) 6%, transparent);
+  }
+
+  /* Work link — hover siempre en coral */
+  .linkWork:hover {
+    color: var(--coral);
+    border-color: color-mix(in srgb, var(--coral) 30%, transparent);
+    background: color-mix(in srgb, var(--coral) 6%, transparent);
+  }
 }
 
-/* Work link — hover siempre en coral */
-.linkWork:hover {
-  color: var(--coral);
-  border-color: color-mix(in srgb, var(--coral) 30%, transparent);
-  background: color-mix(in srgb, var(--coral) 6%, transparent);
+/* Teclado: el hover se fue del celular, pero quien navega con Tab necesita
+   ver donde esta parado. Esto no se dispara al tocar con el dedo. */
+.link:focus-visible {
+  outline: 2px solid var(--coral);
+  outline-offset: 2px;
 }
 
 /* Link activo general (misc, about) */
