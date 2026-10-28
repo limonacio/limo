@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import LimonacioIcon from '../LimonacioIcon/LimonacioIcon'
 import styles from './Nav.module.css'
 
-export default function Nav() {
+export default function Nav({ theme = 'dark', onToggleTheme }) {
   const { t, i18n } = useTranslation()
   const raw = i18n.language || 'en'
   const lang = raw.startsWith('pt') ? 'pt' : raw.startsWith('es') ? 'es' : 'en'
@@ -94,6 +94,36 @@ export default function Nav() {
           <li><a href="#lab"         className={linkClass('lab')}>{t('nav.lab')}</a></li>
           <li><a href="#about"       className={linkClass('about')}>{t('nav.about')}</a></li>
         </ul>
+
+        {/* Claro / oscuro. El icono muestra ADONDE vas, no donde estas:
+            en oscuro se ve un sol, porque apretarlo te lleva a claro. */}
+        <button
+          type="button"
+          className={styles.temaBtn}
+          onClick={(e) => { e.currentTarget.blur(); onToggleTheme?.() }}
+          aria-label={t(theme === 'light' ? 'nav.tema_oscuro' : 'nav.tema_claro')}
+          title={t(theme === 'light' ? 'nav.tema_oscuro' : 'nav.tema_claro')}
+        >
+          {theme === 'light' ? (
+            /* luna */
+            <svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true">
+              <path
+                d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"
+                fill="none" stroke="currentColor" strokeWidth="2"
+                strokeLinejoin="round"
+              />
+            </svg>
+          ) : (
+            /* sol */
+            <svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true">
+              <circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" strokeWidth="2" />
+              <g stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                <path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2" />
+                <path d="M5.2 5.2l1.6 1.6M17.2 17.2l1.6 1.6M18.8 5.2l-1.6 1.6M6.8 17.2l-1.6 1.6" />
+              </g>
+            </svg>
+          )}
+        </button>
 
         <div className={styles.langDropdown} ref={langRef}>
           <button

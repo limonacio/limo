@@ -26,6 +26,22 @@
     <meta name="twitter:description" content="Portfolio of limonacio: websites, a desktop app and creative projects. Design, web development, music and dance." />
     <meta name="twitter:image" content="https://www.limonacio.com/og-image.jpg" />
     <title>limonacio — portfolio · design, development and movement</title>
+    <!-- Tema antes del primer pintado. Va INLINE y en el <head> a proposito:
+         si esperara a que React monte, el visitante veria un fogonazo del
+         tema equivocado. El mismo criterio que useTheme.js: primero lo que
+         eligio, si no lo que tenga el sistema. Envuelto en try porque
+         localStorage puede tirar error en incognito. -->
+    <script>
+      (function () {
+        var t;
+        try { t = localStorage.getItem('limonacio-tema'); } catch (e) {}
+        if (t !== 'light' && t !== 'dark') {
+          t = window.matchMedia('(prefers-color-scheme: light)').matches
+            ? 'light' : 'dark';
+        }
+        document.documentElement.dataset.theme = t;
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

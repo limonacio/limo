@@ -102,6 +102,34 @@
   background: color-mix(in srgb, var(--marca-1) 8%, transparent);
 }
 
+/* ── Boton claro / oscuro ── */
+.temaBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: 1px solid rgba(128,128,128,0.22);
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  color: var(--marca-1);
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s, color 0.2s;
+}
+/* blur() en el onClick + hover solo con puntero real: si no, en mobile el
+   boton queda pintado despues del toque, igual que pasaba con los links. */
+@media (hover: hover) {
+  .temaBtn:hover {
+    border-color: color-mix(in srgb, var(--marca-1) 45%, transparent);
+    background: color-mix(in srgb, var(--marca-1) 8%, transparent);
+  }
+}
+.temaBtn:focus-visible {
+  outline: 2px solid var(--marca-1);
+  outline-offset: 2px;
+}
+
 /* ── Language dropdown ── */
 .langDropdown {
   position: relative;

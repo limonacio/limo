@@ -3,7 +3,9 @@
     "work": "work",
     "misc": "miscellaneous",
     "about": "about",
-    "lab": "lab"
+    "lab": "lab",
+    "tema_claro": "Switch to light mode",
+    "tema_oscuro": "Switch to dark mode"
   },
   "hero": {
     "tagline": "portfolio · work · miscellaneous",

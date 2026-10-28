@@ -3,7 +3,9 @@
     "work": "trabalhos",
     "misc": "miscelâneas",
     "about": "sobre mim",
-    "lab": "lab"
+    "lab": "lab",
+    "tema_claro": "Mudar para modo claro",
+    "tema_oscuro": "Mudar para modo escuro"
   },
   "hero": {
     "tagline": "portfolio · trabalhos · miscelâneas",

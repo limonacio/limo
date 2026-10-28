@@ -26,3 +26,17 @@
   /* Tipografía */
   --font: 'Courier New', Courier, monospace;
 }
+
+/* Valores por defecto del MODO CLARO, igual que los de arriba: se ven solo
+   el instante previo a que useTimePalette escriba la paleta de la franja.
+   El atributo data-theme lo pone un script inline en index.html, antes de
+   que React monte, justo para que ese instante no sea un fogonazo blanco
+   o negro al reves de lo que el visitante eligio. */
+:root[data-theme='light'] {
+  --marca-1: #0E7A45;
+  --marca-2: #900030;
+  --bg:   #F2F0EA;
+  --bg2:  #E9E6DE;
+  --bg3:  #DEDAD0;
+  --text: #161A17;
+}
