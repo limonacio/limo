@@ -172,6 +172,41 @@
 }
 
 @media (max-width: 600px) {
-  .links { display: none; }
   .nav { padding: 0.9rem 1.2rem; }
+
+  /* NAVEGACION MOBILE (28/10/2026). Antes era `.links { display: none }`:
+     el header mobile quedaba con solo el selector de idioma y a about se
+     llegaba unicamente scrolleando todo el sitio.
+     Ahora los links se esconden SOLO mientras el visitante esta en el Hero
+     y aparecen al scrollear, con el mismo gesto que ya tenia el logo de la
+     izquierda (.logoHidden). Asi el Hero queda sin nada arriba -la moneda
+     es lo unico- y el resto del sitio si se puede navegar.
+     ❌ Se descartaron: hamburguesa (un icono mas en el Hero y dos toques
+     para llegar a cualquier lado), links fijos (texto permanente sobre el
+     Hero) y barra inferior tipo app (se come una franja en todas las
+     secciones y un portfolio no es una aplicacion). */
+  .links {
+    display: flex;
+    gap: 0.1rem;
+    opacity: 1;
+    transform: translateX(0);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  /* Va DESPUES de .links: misma especificidad, gana la ultima. */
+  .linksHidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(8px);
+  }
+  /* El logo y los links aparecen al mismo tiempo y compiten por 375px de
+     ancho. Se deja solo el icono: alcanza para volver al inicio y libera
+     unos 100px, que es lo que necesitan los tres links para no desbordar
+     en los telefonos mas angostos. */
+  .logoText { display: none; }
+  .right { gap: 0.6rem; }
+  .link {
+    font-size: 0.68rem;
+    letter-spacing: 0.05em;
+    padding: 0.24rem 0.45rem;
+  }
 }

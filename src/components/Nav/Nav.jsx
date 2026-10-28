@@ -59,7 +59,10 @@ export default function Nav() {
         <span className={styles.logoText}>limonacio</span>
       </a>
       <div className={styles.right}>
-        <ul className={styles.links}>
+        {/* Los links SIEMPRE estan en el DOM; en mobile se esconden mientras
+            el visitante esta en el Hero y aparecen al scrollear, igual que el
+            logo de la izquierda. En desktop se ven siempre. */}
+        <ul className={`${styles.links} ${atHero ? styles.linksHidden : ''}`}>
           <li><a href="#trabajos"    className={linkClass('trabajos')}>{t('nav.work')}</a></li>
           <li><a href="#lab"         className={linkClass('lab')}>{t('nav.lab')}</a></li>
           <li><a href="#about"       className={linkClass('about')}>{t('nav.about')}</a></li>
