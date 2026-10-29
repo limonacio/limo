@@ -14,6 +14,27 @@
 
 export const proyectos = [
 
+  // ── LO ÚLTIMO QUE CREÓ LIMO VA PRIMERO ────────────────────
+
+  {
+    id:       "habilidades",
+    tipo:     "lab",
+    titulo:   "Habilidades para la Vida",
+    subtitulo: {
+      en: "guide · therapeutic · trilingual",
+      es: "guía · terapéutica · trilingüe",
+      pt: "guia · terapêutica · trilíngue",
+    },
+    descripcion: {
+      en: "Open guide on emotions, bonds, gender and rights: 16 topics in three languages, written plainly. Nothing is made up — every idea names its author or the law it comes from. Static site built with Astro, content in Markdown, released under CC BY-SA.",
+      es: "Guía abierta sobre emociones, vínculos, género y derechos: 16 temas en tres idiomas, explicados en simple. Nada está inventado: cada idea lleva su autor o la norma de donde sale. Sitio estático hecho con Astro, contenido en Markdown, publicado bajo CC BY-SA.",
+      pt: "Guia aberto sobre emoções, vínculos, gênero e direitos: 16 temas em três idiomas, explicados de forma simples. Nada é inventado: cada ideia traz seu autor ou a norma de onde vem. Site estático feito com Astro, conteúdo em Markdown, publicado sob CC BY-SA.",
+    },
+    imagen:   "habilidades-cover.webp",
+    link:     "https://habilidades-para-la-vida.vercel.app",
+    featured: false,
+  },
+
   // ── WORK / TRABAJOS ───────────────────────────────────────
 
   {
