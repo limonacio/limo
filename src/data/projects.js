@@ -40,7 +40,7 @@ export const proyectos = [
   {
     id:       "intycaren",
     tipo:     "trabajo",
-    titulo:   "Inty Caren Transfers",
+    titulo:   "Transfers Inty Caren",
     subtitulo: {
       en: "web · transfers · patagonia",
       es: "web · traslados · patagonia",
@@ -52,7 +52,7 @@ export const proyectos = [
       pt: "Site para um servico de traslado privado saindo de El Calafate. Estatico, em tres idiomas, com destinos, veiculos, mapa e perguntas frequentes; as reservas vao pelo WhatsApp.",
     },
     imagen:   "intycaren-cover.webp",
-    link:     "https://intycaren.vercel.app",
+    link:     "https://transfersintycaren.vercel.app",
     featured: false,
   },
 
