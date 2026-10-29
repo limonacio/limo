@@ -1,7 +1,7 @@
 .about {
   background: var(--bg2);
-  border-top: 1px solid rgba(255,255,255,0.05);
-  border-bottom: 1px solid rgba(255,255,255,0.05);
+  border-top: 1px solid color-mix(in srgb, var(--text) 5%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--text) 5%, transparent);
   padding: 4rem 2rem;
 }
 

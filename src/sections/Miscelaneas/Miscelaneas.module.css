@@ -42,7 +42,7 @@
 .line {
   flex: 1;
   height: 1px;
-  background: linear-gradient(to right, rgba(255,255,255,0.07), transparent);
+  background: linear-gradient(to right, color-mix(in srgb, var(--text) 7%, transparent), transparent);
   min-width: 40px;
 }
 
@@ -80,8 +80,8 @@
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.1);
+  background: color-mix(in srgb, var(--text) 4%, transparent);
+  border: 1px solid color-mix(in srgb, var(--text) 10%, transparent);
   color: var(--muted);
   font-size: 1.8rem;
   line-height: 1;
@@ -114,7 +114,10 @@
   border-radius: 50%;
   border: none;
   padding: 0;
-  background: rgba(255,255,255,0.18);
+  /* El camino del carrusel. Antes era rgba(255,255,255,.18), blanco
+     fijo: en modo claro desaparecia y la bolita activa parecia caminar
+     en el aire. Sale del --text para darse vuelta con el tema. */
+  background: color-mix(in srgb, var(--text) 24%, transparent);
   cursor: pointer;
   transition: background 0.22s, transform 0.22s;
 }

@@ -4,7 +4,7 @@
   justify-content: space-between;
   gap: 0.6rem;
   padding: 2.5rem;
-  border-top: 1px solid rgba(255,255,255,0.05);
+  border-top: 1px solid color-mix(in srgb, var(--text) 5%, transparent);
 }
 
 .left {
