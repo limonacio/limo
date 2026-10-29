@@ -649,9 +649,20 @@ export default function Hero() {
                   Los tres van desfasados 15 unidades, asi quedan intercalados
                   menta / coral / lila alrededor del marco. */}
               <svg className={styles.luces} aria-hidden="true">
-                <rect className={`${styles.luz} ${styles.luzMenta}`} x="3" y="3" rx="9" width="calc(100% - 6px)" height="calc(100% - 6px)" />
-                <rect className={`${styles.luz} ${styles.luzCoral}`} x="3" y="3" rx="9" width="calc(100% - 6px)" height="calc(100% - 6px)" />
-                <rect className={`${styles.luz} ${styles.luzLila}`}  x="3" y="3" rx="9" width="calc(100% - 6px)" height="calc(100% - 6px)" />
+                {/* SEIS capas, no tres. Cada una dibuja una de cada seis
+                    bombitas; el color alterna en el espacio (menta, coral,
+                    lila, menta, coral, lila) pero el ORDEN DE ENCENDIDO esta
+                    salteado, en el CSS. Con tres grupos consecutivos el
+                    vecino se prendia siempre justo despues y se veia como un
+                    gusano caminando. */}
+                {[1, 2, 3, 4, 5, 6].map(n => (
+                  <rect
+                    key={n}
+                    className={`${styles.luz} ${styles[`luz${n}`]}`}
+                    x="3" y="3" rx="9"
+                    width="calc(100% - 6px)" height="calc(100% - 6px)"
+                  />
+                ))}
               </svg>
             </a>
             <a href="#miscelaneas" className={`${styles.btn} ${styles.btnSecondary}`}>{t('hero.cta_misc')}</a>
