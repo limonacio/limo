@@ -236,6 +236,24 @@ export const proyectos = [
     featured: false,
   },
 
+  {
+    id:       "misc-03",
+    tipo:     "misc",
+    titulo:   "Cancionero",
+    subtitulo: {
+      en: "songbook · chords · my key",
+      es: "cancionero · acordes · mi tonalidad",
+      pt: "cancioneiro · acordes · meu tom",
+    },
+    descripcion: {
+      en: "Songs adapted to my own key, with lyrics and chords ready to play.",
+      es: "Canciones adaptadas a mi tonalidad, con letra y acordes listos para tocar.",
+      pt: "Músicas adaptadas ao meu tom, com letra e acordes prontos para tocar.",
+    },
+    link:     "https://cancionero.limonacio.com",
+    featured: false,
+  },
+
   // ── Para agregar una miscelánea: copiá este bloque ────────
   // {
   //   id:       "misc-03",
