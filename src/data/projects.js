@@ -30,6 +30,7 @@ export const proyectos = [
       es: "Canciones adaptadas a mi tonalidad, con letra y acordes listos para tocar.",
       pt: "Músicas adaptadas ao meu tom, com letra e acordes prontos para tocar.",
     },
+    imagen:   "cancionero-cover.webp",
     link:     "https://cancionero.limonacio.com",
     featured: false,
   },
