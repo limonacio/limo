@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next'
-import LimonacioIcon from '../LimonacioIcon/LimonacioIcon'
+import MonedaIcon from '../MonedaIcon/MonedaIcon'
+import iconoStyles from '../MonedaIcon/MonedaIcon.module.css'
 import styles from './Footer.module.css'
 
 const SOCIALS = [
@@ -46,7 +47,7 @@ export default function Footer() {
   return (
     <footer className={styles.footer}>
       <div className={styles.left}>
-        <LimonacioIcon size={22} spin={false} pulse={false} dots={true} />
+        <MonedaIcon size={22} className={iconoStyles.icono} />
         <span className={styles.text}>
           <span className={styles.brand}>limonacio</span>
           <sup className={styles.tm}>™</sup>

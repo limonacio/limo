@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
-import LimonacioIcon from '../LimonacioIcon/LimonacioIcon'
+import MonedaIcon from '../MonedaIcon/MonedaIcon'
+import iconoStyles from '../MonedaIcon/MonedaIcon.module.css'
 import styles from './Nav.module.css'
 
 export default function Nav({ theme = 'dark', onToggleTheme }) {
@@ -106,7 +107,7 @@ export default function Nav({ theme = 'dark', onToggleTheme }) {
   return (
     <nav className={styles.nav}>
       <a href="#hero" className={`${styles.logo} ${atHero ? styles.logoHidden : ''}`}>
-        <LimonacioIcon size={34} spin={false} pulse={false} dots={true} />
+        <MonedaIcon size={34} className={iconoStyles.icono} />
         <span className={styles.logoText}>limonacio</span>
       </a>
       <div className={styles.right}>
