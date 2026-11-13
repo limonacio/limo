@@ -845,7 +845,13 @@
          58vh  -> deja lugar a la hora arriba y al rotulo y subtitulo abajo.
          440px -> tope para que no se agigante en tablets.
        min() elige el menor, asi la moneda nunca se corta ni empuja al resto. */
-    width: min(100%, 58vh, 440px);
+    /* El 86% -y no 100%- es lo que despega la moneda del borde. El hero ya
+       pone 2rem de padding, pero el canto ocupa el 97% de la caja, asi que
+       con 100% quedaba a unos 35px del borde de la pantalla y se leia como
+       pegado. Con 86% hay margen de verdad.
+       ⚠️ Sigue sin usar vw: mide la ventana entera e ignora el padding y
+       los rieles oscuros de los costados. El % mide el contenedor. */
+    width: min(86%, 54vh, 400px);
     aspect-ratio: 1;
     margin: 0 auto;
     -webkit-tap-highlight-color: transparent;
