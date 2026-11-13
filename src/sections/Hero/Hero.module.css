@@ -648,7 +648,7 @@
     opacity: 1;
     filter: drop-shadow(0 0 3px rgba(46,204,128,0.8)) drop-shadow(0 0 8px rgba(46,204,128,0.28));
   }
-  .colDerecha:has(.miscLabel:hover) .limonSvg [data-p='moneda'] { stroke-width: 1.2; }
+  .colDerecha:has(.miscLabel:hover) .limonSvg [data-p='moneda'] { stroke-width: 0.75; }
 
   .limonBtn {
     display: flex;
@@ -706,7 +706,9 @@
   .limonSvg [data-p='moneda'] {
     fill: none;
     stroke: #F0526A;
-    stroke-width: 0.8;
+    /* Mismo criterio que la moneda de mobile: trazo fino. Las dos tienen
+       que verse de la misma familia, asi que si cambia una, cambia la otra. */
+    stroke-width: 0.5;
     transition: stroke-width 0.3s ease;
   }
   .limonSvg [data-p='inscripcion'] {
@@ -715,8 +717,8 @@
     font-weight: 700;
   }
   .limonBtn:hover .limonSvg [data-p='moneda'],
-  .limonBtn:focus-visible .limonSvg [data-p='moneda'] { stroke-width: 1.2; }
-  .limonBtnOn .limonSvg [data-p='moneda'] { stroke-width: 1.8; }
+  .limonBtn:focus-visible .limonSvg [data-p='moneda'] { stroke-width: 0.75; }
+  .limonBtnOn .limonSvg [data-p='moneda'] { stroke-width: 1.1; }
 
   /* Etapa 2: al acercar el mouse se enciende, sin rellenarse */
   .limonBtn:hover .limonSvg,
@@ -935,7 +937,13 @@
   .logoTatuaje [data-p='moneda'] {
     fill: none;
     stroke: var(--acento);
-    stroke-width: 0.9;
+    /* Trazo fino a proposito. Los DOS circulos -el aro interno y el canto-
+       llevan el mismo data-p, asi que este valor los afina juntos.
+       Estaba en 0.9 y la moneda se veia pesada: con la inscripcion en el
+       medio, dos lineas gruesas encierran el limon en vez de enmarcarlo.
+       Si se cambia, acompaniar tambien los valores de los estados
+       encendidos de mas abajo, o el salto al apretar queda desmedido. */
+    stroke-width: 0.55;
     transition: stroke-width 0.35s ease;
   }
   .logoTatuaje [data-p='vino'] {
@@ -973,7 +981,7 @@
   .logoBtnOn .logoTatuaje [data-p='vino']        { stroke-width: 2.8; }
   .logoBtnOn::before { opacity: 1; }
   .logoBtnOn .logoTatuaje [data-p='moneda'] {
-    stroke-width: 1.8;
+    stroke-width: 1.1;
     /* Resplandor propio, en el color del acento: el verde del resto no lo
        acompania y sobre fotos oscuras el vino solo no se lee. */
     filter: drop-shadow(0 0 4px rgba(var(--acento-rgb), 0.9));
