@@ -20,7 +20,11 @@
   /* El texto va en el color del FONDO, no en blanco fijo: asi contrasta
      con el acento en los dos modos (claro sobre acento oscuro y al reves). */
   color: var(--bg);
-  background: var(--marca-1);
+  /* El DEGRADADO y no el color plano: la pastilla tiene superficie, que es
+     donde un degradado se luce. De lunes a viernes y de noche vale el color
+     repetido, asi que no cambia nada; el fin de semana es oro metalico.
+     Ver la nota de --marca-1-grad en useTimePalette.js. */
+  background: var(--marca-1-grad);
   border: none;
   padding: 0.5rem 1.6rem;
   border-radius: 20px;

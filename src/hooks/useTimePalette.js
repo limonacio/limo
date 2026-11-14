@@ -25,6 +25,30 @@ import { useEffect } from 'react'
    El vino es el unico que falla, y por mas de la mitad. No es un color
    malo: sobre fondo claro (#F0EDE8) mide 8:1. Es un color de modo CLARO,
    y ahi deberia mudarse cuando exista ese modo. */
+/* ── DEGRADADOS ───────────────────────────────────────────────────────
+   Ademas de los dos colores planos, cada franja define --marca-1-grad y
+   --marca-2-grad. Son para los elementos con SUPERFICIE: hoy la pastilla
+   de seccion (WORK / LAB / MISCELLANEOUS).
+   ⚠️ NO reemplazan a los colores planos: un degradado no sirve como
+   `stroke`, `fill` ni `color`, que es como se usa --marca-1 en la mayoria
+   de los lugares. Son una variable APARTE, no un cambio de las otras.
+   ⚠️ Tampoco funcionan en lineas finas: en el aro de la moneda (0.55 de
+   trazo) un degradado solo se lee como "un lado esta mas oscuro". Para
+   lineas, color plano.
+   En las franjas que no son fin de semana el degradado es el color plano
+   repetido: asi el mecanismo es uno solo y no cambia nada visualmente.
+   El fin de semana si lleva oro metalico y esmeralda tipo gema: bordes
+   profundos y un destello claro cruzando el medio, que es lo que hace que
+   el ojo lea metal y piedra en vez de un color. */
+const plano = (c) => `linear-gradient(135deg, ${c} 0%, ${c} 100%)`
+
+const ORO =
+  'linear-gradient(135deg, #8a6616 0%, #e0b64a 22%, #fff0b8 44%,' +
+  ' #e0b64a 62%, #8a6616 84%, #c99b2c 100%)'
+const GEMA =
+  'linear-gradient(135deg, #043a2b 0%, #0a7d58 16%, #12c57c 34%,' +
+  ' #9FFFD8 50%, #12c57c 66%, #0a7d58 84%, #05533b 100%)'
+
 const PALETTES = {
   /* ── OSCURO ─────────────────────────────────────────────────────────── */
   dark: {
@@ -32,6 +56,8 @@ const PALETTES = {
     weekday: {
       '--marca-1': '#2ECC80',   // menta          8,5:1
       '--marca-2': '#F0526A',   // coral          5,3:1
+      '--marca-1-grad': plano('#2ECC80'),
+      '--marca-2-grad': plano('#F0526A'),
       // ❌ Aca vivia el vino #900030 hasta el 28/10/2026. Daba 1,87:1 y era
       //    el unico acento del sistema que no llegaba al minimo de 4,5:1:
       //    de dia 'miscellaneous' y las etiquetas de las tarjetas casi no se
@@ -43,8 +69,14 @@ const PALETTES = {
     },
     // Sábado–Domingo 08:00–20:00
     weekend: {
-      '--marca-1': '#FFD93D',   // dorado        12,8:1
-      '--marca-2': '#1EFFE0',   // turquesa      13,8:1
+      // Oro y esmeralda. Los planos son para trazos y textos; los degradados
+      // para las superficies. El esmeralda esta en tono 162 y NO en 151 a
+      // proposito: a 151 es el mismo tono que la menta de lunes a viernes y
+      // el sabado se veria igual que el martes.
+      '--marca-1': '#E0A82E',   // oro            8,2:1
+      '--marca-2': '#00E5A0',   // esmeralda     10,6:1
+      '--marca-1-grad': ORO,
+      '--marca-2-grad': GEMA,
       '--bg':      '#161a17',
       '--bg2':     '#1d221e',
       '--bg3':     '#242b25',
@@ -54,6 +86,8 @@ const PALETTES = {
     night: {
       '--marca-1': '#F0526A',   // coral          5,3:1
       '--marca-2': '#7B74E0',   // lila           4,6:1
+      '--marca-1-grad': plano('#F0526A'),
+      '--marca-2-grad': plano('#7B74E0'),
       '--bg':      '#17171e',
       '--bg2':     '#1e1e28',
       '--bg3':     '#252532',
@@ -72,14 +106,24 @@ const PALETTES = {
     weekday: {
       '--marca-1': '#0E7A45',   // verde profundo  4,8:1
       '--marca-2': '#900030',   // vino            8,3:1  ← su lugar natural
+      '--marca-1-grad': plano('#0E7A45'),
+      '--marca-2-grad': plano('#900030'),
       '--bg':      '#F2F0EA',
       '--bg2':     '#E9E6DE',
       '--bg3':     '#DEDAD0',
       '--text':    '#161A17',
     },
     weekend: {
+      // El oro y la gema oscurecidos para fondo claro. El degradado tambien
+      // se oscurece: el metalico de modo oscuro sobre hueso no se lee.
       '--marca-1': '#7E5406',   // oro oscuro      5,8:1
-      '--marca-2': '#046A60',   // turquesa oscuro 5,7:1
+      '--marca-2': '#05604A',   // esmeralda osc.  6,6:1
+      '--marca-1-grad':
+        'linear-gradient(135deg, #4a3103 0%, #8a5f0a 24%, #c99b2c 48%,' +
+        ' #8a5f0a 72%, #4a3103 100%)',
+      '--marca-2-grad':
+        'linear-gradient(135deg, #022f24 0%, #05604A 26%, #0a8a68 50%,' +
+        ' #05604A 74%, #022f24 100%)',
       '--bg':      '#F3F0E9',
       '--bg2':     '#EAE5DB',
       '--bg3':     '#DFD9CC',
@@ -88,6 +132,8 @@ const PALETTES = {
     night: {
       '--marca-1': '#B0203C',   // carmin          5,9:1
       '--marca-2': '#4A3FBF',   // lila            6,7:1
+      '--marca-1-grad': plano('#B0203C'),
+      '--marca-2-grad': plano('#4A3FBF'),
       '--bg':      '#F0EFF4',
       '--bg2':     '#E6E5EE',
       '--bg3':     '#DBDAE6',
