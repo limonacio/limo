@@ -1145,7 +1145,17 @@
     padding: 9px 26px;
     background: rgba(240, 82, 106, 0.08);
     -webkit-tap-highlight-color: transparent;
-    transition: color 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+    /* Apagada en reposo, como el logo. Ver la regla de :has() mas abajo. */
+    opacity: 0.42;
+    transition: opacity 0.45s ease, color 0.3s ease, border-color 0.3s ease,
+                background 0.3s ease, box-shadow 0.45s ease;
+  }
+  /* ⚠️ Con "reducir movimiento" la etapa 2 del logo NUNCA se dispara, asi
+     que sin esto la pastilla se quedaria al 42% para siempre: un boton de
+     navegacion permanentemente apagado. Para esos visitantes va encendida
+     de entrada. */
+  @media (prefers-reduced-motion: reduce) {
+    .labLink { opacity: 1; }
   }
   .labLink:hover,
   .labLink:active,
@@ -1159,10 +1169,21 @@
      del boton, no hijo: la clase de estado (.logoBtnDesp/.logoBtnOn) vive en
      el <a> y hay que mirar hacia arriba, al .heroContent, para alcanzarlo.
      Misma duracion de 0.45s que el logo y el velo: los tres viajan juntos. */
-  .heroContent:has(.logoBtnDesp) .subtitle,
-  .heroContent:has(.logoBtnOn) .subtitle {
-    color: #FFFFFF;
-    text-shadow: 0 1px 4px rgba(0,0,0,0.9), 0 0 10px rgba(255,255,255,0.3);
+  /* LAB ACOMPANIA A LA MONEDA (14/11/2026).
+     La moneda se enciende por etapas y la pastilla estaba siempre a pleno,
+     asi que se adelantaba. Ahora arranca atenuada igual que el logo (0.42,
+     el mismo valor) y se prende con el, con la misma duracion.
+     Va con :has() hacia arriba porque la clase de estado (.logoBtnDesp /
+     .logoBtnOn) vive en el <a> del logo y la pastilla es su hermana.
+     ⚠️ Esta regla reemplaza a la que encendia el subtitulo, que quedo
+     muerta cuando el subtitulo salio de la vista en mobile. */
+  .heroContent:has(.logoBtnDesp) .labLink,
+  .heroContent:has(.logoBtnOn) .labLink {
+    opacity: 1;
+  }
+  .heroContent:has(.logoBtnOn) .labLink {
+    border-color: rgba(240, 82, 106, 0.95);
+    box-shadow: 0 0 12px rgba(240, 82, 106, 0.35);
   }
 
 }
