@@ -16,8 +16,12 @@ import { useEffect } from 'react'
    color fijo, se escribe literal, como hace el logo del Hero.
 
    📏 Contraste medido sobre el fondo oscuro (minimo legible: 4,5:1):
-     #2ECC80 menta 8,5 · #5E9E70 verde 5,6 · #F0526A coral 5,3
-     #C46B3A terracota 4,6 · #7B74E0 lila 4,6 · #900030 vino 1,87 ❌
+     #1EFFE0 turquesa 13,8 · #FFD93D dorado 12,8 · #2ECC80 menta 8,5
+     #F0526A coral 5,3 · #7B74E0 lila 4,6 · #900030 vino 1,87 ❌
+   El fin de semana paso de terracota + verde (4,6 y 5,6, los dos mas
+   apagados que habia) a dorado + turquesa el 14/11/2026: Limo queria que
+   el finde tuviera magia y esos dos no se despegaban del resto. Son los
+   acentos mas brillantes del sitio, a proposito.
    El vino es el unico que falla, y por mas de la mitad. No es un color
    malo: sobre fondo claro (#F0EDE8) mide 8:1. Es un color de modo CLARO,
    y ahi deberia mudarse cuando exista ese modo. */
@@ -39,8 +43,8 @@ const PALETTES = {
     },
     // Sábado–Domingo 08:00–20:00
     weekend: {
-      '--marca-1': '#C46B3A',   // terracota      4,6:1
-      '--marca-2': '#5E9E70',   // verde apagado  5,6:1
+      '--marca-1': '#FFD93D',   // dorado        12,8:1
+      '--marca-2': '#1EFFE0',   // turquesa      13,8:1
       '--bg':      '#161a17',
       '--bg2':     '#1d221e',
       '--bg3':     '#242b25',
@@ -74,8 +78,8 @@ const PALETTES = {
       '--text':    '#161A17',
     },
     weekend: {
-      '--marca-1': '#9A4A1C',   // terracota       5,5:1
-      '--marca-2': '#2F6B45',   // verde           5,6:1
+      '--marca-1': '#7E5406',   // oro oscuro      5,8:1
+      '--marca-2': '#046A60',   // turquesa oscuro 5,7:1
       '--bg':      '#F3F0E9',
       '--bg2':     '#EAE5DB',
       '--bg3':     '#DFD9CC',
