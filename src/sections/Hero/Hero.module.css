@@ -1078,6 +1078,11 @@
     text-align: center;
     font-size: 12px;
     letter-spacing: 0.22em;
+    /* Compensa el espacio que letter-spacing agrega DESPUES de la ultima
+       letra. Sin esto el navegador centra contando ese hueco fantasma y el
+       texto queda corrido a la izquierda: fue el "see my work descentrado".
+       Mismo arreglo que .labLink y que el rotulo de desktop. */
+    text-indent: 0.22em;
     text-transform: uppercase;
     color: #2ECC80;
     opacity: 0.55;
@@ -1087,20 +1092,25 @@
   .logoBtnDesp .logoRotulo,
   .logoBtnOn .logoRotulo { opacity: 1; }
 
+  /* SUBTITULO FUERA DE LA VISTA EN MOBILE (14/11/2026).
+     Limo: "le sacaria las letras de abajo, al menos en la version mobile".
+     El Hero mobile ya dice lo que tiene que decir con la moneda; esta linea
+     competia y apretaba el bloque.
+     Se oculta con la tecnica de "visually hidden" -1px + clip-path- y NO con
+     display:none, para que Google y los lectores de pantalla la sigan
+     leyendo. Mismo criterio que el <h1> de mas arriba.
+     ⚠️ Con esto muere el calculo de --n: servia para correr el subtitulo y
+     que la palabra del medio quedara bajo la flecha del rotulo. Ya no hay
+     subtitulo visible que alinear, asi que se saco tambien de Hero.jsx. */
   .subtitle {
-    margin: 0;
-    text-align: center;
-    /* clamp para que el portugues, que es el mas largo, entre entero en una
-       sola linea: si se corta, la palabra del medio deja de estar donde va. */
-    font-size: clamp(8.5px, 2.5vw, 11px);
-    letter-spacing: 0.14em;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
     white-space: nowrap;
-    /* En reposo, gris apagado: la moneda esta apagada y el subtitulo la
-       acompania. Al encenderse el logo pasa a blanco puro (ver abajo). */
-    color: #a8a29b;
-    text-shadow: 0 1px 4px rgba(0,0,0,0.9);
-    transform: translateX(calc(var(--n, 0) * (1ch + 0.14em)));
-    transition: color 0.45s ease, text-shadow 0.45s ease;
   }
 
   /* Acceso a lab, en renglon propio (21/10/2026). En mobile el header
@@ -1112,10 +1122,11 @@
      dos colores son de la moneda y lo volverian parte de ella. */
   .labLink {
     display: block;
-    margin-top: 14px;
+    width: max-content;
+    margin: 26px auto 0;
     text-align: center;
     font-family: var(--font);
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 700;
     letter-spacing: 0.22em;
     /* compensa el espacio que letter-spacing agrega DESPUES de la ultima
@@ -1123,16 +1134,25 @@
     text-indent: 0.22em;
     text-transform: uppercase;
     text-decoration: none;
-    color: #a8a29b;
-    text-shadow: 0 1px 4px rgba(0,0,0,0.9);
+    /* Pastilla coral: tiene que verse TOCABLE de un vistazo. Antes era un
+       texto gris chiquito y Limo lo leia como "una cosa ahi sin
+       importancia". Va en coral y no en menta a proposito: el menta es de
+       la moneda y de "see my work", que son el camino principal; lab es el
+       desvio y tiene que distinguirse sin competir. */
+    color: #F0526A;
+    border: 1.5px solid rgba(240, 82, 106, 0.55);
+    border-radius: 999px;
+    padding: 9px 26px;
+    background: rgba(240, 82, 106, 0.08);
     -webkit-tap-highlight-color: transparent;
-    transition: color 0.3s ease, text-shadow 0.3s ease;
+    transition: color 0.3s ease, border-color 0.3s ease, background 0.3s ease;
   }
   .labLink:hover,
   .labLink:active,
   .labLink:focus-visible {
-    color: #F0526A;
-    text-shadow: 0 1px 4px rgba(0,0,0,0.9), 0 0 10px rgba(240,82,106,0.45);
+    color: #FFFFFF;
+    border-color: rgba(240, 82, 106, 0.95);
+    background: rgba(240, 82, 106, 0.3);
   }
   /* El subtitulo se enciende con la moneda, igual que en desktop se enciende
      con "see work". Va con :has() porque el subtitulo es HERMANO POSTERIOR
