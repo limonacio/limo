@@ -33,6 +33,19 @@ export default function LimonTrazado({ className }) {
       aria-hidden="true"
     >
       <defs>
+        {/* Oro metalico para el limon los fines de semana. El id lleva
+            sufijo porque las dos monedas conviven en el DOM -una oculta
+            por CSS- y dos <linearGradient> con el mismo id se pisan.
+            Lo enciende el CSS con stroke/fill: url(#oroLogoD), bajo
+            :root[data-franja="weekend"]. */}
+        <linearGradient id="oroLogoD" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#8a6616" />
+          <stop offset="22%" stopColor="#e0b64a" />
+          <stop offset="44%" stopColor="#fff0b8" />
+          <stop offset="62%" stopColor="#e0b64a" />
+          <stop offset="84%" stopColor="#8a6616" />
+          <stop offset="100%" stopColor="#c99b2c" />
+        </linearGradient>
         <path id="aroLimon" d="M50.53 -49.6 a 72.45 72.45 0 1 1 0 144.9 a 72.45 72.45 0 1 1 0 -144.9" />
       </defs>
       <text data-p="inscripcion" fontSize="5.71" letterSpacing="3.69">

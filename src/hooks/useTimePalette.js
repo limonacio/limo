@@ -157,9 +157,16 @@ function getSlotName() {
 
 function applyPalette(theme) {
   const modo = PALETTES[theme] ?? PALETTES.dark
-  const palette = modo[getSlotName()]
+  const slot = getSlotName()
+  const palette = modo[slot]
   const root = document.documentElement
   Object.entries(palette).forEach(([k, v]) => root.style.setProperty(k, v))
+  // Ademas de los colores, se publica QUE FRANJA es, para que el CSS pueda
+  // hacer excepciones puntuales. La regla sigue siendo que el logo NO sigue
+  // la paleta horaria; esto permite romperla a proposito y por franja, que
+  // es distinto. Hoy lo usa la moneda, que el fin de semana se vuelve de
+  // oro y esmeralda.
+  root.dataset.franja = slot
 }
 
 /* Recibe el tema para poder elegir entre el set claro y el oscuro.

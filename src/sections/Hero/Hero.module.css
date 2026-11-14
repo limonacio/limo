@@ -1211,3 +1211,67 @@
   0%, 100% { opacity: 0.10; stroke-width: 4.2; }
   50%      { opacity: 1;    stroke-width: 6.2; }
 }
+
+/* ══ FIN DE SEMANA: LA MONEDA SE VUELVE DE ORO Y ESMERALDA ══════════════
+   ⚠️ ESTO ROMPE A PROPOSITO LA REGLA DE QUE EL LOGO NO SIGUE LA PALETA.
+   La regla sigue valiendo por defecto -el logo es menta y coral literales,
+   pase lo que pase- y esta es la unica excepcion, acotada a una franja.
+   No se hizo atando el logo a var(--marca-1) y var(--marca-2) porque eso lo
+   habria cambiado TAMBIEN de noche, donde marca-1 es coral y marca-2 lila.
+   El enganche es data-franja, que publica useTimePalette en el <html>.
+
+   El limon va con el DEGRADADO de oro (los <linearGradient> viven dentro de
+   cada SVG, con id distinto porque las dos monedas conviven en el DOM) y el
+   aro con esmeralda PLANA: en una linea de 0.55 de trazo un degradado solo
+   se lee como "un lado esta mas oscuro".
+   Oro #E0A82E 8,2:1 · esmeralda #00E5A0 10,6:1, las dos sobre el fondo
+   oscuro. El esmeralda esta en tono 162 y no 151 para no confundirse con la
+   menta de lunes a viernes. */
+
+/* ── mobile ── */
+:root[data-franja='weekend'] .logoBtn {
+  --acento: #00E5A0;
+  --acento-rgb: 0, 229, 160;
+}
+:root[data-franja='weekend'] .logoTatuaje [data-p='limon'] {
+  fill: url(#oroLogoM);
+  stroke: url(#oroLogoM);
+}
+:root[data-franja='weekend'] .logoTatuaje [data-p='letrasHueca'],
+:root[data-franja='weekend'] .logoTatuaje [data-p='letras'] {
+  stroke: url(#oroLogoM);
+}
+/* El halo acompania: un resplandor verde sobre un limon dorado se ve mal. */
+:root[data-franja='weekend'] .logoTatuaje {
+  filter: drop-shadow(0 0 1.5px rgba(224, 168, 46, 0.35));
+}
+:root[data-franja='weekend'] .logoBtnDesp .logoTatuaje {
+  filter: drop-shadow(0 0 3px rgba(224, 168, 46, 0.8))
+          drop-shadow(0 0 8px rgba(224, 168, 46, 0.28));
+}
+:root[data-franja='weekend'] .logoBtnOn .logoTatuaje {
+  filter: drop-shadow(0 0 4px rgba(224, 168, 46, 0.95))
+          drop-shadow(0 0 9px rgba(224, 168, 46, 0.4));
+}
+
+/* ── desktop ── */
+:root[data-franja='weekend'] .limonSvg [data-p='limon'] {
+  fill: url(#oroLogoD);
+  stroke: url(#oroLogoD);
+}
+:root[data-franja='weekend'] .limonSvg [data-p='moneda'] { stroke: #00E5A0; }
+:root[data-franja='weekend'] .limonSvg [data-p='inscripcion'] { fill: #00E5A0; }
+:root[data-franja='weekend'] .firmaLinea { stroke: #00E5A0; }
+:root[data-franja='weekend'] .limonSvg {
+  filter: drop-shadow(0 0 1.5px rgba(224, 168, 46, 0.35));
+}
+:root[data-franja='weekend'] .limonBtn:hover .limonSvg,
+:root[data-franja='weekend'] .limonBtn:focus-visible .limonSvg,
+:root[data-franja='weekend'] .colDerecha:has(.miscLabel:hover) .limonSvg {
+  filter: drop-shadow(0 0 3px rgba(224, 168, 46, 0.8))
+          drop-shadow(0 0 8px rgba(224, 168, 46, 0.28));
+}
+:root[data-franja='weekend'] .limonBtnOn .limonSvg {
+  filter: drop-shadow(0 0 5px rgba(224, 168, 46, 1))
+          drop-shadow(0 0 18px rgba(224, 168, 46, 0.6));
+}

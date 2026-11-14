@@ -39,6 +39,19 @@ export default function LogoTatuaje({ className }) {
       aria-hidden="true"
     >
       <defs>
+        {/* Oro metalico para el limon los fines de semana. El id lleva
+            sufijo porque las dos monedas conviven en el DOM -una oculta
+            por CSS- y dos <linearGradient> con el mismo id se pisan.
+            Lo enciende el CSS con stroke/fill: url(#oroLogoM), bajo
+            :root[data-franja="weekend"]. */}
+        <linearGradient id="oroLogoM" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#8a6616" />
+          <stop offset="22%" stopColor="#e0b64a" />
+          <stop offset="44%" stopColor="#fff0b8" />
+          <stop offset="62%" stopColor="#e0b64a" />
+          <stop offset="84%" stopColor="#8a6616" />
+          <stop offset="100%" stopColor="#c99b2c" />
+        </linearGradient>
         <mask id="letrasHuecas" maskUnits="userSpaceOnUse" x="-60" y="0" width="240" height="180">
           <path d={letras} fill="none" stroke="#fff" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
           <path d={letras} fill="none" stroke="#000" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
