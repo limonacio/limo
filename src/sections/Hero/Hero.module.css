@@ -1275,3 +1275,32 @@
   filter: drop-shadow(0 0 5px rgba(224, 168, 46, 1))
           drop-shadow(0 0 18px rgba(224, 168, 46, 0.6));
 }
+
+/* ── la pastilla de LAB acompania a la moneda ──
+   Sigue al ARO, no al limon: el aro es el acento de la moneda y la pastilla
+   siempre fue del mismo color que el (coral de lunes a viernes). El fin de
+   semana los dos pasan a esmeralda.
+   En reposo lleva un lavado de gema apenas insinuado y al tocarla se llena
+   con el degradado completo, con el texto oscuro encima. Es la misma
+   escalada que ya tenia en coral, solo que con gema. */
+:root[data-franja='weekend'] .labLink {
+  color: #00E5A0;
+  border-color: rgba(0, 229, 160, 0.55);
+  background: linear-gradient(135deg,
+    rgba(4, 58, 43, 0.38) 0%,
+    rgba(18, 197, 124, 0.22) 50%,
+    rgba(5, 83, 59, 0.38) 100%);
+}
+:root[data-franja='weekend'] .labLink:hover,
+:root[data-franja='weekend'] .labLink:active,
+:root[data-franja='weekend'] .labLink:focus-visible {
+  /* texto oscuro: sobre la gema llena, el blanco se pierde */
+  color: #022b1e;
+  border-color: rgba(159, 255, 216, 0.9);
+  background: linear-gradient(135deg, #043a2b 0%, #0a7d58 16%, #12c57c 34%,
+    #9FFFD8 50%, #12c57c 66%, #0a7d58 84%, #05533b 100%);
+}
+:root[data-franja='weekend'] .heroContent:has(.logoBtnOn) .labLink {
+  border-color: rgba(0, 229, 160, 0.95);
+  box-shadow: 0 0 12px rgba(0, 229, 160, 0.35);
+}
