@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next'
+import { getSlotName } from '../../hooks/useTimePalette'
 import { useState, useEffect, useRef, useCallback, useMemo, Fragment } from 'react'
 import LimonacioIcon from '../../components/LimonacioIcon/LimonacioIcon'
 import LogoTatuaje from '../../components/LogoTatuaje/LogoTatuaje'
@@ -411,6 +412,26 @@ export default function Hero() {
   }
 
   // El toggle nunca entra a madrugada (índice 0): solo aparece a las 4 AM reales
+  /* ── QUE FRANJA LE TOCA A LA MONEDA ────────────────────────────────
+     Hay DOS relojes en el sitio y es la trampa de todo esto:
+       · el de las FOTOS   madrugada / amanecer / glaciar / tarde / noche
+       · el de la PALETA   weekday / weekend / night
+     El ◎ mueve el primero. Si la moneda escuchara solo al segundo, el
+     visitante pondria la foto del mediodia y la moneda seguiria en los
+     colores de la noche, que es justo lo que se veia mal.
+     Entonces: si el visitante toco el ◎, manda la foto que eligio; si no,
+     manda el reloj real. */
+  const franjaMoneda = useMemo(() => {
+    if (!manual) return getSlotName()
+    if (slot.name === 'noche' || slot.name === 'madrugada') return 'night'
+    const dia = new Date().getDay()
+    return dia === 0 || dia === 6 ? 'weekend' : 'weekday'
+  }, [manual, slot.name, ahora])
+
+  useEffect(() => {
+    document.documentElement.dataset.franja = franjaMoneda
+  }, [franjaMoneda])
+
   const handleToggle = (e) => {
     e.currentTarget.blur()   // que no quede marcado: el ◎ es secreto
     setManual(true)          // desde ahora manda el visitante, no el reloj

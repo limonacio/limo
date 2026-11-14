@@ -147,7 +147,9 @@ const PALETTES = {
   },
 }
 
-function getSlotName() {
+/* Exportada porque el Hero tambien la necesita: es el unico dueño del
+   atributo data-franja del <html>. Ver la nota de abajo. */
+export function getSlotName() {
   const now  = new Date()
   const hour = now.getHours()
   const day  = now.getDay() // 0=Dom, 6=Sáb
@@ -166,12 +168,10 @@ function applyPalette(theme) {
   const palette = modo[slot]
   const root = document.documentElement
   Object.entries(palette).forEach(([k, v]) => root.style.setProperty(k, v))
-  // Ademas de los colores, se publica QUE FRANJA es, para que el CSS pueda
-  // hacer excepciones puntuales. La regla sigue siendo que el logo NO sigue
-  // la paleta horaria; esto permite romperla a proposito y por franja, que
-  // es distinto. Hoy lo usa la moneda, que el fin de semana se vuelve de
-  // oro y esmeralda.
-  root.dataset.franja = slot
+  /* ⚠️ ACA NO SE TOCA data-franja. Lo pone el Hero y solo el Hero.
+     Motivo: el ◎ deja que el visitante elija la franja a mano, y si este
+     hook tambien escribiera el atributo se lo pisaria al cambiar de hora.
+     Un atributo, un dueño. */
 }
 
 /* Recibe el tema para poder elegir entre el set claro y el oscuro.
