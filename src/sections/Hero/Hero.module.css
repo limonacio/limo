@@ -1073,9 +1073,13 @@
 
   /* Rotulo del boton: va DENTRO del <a>, asi se enciende junto con el logo */
   /* PASTILLA, igual que lab. Antes era texto pelado y lab tenia recuadro,
-     asi que el desvio pesaba mas que el camino principal. Ahora los dos
-     tienen la misma forma y lo que los separa es el COLOR: menta el que
-     lleva a work, coral el que lleva a lab. Nunca el mismo. */
+     asi que el desvio pesaba mas que el camino principal.
+     ⚠️ LAS DOS VAN DEL MISMO COLOR, a proposito. Se probo una menta y la
+     otra coral para diferenciarlas y Limo lo descarto: "no me termina de
+     convencer tanto color junto". Ya las separa la DISTANCIA, no hace
+     falta que las separe el color. Y mas abajo las dos pastillas de
+     seccion -WORK y LAB- tambien comparten color, asi que tenerlas
+     distintas aca contradecia al resto del sitio. */
   .logoRotulo {
     display: block;
     width: max-content;
@@ -1149,16 +1153,14 @@
     text-indent: 0.22em;
     text-transform: uppercase;
     text-decoration: none;
-    /* Pastilla coral: tiene que verse TOCABLE de un vistazo. Antes era un
-       texto gris chiquito y Limo lo leia como "una cosa ahi sin
-       importancia". Va en coral y no en menta a proposito: el menta es de
-       la moneda y de "see my work", que son el camino principal; lab es el
-       desvio y tiene que distinguirse sin competir. */
-    color: #F0526A;
-    border: 1.5px solid rgba(240, 82, 106, 0.55);
+    /* Pastilla: tiene que verse TOCABLE de un vistazo. Antes era un texto
+       gris chiquito y Limo lo leia como "una cosa ahi sin importancia".
+       Mismo color que el rotulo de "see my work": ver la nota ahi. */
+    color: #2ECC80;
+    border: 1.5px solid rgba(46, 204, 128, 0.55);
     border-radius: 999px;
     padding: 9px 26px;
-    background: rgba(240, 82, 106, 0.08);
+    background: rgba(46, 204, 128, 0.08);
     -webkit-tap-highlight-color: transparent;
     /* Apagada en reposo, como el logo. Ver la regla de :has() mas abajo. */
     opacity: 0.42;
@@ -1176,8 +1178,8 @@
   .labLink:active,
   .labLink:focus-visible {
     color: #FFFFFF;
-    border-color: rgba(240, 82, 106, 0.95);
-    background: rgba(240, 82, 106, 0.3);
+    border-color: rgba(46, 204, 128, 0.95);
+    background: rgba(46, 204, 128, 0.3);
   }
   /* El subtitulo se enciende con la moneda, igual que en desktop se enciende
      con "see work". Va con :has() porque el subtitulo es HERMANO POSTERIOR
@@ -1197,8 +1199,8 @@
     opacity: 1;
   }
   .heroContent:has(.logoBtnOn) .labLink {
-    border-color: rgba(240, 82, 106, 0.95);
-    box-shadow: 0 0 12px rgba(240, 82, 106, 0.35);
+    border-color: rgba(46, 204, 128, 0.95);
+    box-shadow: 0 0 12px rgba(46, 204, 128, 0.35);
   }
 
 }
@@ -1292,30 +1294,15 @@
 }
 
 /* ── las dos pastillas del Hero mobile, el fin de semana ──
-   LAS DOS NUNCA COMPARTEN COLOR: es lo que las distingue de un vistazo.
-   De lunes a viernes son menta (work) y coral (lab). El fin de semana son
-   ESMERALDA (work) y ORO (lab).
-   ⚠️ Esto INVIERTE el reparto por roles: por rol le tocaria oro al rotulo
-   -que sigue al limon- y esmeralda a lab -que sigue al aro-. Va al reves a
-   pedido de Limo, para que lab quede en el color mas vistoso y los dos
-   contrasten siempre.
-   En reposo las dos llevan un lavado apenas insinuado y al tocarlas se
-   llenan con el degradado completo, con el texto oscuro encima. */
-:root[data-franja='weekend'] .logoRotulo {
-  color: #00E5A0;
-  border-color: rgba(0, 229, 160, 0.55);
-  background: linear-gradient(135deg,
-    rgba(4, 58, 43, 0.38) 0%,
-    rgba(18, 197, 124, 0.22) 50%,
-    rgba(5, 83, 59, 0.38) 100%);
-  text-shadow: 0 0 8px rgba(0, 229, 160, 0.45);
-}
-:root[data-franja='weekend'] .logoBtnOn .logoRotulo {
-  border-color: rgba(159, 255, 216, 0.9);
-  background: linear-gradient(135deg, rgba(4,58,43,0.6) 0%,
-    rgba(18,197,124,0.4) 50%, rgba(5,83,59,0.6) 100%);
-}
-
+   LAS DOS COMPARTEN COLOR, igual que entre semana: oro, el mismo acento que
+   llevan las pastillas de seccion mas abajo. Asi el Hero no contradice al
+   resto del sitio.
+   El aro de la moneda sigue en esmeralda: el contraste del Hero lo da la
+   moneda contra las pastillas, no las pastillas entre si.
+   En reposo llevan un lavado apenas insinuado y al tocarlas se llenan con
+   el oro completo, con el texto oscuro encima -sobre el oro lleno el
+   blanco se pierde-. */
+:root[data-franja='weekend'] .logoRotulo,
 :root[data-franja='weekend'] .labLink {
   color: #E0A82E;
   border-color: rgba(224, 168, 46, 0.55);
@@ -1328,13 +1315,13 @@
 :root[data-franja='weekend'] .labLink:hover,
 :root[data-franja='weekend'] .labLink:active,
 :root[data-franja='weekend'] .labLink:focus-visible {
-  /* texto oscuro: sobre el oro lleno, el blanco se pierde */
   color: #2b2105;
   border-color: rgba(255, 240, 184, 0.9);
   background: linear-gradient(135deg, #8a6616 0%, #e0b64a 22%, #fff0b8 44%,
     #e0b64a 62%, #8a6616 84%, #c99b2c 100%);
   text-shadow: none;
 }
+:root[data-franja='weekend'] .logoBtnOn .logoRotulo,
 :root[data-franja='weekend'] .heroContent:has(.logoBtnOn) .labLink {
   border-color: rgba(224, 168, 46, 0.95);
   box-shadow: 0 0 12px rgba(224, 168, 46, 0.35);
