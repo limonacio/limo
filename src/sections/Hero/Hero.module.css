@@ -1072,11 +1072,22 @@
   }
 
   /* Rotulo del boton: va DENTRO del <a>, asi se enciende junto con el logo */
+  /* PASTILLA, igual que lab. Antes era texto pelado y lab tenia recuadro,
+     asi que el desvio pesaba mas que el camino principal. Ahora los dos
+     tienen la misma forma y lo que los separa es el COLOR: menta el que
+     lleva a work, coral el que lleva a lab. Nunca el mismo. */
   .logoRotulo {
     display: block;
-    margin-top: 4px;
+    width: max-content;
+    /* 18 y no 4: separado de la moneda, que es lo que pedia Limo */
+    margin: 18px auto 0;
     text-align: center;
     font-size: 12px;
+    font-weight: 700;
+    border: 1.5px solid rgba(46, 204, 128, 0.55);
+    border-radius: 999px;
+    padding: 9px 26px;
+    background: rgba(46, 204, 128, 0.08);
     letter-spacing: 0.22em;
     /* Compensa el espacio que letter-spacing agrega DESPUES de la ultima
        letra. Sin esto el navegador centra contando ese hueco fantasma y el
@@ -1085,12 +1096,16 @@
     text-indent: 0.22em;
     text-transform: uppercase;
     color: #2ECC80;
-    opacity: 0.55;
+    opacity: 0.42;
     text-shadow: 0 0 8px rgba(46,204,128,0.45);
-    transition: opacity 0.35s ease;
+    transition: opacity 0.45s ease, border-color 0.3s ease, background 0.3s ease;
   }
   .logoBtnDesp .logoRotulo,
   .logoBtnOn .logoRotulo { opacity: 1; }
+  .logoBtnOn .logoRotulo {
+    border-color: rgba(46, 204, 128, 0.95);
+    background: rgba(46, 204, 128, 0.22);
+  }
 
   /* SUBTITULO FUERA DE LA VISTA EN MOBILE (14/11/2026).
      Limo: "le sacaria las letras de abajo, al menos en la version mobile".
@@ -1276,31 +1291,51 @@
           drop-shadow(0 0 18px rgba(224, 168, 46, 0.6));
 }
 
-/* ── la pastilla de LAB acompania a la moneda ──
-   Sigue al ARO, no al limon: el aro es el acento de la moneda y la pastilla
-   siempre fue del mismo color que el (coral de lunes a viernes). El fin de
-   semana los dos pasan a esmeralda.
-   En reposo lleva un lavado de gema apenas insinuado y al tocarla se llena
-   con el degradado completo, con el texto oscuro encima. Es la misma
-   escalada que ya tenia en coral, solo que con gema. */
-:root[data-franja='weekend'] .labLink {
+/* ── las dos pastillas del Hero mobile, el fin de semana ──
+   LAS DOS NUNCA COMPARTEN COLOR: es lo que las distingue de un vistazo.
+   De lunes a viernes son menta (work) y coral (lab). El fin de semana son
+   ESMERALDA (work) y ORO (lab).
+   ⚠️ Esto INVIERTE el reparto por roles: por rol le tocaria oro al rotulo
+   -que sigue al limon- y esmeralda a lab -que sigue al aro-. Va al reves a
+   pedido de Limo, para que lab quede en el color mas vistoso y los dos
+   contrasten siempre.
+   En reposo las dos llevan un lavado apenas insinuado y al tocarlas se
+   llenan con el degradado completo, con el texto oscuro encima. */
+:root[data-franja='weekend'] .logoRotulo {
   color: #00E5A0;
   border-color: rgba(0, 229, 160, 0.55);
   background: linear-gradient(135deg,
     rgba(4, 58, 43, 0.38) 0%,
     rgba(18, 197, 124, 0.22) 50%,
     rgba(5, 83, 59, 0.38) 100%);
+  text-shadow: 0 0 8px rgba(0, 229, 160, 0.45);
+}
+:root[data-franja='weekend'] .logoBtnOn .logoRotulo {
+  border-color: rgba(159, 255, 216, 0.9);
+  background: linear-gradient(135deg, rgba(4,58,43,0.6) 0%,
+    rgba(18,197,124,0.4) 50%, rgba(5,83,59,0.6) 100%);
+}
+
+:root[data-franja='weekend'] .labLink {
+  color: #E0A82E;
+  border-color: rgba(224, 168, 46, 0.55);
+  background: linear-gradient(135deg,
+    rgba(74, 49, 3, 0.38) 0%,
+    rgba(224, 182, 74, 0.22) 50%,
+    rgba(74, 49, 3, 0.38) 100%);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9);
 }
 :root[data-franja='weekend'] .labLink:hover,
 :root[data-franja='weekend'] .labLink:active,
 :root[data-franja='weekend'] .labLink:focus-visible {
-  /* texto oscuro: sobre la gema llena, el blanco se pierde */
-  color: #022b1e;
-  border-color: rgba(159, 255, 216, 0.9);
-  background: linear-gradient(135deg, #043a2b 0%, #0a7d58 16%, #12c57c 34%,
-    #9FFFD8 50%, #12c57c 66%, #0a7d58 84%, #05533b 100%);
+  /* texto oscuro: sobre el oro lleno, el blanco se pierde */
+  color: #2b2105;
+  border-color: rgba(255, 240, 184, 0.9);
+  background: linear-gradient(135deg, #8a6616 0%, #e0b64a 22%, #fff0b8 44%,
+    #e0b64a 62%, #8a6616 84%, #c99b2c 100%);
+  text-shadow: none;
 }
 :root[data-franja='weekend'] .heroContent:has(.logoBtnOn) .labLink {
-  border-color: rgba(0, 229, 160, 0.95);
-  box-shadow: 0 0 12px rgba(0, 229, 160, 0.35);
+  border-color: rgba(224, 168, 46, 0.95);
+  box-shadow: 0 0 12px rgba(224, 168, 46, 0.35);
 }
