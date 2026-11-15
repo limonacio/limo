@@ -17,7 +17,7 @@ import { useEffect } from 'react'
 
    📏 Contraste medido sobre el fondo oscuro (minimo legible: 4,5:1):
      #1EFFE0 turquesa 13,8 · #FFD93D dorado 12,8 · #2ECC80 menta 8,5
-     #F0526A coral 5,3 · #7B74E0 lila 4,6 · #900030 vino 1,87 ❌
+     #B794FF violeta 7,4 · #F0526A coral 5,3 · #900030 vino 1,87 ❌
    El fin de semana paso de terracota + verde (4,6 y 5,6, los dos mas
    apagados que habia) a dorado + turquesa el 14/11/2026: Limo queria que
    el finde tuviera magia y esos dos no se despegaban del resto. Son los
@@ -85,9 +85,12 @@ const PALETTES = {
     // Todas las noches 20:00–08:00
     night: {
       '--marca-1': '#F0526A',   // coral          5,3:1
-      '--marca-2': '#7B74E0',   // lila           4,6:1
+      // ❌ Era lila #7B74E0, 4,6:1: el acento mas apagado que quedaba. Se
+      //    cambio el 15/11/2026 por un violeta neon, mismo motivo que el
+      //    fin de semana.
+      '--marca-2': '#B794FF',   // violeta        7,4:1
       '--marca-1-grad': plano('#F0526A'),
-      '--marca-2-grad': plano('#7B74E0'),
+      '--marca-2-grad': plano('#B794FF'),
       '--bg':      '#17171e',
       '--bg2':     '#1e1e28',
       '--bg3':     '#252532',
@@ -131,9 +134,11 @@ const PALETTES = {
     },
     night: {
       '--marca-1': '#B0203C',   // carmin          5,9:1
-      '--marca-2': '#4A3FBF',   // lila            6,7:1
+      // Mismo tono que el violeta de oscuro (260) para que sean el mismo
+      // color con mas y con menos luz. El anterior estaba en 245.
+      '--marca-2': '#5B2FBF',   // violeta         7,1:1
       '--marca-1-grad': plano('#B0203C'),
-      '--marca-2-grad': plano('#4A3FBF'),
+      '--marca-2-grad': plano('#5B2FBF'),
       '--bg':      '#F0EFF4',
       '--bg2':     '#E6E5EE',
       '--bg3':     '#DBDAE6',

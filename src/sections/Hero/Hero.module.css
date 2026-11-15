@@ -1326,3 +1326,79 @@
   border-color: rgba(224, 168, 46, 0.95);
   box-shadow: 0 0 12px rgba(224, 168, 46, 0.35);
 }
+
+/* ══ NOCHE: LA MONEDA PASA A CORAL Y VIOLETA ═══════════════════════════
+   Segunda excepcion a la regla de que el logo no sigue la paleta, con el
+   mismo mecanismo que el fin de semana: data-franja.
+   De 20 a 08, todos los dias. El limon y las pastillas en coral -que es
+   --marca-1, el mismo de las pastillas de seccion- y el aro en violeta.
+   Coral #F0526A 5,2:1 · violeta #B794FF 7,4:1, sobre el fondo de la noche.
+   El violeta esta en tono 260 y el coral en 351: bien separados, al reves
+   del purpura #C084FC que se descarto por acercarse demasiado al coral. */
+
+/* ── mobile ── */
+:root[data-franja='night'] .logoBtn {
+  --acento: #B794FF;
+  --acento-rgb: 183, 148, 255;
+}
+:root[data-franja='night'] .logoTatuaje [data-p='limon'] {
+  fill: #F0526A;
+  stroke: #F0526A;
+}
+:root[data-franja='night'] .logoTatuaje [data-p='letrasHueca'],
+:root[data-franja='night'] .logoTatuaje [data-p='letras'] {
+  stroke: #F0526A;
+}
+:root[data-franja='night'] .logoTatuaje {
+  filter: drop-shadow(0 0 1.5px rgba(240, 82, 106, 0.35));
+}
+:root[data-franja='night'] .logoBtnDesp .logoTatuaje {
+  filter: drop-shadow(0 0 3px rgba(240, 82, 106, 0.8))
+          drop-shadow(0 0 8px rgba(240, 82, 106, 0.28));
+}
+:root[data-franja='night'] .logoBtnOn .logoTatuaje {
+  filter: drop-shadow(0 0 4px rgba(240, 82, 106, 0.95))
+          drop-shadow(0 0 9px rgba(240, 82, 106, 0.4));
+}
+/* Las dos pastillas comparten color, igual que en las otras franjas. */
+:root[data-franja='night'] .logoRotulo,
+:root[data-franja='night'] .labLink {
+  color: #F0526A;
+  border-color: rgba(240, 82, 106, 0.55);
+  background: rgba(240, 82, 106, 0.08);
+  text-shadow: 0 0 8px rgba(240, 82, 106, 0.45);
+}
+:root[data-franja='night'] .labLink:hover,
+:root[data-franja='night'] .labLink:active,
+:root[data-franja='night'] .labLink:focus-visible {
+  color: #FFFFFF;
+  border-color: rgba(240, 82, 106, 0.95);
+  background: rgba(240, 82, 106, 0.3);
+}
+:root[data-franja='night'] .logoBtnOn .logoRotulo,
+:root[data-franja='night'] .heroContent:has(.logoBtnOn) .labLink {
+  border-color: rgba(240, 82, 106, 0.95);
+  box-shadow: 0 0 12px rgba(240, 82, 106, 0.35);
+}
+
+/* ── desktop ── */
+:root[data-franja='night'] .limonSvg [data-p='limon'] {
+  fill: #F0526A;
+  stroke: #F0526A;
+}
+:root[data-franja='night'] .limonSvg [data-p='moneda'] { stroke: #B794FF; }
+:root[data-franja='night'] .limonSvg [data-p='inscripcion'] { fill: #B794FF; }
+:root[data-franja='night'] .firmaLinea { stroke: #B794FF; }
+:root[data-franja='night'] .limonSvg {
+  filter: drop-shadow(0 0 1.5px rgba(240, 82, 106, 0.35));
+}
+:root[data-franja='night'] .limonBtn:hover .limonSvg,
+:root[data-franja='night'] .limonBtn:focus-visible .limonSvg,
+:root[data-franja='night'] .colDerecha:has(.miscLabel:hover) .limonSvg {
+  filter: drop-shadow(0 0 3px rgba(240, 82, 106, 0.8))
+          drop-shadow(0 0 8px rgba(240, 82, 106, 0.28));
+}
+:root[data-franja='night'] .limonBtnOn .limonSvg {
+  filter: drop-shadow(0 0 5px rgba(240, 82, 106, 1))
+          drop-shadow(0 0 18px rgba(240, 82, 106, 0.6));
+}
