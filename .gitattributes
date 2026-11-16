@@ -1,0 +1,4 @@
+# Finales de linea: siempre LF en el repo.
+# Sin esto, cada herramienta que toque un archivo puede dejarlo en CRLF y
+# git marca TODAS las lineas como cambiadas aunque el contenido sea igual.
+* text=auto eol=lf

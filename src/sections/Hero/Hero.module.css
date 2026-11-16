@@ -1091,7 +1091,11 @@
     border: 1.5px solid rgba(46, 204, 128, 0.55);
     border-radius: 999px;
     padding: 9px 26px;
-    background: rgba(46, 204, 128, 0.08);
+    /* Base OSCURA, no solo el tinte del acento: sobre las fotos claras la
+       palabra se perdia. El tinte va encima y aporta el color. */
+    background: linear-gradient(rgba(46, 204, 128, 0.12),
+                                rgba(46, 204, 128, 0.12)),
+                rgba(8, 12, 10, 0.5);
     letter-spacing: 0.22em;
     /* Compensa el espacio que letter-spacing agrega DESPUES de la ultima
        letra. Sin esto el navegador centra contando ese hueco fantasma y el
@@ -1160,7 +1164,10 @@
     border: 1.5px solid rgba(46, 204, 128, 0.55);
     border-radius: 999px;
     padding: 9px 26px;
-    background: rgba(46, 204, 128, 0.08);
+    /* Ver la nota del mismo fondo en .logoRotulo. */
+    background: linear-gradient(rgba(46, 204, 128, 0.12),
+                                rgba(46, 204, 128, 0.12)),
+                rgba(8, 12, 10, 0.5);
     -webkit-tap-highlight-color: transparent;
     /* Apagada en reposo, como el logo. Ver la regla de :has() mas abajo. */
     opacity: 0.42;
@@ -1307,9 +1314,10 @@
   color: #E0A82E;
   border-color: rgba(224, 168, 46, 0.55);
   background: linear-gradient(135deg,
-    rgba(74, 49, 3, 0.38) 0%,
-    rgba(224, 182, 74, 0.22) 50%,
-    rgba(74, 49, 3, 0.38) 100%);
+      rgba(74, 49, 3, 0.45) 0%,
+      rgba(224, 182, 74, 0.28) 50%,
+      rgba(74, 49, 3, 0.45) 100%),
+    rgba(8, 12, 10, 0.5);
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9);
 }
 :root[data-franja='weekend'] .labLink:hover,
@@ -1365,7 +1373,9 @@
 :root[data-franja='night'] .labLink {
   color: #F0526A;
   border-color: rgba(240, 82, 106, 0.55);
-  background: rgba(240, 82, 106, 0.08);
+  background: linear-gradient(rgba(240, 82, 106, 0.12),
+                              rgba(240, 82, 106, 0.12)),
+              rgba(8, 12, 10, 0.5);
   text-shadow: 0 0 8px rgba(240, 82, 106, 0.45);
 }
 :root[data-franja='night'] .labLink:hover,

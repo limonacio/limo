@@ -2,7 +2,16 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="/assets/img/limonacio-icon.png" />
+    <!-- La moneda, simplificada para tamanio chico. El .ico lleva CINCO
+         capas con su propio dibujo cada una, no una reescalada.
+         ⚠️ Va con DISCO OSCURO de fondo, no transparente: la menta sobre una
+         barra de pestanias clara da 1,77:1 y desaparece. El disco es
+         circular para que se lea como moneda; el apple-touch-icon lo lleva
+         cuadrado y a sangre, porque iOS recorta y rellena de blanco lo
+         transparente. -->
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/assets/img/limonacio-icon.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Portfolio of limonacio: websites, a desktop app and creative projects. Design, web development, music and dance." />
     <meta name="theme-color" content="#1a1a1a" />
