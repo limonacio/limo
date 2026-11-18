@@ -168,6 +168,17 @@ function applyPalette(theme) {
   const palette = modo[slot]
   const root = document.documentElement
   Object.entries(palette).forEach(([k, v]) => root.style.setProperty(k, v))
+
+  /* Ademas de la franja que toca por reloj, publicamos los dos acentos de
+     LAS TRES franjas, del tema activo. Esto es lo que le permite a la
+     moneda chica (MonedaMini) seguir al boton secreto sin que nadie
+     duplique un color: el CSS elige con :root[data-franja='…'] y los
+     valores siguen saliendo de PALETTES, aca arriba.
+     Se republican con el tema porque claro y oscuro NO comparten acentos. */
+  Object.keys(modo).forEach((nombre) => {
+    root.style.setProperty(`--m1-${nombre}`, modo[nombre]['--marca-1'])
+    root.style.setProperty(`--m2-${nombre}`, modo[nombre]['--marca-2'])
+  })
   /* ⚠️ ACA NO SE TOCA data-franja. Lo pone el Hero y solo el Hero.
      Motivo: el ◎ deja que el visitante elija la franja a mano, y si este
      hook tambien escribiera el atributo se lo pisaria al cambiar de hora.

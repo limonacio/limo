@@ -5,7 +5,8 @@
 // latina y el canto, que a 40px se convierten en ruido. Este es el
 // mismo limon, vectorizado del dibujo original, con un solo aro.
 //
-// Los dos colores salen de la paleta, NO van fijos:
+// Los dos colores salen de la paleta, NO van fijos, y ademas siguen al
+// boton secreto del Hero (data-franja). El como esta en el .module.css:
 //   limon -> --marca-1   |   aro -> --marca-2
 // Asi acompania a la franja sin tener una sola excepcion escrita:
 //   semana  menta  + coral      finde  oro + esmeralda
@@ -16,6 +17,8 @@
 //   title  string  — si se pasa, el svg se anuncia a lectores de
 //                    pantalla; si no, queda decorativo.
 // ─────────────────────────────────────────────────────────────
+
+import styles from './MonedaMini.module.css'
 
 const ARO_R  = 44.479
 const ARO_SW = 3.042
@@ -30,15 +33,15 @@ export default function MonedaMini({ size = 40, title }) {
       role={title ? 'img' : 'presentation'}
       aria-hidden={title ? undefined : true}
       aria-label={title}
-      style={{ display: 'block', flexShrink: 0 }}
+      className={styles.moneda}
     >
       <circle
         cx="50" cy="50" r={ARO_R}
         fill="none"
-        stroke="var(--marca-2)"
+        stroke="var(--aro)"
         strokeWidth={ARO_SW}
       />
-      <path d={LIMON} fill="var(--marca-1)" fillRule="evenodd" />
+      <path d={LIMON} fill="var(--limon)" fillRule="evenodd" />
     </svg>
   )
 }

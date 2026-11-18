@@ -1,0 +1,51 @@
+/* ─── MonedaMini ─────────────────────────────────────────────────────
+   Por defecto la moneda chica usa los acentos vigentes (--marca-1/2),
+   que escribe applyPalette() con la hora REAL.
+
+   Pero el boton secreto del Hero (el ◎) deja elegir la franja a mano, y
+   eso viaja por data-franja, no por las variables. Por eso cuando ese
+   atributo esta puesto mandan las variables por franja que publica
+   applyPalette(): --m1-weekday, --m1-weekend, --m1-night y sus pares.
+
+   ⚠️ ACA NO HAY NINGUN COLOR ESCRITO, a proposito. Todos salen de
+   PALETTES en useTimePalette.js. Si alguna vez hace falta tocar un tono,
+   se toca alla y esto lo sigue solo, en claro y en oscuro.
+
+   ⚠️ data-franja lo escribe el Hero y SOLO el Hero. Ver la nota en
+   useTimePalette.js: un atributo, un dueño.
+   ─────────────────────────────────────────────────────────────────── */
+
+.moneda {
+  --limon: var(--marca-1);
+  --aro:   var(--marca-2);
+  display: block;
+  flex-shrink: 0;
+}
+
+:root[data-franja='weekday'] .moneda {
+  --limon: var(--m1-weekday);
+  --aro:   var(--m2-weekday);
+}
+
+:root[data-franja='weekend'] .moneda {
+  --limon: var(--m1-weekend);
+  --aro:   var(--m2-weekend);
+}
+
+:root[data-franja='night'] .moneda {
+  --limon: var(--m1-night);
+  --aro:   var(--m2-night);
+}
+
+/* El cambio acompaña al de la paleta del resto del sitio. */
+.moneda circle,
+.moneda path {
+  transition: stroke 0.45s ease, fill 0.45s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .moneda circle,
+  .moneda path {
+    transition: none;
+  }
+}
