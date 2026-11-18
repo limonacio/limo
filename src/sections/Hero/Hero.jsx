@@ -150,6 +150,26 @@ function buildOrder(slot) {
   return esMobile ? [...verticales, ...horizontales] : [...horizontales, ...verticales]
 }
 
+/* ── De franja de FOTO a franja de PALETA ────────────────────────────
+   Son dos vocabularios distintos: las fotos tienen cinco nombres y la
+   paleta tres. Este mapa es el unico puente, y existe para el ◎: cuando
+   el visitante elige la foto a mano, la moneda tiene que acompañarla.
+
+   null = no depende de la foto sino del dia (finde u oro, semana menta).
+
+   ⚠️ SI AGREGAS UN SLOT A SLOTS[], AGREGALO ACA. Sin su entrada cae en
+   el caso por defecto y la moneda queda con el color equivocado: fue
+   exactamente el bug del amanecer (18/11/2026), que salia menta y coral
+   cuando tenia que salir oro y esmeralda.
+   ─────────────────────────────────────────────────────────────────── */
+const FRANJA_DE_SLOT = {
+  madrugada: 'night',
+  amanecer:  'weekend',   // de 5 a 9 se viste de fin de semana (ver getSlotName)
+  glaciar:   null,
+  tarde:     null,
+  noche:     'night',
+}
+
 // ¿La hora h cae dentro de [desde, hasta)? Soporta rangos que cruzan medianoche (ej. 21 → 4)
 function inRange(h, [desde, hasta]) {
   return desde < hasta
@@ -423,7 +443,8 @@ export default function Hero() {
      manda el reloj real. */
   const franjaMoneda = useMemo(() => {
     if (!manual) return getSlotName()
-    if (slot.name === 'noche' || slot.name === 'madrugada') return 'night'
+    const fija = FRANJA_DE_SLOT[slot.name]
+    if (fija) return fija
     const dia = new Date().getDay()
     return dia === 0 || dia === 6 ? 'weekend' : 'weekday'
   }, [manual, slot.name, ahora])
