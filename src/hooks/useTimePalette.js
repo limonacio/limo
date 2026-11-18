@@ -154,11 +154,29 @@ export function getSlotName() {
   const hour = now.getHours()
   const day  = now.getDay() // 0=Dom, 6=Sáb
 
-  const isNight   = hour < 8 || hour >= 20
+  const isNight   = hour < 5 || hour >= 20
   const isWeekend = day === 0 || day === 6
+  /* 5 a 9 es el amanecer: la franja de las playas de Natal, justo antes
+     de que arranque el video del glaciar. Los horarios salen de SLOTS[]
+     en Hero.jsx, que es la unica fuente de verdad de las franjas de foto.
+     Si alla se corre el amanecer, hay que correrlo aca tambien. */
+  const isMorning = hour >= 5 && hour < 9
 
-  if (isNight)   return 'night'
-  if (isWeekend) return 'weekend'
+  /* ⚠️ LA MAÑANA DEVUELVE 'weekend' A PROPOSITO, no es un bug.
+     Pedido de Limo (18/11/2026): de lunes a viernes el amanecer se viste
+     igual que el fin de semana, oro y esmeralda.
+     Se reusa el nombre en vez de crear una franja 'morning' porque el
+     color tiene que ser IDENTICO: una franja nueva obligaria a sumarla a
+     las reglas :root[data-franja='…'] del Hero (oro y gema de la moneda
+     grande) y de MonedaMini, y la que se olvide queda sin color.
+     👉 Si alguna vez la mañana tiene que diferenciarse del finde, ESE es
+     el momento de crear 'morning' — y hay que tocar los dos CSS. */
+
+  /* La noche ahora termina a las 5 y no a las 8, si no se pisaria con el
+     amanecer. Vale para los siete dias: a las 6 de un sabado tampoco es
+     de noche. */
+  if (isNight)                return 'night'
+  if (isWeekend || isMorning) return 'weekend'
   return 'weekday'
 }
 
