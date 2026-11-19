@@ -1252,29 +1252,21 @@
     border-color: rgba(46, 204, 128, 0.95);
     box-shadow: 0 0 12px rgba(46, 204, 128, 0.35);
   }
-  /* ── El ◎ respira con el resto ──────────────────────────────────
-     Se quedaba fijo mientras la moneda y las pastillas se apagaban, y
-     terminaba siendo lo MAS visible del hero en reposo: justo al reves
-     de lo que tiene que ser un boton secreto.
-     Se cuelga del mismo interruptor que la pastilla de LAB.
-     ⚠️ El :has() va sobre .hero y no sobre .heroContent porque el ◎
-     es hermano de ese bloque, no hijo.
-     ⚠️ La animacion del clic usa `scale`, no `transform`, asi que no
-     se pelea con el translateX(-50%) que lo centra en mobile.
+  /* ── El ◎ esta apagado SIEMPRE, salvo que lo toquen ─────────────
+     Primero se lo colgo del mismo interruptor que la pastilla de LAB,
+     para que se encendiera junto con el logo. Limo lo corrigio el
+     19/11/2026: es un boton secreto, no tiene que encenderse porque
+     pase algo en otra parte del hero. Solo responde a quien lo toca.
+     ⚠️ Por eso NO hay ninguna regla con :has() aca. Si alguien la
+     agrega para 'emparejarlo' con el resto, esta deshaciendo esto.
      ──────────────────────────────────────────────────────────── */
   .toggleBtn {
     opacity: 0.42;
     transition: opacity 0.45s ease, color 0.3s ease, transform 0.3s ease;
   }
-  .hero:has(.logoBtnDesp) .toggleBtn,
-  .hero:has(.logoBtnOn) .toggleBtn { opacity: 1; }
-
-  /* Con "reducir movimiento" la etapa 2 del logo no se dispara nunca,
-     asi que sin esto quedaria apagado para siempre. Misma salvedad que
-     en .labLink. */
-  @media (prefers-reduced-motion: reduce) {
-    .toggleBtn { opacity: 1; }
-  }
+  /* Lo unico que lo enciende: el dedo encima, o el teclado. */
+  .toggleBtn:active,
+  .toggleBtn:focus-visible { opacity: 1; transition: opacity 0.12s ease; }
 
 }
 
