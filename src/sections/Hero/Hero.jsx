@@ -214,6 +214,7 @@ export default function Hero() {
   const [logoOnda,   setLogoOnda]   = useState(0)      // contador de halos del logo mobile
   const [logoDesp,   setLogoDesp]   = useState(false)  // logo mobile a medio encender mientras se scrollea
   const [manual,     setManual]     = useState(false)  // true si el visitante eligio la franja con el ◎
+  const [pulso,      setPulso]      = useState(0)      // contador: cada clic en el ◎ redispara su animacion
 
   // Reloj del hero: se refresca cada 30 s (suficiente para mostrar hora y minutos).
   // Aprovechamos el mismo intervalo para re-evaluar la FRANJA: la inicial se
@@ -456,6 +457,9 @@ export default function Hero() {
   const handleToggle = (e) => {
     e.currentTarget.blur()   // que no quede marcado: el ◎ es secreto
     setManual(true)          // desde ahora manda el visitante, no el reloj
+    setPulso(p => p + 1)     // mismo truco que las ondas del limon: el key
+                             // cambia, el <span> se remonta y la animacion
+                             // arranca de cero aunque toques dos veces seguidas
     setSlotIdx(i => {
       const next = (i + 1) % SLOTS.length
       return next === 0 ? 1 : next
@@ -734,7 +738,9 @@ export default function Hero() {
 
       {/* Toggle misterioso */}
       <button className={styles.toggleBtn} onClick={handleToggle} aria-label={t('hero.toggle')}>
-        ◎
+        {/* El glifo va en su propio <span> para poder animarlo sin tocar el
+            boton: asi el rebote no pelea con el rotate del :hover. */}
+        <span key={pulso} className={pulso > 0 ? styles.toggleGlifo : undefined}>◎</span>
       </button>
 
       {/* Scroll hint */}

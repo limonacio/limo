@@ -307,6 +307,45 @@
   border-radius: 50%;
 }
 
+/* ── El ◎ al apretarlo: rebote + destello ────────────────────────────
+   Dos animaciones a la vez, que no se pisan porque tocan cosas distintas:
+   el rebote usa la propiedad `scale` (NO `transform`) y el destello el
+   color. Si el rebote usara transform se comeria el rotate del :hover.
+
+   El color del destello es el de la franja A LA QUE SE ESTA PASANDO, no
+   el del reloj: sale de las mismas --m1-* que publica applyPalette()
+   para la moneda chica. Un solo lugar define los tonos.
+   ─────────────────────────────────────────────────────────────────── */
+.toggleGlifo {
+  display: inline-block;
+  --destello: var(--marca-1);
+  animation: secretoRebote 0.42s cubic-bezier(0.34, 1.7, 0.5, 1),
+             secretoDestello 0.8s ease-out;
+}
+
+:root[data-franja='weekday'] .toggleGlifo { --destello: var(--m1-weekday); }
+:root[data-franja='weekend'] .toggleGlifo { --destello: var(--m1-weekend); }
+:root[data-franja='night']   .toggleGlifo { --destello: var(--m1-night); }
+
+@keyframes secretoRebote {
+  0%   { scale: 1; }
+  35%  { scale: 0.74; }
+  100% { scale: 1; }
+}
+
+@keyframes secretoDestello {
+  0%   { color: inherit; }
+  18%  { color: var(--destello);
+         text-shadow: 0 0 14px var(--destello); }
+  100% { color: inherit; text-shadow: none; }
+}
+
+/* Quien pidio menos movimiento se queda solo con el destello, que no
+   mueve nada: sigue avisando que la franja cambio. */
+@media (prefers-reduced-motion: reduce) {
+  .toggleGlifo { animation: secretoDestello 0.8s ease-out; }
+}
+
 .toggleBtn:hover {
   color: rgba(255,255,255,0.6);
   transform: rotate(45deg);
@@ -1212,6 +1251,29 @@
   .heroContent:has(.logoBtnOn) .labLink {
     border-color: rgba(46, 204, 128, 0.95);
     box-shadow: 0 0 12px rgba(46, 204, 128, 0.35);
+  }
+  /* ── El ◎ respira con el resto ──────────────────────────────────
+     Se quedaba fijo mientras la moneda y las pastillas se apagaban, y
+     terminaba siendo lo MAS visible del hero en reposo: justo al reves
+     de lo que tiene que ser un boton secreto.
+     Se cuelga del mismo interruptor que la pastilla de LAB.
+     ⚠️ El :has() va sobre .hero y no sobre .heroContent porque el ◎
+     es hermano de ese bloque, no hijo.
+     ⚠️ La animacion del clic usa `scale`, no `transform`, asi que no
+     se pelea con el translateX(-50%) que lo centra en mobile.
+     ──────────────────────────────────────────────────────────── */
+  .toggleBtn {
+    opacity: 0.42;
+    transition: opacity 0.45s ease, color 0.3s ease, transform 0.3s ease;
+  }
+  .hero:has(.logoBtnDesp) .toggleBtn,
+  .hero:has(.logoBtnOn) .toggleBtn { opacity: 1; }
+
+  /* Con "reducir movimiento" la etapa 2 del logo no se dispara nunca,
+     asi que sin esto quedaria apagado para siempre. Misma salvedad que
+     en .labLink. */
+  @media (prefers-reduced-motion: reduce) {
+    .toggleBtn { opacity: 1; }
   }
 
 }
