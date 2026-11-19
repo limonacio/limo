@@ -291,6 +291,10 @@
   line-height: 1;
   transition: color 0.3s, transform 0.3s;
   user-select: none;
+  /* El "cuadrado fantasma" al tocarlo en mobile: Chrome pinta un recuadro
+     gris sobre cualquier elemento interactivo. No es un efecto nuestro.
+     La hamburguesa del Nav ya lo tenia apagado; esto le faltaba. */
+  -webkit-tap-highlight-color: transparent;
 }
 
 /* El ◎ es secreto: no debe quedar marcado despues de tocarlo.
